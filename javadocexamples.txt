@@ -14,6 +14,8 @@ public class Make {
      *
      * @return A <code>Set<Make></code> containing the data from the file.
      * @throws FileNotFoundException Thrown if the file path does not exist.
+     * @author Matthew McCaskill
+     * @author Ashley Lu Couch
      */
     private static Set<Make> loadCSV(String file) throws FileNotFoundException {
         ...
