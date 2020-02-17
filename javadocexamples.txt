@@ -1,0 +1,27 @@
+NOTES:
+ - Javadoc is REQUIRED for all classes, as well as static, protected, and public members.
+ - Javadoc is RECOMMENDED for all methods.
+
+/**
+ * This class holds information about the various models of a single make of
+ * cars.
+ */
+public class Make {
+    /**
+     * Load a CSV file and construct set of {@link Make Makes} from the file.
+     *
+     * @param file The path of the file to read.
+     *
+     * @return A <code>Set<Make></code> containing the data from the file.
+     * @throws FileNotFoundException Thrown if the file path does not exist.
+     */
+    private static Set<Make> loadCSV(String file) throws FileNotFoundException {
+        ...
+    }
+
+    /**
+     * The MPG of the car in the city.
+     */
+    public double city;
+}
+
