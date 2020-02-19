@@ -5,7 +5,7 @@ import to.us.resume_builder.export.ILaTeXConvertable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Item extends ResumeComponent  implements ILaTeXConvertable {
+public class Experience extends ResumeComponent  implements ILaTeXConvertable {
     /**
      * The name of the organization worked for, or the name of the school.
      */
@@ -36,7 +36,7 @@ public class Item extends ResumeComponent  implements ILaTeXConvertable {
      * Creates an instance of an item with id
      * @param id
      */
-    public Item(String id){
+    public Experience(String id){
         super(id);
         bullets = new LinkedList<>();
     }
