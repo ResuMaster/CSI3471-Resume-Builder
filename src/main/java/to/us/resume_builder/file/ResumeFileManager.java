@@ -21,7 +21,12 @@ public class ResumeFileManager {
      */
     public ResumeFile importFile(String path) throws IOException {
         Reader file = new FileReader(path);
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+            .serializeNulls()
+            .setDateFormat(DateFormat.FULL)
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .setPrettyPrinting()
+            .create();
         ResumeFile r = null;
         try {
             r = gson.fromJson(file, ResumeFile.class);
