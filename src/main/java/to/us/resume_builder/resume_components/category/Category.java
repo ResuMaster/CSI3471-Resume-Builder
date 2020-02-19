@@ -1,42 +1,24 @@
-package to.us.resume_builder.components;
+package to.us.resume_builder.resume_components.category;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
+import to.us.resume_builder.resume_components.ResumeComponent;
 
-public class Category implements ILaTeXConvertable {
+public class Category extends ResumeComponent implements ILaTeXConvertable {
 
-    final String id;
-    final CategoryType type;
-
-    boolean visible = true;
+    protected final CategoryType type;
 
     /**
      * The name of the category, it is used for internal and outline information.
      */
-    String name;
+    protected String name;
     /**
      * The title of the category, it is used in the resume document.
      */
-    String displayName;
+    protected String displayName;
 
-    Category(String id, CategoryType type){
-        this.id = id;
+    protected Category(String id, CategoryType type){
+        super(id);
         this.type = type;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public boolean getVisible(){
-        return visible;
-    }
-
-    void toggleCategoryVisibility(){
-        visible = !visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
     }
 
     public CategoryType getType() {

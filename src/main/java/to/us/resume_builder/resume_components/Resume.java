@@ -1,4 +1,6 @@
-package to.us.resume_builder.components;
+package to.us.resume_builder.resume_components;
+
+import to.us.resume_builder.resume_components.category.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,13 +8,13 @@ import java.util.Random;
 
 
 public class Resume {
-    List<Category> categoryList;
+    private List<Category> categoryList;
 
-    Resume(){
+    public Resume(){
         categoryList = new LinkedList<>();
     }
 
-    String createCategory(CategoryType type){
+    public String createCategory(CategoryType type){
         Random rand = new Random();
         String id = String.valueOf(rand.nextInt(1000));
 

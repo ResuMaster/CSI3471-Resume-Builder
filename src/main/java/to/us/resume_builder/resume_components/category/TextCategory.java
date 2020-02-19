@@ -1,10 +1,10 @@
-package to.us.resume_builder.components;
+package to.us.resume_builder.resume_components.category;
 
 public class TextCategory extends Category {
 
-    String text;
+    private String text;
 
-    TextCategory(String id) {
+    public TextCategory(String id) {
         super(id, CategoryType.TEXT);
     }
 

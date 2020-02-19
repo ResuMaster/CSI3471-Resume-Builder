@@ -1,24 +1,26 @@
-package to.us.resume_builder.components;
+package to.us.resume_builder.resume_components.category;
+
+import to.us.resume_builder.resume_components.Field;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class BulletCategory extends Category {
 
-    List<Field> bullets;
+    private List<Field> bullets;
 
-    BulletCategory(String id) {
+    public BulletCategory(String id) {
         super(id, CategoryType.BULLETS);
         bullets = new LinkedList<>();
     }
 
     // TODO Implement
-    void addBullet(){
-
+    public String addBullet(){
+        return "";
     }
 
     // TODO Implement
-    void removeBullet(String id){
+    public void removeBullet(String id){
 
     }
 

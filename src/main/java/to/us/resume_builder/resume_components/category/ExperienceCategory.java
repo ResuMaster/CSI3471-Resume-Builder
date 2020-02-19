@@ -1,20 +1,22 @@
-package to.us.resume_builder.components;
+package to.us.resume_builder.resume_components.category;
+
+import to.us.resume_builder.resume_components.Item;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ExperienceCategory extends Category {
 
-    List<Item> experience;
+    private List<Item> experiences;
 
-    ExperienceCategory(String id) {
+    public ExperienceCategory(String id) {
         super(id, CategoryType.EXPERIENCE);
-        experience = new LinkedList<>();
+        experiences = new LinkedList<>();
     }
 
     // TODO Implement
-    public void addExperience(){
-
+    public String addExperience(){
+        return "";
     }
 
     // TODO Implement

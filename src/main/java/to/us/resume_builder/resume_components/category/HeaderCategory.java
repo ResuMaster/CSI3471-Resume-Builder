@@ -1,4 +1,4 @@
-package to.us.resume_builder.components;
+package to.us.resume_builder.resume_components.category;
 
 
 public class HeaderCategory extends Category {
@@ -6,28 +6,28 @@ public class HeaderCategory extends Category {
     /**
      * The link that the user want to have in the header, usually linkedin.com
      */
-    String link;
+    private String link;
 
     /**
      * The user's email address that they want on the resume
      */
-    String email;
+    private String email;
 
     /**
      * The user's phone number that they want on the resume
      */
-    String phone_number;
+    private String phone_number;
 
     /**
      * The user's address than they want on the resume
      */
-    String address;
+    private String address;
 
     /**
      *
      * @param id the ID for this instance of Category
      */
-    HeaderCategory(String id) {
+    public HeaderCategory(String id) {
         super(id, CategoryType.HEADER);
     }
 

@@ -1,60 +1,44 @@
-package to.us.resume_builder.components;
+package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Item  implements ILaTeXConvertable {
-
-    /**
-     * The ID for an item.
-     */
-    final String id;
-
-    boolean visible;
-
+public class Item extends ResumeComponent  implements ILaTeXConvertable {
     /**
      * The name of the organization worked for, or the name of the school.
      */
-    String organization;
+    private String organization;
 
     /**
      * The location where work for organization took place.
      */
-    String location;
+    private String location;
 
     /**
      * The date that the user want to display, it is a String and user is responsible to format it
      */
-    String date;
+    private String date;
 
     /**
      * The position of the user, this is major for school or job title for work
      */
-    String title;
+    private String title;
 
     /**
      * The list of bullets that follow an item.
      */
-    List<Field> bullets;
+    private List<Field> bullets;
 
 
     /**
      * Creates an instance of an item with id
      * @param id
      */
-    Item(String id){
-        this.id = id;
+    public Item(String id){
+        super(id);
         bullets = new LinkedList<>();
-    }
-
-    /**
-     * returns the ID for this instance
-     * @return id
-     */
-    public String getId() {
-        return id;
     }
 
     /**
@@ -107,18 +91,6 @@ public class Item  implements ILaTeXConvertable {
     public void removeBullet(String id){
         // find the instance of field with matching id
         // remove from bullets list
-    }
-
-    public boolean getVisible(){
-        return visible;
-    }
-
-    void toggleCategoryVisibility(){
-        visible = !visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
     }
 
     @Override
