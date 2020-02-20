@@ -1,5 +1,7 @@
 package to.us.resume_builder.resume_components.category;
 
+import to.us.resume_builder.export.template.ResumeTemplate;
+import to.us.resume_builder.export.template.StringTemplate;
 import to.us.resume_builder.resume_components.Experience;
 
 import java.util.LinkedList;
@@ -15,17 +17,24 @@ public class ExperienceCategory extends Category {
     }
 
     // TODO Implement
-    public String addExperience(){
+    public String addExperience() {
         return "";
     }
 
     // TODO Implement
-    public void removeExperience(String id){
+    public void removeExperience(String id) {
 
     }
 
     @Override
-    public String getLaTeXContent() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getCategoryTemplate(this.type)
+            .replaceVariable("title", this.displayName)
+            .replaceVariable("content", experiences.stream()
+                .map(f -> f.formatLaTeXString(template))
+                .reduce((a, b) -> a + b)
+                .orElse("")
+            )
+            .toString();
     }
 }

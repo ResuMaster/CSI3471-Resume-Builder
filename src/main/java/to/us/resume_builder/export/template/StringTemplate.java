@@ -1,36 +1,53 @@
 package to.us.resume_builder.export.template;
 
-import java.security.InvalidKeyException;
+import to.us.resume_builder.export.ResumeExportException;
+
+import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class StringTemplate {
     private String template;
     private Map<String, String> replacements;
 
-    public StringTemplate() {
-        // TODO: populate replacements
+    public StringTemplate(String template) {
+        this.template = template;
+
+        replacements = new HashMap<>();
+
+        Pattern.compile("(?<!\\\\)<([a-z]+)>", Pattern.CASE_INSENSITIVE)
+            .matcher(template)
+            .results()
+            .forEach(r -> replacements.put(r.group(1), null));
     }
 
     private StringTemplate(StringTemplate other) {
         this.template = other.template;
+        this.replacements = new HashMap<>(other.replacements);
     }
 
-    public StringTemplate replaceKey(String key, String value) throws Exception { // TODO: InvalidKeyException
-        if (this.replacements.containsKey(key)){
+    public StringTemplate replaceVariable(String key, String value) {
+        if (this.replacements.containsKey(key)) {
             this.replacements.put(key, value);
         }
-        else {
-            throw new Exception (); // TODO: InvalidKeyException
-        }
+
         return this;
     }
 
     @Override
     public String toString() {
-        return template;
+        String t = template;
+
+        for (Map.Entry<String, String> entry : replacements.entrySet()) {
+            if (entry.getValue() != null) {
+                t = t.replaceAll("<" + entry.getKey() + ">", entry.getValue());
+            }
+        }
+
+        return t;
     }
 
-    protected StringTemplate copy()  {
+    public StringTemplate copy() {
         return new StringTemplate(this);
     }
 }

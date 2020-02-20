@@ -1,6 +1,9 @@
 package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
+import to.us.resume_builder.export.ResumeExportException;
+import to.us.resume_builder.export.template.ResumeTemplate;
+import to.us.resume_builder.export.template.StringTemplate;
 
 public class Field extends ResumeComponent implements ILaTeXConvertable {
 
@@ -19,7 +22,9 @@ public class Field extends ResumeComponent implements ILaTeXConvertable {
     }
 
     @Override
-    public String getLaTeXContent() {
-        return "\\item " + text;
+    public String formatLaTeXString(ResumeTemplate template)  {
+        return template.getFieldTemplate()
+            .replaceVariable("content", this.text)
+            .toString();
     }
 }

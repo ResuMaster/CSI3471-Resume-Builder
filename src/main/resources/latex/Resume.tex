@@ -61,6 +61,24 @@
     \end{spacing}
 }
 
+% Experience Category
+\newenvironment{resumeexperiencecategory}[1]{
+    \begin{spacing}{1.1}
+        \textbf{\Large \uppercase{#1}}\\
+}{
+    \end{spacing}
+}
+
+% Experience
+\newcommand{\resumeexperience}[5]{
+    \textbf{\uppercase {#1}} - #3\hfill \textbf{#4}\\
+    \textbf{#2}
+    
+    \begin{itemize}[topsep=1pt,itemsep=1pt,partopsep=.5pt, parsep=.5pt]
+        #5
+    \end{itemize}
+}
+
 % Separator Line
 \newcommand*{\resumeseparator}{
     \begin{spacing}{1.1}
@@ -81,49 +99,39 @@
 
 	\resumeseparator
     
-	\begin{spacing}{1.1}
-		
-		\textbf{\Large EDUCATION}\\
-		\textbf{\uppercase {Baylor University}} - Waco, Texas\hfill \textbf{May 2022}\\
-		\textbf{Bachelor of Science in Computer Science}
-		
-		\begin{itemize}[topsep=1pt,itemsep=1pt,partopsep=.5pt, parsep=.5pt]
+    \begin{resumeexperiencecategory}{Education}
+        \resumeexperience{Baylor University}{Bachelor of Science in Computer Science}{Waco, Texas}{May 2022}{
             \item Secondary Major in Mathematics
-			\item GPA 4.0
-			\item Active member of Computing 4 Compassion
+            \item GPA 4.0
+            \item Active member of Computing 4 Compassion
             \item Member of Association for Computing Machinery (ACM) and Alpha Lambda Delta
-            \item Relevant Coursework: Introduction to Computer Science I \& II, Discrete Mathematics,\\ Data Structures, Software Engineering, and Algorithms%, Introduction 
-		\end{itemize}
-		
-		\begin{spacing}{1.2}
-			\noindent\rule{\textwidth}{1pt}
-		\end{spacing}
-		\textbf{\Large EXPERIENCE}\\
-		\textbf{\uppercase {Academic Support Programs, Baylor University}} \hfill \textbf{2019-Present}\\
-		\textbf{Supplemental Instruction Leader}
-		\begin{itemize}[topsep=1pt,itemsep=1pt,partopsep=.5pt, parsep=.5pt]
-			\item Led biweekly group review sessions to improve student understanding of course content
+            \item Relevant Coursework: Introduction to Computer Science I \& II, Discrete Mathematics,\\ Data Structures, Software Engineering, and Algorithms
+        }
+    \end{resumeexperiencecategory}
+	
+   	\resumeseparator
+       
+    \begin{resumeexperiencecategory}{Experience}
+        \resumeexperience{Academic Support Programs, Baylor University}{Supplemental Instruction Leader}{Waco, Texas}{2019-Present}{
+            \item Led biweekly group review sessions to improve student understanding of course content
             \item Adapted teaching strategies to engage various learning styles
             \item Functioned as an intermediary between students and professor
-		\end{itemize}
-    
-        \textbf{\uppercase {The Refinery Christian Church}} \hfill \textbf{Summer 2019}\\
-        \textbf{Kids Ministry Intern}
-        \begin{itemize}[topsep=1pt,itemsep=1pt,partopsep=.5pt, parsep=.5pt]
+        }
+        \resumeexperience{The Refinery Christian Church}{Kids Ministry Intern}{Goodyear, Arizona}{Summer 2019}{
             \item Planned and executed weekend programming for children of all ages weekly
             \item Learned effective management techniques to ensure smooth experience
             \item Mentored new volunteers in teaching confidence and techniques
             \item Responded to various emergency situations with calmness and efficiency
-        \end{itemize}
-		
-        \resumeseparator
-		
-        \begin{resumebulletcategory}{Additional}
-            \item Proficient in C++, Java SE, HTML, CSS, JavaScript, LaTeX
-            \item Comfortable with jQuery, Bootstrap, Python, C\#, Intel x86 Assembly
-            \item Taught fifth and sixth grade students basic programming skills through Computing 4 Compassion's igniteCS division
-            \item Served as a Host Group Leader with Antioch Community Church
-            \item Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques
-        \end{resumebulletcategory}
-	\end{spacing}
+        }
+    \end{resumeexperiencecategory}
+       
+    \resumeseparator
+
+    \begin{resumebulletcategory}{Additional}
+        \item Proficient in C++, Java SE, HTML, CSS, JavaScript, LaTeX
+        \item Comfortable with jQuery, Bootstrap, Python, C\#, Intel x86 Assembly
+        \item Taught fifth and sixth grade students basic programming skills through Computing 4 Compassion's igniteCS division
+        \item Served as a Host Group Leader with Antioch Community Church
+        \item Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques
+    \end{resumebulletcategory}
 \end{document}

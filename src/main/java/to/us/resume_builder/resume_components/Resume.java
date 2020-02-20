@@ -35,4 +35,7 @@ public class Resume {
         return id;
     }
 
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
 }

@@ -1,6 +1,8 @@
 package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
+import to.us.resume_builder.export.template.ResumeTemplate;
+import to.us.resume_builder.export.template.StringTemplate;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -91,5 +93,20 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
     public void removeBullet(String id){
         // find the instance of field with matching id
         // remove from bullets list
+    }
+
+    @Override
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getExperienceTemplate()
+            .replaceVariable("organization", this.organization)
+            .replaceVariable("title", this.title)
+            .replaceVariable("location", this.location)
+            .replaceVariable("date", this.date)
+            .replaceVariable("content", bullets.stream()
+                .map(f -> f.formatLaTeXString(template))
+                .reduce((a, b) -> a + b)
+                .orElse("")
+            )
+            .toString();
     }
 }

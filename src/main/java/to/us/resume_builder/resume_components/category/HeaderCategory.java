@@ -1,6 +1,9 @@
 package to.us.resume_builder.resume_components.category;
 
 
+import to.us.resume_builder.export.template.ResumeTemplate;
+import to.us.resume_builder.export.template.StringTemplate;
+
 public class HeaderCategory extends Category {
 
     /**
@@ -64,7 +67,13 @@ public class HeaderCategory extends Category {
     }
 
     @Override
-    public String getLaTeXContent() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getCategoryTemplate(this.type)
+            .replaceVariable("name", this.displayName)
+            .replaceVariable("address", this.address)
+            .replaceVariable("phone", this.phone_number)
+            .replaceVariable("link", this.link)
+            .replaceVariable("email", this.email)
+            .toString();
     }
 }
