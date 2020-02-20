@@ -92,9 +92,4 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
         // find the instance of field with matching id
         // remove from bullets list
     }
-
-    @Override
-    public String toLaTeXString() {
-        return null;
-    }
 }

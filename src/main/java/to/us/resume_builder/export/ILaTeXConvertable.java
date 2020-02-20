@@ -1,6 +1,7 @@
 package to.us.resume_builder.export;
 
-public interface ILaTeXConvertable {
+import to.us.resume_builder.export.template.ResumeTemplate;
 
-    String toLaTeXString();
+public interface ILaTeXConvertable {
+    String formatLaTeXString(ResumeTemplate template);
 }

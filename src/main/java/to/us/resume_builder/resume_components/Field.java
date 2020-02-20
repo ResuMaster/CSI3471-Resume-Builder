@@ -19,7 +19,7 @@ public class Field extends ResumeComponent implements ILaTeXConvertable {
     }
 
     @Override
-    public String toLaTeXString() {
-        return null;
+    public String getLaTeXContent() {
+        return "\\item " + text;
     }
 }

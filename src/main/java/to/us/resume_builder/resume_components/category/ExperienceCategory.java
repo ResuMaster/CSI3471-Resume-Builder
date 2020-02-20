@@ -25,7 +25,7 @@ public class ExperienceCategory extends Category {
     }
 
     @Override
-    public String toLaTeXString() {
+    public String getLaTeXContent() {
         return null;
     }
 }
