@@ -1,10 +1,27 @@
 package to.us.resume_builder.resume_editor;
 
+import to.us.resume_builder.adminView.UpdateUserController;
+import to.us.resume_builder.export.ILaTeXConvertable;
+import to.us.resume_builder.file.Metadata;
+import to.us.resume_builder.file.ResumeFile;
+import to.us.resume_builder.file.ResumeFileManager;
 import to.us.resume_builder.resume_components.category.*;
 import to.us.resume_builder.resume_components.*;
+import to.us.resume_builder.user.User;
+import to.us.resume_builder.user.UserDBC;
+import to.us.resume_builder.user.UserRole;
+
+import java.io.*;
 
 
-public class ResumeEditor {
+public class ResumeEditor implements ILaTeXConvertable {
+
+    ResumeEditor(User u, User a, Resume r) {
+        user = u;
+        database = new UserDBC(user);
+        resume = r;
+        fileManager = new ResumeFileManager();
+    }
     /**
      * When the Writer decides to add a Category, we need to take that Category and add it to the Resume
      * @param c the Category being added to the Resume
@@ -48,7 +65,6 @@ public class ResumeEditor {
         // TODO implement
     }
 
-
     // remove category
     public void removeCategory(Category c) {
         // TODO implement
@@ -66,7 +82,7 @@ public class ResumeEditor {
 
     // remove header
     public void removeHeader(HeaderCategory c) {
-
+        // TODO implement
     }
 
     // set toggle field
@@ -94,22 +110,17 @@ public class ResumeEditor {
         // TODO implement
     }
 
-
     // export resume
-    public void exportResume() {
-        // TODO implement
+    public void exportResume(String path) {
+        try {
+            FileOutputStream file = new FileOutputStream(new File(path));
+            file.write(toLaTeXString().getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-    // cancel export resume
-    public void cancelExport() {
-        // TODO implement
-    }
-
-    // set save location
-    public void saveLocation() {
-        // TODO implement
-    }
-
 
     // email resume
     public void emailResume() {
@@ -118,58 +129,115 @@ public class ResumeEditor {
 
 
     // import data file
-    public void importDataFile() {
-        // TODO implement
+    public void importDataFile(String path) {
+        try {
+            resume = fileManager.importFile(path).getResume();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // export data file
+    public void exportDataFile(String path) {
+        try {
+            fileManager.exportFile(new ResumeFile(new Metadata(), resume), path);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // cancel export data
+    public void cancelExportData() {
+        // TODO implement
+    }
 
 
     // init role change
+    public void startChangeRole(UserRole role) {
+        if(controller.initiateRoleChange(user)) {
+            controller.changeUserRole(role);
+            user.setRole(role);
+        }
+    }
 
-    // set role request
+//    // set role request
+//    public void changeRole(UserRole role) {
+//        controller.changeUserRole(role);
+//        user.setRole(role);
+//    }
 
 
     // create account
+    public void createAccount(User u) {
+        user = u;
+    }
 
     // validate account
+    public void validateCredentials() {
+        // TODO implement
+    }
 
 
     // request review
+    public void requestReview() {
+        // TODO implement
+    }
 
     // set reviewers
+    public void setReviewers() {
+        // TODO implement
+    }
 
     // submit review
+    public void submitReviewRequest() {
+        // TODO implement
+    }
 
     // cancel review
+    public void cancelReviewRequest() {
+        // TODO implement
+    }
 
 
     // select review resume
+    public void selectReviewResume(Resume r) {
+        // TODO implement
+    }
 
     // enter comment
+    public void addComment() {
+        // TODO implement
+    }
 
     // submit comment
+    public void submitComment() {
+        // TODO implement
+    }
 
     // cancel review
+    public void cancelReview() {
+        // TODO implement
+    }
 
     // submit review
-
+    public void submitReview() {
+        // TODO implement
+    }
 
     // save resume changes
+    public void saveChanges() {
+        // TODO implement
+    }
 
+    @Override
+    public String toLaTeXString() {
+        return null;
+    }
 
-    // select comment field
-
-    // select comment header
-
-    // select comment category
-
-    // select comment experience
-
-
-    //
-
+    private static UpdateUserController controller;
     private Resume resume;
+    private User user;
+    private UserDBC database;
+    private ResumeFileManager fileManager;
 }
