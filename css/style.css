@@ -1,0 +1,33 @@
+body {
+    width: 100%;
+    height: 100%;
+    background: #38A6D1;
+}
+
+.jumbotron {
+    margin: 30px auto;
+    width: 734px;
+}
+
+.wide-button {
+    text-align: center;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.download-links {
+    display: flex;
+}
+
+.download-button {
+    flex: 1;
+    margin: 2px;
+}
+
+.section-title {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
