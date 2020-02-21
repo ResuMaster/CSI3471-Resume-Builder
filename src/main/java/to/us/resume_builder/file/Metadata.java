@@ -16,8 +16,8 @@ public class Metadata {
     // When the Resume was last changed
     private Date lastModified;
 
-    // The User attached to the Resume
-//    private User user;
+    // The User's email
+    private String email;
 
     /**
      * Creates a Metadata object with the given parameters.
@@ -27,7 +27,7 @@ public class Metadata {
      * @param lastModified When the Resume was last modified.
      */
 //    public Metadata(User user, Calendar created, Calendar lastModified) {
-//        this.user = user;
+//        this.email = user.getEmail();
 //        this.created = created;
 //        this.lastModified = lastModified;
 //    }
