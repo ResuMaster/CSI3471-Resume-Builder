@@ -11,20 +11,13 @@ import java.text.DateFormat;
  * @author Jacob
  */
 public class ResumeFileManager {
-    Gson gson;
-
-    /**
-     * Constructs a ResumeFileManager
-     */
-    public ResumeFileManager() {
-        super();
-        gson = new GsonBuilder()
+    // Used for marshalling/unmarshalling json
+    private static Gson gson = new GsonBuilder()
             .serializeNulls()
             .setDateFormat(DateFormat.FULL)
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setPrettyPrinting()
             .create();
-    }
 
     /**
      * Imports a given resume data JSON file.
@@ -33,7 +26,7 @@ public class ResumeFileManager {
      * @return The ResumeFile read from the file.
      * @throws IOException
      */
-    public ResumeFile importFile(String path) throws IOException {
+    public static ResumeFile importFile(String path) throws IOException {
         Reader file = new FileReader(path);
         ResumeFile r = null;
         try {
@@ -55,7 +48,7 @@ public class ResumeFileManager {
      * @param path The path to the file to export to.
      * @throws IOException
      */
-    public void exportFile(ResumeFile r, String path) throws IOException {
+    public static void exportFile(ResumeFile r, String path) throws IOException {
         String json = gson.toJson(r);
         Writer file = new FileWriter(path);
         file.write(json);
