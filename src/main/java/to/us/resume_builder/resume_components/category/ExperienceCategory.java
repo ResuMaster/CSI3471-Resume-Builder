@@ -25,6 +25,14 @@ public class ExperienceCategory extends Category {
 
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
         return template.getCategoryTemplate(this.type)

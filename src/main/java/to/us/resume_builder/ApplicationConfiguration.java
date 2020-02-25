@@ -15,7 +15,7 @@ public class ApplicationConfiguration {
     }
 
     private void setDefaults() {
-        configuration.put("templateDirectory", "./src/main/resources/templates/");
+        configuration.put("templateDirectory", "./templates/");
     }
 
     public String get(String key) {

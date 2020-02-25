@@ -7,7 +7,7 @@ public class Field extends ResumeComponent implements ILaTeXConvertable {
 
     private String text;
 
-    public Field(String id){
+    public Field(String id) {
         super(id);
     }
 
@@ -19,8 +19,16 @@ public class Field extends ResumeComponent implements ILaTeXConvertable {
         this.text = text;
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
-    public String formatLaTeXString(ResumeTemplate template)  {
+    public String formatLaTeXString(ResumeTemplate template) {
         return template.getFieldTemplate()
             .replaceVariable("content", this.text)
             .toString();
