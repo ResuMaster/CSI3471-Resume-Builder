@@ -69,7 +69,7 @@ public class ResumeExporter {
         Files.writeString(latexPath, latexCode, StandardOpenOption.CREATE);
 
         // Generate the PDF
-        boolean status = createResumePDF(latexPath);
+        boolean status = compileResumePDF(latexPath);
 
         // TODO: do something with the resulting pdf
         Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), Path.of("export.pdf"), StandardCopyOption.REPLACE_EXISTING);
@@ -77,6 +77,13 @@ public class ResumeExporter {
         return status;
     }
 
+    /**
+     * Get the full LaTeX string which represents the resume.
+     *
+     * @param template The template to use to generate the string.
+     *
+     * @return The LaTeX representation of this resume.
+     */
     private String getLaTeXString(ResumeTemplate template) {
         StringJoiner sb = new StringJoiner(template.getSeparatorTemplate().toString());
 
@@ -89,7 +96,14 @@ public class ResumeExporter {
             .toString();
     }
 
-    private boolean createResumePDF(Path filePath) {
+    /**
+     * Compile the resume PDF from an existing <code>.tex</code> source.
+     *
+     * @param filePath The path to the <code>.tex</code> file to compile.
+     *
+     * @return Whether or not the compilation was successful.
+     */
+    private boolean compileResumePDF(Path filePath) {
         // Temporary artifacts
         final String[] ARTIFACTS_TO_DELETE = { "aux", "log", "tex" };
 
