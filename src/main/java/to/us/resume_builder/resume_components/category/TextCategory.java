@@ -1,7 +1,6 @@
 package to.us.resume_builder.resume_components.category;
 
-import to.us.resume_builder.export.template.ResumeTemplate;
-import to.us.resume_builder.export.template.StringTemplate;
+import to.us.resume_builder.export.ResumeTemplate;
 
 public class TextCategory extends Category {
 

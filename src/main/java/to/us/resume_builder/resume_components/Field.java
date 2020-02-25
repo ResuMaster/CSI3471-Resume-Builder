@@ -1,9 +1,7 @@
 package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
-import to.us.resume_builder.export.ResumeExportException;
-import to.us.resume_builder.export.template.ResumeTemplate;
-import to.us.resume_builder.export.template.StringTemplate;
+import to.us.resume_builder.export.ResumeTemplate;
 
 public class Field extends ResumeComponent implements ILaTeXConvertable {
 

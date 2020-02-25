@@ -1,9 +1,8 @@
 package to.us.resume_builder;
 
-import to.us.resume_builder.export.ResumeExportException;
 import to.us.resume_builder.export.ResumeExporter;
-import to.us.resume_builder.export.template.ResumeTemplate;
-import to.us.resume_builder.export.template.StringTemplate;
+import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.StringTemplate;
 import to.us.resume_builder.resume_components.Resume;
 
 import java.io.IOException;

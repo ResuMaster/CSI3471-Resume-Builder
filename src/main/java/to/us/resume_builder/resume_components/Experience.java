@@ -1,8 +1,7 @@
 package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
-import to.us.resume_builder.export.template.ResumeTemplate;
-import to.us.resume_builder.export.template.StringTemplate;
+import to.us.resume_builder.export.ResumeTemplate;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
 
     /**
      * Creates an instance of an item with id
-     * @param id
+     * @param id ud
      */
     public Experience(String id){
         super(id);
@@ -53,7 +52,7 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
 
     /**
      * sets organization of this item
-     * @param organization
+     * @param organization ud
      */
     public void setOrganization(String organization) {
         this.organization = organization;
