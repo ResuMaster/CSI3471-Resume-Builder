@@ -1,10 +1,7 @@
 package to.us.resume_builder.file;
 
-<<<<<<< HEAD
 import to.us.resume_builder.user.User;
 
-=======
->>>>>>> 6a47fc88421d6d301c1dd11bf2a9d25b34517c2d
 import java.util.Date;
 
 /**
@@ -31,17 +28,9 @@ public class Metadata {
      * @param created When the Resume was created
      * @param lastModified When the Resume was last modified.
      */
-<<<<<<< HEAD
     public Metadata(User user, Date created, Date lastModified) {
         this.email = user.getEmail();
         this.created = created;
         this.lastModified = lastModified;
     }
-=======
-//    public Metadata(User user, Calendar created, Calendar lastModified) {
-//        this.email = user.getEmail();
-//        this.created = created;
-//        this.lastModified = lastModified;
-//    }
->>>>>>> 6a47fc88421d6d301c1dd11bf2a9d25b34517c2d
 }
