@@ -1,3 +1,4 @@
 {
-  "templateDirectory": "./src/main/resources/templates"
+  "templates.directory": "./src/main/resources/templates/",
+  "export.tempLocation": "./temp/"
 }

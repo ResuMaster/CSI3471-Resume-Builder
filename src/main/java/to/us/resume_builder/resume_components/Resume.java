@@ -35,6 +35,13 @@ public class Resume {
         return id;
     }
 
+    public Category getCategory(String id) {
+        return categoryList.stream()
+            .filter(c -> c.getId().equals(id))
+            .findFirst()
+            .get();
+    }
+
     public List<Category> getCategoryList() {
         return categoryList;
     }

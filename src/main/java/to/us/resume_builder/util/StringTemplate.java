@@ -2,6 +2,7 @@ package to.us.resume_builder.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -82,7 +83,7 @@ public class StringTemplate implements Cloneable {
         // Replace each <key> with its value.
         for (Map.Entry<String, String> entry : replacements.entrySet()) {
             if (entry.getValue() != null) {
-                t = t.replaceAll("<" + entry.getKey() + ">", entry.getValue());
+                t = t.replaceAll("<" + entry.getKey() + ">", Matcher.quoteReplacement(entry.getValue()));
             }
         }
 

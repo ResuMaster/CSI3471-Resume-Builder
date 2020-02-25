@@ -34,14 +34,14 @@ public enum ResumeTemplate {
      * @param templateName The name of the template to load.
      */
     ResumeTemplate(String templateName) {
-        String templateDirectory = ApplicationConfiguration.getInstance().get("templateDirectory");
+        String templateDirectory = ApplicationConfiguration.getInstance().getString("templates.directory");
 
         // Attempt to load the template files
         try {
             latexTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "latex.tem")));
             experienceTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "experience.tem")));
             fieldTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "field.tem")));
-            separatorTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "field.tem")));
+            separatorTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "separator.tem")));
             categoryTemplates = new HashMap<>();
             for (CategoryType c : CategoryType.values()) {
                 categoryTemplates.put(c, new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, c.getTemplateFileName() + ".tem"))));
