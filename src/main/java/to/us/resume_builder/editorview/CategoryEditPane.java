@@ -10,7 +10,7 @@ import javax.swing.*;
  * 
  * @author Micah
  */
-public abstract class EditPane extends JPanel {
+public abstract class CategoryEditPane extends JPanel {
 
 	/**
 	 * Version on 2/21.
@@ -33,5 +33,5 @@ public abstract class EditPane extends JPanel {
 	 * Saves the data in this EditPane to the copy of the ResumeData <em>in
 	 * ram</em>.
 	 */
-	abstract void save();
+	public abstract void save();
 }
