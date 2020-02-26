@@ -4,13 +4,17 @@ import to.us.resume_builder.resume_components.category.Category;
 
 public class BulletCategoryEditPane extends EditPane{
 
+    /**
+     *
+     * @param category the category to display in the JPanel
+     */
     BulletCategoryEditPane(Category category) {
         super();
-        super.contents.add()
+
     }
 
     @Override
-    void save() {
+    public void save() {
 
     }
 }

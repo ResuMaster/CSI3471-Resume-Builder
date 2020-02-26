@@ -31,7 +31,7 @@ public abstract class EditPane extends JPanel {
 
 	/**
 	 * Saves the data in this EditPane to the copy of the ResumeData <em>in
-	 * ram</em>.
+	 * RAM</em>.
 	 */
-	abstract void save();
+	public abstract void save();
 }
