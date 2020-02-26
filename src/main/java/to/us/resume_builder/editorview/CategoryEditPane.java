@@ -21,6 +21,8 @@ public abstract class CategoryEditPane extends JPanel {
 	 * JPanel which we will add the separate JPanels from
 	 */
 	protected JPanel contents;
+	protected JTextField name;
+	protected JTextField displayName;
 
 	public void editPane(Category category) {
 		JTextField name = new JTextField(category.getName());
