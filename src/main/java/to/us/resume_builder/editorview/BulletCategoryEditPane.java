@@ -4,7 +4,7 @@ import to.us.resume_builder.resume_components.category.Category;
 
 public class BulletCategoryEditPane extends CategoryEditPane {
 
-    BulletCategoryEditPane(Category category) {
+    public BulletCategoryEditPane(Category category) {
         super();
     }
 
