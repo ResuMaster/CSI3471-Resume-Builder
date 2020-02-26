@@ -3,7 +3,7 @@ package to.us.resume_builder.resume_components.category;
 import to.us.resume_builder.export.ILaTeXConvertable;
 import to.us.resume_builder.resume_components.ResumeComponent;
 
-public class Category extends ResumeComponent implements ILaTeXConvertable {
+public abstract class Category extends ResumeComponent implements ILaTeXConvertable {
 
     protected final CategoryType type;
 
