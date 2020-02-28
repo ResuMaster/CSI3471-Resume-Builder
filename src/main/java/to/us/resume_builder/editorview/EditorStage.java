@@ -113,13 +113,13 @@ public class EditorStage extends JPanel {
      * 
      * @param args Command-line arguments
      */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame f = new JFrame("Tester");
-            f.add(new EditorStage(new TextCategory("heya")));
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.pack();
-            f.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            JFrame f = new JFrame("Tester");
+//            f.add(new EditorStage(new TextCategory("heya")));
+//            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            f.pack();
+//            f.setVisible(true);
+//        });
+//    }
 }
