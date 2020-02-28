@@ -24,7 +24,7 @@ public class HeaderCategory extends Category {
     private String address;
 
     /**
-     *
+     * Creates an instance of HeaderCategory with id
      * @param id the ID for this instance of Category
      */
     public HeaderCategory(String id) {
