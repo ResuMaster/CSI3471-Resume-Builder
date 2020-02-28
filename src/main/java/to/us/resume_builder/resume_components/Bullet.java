@@ -3,11 +3,11 @@ package to.us.resume_builder.resume_components;
 import to.us.resume_builder.export.ILaTeXConvertable;
 import to.us.resume_builder.export.ResumeTemplate;
 
-public class Field extends ResumeComponent implements ILaTeXConvertable {
+public class Bullet extends ResumeComponent implements ILaTeXConvertable {
 
     private String text;
 
-    public Field(String id) {
+    public Bullet(String id){
         super(id);
     }
 

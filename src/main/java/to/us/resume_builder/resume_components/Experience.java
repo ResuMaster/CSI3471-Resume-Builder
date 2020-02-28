@@ -5,7 +5,9 @@ import to.us.resume_builder.export.ResumeTemplate;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
+// TODO look into this extending BulletCategory
 public class Experience extends ResumeComponent  implements ILaTeXConvertable {
     /**
      * The name of the organization worked for, or the name of the school.
@@ -30,7 +32,7 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
     /**
      * The list of bullets that follow an item.
      */
-    private List<Field> bullets;
+    private List<Bullet> bullets;
 
 
     /**
@@ -83,9 +85,15 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
     }
 
     // TODO Implement
-    public void addBullet(){
-        // generate id
-        // add instance of field to bullets list
+    public String addBullet(){
+        // generate id with current id in the front
+        Random rand = new Random();
+        String id = this.id + rand.nextInt(1000);
+        // TODO check id to make sure that it is not a duplicate
+
+        // add new element to bullets
+        bullets.add(new Bullet(id));
+        return id;
     }
 
     // TODO Implement
