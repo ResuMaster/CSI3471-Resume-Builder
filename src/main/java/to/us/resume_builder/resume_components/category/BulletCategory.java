@@ -1,11 +1,7 @@
 package to.us.resume_builder.resume_components.category;
 
-<<<<<<< HEAD
 import to.us.resume_builder.export.ResumeTemplate;
-import to.us.resume_builder.resume_components.Field;
-=======
 import to.us.resume_builder.resume_components.Bullet;
->>>>>>> master
 
 import java.util.LinkedList;
 import java.util.List;
