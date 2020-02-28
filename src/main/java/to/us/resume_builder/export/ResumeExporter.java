@@ -6,6 +6,7 @@ import to.us.resume_builder.resume_components.category.Category;
 import to.us.resume_builder.util.MiscUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.List;
 import java.util.StringJoiner;
@@ -66,13 +67,13 @@ public class ResumeExporter {
         }
 
         // Generate the LaTeX file
-        Files.writeString(latexPath, latexCode, StandardOpenOption.CREATE);
+        Files.writeString(latexPath, latexCode, StandardCharsets.UTF_8, StandardOpenOption.CREATE);
 
         // Generate the PDF
         boolean status = compileResumePDF(latexPath);
 
         // TODO: do something with the resulting pdf
-        Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), Path.of("export.pdf"), StandardCopyOption.REPLACE_EXISTING);
+        Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), Path.of(fileName), StandardCopyOption.REPLACE_EXISTING);
 
         return status;
     }
@@ -113,13 +114,11 @@ public class ResumeExporter {
 
             // Clean up artifacts
             for (String extension : ARTIFACTS_TO_DELETE) {
-                System.out.println(filePath.resolveSibling(filePath.getFileName().toString().split("\\.")[0] + "." + extension));
                 Files.deleteIfExists(filePath.resolveSibling(filePath.getFileName().toString().split("\\.")[0] + "." + extension));
             }
 
             return true;
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();  // TODO: remove
             return false;
         }
     }

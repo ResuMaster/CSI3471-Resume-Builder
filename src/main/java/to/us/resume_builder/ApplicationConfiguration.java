@@ -1,10 +1,12 @@
 package to.us.resume_builder;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,16 +22,33 @@ public class ApplicationConfiguration {
      */
     public ApplicationConfiguration() {
         // Read the configuration file
-        Gson gson = new Gson();
+        boolean createConfigFile = false;
         try {
-            configuration = gson.fromJson(new BufferedReader(new FileReader("config.json")), Map.class);
+            Gson gson = new Gson();
+            configuration = gson.fromJson(new BufferedReader(new FileReader("config.json", StandardCharsets.UTF_8)), Map.class);
+        } catch (FileNotFoundException e) {
+            configuration = new HashMap<>();
+            System.out.println("Configuration file does not exist. Creating...");
+            createConfigFile = true;
         } catch (IOException e) {
             configuration = new HashMap<>();
             System.err.println("Could not read configuration file.");
+
         }
 
         // Setup default options for any unspecified options
         setDefaults();
+
+        // Create the default configuration file if needed
+        if (createConfigFile) {
+            try {
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String json = gson.toJson(configuration);
+                Files.writeString(Paths.get("config.json"), json, StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                System.err.println("Could not write to configuration file.");
+            }
+        }
     }
 
     /**

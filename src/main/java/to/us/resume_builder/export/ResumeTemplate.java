@@ -47,6 +47,14 @@ public enum ResumeTemplate {
                 categoryTemplates.put(c, new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, c.getTemplateFileName() + ".tem"))));
             }
         } catch (IOException e) {
+            latexTemplate = new StringTemplate("");
+            experienceTemplate = new StringTemplate("");
+            fieldTemplate = new StringTemplate("");
+            separatorTemplate = new StringTemplate("");
+            categoryTemplates = new HashMap<>();
+            for (CategoryType c : CategoryType.values()) {
+                categoryTemplates.put(c, new StringTemplate(""));
+            }
             e.printStackTrace(); // TODO: open popup window
         }
     }
