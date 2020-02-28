@@ -14,7 +14,8 @@ public class Main {
             JFrame f = new JFrame("Tester");
             f.setLayout(new BorderLayout());
             f.setJMenuBar(new EditorMenuBar());
-            f.add(new EditorCategorySelector(), BorderLayout.WEST);
+            JList<String> categories = new JList<>();
+            f.add(new EditorCategorySelector(categories), BorderLayout.WEST);
             f.add(new EditorStage(new TextCategory("heya")), BorderLayout.CENTER);
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             f.pack();

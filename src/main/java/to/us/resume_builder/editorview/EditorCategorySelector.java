@@ -10,8 +10,10 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     private JList<String> categories;
     private JScrollPane scroll;
 
-    public EditorCategorySelector() {
-        categories = new JList<>();
+    public EditorCategorySelector(JList<String> jList) {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        categories = jList;
         scroll = new JScrollPane();
 
         categories.addListSelectionListener(this);
@@ -47,6 +49,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
 
         scroll.add(categories);
         scroll.getViewport().setView(categories);
+        add(scroll);
     }
 
     @Override
