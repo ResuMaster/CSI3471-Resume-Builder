@@ -1,9 +1,7 @@
 package to.us.resume_builder;
 
-import to.us.resume_builder.editorview.BulletCategoryEditPane;
-import to.us.resume_builder.editorview.ExperienceCategoryEditPane;
-import to.us.resume_builder.editorview.HeaderCategoryEditPane;
-import to.us.resume_builder.editorview.TextCategoryEditPane;
+import to.us.resume_builder.editorview.*;
+import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.category.BulletCategory;
 import to.us.resume_builder.resume_components.category.ExperienceCategory;
 import to.us.resume_builder.resume_components.category.HeaderCategory;
@@ -38,11 +36,18 @@ public class Main {
         tc.setDisplayName("Text Category");
         tc.setName("Text Category");
         tc.setText("my text");
+
+        Experience ex = new Experience("123");
+        ex.setDate("MArch");
+        ex.setLocation("Waco");
+        ex.setOrganization("Baylor");
         
-        frame.add(new BulletCategoryEditPane(bc));
-        frame.add(new ExperienceCategoryEditPane(expC));
-        frame.add(new HeaderCategoryEditPane(hc));
-        frame.add(new TextCategoryEditPane(tc));
+//        frame.add(new BulletCategoryEditPane(bc));
+//        frame.add(new ExperienceCategoryEditPane(expC));
+//        frame.add(new HeaderCategoryEditPane(hc));
+//        frame.add(new TextCategoryEditPane(tc));
+//        frame.add(new ExperienceComponent(ex));
+        frame.setContentPane(new ExperienceComponent(ex));
         frame.pack();
         frame.setVisible(true);
     }
