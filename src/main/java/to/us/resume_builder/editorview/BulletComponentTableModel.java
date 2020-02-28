@@ -9,12 +9,16 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     Vector<Object[]> data;
     String[] columnNames;
 
+    /**
+     * Creates a TableModel for a BulletComponent
+     * @param data
+     * @param columnNames
+     */
     public BulletComponentTableModel(Vector<Object[]> data, String[] columnNames) {
         super();
         this.columnNames = columnNames;
         this.data = data;
     }
-
 
     /**
      * Returns the number of rows in the model. A
