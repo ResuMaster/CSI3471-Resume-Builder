@@ -33,7 +33,7 @@ public abstract class CategoryEditPane extends JPanel {
 
 	/**
 	 * Saves the data in this EditPane to the copy of the ResumeData <em>in
-	 * ram</em>.
+	 * RAM</em>.
 	 */
 	public abstract void save();
 }
