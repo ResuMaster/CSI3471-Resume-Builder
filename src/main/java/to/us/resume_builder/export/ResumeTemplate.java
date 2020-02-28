@@ -55,7 +55,8 @@ public enum ResumeTemplate {
             for (CategoryType c : CategoryType.values()) {
                 categoryTemplates.put(c, new StringTemplate(""));
             }
-            e.printStackTrace(); // TODO: open popup window
+
+            e.printStackTrace(); // TODO: display error message
         }
     }
 

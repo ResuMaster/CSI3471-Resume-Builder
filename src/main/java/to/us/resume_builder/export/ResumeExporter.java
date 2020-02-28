@@ -5,6 +5,7 @@ import to.us.resume_builder.resume_components.Resume;
 import to.us.resume_builder.resume_components.category.Category;
 import to.us.resume_builder.util.MiscUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -33,27 +34,28 @@ public class ResumeExporter {
     /**
      * Export the resume to the specified file.
      *
-     * @param fileName The name of the file to export to.
+     * @param exportLocation The name of the file to export to.
      *
      * @return Whether or not the export was successful.
      * @throws IOException Thrown if any errors occur during the export
      *                     process.
      */
-    public boolean export(String fileName) throws IOException {
-        return export(fileName, ResumeTemplate.DEFAULT);
+    public boolean export(Path exportLocation) throws IOException {
+        return export(exportLocation, ResumeTemplate.DEFAULT);
     }
 
     /**
-     * Export the resume to the specified file, using the specified template.
+     * Export the resume to the specified exportLocation, using the specified
+     * template.
      *
-     * @param fileName The name of the file to export to.
-     * @param template The template to use to export the resume.
+     * @param exportLocation The exportLocation to export to.
+     * @param template       The template to use to export the resume.
      *
      * @return Whether or not the export was successful.
      * @throws IOException Thrown if any errors occur during the export
      *                     process.
      */
-    public boolean export(String fileName, ResumeTemplate template) throws IOException {
+    public boolean export(Path exportLocation, ResumeTemplate template) throws IOException {
         // Generate the LaTeX code
         String latexCode;
         latexCode = getLaTeXString(template);
@@ -72,8 +74,8 @@ public class ResumeExporter {
         // Generate the PDF
         boolean status = compileResumePDF(latexPath);
 
-        // TODO: do something with the resulting pdf
-        Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), Path.of(fileName), StandardCopyOption.REPLACE_EXISTING);
+        // Save the pdf to the specified location
+        Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
 
         return status;
     }
@@ -86,14 +88,16 @@ public class ResumeExporter {
      * @return The LaTeX representation of this resume.
      */
     private String getLaTeXString(ResumeTemplate template) {
-        StringJoiner sb = new StringJoiner(template.getSeparatorTemplate().toString());
+        // Create a StringJoiner to hold the contents of the template
+        StringJoiner contents = new StringJoiner(template.getSeparatorTemplate().toString());
 
-        List<Category> categories = resume.getCategoryList();
+        // Get the LaTeX for each of the categories
+        resume.getCategoryList()
+            .forEach(c -> contents.add(c.formatLaTeXString(template)));
 
-        categories.forEach(c -> sb.add(c.formatLaTeXString(template)));
-
+        // Replace the <content> tag in the resume template with the actual contents
         return template.getLatexTemplate()
-            .replaceVariable("content", sb.toString())
+            .replaceVariable("content", contents.toString())
             .toString();
     }
 
@@ -103,12 +107,13 @@ public class ResumeExporter {
      * @param filePath The path to the <code>.tex</code> file to compile.
      *
      * @return Whether or not the compilation was successful.
+     * @throws IOException Thrown if an I/O error occurs.
      */
-    private boolean compileResumePDF(Path filePath) {
+    private boolean compileResumePDF(Path filePath) throws IOException {
         // Temporary artifacts
         final String[] ARTIFACTS_TO_DELETE = { "aux", "log", "tex" };
 
-        // Attempt to generate
+        // Attempt to generate the resume
         try {
             Runtime.getRuntime().exec("pdflatex \"" + filePath.toAbsolutePath().toString() + "\"", null, filePath.getParent().toFile()).waitFor();
 
@@ -118,7 +123,7 @@ public class ResumeExporter {
             }
 
             return true;
-        } catch (IOException | InterruptedException e) {
+        } catch (InterruptedException e) {
             return false;
         }
     }

@@ -94,6 +94,7 @@ public class ApplicationConfiguration {
      * @return The current instance of the singleton.
      */
     public static ApplicationConfiguration getInstance() {
+        // Create the instance if it does not already exist
         if (instance == null)
             instance = new ApplicationConfiguration();
 

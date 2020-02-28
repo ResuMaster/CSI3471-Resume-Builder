@@ -39,7 +39,7 @@ public class Resume {
         return categoryList.stream()
             .filter(c -> c.getId().equals(id))
             .findFirst()
-            .get();
+            .orElse(null);
     }
 
     public List<Category> getCategoryList() {

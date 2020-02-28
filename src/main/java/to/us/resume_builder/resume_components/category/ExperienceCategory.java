@@ -25,6 +25,13 @@ public class ExperienceCategory extends Category {
 
     }
 
+    public Experience getExperience(String id) {
+        return experiences.stream()
+            .filter(c -> c.getId().equals(id))
+            .findFirst()
+            .orElse(null);
+    }
+
     /**
      * Get the result of serializing this object using the specified template.
      *
