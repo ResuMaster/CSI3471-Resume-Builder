@@ -22,24 +22,24 @@ class ResumeExporterTest {
 
         // Header
         String headerID = r.createCategory(CategoryType.HEADER);
-        HeaderCategory header = (HeaderCategory) r.getCategory(headerID);
+        HeaderCategory header = (HeaderCategory) r.getCategoryByID(headerID);
         header.setName("Header");
         header.setDisplayName("Matthew McCaskill");
         header.setAddress("Goodyear, AZ 85395");
         header.setEmail("mattrm.dev");
         header.setLink("www.linkedin.com/in/matthew-mccaskill");
-        header.setPhone_number("(623) 377-3772");
+        header.setPhoneNumber("(623) 377-3772");
 
         // Profile
         String profileID = r.createCategory(CategoryType.TEXT);
-        TextCategory profile = (TextCategory) r.getCategory(profileID);
+        TextCategory profile = (TextCategory) r.getCategoryByID(profileID);
         profile.setName("Profile");
         profile.setDisplayName("Career Profile");
         profile.setText("Highly motivated Computer Science candidate with a strong foundation in software development. Strong ability to quickly resolve hardware and software problems to minimize disruptions in operations. Proven history of facilitating adoption of innovative solutions and training end users on new software. Excited to contribute to a mission-driven environment.");
 
         // Education
         String educationID = r.createCategory(CategoryType.EXPERIENCE);
-        ExperienceCategory education = (ExperienceCategory) r.getCategory(educationID);
+        ExperienceCategory education = (ExperienceCategory) r.getCategoryByID(educationID);
         education.setName("Education");
         education.setDisplayName("Education");
 
@@ -57,7 +57,7 @@ class ResumeExporterTest {
 
         // Experience
         String experienceID = r.createCategory(CategoryType.EXPERIENCE);
-        ExperienceCategory experience = (ExperienceCategory) r.getCategory(experienceID);
+        ExperienceCategory experience = (ExperienceCategory) r.getCategoryByID(experienceID);
         experience.setName("Experience");
         experience.setDisplayName("Experience");
 
@@ -84,7 +84,7 @@ class ResumeExporterTest {
 
         // Additional
         String miscID = r.createCategory(CategoryType.BULLETS);
-        BulletCategory misc = (BulletCategory) r.getCategory(miscID);
+        BulletCategory misc = (BulletCategory) r.getCategoryByID(miscID);
         misc.setName("Miscellaneous");
         misc.setDisplayName("Additional");
         misc.addBullet();  // TODO: link

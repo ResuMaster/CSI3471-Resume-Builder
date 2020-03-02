@@ -52,18 +52,6 @@ public class Resume {
         return id;
     }
 
-<<<<<<< HEAD
-    public Category getCategory(String id) {
-        return categoryList.stream()
-            .filter(c -> c.getId().equals(id))
-            .findFirst()
-            .orElse(null);
-    }
-
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-=======
     /**
      * Get the current List categoryList for this instance.
      * @return the current categoryList
@@ -94,6 +82,4 @@ public class Resume {
     private boolean checkCategoryListID(String id) {
         return getCategoryByID(id) != null;
     }
-
->>>>>>> origin/resume-components
 }
