@@ -5,8 +5,16 @@ public class ResumeComponent {
      * The ID for this component.
      */
     protected final String id;
+
+    /**
+     * The visibility for the instance
+     */
     protected boolean visible = true;
 
+    /**
+     * sets the resume id for the instance
+     * @param id
+     */
     public ResumeComponent(String id) {
         this.id = id;
     }

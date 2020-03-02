@@ -6,9 +6,9 @@ import to.us.resume_builder.export.ResumeTemplate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
-// TODO look into this extending BulletCategory
-public class Experience extends ResumeComponent  implements ILaTeXConvertable {
+public class Experience extends ResumeComponent  implements ILaTeXConvertable, IBulletContainer {
     /**
      * The name of the organization worked for, or the name of the school.
      */
@@ -20,12 +20,12 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
     private String location;
 
     /**
-     * The date that the user want to display, it is a String and user is responsible to format it
+     * The date that the user want to display, it is a String and user is responsible to format it.
      */
     private String date;
 
     /**
-     * The position of the user, this is major for school or job title for work
+     * The position of the user, this is major for school or job title for work.
      */
     private String title;
 
@@ -36,8 +36,8 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
 
 
     /**
-     * Creates an instance of an item with id
-     * @param id ud
+     * Creates an instance of an item with id.
+     * @param id
      */
     public Experience(String id){
         super(id);
@@ -45,61 +45,122 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable {
     }
 
     /**
-     * returns the Organization for this instance
-     * @return organization
+     * Get the organization for this instance.
+     * @return organization the current String
      */
     public String getOrganization() {
         return organization;
     }
 
     /**
-     * sets organization of this item
-     * @param organization ud
+     * Sets organization of this instance.
+     * @param organization the string to set to
      */
     public void setOrganization(String organization) {
         this.organization = organization;
     }
 
+    /**
+     * Get the current String location for this instance
+     * @return the current String location
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Sets location of this instance.
+     * @param location the string to set to
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * Get the current String date for this instance
+     * @return the current String date
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Sets date of this instance.
+     * @param date the string to set to
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     * Get the current String title for this instance
+     * @return the current String title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Sets title of this instance.
+     * @param title the string to set to
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    // TODO Implement
+    /**
+     * Get the current List of Bullets for this instance
+     * @return the current Bullet List
+     */
+    public List<Bullet> getBulletList(){
+        return bullets;
+    }
+
+    /**
+     * Get the bullet component by id
+     * @param id String to search for id
+     * @return the bullet if found, or null if not found
+     */
+    public Bullet getBulletByID(String id){
+        for (Bullet b : bullets) {
+            if (b.getId().equals(id)) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Create a new bullet for bullets list with a random generated id
+     * @return the id created for the new bullet
+     */
     public String addBullet(){
-        // generate id with current id in the front
-        Random rand = new Random();
-        String id = this.id + rand.nextInt(1000);
-        // TODO check id to make sure that it is not a duplicate
+        do {
+            // generate id with current id in the front
+            Random rand = new Random();
+            String id = this.id + "." + rand.nextInt(1000);
+        } while (checkBulletListID(id));
 
         // add new element to bullets
         bullets.add(new Bullet(id));
         return id;
     }
 
-    // TODO Implement
+    /**
+     * Removes the list item that matches the id
+     * @param id
+     */
     public void removeBullet(String id){
-        // find the instance of field with matching id
-        // remove from bullets list
+        bullets = bullets.stream().filter(e -> !e.getId().equals(id)).collect(Collectors.toList());
+    }
+
+    /**
+     * Returns true if the id is found in the bullets list, false if not found
+     * @param id the string to see if it is equal to any id's in list
+     * @return true if found
+     */
+    public boolean checkBulletListID(String id){
+        return getBulletByID(id) != null;
     }
 
     /**
