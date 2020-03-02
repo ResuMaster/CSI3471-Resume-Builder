@@ -121,12 +121,10 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
      * @return the bullet if found, or null if not found
      */
     public Bullet getBulletByID(String id){
-        for (Bullet b : bullets) {
-            if (b.getId().equals(id)) {
-                return b;
-            }
-        }
-        return null;
+        return bullets.stream()
+                .filter(b -> b.getID().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -150,7 +148,7 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
      * @param id
      */
     public void removeBullet(String id){
-        bullets = bullets.stream().filter(e -> !e.getId().equals(id)).collect(Collectors.toList());
+        bullets = bullets.stream().filter(e -> !e.getID().equals(id)).collect(Collectors.toList());
     }
 
     /**

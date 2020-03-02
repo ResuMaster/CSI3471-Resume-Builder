@@ -16,7 +16,7 @@ public class HeaderCategory extends Category {
     /**
      * The user's phone number that they want on the resume
      */
-    private String phone_number;
+    private String phoneNumber;
 
     /**
      * The user's address than they want on the resume
@@ -68,7 +68,7 @@ public class HeaderCategory extends Category {
      * @return the current String phone_number
      */
     public String getPhoneNumber() {
-        return phone_number;
+        return phoneNumber;
     }
 
     /**
@@ -76,7 +76,7 @@ public class HeaderCategory extends Category {
      * @param phone_number the new String to set to
      */
     public void setPhoneNumber(String phone_number) {
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
 
     /**

@@ -66,12 +66,10 @@ public class Resume {
      * @return a reference to the Category if it is found, if not found return null.
      */
     public Category getCategoryByID(String id){
-        for (Category c : categoryList) {
-            if (c.getId().equals(id)) {
-                return c;
-            }
-        }
-        return null;
+        return categoryList.stream()
+                .filter(c -> c.getID().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     /**

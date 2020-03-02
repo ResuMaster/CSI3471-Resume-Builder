@@ -7,29 +7,29 @@ public class ResumeComponent {
     protected final String id;
 
     /**
-     * The visibility for the instance
+     * The visibility for the instance.
      */
     protected boolean visible = true;
 
     /**
-     * sets the resume id for the instance
-     * @param id
+     * sets the resume id for the instance.
+     * @param id The new ID for this instance.
      */
     public ResumeComponent(String id) {
         this.id = id;
     }
 
     /**
-     * returns the ID for this instance
-     * @return id
+     * returns the ID for this instance.
+     * @return id The ID for this instance.
      */
-    public String getId() {
+    public String getID() {
         return id;
     }
 
     /**
-     * Get the current visibility for this instance
-     * @return visible
+     * Get the current visibility for this instance.
+     * @return visible The current visibility of the item.
      */
     public boolean getVisible(){
         return visible;
@@ -43,8 +43,8 @@ public class ResumeComponent {
     }
 
     /**
-     * Sets the visibility of the object
-     * @param visible the visibility the object is set to
+     * Sets the visibility of the object.
+     * @param visible The visibility to set to.
      */
     public void setVisible(boolean visible) {
         this.visible = visible;

@@ -6,7 +6,6 @@ import to.us.resume_builder.resume_components.IBulletContainer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class BulletCategory extends Category implements IBulletContainer {
 
@@ -39,12 +38,10 @@ public class BulletCategory extends Category implements IBulletContainer {
      * @return the bullet if found, or null if not found
      */
     public Bullet getBulletByID(String id){
-        for (Bullet b : bullets) {
-            if (b.getId().equals(id)) {
-                return b;
-            }
-        }
-        return null;
+        return bullets.stream()
+                .filter(c -> c.getID().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -68,7 +65,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      * @param id
      */
     public void removeBullet(String id){
-        bullets = bullets.stream().filter(e -> !e.getId().equals(id)).collect(Collectors.toList());
+        bullets.removeIf(b -> b.getID().equals(id));
     }
 
     /**

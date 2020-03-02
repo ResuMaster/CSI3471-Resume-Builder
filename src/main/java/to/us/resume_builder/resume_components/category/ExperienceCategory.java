@@ -29,12 +29,10 @@ public class ExperienceCategory extends Category {
      * @return a reference to the Experience if it is found, if not found return null.
      */
     Experience getExperienceByID(String id){
-        for (Experience e : experiences) {
-            if (e.getId().equals(id)) {
-                return e;
-            }
-        }
-        return null;
+        return experiences.stream()
+                .filter(c -> c.getID().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -56,7 +54,7 @@ public class ExperienceCategory extends Category {
      * @param id
      */
     public void removeExperience(String id){
-        experiences = experiences.stream().filter(e -> !e.getId().equals(id)).collect(Collectors.toList());
+        experiences = experiences.stream().filter(e -> !e.getID().equals(id)).collect(Collectors.toList());
     }
 
     /**
