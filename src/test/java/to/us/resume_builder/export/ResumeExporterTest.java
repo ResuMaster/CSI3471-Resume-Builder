@@ -9,7 +9,7 @@ import to.us.resume_builder.resume_components.category.*;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ResumeExporterTest {
     @Test
@@ -49,11 +49,11 @@ class ResumeExporterTest {
         baylorEdu.setLocation("Waco, Texas");
         baylorEdu.setDate("May 2022");
         baylorEdu.setTitle("Bachelor of Science in Computer Science");
-        baylorEdu.addBullet();  // TODO: link
-        baylorEdu.addBullet();
-        baylorEdu.addBullet();
-        baylorEdu.addBullet();
-        baylorEdu.addBullet();
+        baylorEdu.getBulletByID(baylorEdu.addBullet()).setText("Secondary Major in Mathematics");
+        baylorEdu.getBulletByID(baylorEdu.addBullet()).setText("GPA 4.0");
+        baylorEdu.getBulletByID(baylorEdu.addBullet()).setText("Active member of Computing 4 Compassion");
+        baylorEdu.getBulletByID(baylorEdu.addBullet()).setText("Member of Association for Computing Machinery (ACM) and Alpha Lambda Delta");
+        baylorEdu.getBulletByID(baylorEdu.addBullet()).setText("Relevant Coursework: Introduction to Computer Science I & II, Discrete Mathematics, Data Structures, Software Engineering, and Algorithms");
 
         // Experience
         String experienceID = r.createCategory(CategoryType.EXPERIENCE);
@@ -67,9 +67,9 @@ class ResumeExporterTest {
         siExp.setLocation("Waco, Texas");
         siExp.setDate("2019-Present");
         siExp.setTitle("Supplemental Instruction Leader");
-        siExp.addBullet();  // TODO: link
-        siExp.addBullet();
-        siExp.addBullet();
+        siExp.getBulletByID(siExp.addBullet()).setText("Led biweekly group review sessions to improve student understanding of course content");
+        siExp.getBulletByID(siExp.addBullet()).setText("Adapted teaching strategies to engage various learning styles");
+        siExp.getBulletByID(siExp.addBullet()).setText("Functioned as an intermediary between students and professor");
 
         String kidsMinExpID = experience.addExperience();
         Experience kidsMinExp = experience.getExperience(kidsMinExpID);
@@ -77,26 +77,26 @@ class ResumeExporterTest {
         kidsMinExp.setLocation("Goodyear, Arizona");
         kidsMinExp.setDate("Summer 2019");
         kidsMinExp.setTitle("Kids Ministry Intern");
-        kidsMinExp.addBullet();  // TODO: link
-        kidsMinExp.addBullet();
-        kidsMinExp.addBullet();
-        kidsMinExp.addBullet();
+        kidsMinExp.getBulletByID(kidsMinExp.addBullet()).setText("Planned and executed weekend programming for children of all ages weekly");
+        kidsMinExp.getBulletByID(kidsMinExp.addBullet()).setText("Learned effective management techniques to ensure smooth experience");
+        kidsMinExp.getBulletByID(kidsMinExp.addBullet()).setText("Mentored new volunteers in teaching confidence and techniques");
+        kidsMinExp.getBulletByID(kidsMinExp.addBullet()).setText("Responded to various emergency situations with calmness and efficiency");
 
         // Additional
         String miscID = r.createCategory(CategoryType.BULLETS);
         BulletCategory misc = (BulletCategory) r.getCategoryByID(miscID);
         misc.setName("Miscellaneous");
         misc.setDisplayName("Additional");
-        misc.addBullet();  // TODO: link
-        misc.addBullet();
-        misc.addBullet();
-        misc.addBullet();
-        misc.addBullet();
+        misc.getBulletByID(misc.addBullet()).setText("Proficient in C++, Java SE, HTML, CSS, JavaScript, LaTeX");
+        misc.getBulletByID(misc.addBullet()).setText("Comfortable with jQuery, Bootstrap, Python, C#, Intel x86 Assembly");
+        misc.getBulletByID(misc.addBullet()).setText("Taught fifth and sixth grade students basic programming skills through Computing 4 Compassion’s igniteCS division");
+        misc.getBulletByID(misc.addBullet()).setText("Served as a Host Group Leader with Antioch Community Church");
+        misc.getBulletByID(misc.addBullet()).setText("Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques");
 
         // Attempt to export the resume
         ResumeExporter re = new ResumeExporter(r);
         try {
-            re.export(Path.of("export.pdf"));
+            assertTrue(re.export(Path.of("export.pdf")));
         } catch (IOException e) {
             e.printStackTrace();
         }
