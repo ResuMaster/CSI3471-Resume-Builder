@@ -6,29 +6,32 @@ import to.us.resume_builder.export.ResumeTemplate;
 public class Bullet extends ResumeComponent implements ILaTeXConvertable {
 
     /**
-     * The string that is displayed in the resume
+     * The string that is displayed in the resume.
      */
     private String text;
 
     /**
-     * a bullet constructor with a specific id
-     * @param id the id for this instance
+     * Creates a bullet constructor with a specific id.
+     *
+     * @param id The id for this bullet.
      */
-    public Bullet(String id){
+    public Bullet(String id) {
         super(id);
     }
 
     /**
-     * Get the current String text for this instance
-     * @return the current string text
+     * Get the current String text for this instance.
+     *
+     * @return The current string text.
      */
     public String getText() {
         return text;
     }
 
     /**
-     * Set the value of text for this instance
-     * @param text the String to set to
+     * Set the value of text for this instance.
+     *
+     * @param text The String to set text to.
      */
     public void setText(String text) {
         this.text = text;

@@ -7,18 +7,18 @@ import to.us.resume_builder.resume_components.IBulletContainer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class BulletCategory extends Category implements IBulletContainer {
 
     /**
-     * a List of bullets
+     * A List of bullets.
      */
     private List<Bullet> bullets;
 
     /**
-     * Creates an instance of BulletCategory with id
-     * @param id the ID for this instance of Category
+     * Creates an instance of BulletCategory with id.
+     *
+     * @param id The ID for this instance of Category.
      */
     public BulletCategory(String id) {
         super(id, CategoryType.BULLETS);
@@ -27,32 +27,34 @@ public class BulletCategory extends Category implements IBulletContainer {
 
 
     /**
-     * Get the current List of Bullets for this instance
-     * @return the current Bullet List
+     * Get the current List of Bullets for this instance.
+     *
+     * @return the current Bullet List.
      */
-    public List<Bullet> getBulletList(){
+    public List<Bullet> getBulletList() {
         return bullets;
     }
 
     /**
-     * Get the bullet component by id
-     * @param id String to search for id
-     * @return the bullet if found, or null if not found
+     * Get the bullet component by id.
+     *
+     * @param id String to search for id.
+     *
+     * @return The bullet if found, or null if not found.
      */
-    public Bullet getBulletByID(String id){
-        for (Bullet b : bullets) {
-            if (b.getId().equals(id)) {
-                return b;
-            }
-        }
-        return null;
+    public Bullet getBulletByID(String id) {
+        return bullets.stream()
+            .filter(c -> c.getID().equals(id))
+            .findFirst()
+            .orElse(null);
     }
 
     /**
-     * Create a new bullet for bullets list with a random generated id
-     * @return the id created for the new bullet
+     * Create a new bullet for bullets list with a random generated id.
+     *
+     * @return The id created for the new bullet.
      */
-    public String addBullet(){
+    public String addBullet() {
         do {
             // generate id with current id in the front
             Random rand = new Random();
@@ -65,19 +67,22 @@ public class BulletCategory extends Category implements IBulletContainer {
     }
 
     /**
-     * Removes the list item that matches the id
-     * @param id
+     * Removes the list item that matches the id.
+     *
+     * @param id The String to find which instant.
      */
-    public void removeBullet(String id){
-        bullets = bullets.stream().filter(e -> !e.getId().equals(id)).collect(Collectors.toList());
+    public void removeBullet(String id) {
+        bullets.removeIf(b -> b.getID().equals(id));
     }
 
     /**
-     * Returns true if the id is found in the bullets list, false if not found
-     * @param id the string to see if it is equal to any id's in list
-     * @return true if found
+     * Returns true if the id is found in the bullets list, false if not found.
+     *
+     * @param id The string to see if it is equal to any ID's in list.
+     *
+     * @return True if found.
      */
-    public boolean checkBulletListID(String id){
+    public boolean checkBulletListID(String id) {
         return getBulletByID(id) != null;
     }
 

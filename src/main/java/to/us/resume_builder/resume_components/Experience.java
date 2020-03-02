@@ -6,9 +6,8 @@ import to.us.resume_builder.export.ResumeTemplate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
-public class Experience extends ResumeComponent  implements ILaTeXConvertable, IBulletContainer {
+public class Experience extends ResumeComponent implements ILaTeXConvertable, IBulletContainer {
     /**
      * The name of the organization worked for, or the name of the school.
      */
@@ -20,12 +19,14 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
     private String location;
 
     /**
-     * The date that the user want to display, it is a String and user is responsible to format it.
+     * The date that the user want to display, it is a String and user is
+     * responsible to format it.
      */
     private String date;
 
     /**
-     * The position of the user, this is major for school or job title for work.
+     * The position of the user, this is major for school or job title for
+     * work.
      */
     private String title;
 
@@ -37,16 +38,18 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
 
     /**
      * Creates an instance of an item with id.
-     * @param id
+     *
+     * @param id The id to set the experience to.
      */
-    public Experience(String id){
+    public Experience(String id) {
         super(id);
         bullets = new LinkedList<>();
     }
 
     /**
-     * Get the organization for this instance.
-     * @return organization the current String
+     * Get the current String organization for this instance.
+     *
+     * @return The current String for organization.
      */
     public String getOrganization() {
         return organization;
@@ -54,15 +57,17 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
 
     /**
      * Sets organization of this instance.
-     * @param organization the string to set to
+     *
+     * @param organization The string to set organization to.
      */
     public void setOrganization(String organization) {
         this.organization = organization;
     }
 
     /**
-     * Get the current String location for this instance
-     * @return the current String location
+     * Get the current String location for this instance.
+     *
+     * @return The current String for location.
      */
     public String getLocation() {
         return location;
@@ -70,15 +75,17 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
 
     /**
      * Sets location of this instance.
-     * @param location the string to set to
+     *
+     * @param location The string to set location to.
      */
     public void setLocation(String location) {
         this.location = location;
     }
 
     /**
-     * Get the current String date for this instance
-     * @return the current String date
+     * Get the current String date for this instance.
+     *
+     * @return the current String date.
      */
     public String getDate() {
         return date;
@@ -86,15 +93,17 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
 
     /**
      * Sets date of this instance.
-     * @param date the string to set to
+     *
+     * @param date The string to set date to.
      */
     public void setDate(String date) {
         this.date = date;
     }
 
     /**
-     * Get the current String title for this instance
-     * @return the current String title
+     * Get the current String title for this instance.
+     *
+     * @return the current String title.
      */
     public String getTitle() {
         return title;
@@ -102,39 +111,42 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
 
     /**
      * Sets title of this instance.
-     * @param title the string to set to
+     *
+     * @param title The string to set title to.
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * Get the current List of Bullets for this instance
-     * @return the current Bullet List
+     * Get the current List of Bullets for this instance.
+     *
+     * @return The current Bullet List.
      */
-    public List<Bullet> getBulletList(){
+    public List<Bullet> getBulletList() {
         return bullets;
     }
 
     /**
-     * Get the bullet component by id
-     * @param id String to search for id
-     * @return the bullet if found, or null if not found
+     * Get the bullet component by id.
+     *
+     * @param id String to search for id.
+     *
+     * @return the bullet if found, or null if not found.
      */
-    public Bullet getBulletByID(String id){
-        for (Bullet b : bullets) {
-            if (b.getId().equals(id)) {
-                return b;
-            }
-        }
-        return null;
+    public Bullet getBulletByID(String id) {
+        return bullets.stream()
+            .filter(b -> b.getID().equals(id))
+            .findFirst()
+            .orElse(null);
     }
 
     /**
-     * Create a new bullet for bullets list with a random generated id
-     * @return the id created for the new bullet
+     * Create a new bullet for bullets list with a random generated id.
+     *
+     * @return the id created for the new bullet.
      */
-    public String addBullet(){
+    public String addBullet() {
         do {
             // generate id with current id in the front
             Random rand = new Random();
@@ -147,19 +159,22 @@ public class Experience extends ResumeComponent  implements ILaTeXConvertable, I
     }
 
     /**
-     * Removes the list item that matches the id
-     * @param id
+     * Removes the list item that matches the id.
+     *
+     * @param id the ID used to find the Bullet to remove.
      */
-    public void removeBullet(String id){
-        bullets = bullets.stream().filter(e -> !e.getId().equals(id)).collect(Collectors.toList());
+    public void removeBullet(String id) {
+        bullets.removeIf(b -> b.getID().equals(id));
     }
 
     /**
-     * Returns true if the id is found in the bullets list, false if not found
-     * @param id the string to see if it is equal to any id's in list
-     * @return true if found
+     * Returns true if the id is found in the bullets list, false if not found.
+     *
+     * @param id the string to see if it is equal to any id's in list.
+     *
+     * @return true if found.
      */
-    public boolean checkBulletListID(String id){
+    public boolean checkBulletListID(String id) {
         return getBulletByID(id) != null;
     }
 

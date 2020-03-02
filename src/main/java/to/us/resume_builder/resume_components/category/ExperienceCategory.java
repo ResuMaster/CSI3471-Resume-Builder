@@ -17,7 +17,8 @@ public class ExperienceCategory extends Category {
 
     /**
      * Creates an instance of ExperienceCategory with id.
-     * @param id the ID for this instance of Category
+     *
+     * @param id The ID for this instance of Category.
      */
     public ExperienceCategory(String id) {
         super(id, CategoryType.EXPERIENCE);
@@ -25,24 +26,26 @@ public class ExperienceCategory extends Category {
     }
 
     /**
-     * Return the experience that matches the passed String id
-     * @param id the String to compare to
-     * @return a reference to the Experience if it is found, if not found return null.
+     * Return the experience that matches the passed String id.
+     *
+     * @param id The String to compare to.
+     *
+     * @return A reference to the Experience if it is found, if not found return
+     *     null.
      */
-    Experience getExperienceByID(String id){
-        for (Experience e : experiences) {
-            if (e.getId().equals(id)) {
-                return e;
-            }
-        }
-        return null;
+    Experience getExperienceByID(String id) {
+        return experiences.stream()
+            .filter(c -> c.getID().equals(id))
+            .findFirst()
+            .orElse(null);
     }
 
     /**
      * Adds an experience with a random generated id.
-     * @return id the id of the new experience
+     *
+     * @return The id of the new experience.
      */
-    public String addExperience(){
+    public String addExperience() {
         do {
             // generate id with current id in the front
             Random rand = new Random();
@@ -54,18 +57,22 @@ public class ExperienceCategory extends Category {
 
     /**
      * Removes the list item that matches the id.
-     * @param id
+     *
+     * @param id The String find the instance to remove by.
      */
-    public void removeExperience(String id){
-        experiences = experiences.stream().filter(e -> !e.getId().equals(id)).collect(Collectors.toList());
+    public void removeExperience(String id) {
+        experiences.removeIf(b -> b.getID().equals(id));
     }
 
     /**
-     * Returns true if the id is found in the experiences list, false if not found
-     * @param id the string to see if it is equal to any id's in list
-     * @return true if found
+     * Returns true if the id is found in the experiences list, false if not
+     * found.
+     *
+     * @param id The string to see if it is equal to any id's in list.
+     *
+     * @return True if found.
      */
-    private boolean checkExperienceListID(String id){
+    private boolean checkExperienceListID(String id) {
         return getExperienceByID(id) != null;
     }
 
@@ -95,7 +102,6 @@ public class ExperienceCategory extends Category {
             )
             .toString();
     }
-
 
 
 }
