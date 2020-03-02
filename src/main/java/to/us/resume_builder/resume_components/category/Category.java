@@ -11,7 +11,8 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     protected final CategoryType type;
 
     /**
-     * The name of the category, it is used for internal and outline information.
+     * The name of the category, it is used for internal and outline
+     * information.
      */
     protected String name;
     /**
@@ -20,17 +21,19 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     protected String displayName;
 
     /**
-     * An abstract category.
-     * @param id the id of the current object
-     * @param type the type that the category is
+     * An abstract category constructor.
+     *
+     * @param id   The id of the current object.
+     * @param type The type that the category is.
      */
-    protected Category(String id, CategoryType type){
+    protected Category(String id, CategoryType type) {
         super(id);
         this.type = type;
     }
 
     /**
-     * Returns the CategoryType type of the category.
+     * Returns the CategoryType type of the category for this instance.
+     *
      * @return type
      */
     public CategoryType getType() {
@@ -38,24 +41,27 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     }
 
     /**
-     * Returns the current String displayName.
-     * @return displayName
+     * Returns the current String displayName for this instance.
+     *
+     * @return The String displayName.
      */
     public String getDisplayName() {
         return displayName;
     }
 
     /**
-     * Sets the String displayName.
-     * @param displayName the String to set to
+     * Sets the String displayName for this instance.
+     *
+     * @param displayName The String to set displayName to.
      */
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
 
     /**
-     * Returns the current String name.
-     * @return name
+     * Returns the current String name for this instance.
+     *
+     * @return The String name.
      */
     public String getName() {
         return name;
@@ -63,7 +69,8 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
 
     /**
      * Sets the String name.
-     * @param name the String to set to
+     *
+     * @param name The String to set name to
      */
     public void setName(String name) {
         this.name = name;

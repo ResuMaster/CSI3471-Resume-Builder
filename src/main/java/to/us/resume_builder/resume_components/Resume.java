@@ -17,16 +17,19 @@ public class Resume {
     /**
      * Resume constructor creates a new instance of a resume.
      */
-    public Resume(){
+    public Resume() {
         categoryList = new LinkedList<>();
     }
 
     /**
-     * add a Category of type to categoryList with a unique random generated id.
+     * add a Category of type to categoryList with a unique random generated
+     * id.
+     *
      * @param type the type of category to be created.
+     *
      * @return the unique random generated id.
      */
-    public String createCategory(CategoryType type){
+    public String createCategory(CategoryType type) {
         String id;
         // generate a random id and check that it is not being used
         do {
@@ -35,7 +38,7 @@ public class Resume {
         } while (checkCategoryListID(id));
 
         // create a new category of type with the generated id
-        switch(type){
+        switch (type) {
             case HEADER:
                 categoryList.add(new HeaderCategory(id));
                 break;
@@ -54,27 +57,33 @@ public class Resume {
 
     /**
      * Get the current List categoryList for this instance.
+     *
      * @return the current categoryList
      */
-    public List<Category> getCategoryList(){
+    public List<Category> getCategoryList() {
         return categoryList;
     }
 
     /**
      * Returns the Category reference by the id.
+     *
      * @param id the String to find the category.
-     * @return a reference to the Category if it is found, if not found return null.
+     *
+     * @return a reference to the Category if it is found, if not found return
+     *     null.
      */
-    public Category getCategoryByID(String id){
+    public Category getCategoryByID(String id) {
         return categoryList.stream()
-                .filter(c -> c.getID().equals(id))
-                .findFirst()
-                .orElse(null);
+            .filter(c -> c.getID().equals(id))
+            .findFirst()
+            .orElse(null);
     }
 
     /**
      * A helper function to check if the id is use in the list currently.
+     *
      * @param id the string to check by.
+     *
      * @return true if the id is used, false if not.
      */
     private boolean checkCategoryListID(String id) {
