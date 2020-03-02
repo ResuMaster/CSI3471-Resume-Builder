@@ -146,10 +146,11 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      * @return the id created for the new bullet.
      */
     public String addBullet() {
+        String id;
         do {
             // generate id with current id in the front
             Random rand = new Random();
-            String id = this.id + "." + rand.nextInt(1000);
+            id = this.id + "." + rand.nextInt(1000);
         } while (checkBulletListID(id));
 
         // add new element to bullets
