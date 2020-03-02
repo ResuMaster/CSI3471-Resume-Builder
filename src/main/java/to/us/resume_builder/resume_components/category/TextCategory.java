@@ -1,6 +1,7 @@
 package to.us.resume_builder.resume_components.category;
 
 import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
 
 public class TextCategory extends Category {
 
@@ -47,8 +48,8 @@ public class TextCategory extends Category {
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
         return template.getCategoryTemplate(this.type)
-            .replaceVariable("title", this.displayName)
-            .replaceVariable("content", this.text)
+            .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
+            .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
             .toString();
     }
 }

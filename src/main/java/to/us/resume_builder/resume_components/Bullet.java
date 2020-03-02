@@ -2,6 +2,7 @@ package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
 import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
 
 public class Bullet extends ResumeComponent implements ILaTeXConvertable {
 
@@ -48,7 +49,7 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
         return template.getFieldTemplate()
-            .replaceVariable("content", this.text)
+            .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
             .toString();
     }
 }

@@ -44,7 +44,7 @@ class ResumeExporterTest {
         education.setDisplayName("Education");
 
         String baylorEduID = education.addExperience();
-        Experience baylorEdu = education.getExperience(baylorEduID);
+        Experience baylorEdu = education.getExperienceByID(baylorEduID);
         baylorEdu.setOrganization("Baylor University");
         baylorEdu.setLocation("Waco, Texas");
         baylorEdu.setDate("May 2022");
@@ -62,7 +62,7 @@ class ResumeExporterTest {
         experience.setDisplayName("Experience");
 
         String siExpID = experience.addExperience();
-        Experience siExp = experience.getExperience(siExpID);
+        Experience siExp = experience.getExperienceByID(siExpID);
         siExp.setOrganization("Academic Support Programs, Baylor University");
         siExp.setLocation("Waco, Texas");
         siExp.setDate("2019-Present");
@@ -72,7 +72,7 @@ class ResumeExporterTest {
         siExp.getBulletByID(siExp.addBullet()).setText("Functioned as an intermediary between students and professor");
 
         String kidsMinExpID = experience.addExperience();
-        Experience kidsMinExp = experience.getExperience(kidsMinExpID);
+        Experience kidsMinExp = experience.getExperienceByID(kidsMinExpID);
         kidsMinExp.setOrganization("The Refinery Christian Church");
         kidsMinExp.setLocation("Goodyear, Arizona");
         kidsMinExp.setDate("Summer 2019");

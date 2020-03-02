@@ -2,6 +2,7 @@ package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
 import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -190,10 +191,10 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
         return template.getExperienceTemplate()
-            .replaceVariable("organization", this.organization)
-            .replaceVariable("title", this.title)
-            .replaceVariable("location", this.location)
-            .replaceVariable("date", this.date)
+            .replaceVariable("organization", MiscUtils.escapeLaTeX(this.organization))
+            .replaceVariable("title", MiscUtils.escapeLaTeX(this.title))
+            .replaceVariable("location", MiscUtils.escapeLaTeX(this.location))
+            .replaceVariable("date", MiscUtils.escapeLaTeX(this.date))
             .replaceVariable("content", bullets.stream()
                 .map(f -> f.formatLaTeXString(template))
                 .reduce((a, b) -> a + b)

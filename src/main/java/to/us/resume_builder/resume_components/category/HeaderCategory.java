@@ -2,6 +2,7 @@ package to.us.resume_builder.resume_components.category;
 
 
 import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
 
 public class HeaderCategory extends Category {
 
@@ -117,11 +118,11 @@ public class HeaderCategory extends Category {
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
         return template.getCategoryTemplate(this.type)
-            .replaceVariable("name", this.displayName)
-            .replaceVariable("address", this.address)
-            .replaceVariable("phone", this.phone_number)
-            .replaceVariable("link", this.link)
-            .replaceVariable("email", this.email)
+            .replaceVariable("name", MiscUtils.escapeLaTeX(this.displayName))
+            .replaceVariable("address", MiscUtils.escapeLaTeX(this.address))
+            .replaceVariable("phone", MiscUtils.escapeLaTeX(this.phoneNumber))
+            .replaceVariable("link", MiscUtils.escapeLaTeX(this.link))
+            .replaceVariable("email", MiscUtils.escapeLaTeX(this.email))
             .toString();
     }
 }

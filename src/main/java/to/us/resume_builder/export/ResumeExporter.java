@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class handles the exporting of a resume file to a PDF.
@@ -115,7 +116,14 @@ public class ResumeExporter {
 
         // Attempt to generate the resume
         try {
-            Runtime.getRuntime().exec("pdflatex \"" + filePath.toAbsolutePath().toString() + "\"", null, filePath.getParent().toFile()).waitFor();
+            ProcessBuilder builder = new ProcessBuilder("pdflatex", "\"" + filePath.toAbsolutePath().toString() + "\"");
+            builder.directory(filePath.getParent().toFile());
+            // TODO: add dedicated log file
+            builder.redirectOutput(new File("./export.log"));
+            builder.redirectError(new File("./export.log"));
+            Process p = builder.start();
+            // TODO: add config option for this
+            p.waitFor(30L, TimeUnit.SECONDS);
 
             // Clean up artifacts
             for (String extension : ARTIFACTS_TO_DELETE) {
