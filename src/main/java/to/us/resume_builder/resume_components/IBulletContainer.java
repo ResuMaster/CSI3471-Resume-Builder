@@ -43,5 +43,17 @@ public interface IBulletContainer {
      */
     boolean checkBulletListID(String id);
 
+    /**
+     * Set the number of columns in the bullet list.
+     * @param number The value to set columns to.
+     */
+    void setColumn(int number);
+
+    /**
+     * Get the number of columns in the bullet list.
+     * @return The number of columns.
+     */
+    int getColumn();
+
 
 }
