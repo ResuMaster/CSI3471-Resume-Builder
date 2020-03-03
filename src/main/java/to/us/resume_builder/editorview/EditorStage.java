@@ -103,7 +103,7 @@ public class EditorStage extends JPanel {
         }
 
         @Override
-        void save() {
+        public void save() {
             JOptionPane.showMessageDialog(this, "Dummy save message.");
         }
     }
