@@ -1,7 +1,9 @@
 package to.us.resume_builder.resume_components.category;
 
+import to.us.resume_builder.export.ResumeTemplate;
 import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.IBulletContainer;
+import to.us.resume_builder.util.MiscUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -86,8 +88,24 @@ public class BulletCategory extends Category implements IBulletContainer {
         return getBulletByID(id) != null;
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
-    public String toLaTeXString() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getCategoryTemplate(this.type)
+            .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
+            .replaceVariable("content",
+                bullets.stream()
+                    .map(f -> f.formatLaTeXString(template))
+                    .reduce((a, b) -> a + b)
+                    .orElse("")
+            )
+            .toString();
     }
 }

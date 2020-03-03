@@ -1,5 +1,8 @@
 package to.us.resume_builder.resume_components.category;
 
+import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
+
 public class TextCategory extends Category {
 
     /**
@@ -34,8 +37,19 @@ public class TextCategory extends Category {
         this.text = text;
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
-    public String toLaTeXString() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getCategoryTemplate(this.type)
+            .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
+            .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
+            .toString();
     }
 }

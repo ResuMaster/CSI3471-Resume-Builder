@@ -1,6 +1,8 @@
 package to.us.resume_builder.resume_components.category;
 
+import to.us.resume_builder.export.ResumeTemplate;
 import to.us.resume_builder.resume_components.Experience;
+import to.us.resume_builder.util.MiscUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ExperienceCategory extends Category {
      * @return A reference to the Experience if it is found, if not found return
      *     null.
      */
-    Experience getExperienceByID(String id) {
+    public Experience getExperienceByID(String id) {
         return experiences.stream()
             .filter(c -> c.getID().equals(id))
             .findFirst()
@@ -76,9 +78,24 @@ public class ExperienceCategory extends Category {
         return getExperienceByID(id) != null;
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
-    public String toLaTeXString() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getCategoryTemplate(this.type)
+            .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
+            .replaceVariable("content", experiences.stream()
+                .map(f -> f.formatLaTeXString(template))
+                .reduce((a, b) -> a + b)
+                .orElse("")
+            )
+            .toString();
     }
 
 

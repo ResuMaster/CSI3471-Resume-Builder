@@ -1,6 +1,8 @@
 package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
+import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -178,8 +180,26 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
         return getBulletByID(id) != null;
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
-    public String toLaTeXString() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getExperienceTemplate()
+            .replaceVariable("organization", MiscUtils.escapeLaTeX(this.organization))
+            .replaceVariable("title", MiscUtils.escapeLaTeX(this.title))
+            .replaceVariable("location", MiscUtils.escapeLaTeX(this.location))
+            .replaceVariable("date", MiscUtils.escapeLaTeX(this.date))
+            .replaceVariable("content", bullets.stream()
+                .map(f -> f.formatLaTeXString(template))
+                .reduce((a, b) -> a + b)
+                .orElse("")
+            )
+            .toString();
     }
 }

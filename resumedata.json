@@ -35,7 +35,6 @@
             "items": [
                 {
                     "id": 4,
-                    "department": null,
                     "organization": "Baylor University",
                     "location": "Waco, Texas",
                     "date": "May 2022",

@@ -89,5 +89,4 @@ public class Resume {
     private boolean checkCategoryListID(String id) {
         return getCategoryByID(id) != null;
     }
-
 }
