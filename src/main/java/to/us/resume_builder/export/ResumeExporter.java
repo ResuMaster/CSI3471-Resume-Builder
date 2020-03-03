@@ -126,6 +126,7 @@ public class ResumeExporter {
             p.waitFor(30L, TimeUnit.SECONDS);
 
             // Clean up artifacts
+            // TODO: have way to clean up rest of artifacts
             for (String extension : ARTIFACTS_TO_DELETE) {
                 Files.deleteIfExists(filePath.resolveSibling(filePath.getFileName().toString().split("\\.")[0] + "." + extension));
             }

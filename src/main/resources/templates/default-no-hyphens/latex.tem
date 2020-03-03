@@ -18,6 +18,8 @@
 \usepackage[defaultsans]{droidsans}
 \renewcommand*\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
+\usepackage[none]{hyphenat}  % remove hyphens at the ends of lines
+\sloppy
 
 % Helper packages
 \usepackage{enumitem}

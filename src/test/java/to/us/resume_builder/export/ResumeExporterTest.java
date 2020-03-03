@@ -10,14 +10,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-class ResumeExporterTest {
-    @Test
-    void export() {
-        // Setup configuration
-        ApplicationConfiguration.getInstance();
-
-        // Create test resume
+public class ResumeExporterTest {
+    private static Resume getTestResume() {
         Resume r = new Resume();
 
         // Header
@@ -93,12 +89,41 @@ class ResumeExporterTest {
         misc.getBulletByID(misc.addBullet()).setText("Served as a Host Group Leader with Antioch Community Church");
         misc.getBulletByID(misc.addBullet()).setText("Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques");
 
+        return r;
+    }
+
+    @Test
+    public void exportDefault() {
+        // Setup configuration
+        ApplicationConfiguration.getInstance();
+
+        // Create test resume
+        Resume r = getTestResume();
+
         // Attempt to export the resume
         ResumeExporter re = new ResumeExporter(r);
         try {
-            assertTrue(re.export(Path.of("export.pdf")));
+            assertTrue(re.export(Path.of("export1.pdf")));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void exportNoHyphens() {
+        // Setup configuration
+        ApplicationConfiguration.getInstance();
+
+        // Create test resume
+        Resume r = getTestResume();
+
+        // Attempt to export the resume
+        ResumeExporter re = new ResumeExporter(r);
+        try {
+            assertTrue(re.export(Path.of("export2.pdf"), ResumeTemplate.DEFAULT_NO_HYPHENS));
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
         }
     }
 }

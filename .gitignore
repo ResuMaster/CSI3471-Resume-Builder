@@ -471,6 +471,6 @@ TSWLatexianTemp*
 ### Project Excludes ###
 .DS_Store
 temp/
-export.pdf
+export*.pdf
 
 # End of https://www.gitignore.io/api/java,maven,eclipse,intellij,latex

@@ -20,7 +20,8 @@ import java.util.Map;
  * @author Matthew McCaskill
  */
 public enum ResumeTemplate {
-    DEFAULT("default");
+    DEFAULT("default"),
+    DEFAULT_NO_HYPHENS("default-no-hyphens");
 
     private StringTemplate latexTemplate;
     private Map<CategoryType, StringTemplate> categoryTemplates;
