@@ -11,7 +11,6 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -30,7 +29,7 @@ public class Main {
         hc.setAddress("my address");
         hc.setEmail("my email");
         hc.setLink("my link");
-        hc.setPhone_number("my phone number");
+        hc.setPhoneNumber("my phone number");
 
         TextCategory tc = new TextCategory("12348");
         tc.setDisplayName("Text Category");
