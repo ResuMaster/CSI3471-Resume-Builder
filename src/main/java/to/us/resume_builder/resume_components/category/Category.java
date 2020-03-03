@@ -75,9 +75,4 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     public void setName(String name) {
         this.name = name;
     }
-
-    @Override
-    public String toLaTeXString() {
-        return null;
-    }
 }

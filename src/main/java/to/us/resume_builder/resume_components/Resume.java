@@ -90,4 +90,12 @@ public class Resume {
         return getCategoryByID(id) != null;
     }
 
+    /**
+     * Removes the categoryList item that matches the id.
+     *
+     * @param id the ID used to find the Category to remove.
+     */
+    public void removeCategoryByID(String id) {
+        categoryList.removeIf(b -> b.getID().equals(id));
+    }
 }

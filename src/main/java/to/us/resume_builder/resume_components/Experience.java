@@ -1,6 +1,8 @@
 package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
+import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +35,11 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      * The list of bullets that follow an item.
      */
     private List<Bullet> bullets;
+
+    /**
+     * The number of columns for the bullet list
+     */
+    private int columnCount;
 
 
     /**
@@ -127,6 +134,22 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
     }
 
     /**
+     * Set the number of columns in the bullet list.
+     * @param number The value to set columns to.
+     */
+    public void setColumn(int number){
+        this.columnCount = number;
+    }
+
+    /**
+     * Get the number of columns in the bullet list.
+     * @return The number of columns.
+     */
+    public int getColumn(){
+        return this.columnCount;
+    }
+
+    /**
      * Get the bullet component by id.
      *
      * @param id String to search for id.
@@ -178,8 +201,26 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
         return getBulletByID(id) != null;
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
-    public String toLaTeXString() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getExperienceTemplate()
+            .replaceVariable("organization", MiscUtils.escapeLaTeX(this.organization))
+            .replaceVariable("title", MiscUtils.escapeLaTeX(this.title))
+            .replaceVariable("location", MiscUtils.escapeLaTeX(this.location))
+            .replaceVariable("date", MiscUtils.escapeLaTeX(this.date))
+            .replaceVariable("content", bullets.stream()
+                .map(f -> f.formatLaTeXString(template))
+                .reduce((a, b) -> a + b)
+                .orElse("")
+            )
+            .toString();
     }
 }

@@ -1,6 +1,8 @@
 package to.us.resume_builder.resume_components;
 
 import to.us.resume_builder.export.ILaTeXConvertable;
+import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.util.MiscUtils;
 
 public class Bullet extends ResumeComponent implements ILaTeXConvertable {
 
@@ -36,8 +38,18 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
         this.text = text;
     }
 
+    /**
+     * Get the result of serializing this object using the specified template.
+     *
+     * @param template The template to format this object with.
+     *
+     * @return A String representing the object in the LaTeX template.
+     * @author Matthew McCaskill
+     */
     @Override
-    public String toLaTeXString() {
-        return null;
+    public String formatLaTeXString(ResumeTemplate template) {
+        return template.getFieldTemplate()
+            .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
+            .toString();
     }
 }
