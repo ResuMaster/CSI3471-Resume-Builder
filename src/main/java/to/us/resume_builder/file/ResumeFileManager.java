@@ -1,6 +1,7 @@
 package to.us.resume_builder.file;
 
 import com.google.gson.*;
+import to.us.resume_builder.resume_components.category.Category;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -14,6 +15,7 @@ public class ResumeFileManager {
     // Used for marshalling/unmarshalling json
     private static Gson gson = new GsonBuilder()
         .serializeNulls()
+        .registerTypeAdapter(Category.class, new CategoryDeserializer())
         .setDateFormat(DateFormat.FULL)
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .setPrettyPrinting()
