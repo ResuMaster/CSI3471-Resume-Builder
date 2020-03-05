@@ -33,9 +33,7 @@ public class ResumeFileManager {
         ResumeFile r = null;
         try {
             r = gson.fromJson(file, ResumeFile.class);
-        } catch(JsonSyntaxException e) {
-            return null;
-        } catch(JsonIOException e) {
+        } catch (JsonSyntaxException | JsonIOException e) {
             return null;
         } finally {
             file.close();
