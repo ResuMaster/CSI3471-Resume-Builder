@@ -24,7 +24,7 @@ public class ResumeFileManager {
      *
      * @param path The path to the file to be imported from.
      * @return The ResumeFile read from the file.
-     * @throws IOException
+     * @throws IOException exception opening, closing or reading from json file
      */
     public static ResumeFile importFile(String path) throws IOException {
         Reader file = new FileReader(path);
@@ -46,7 +46,7 @@ public class ResumeFileManager {
      *
      * @param r The ResumeFile to be exported
      * @param path The path to the file to export to.
-     * @throws IOException
+     * @throws IOException exceptino creating, closing or writing to json file
      */
     public static void exportFile(ResumeFile r, String path) throws IOException {
         String json = gson.toJson(r);
