@@ -38,6 +38,7 @@ public class ResumeFileManager {
         } finally {
             file.close();
         }
+        r.setFilePath(path);
         return r;
     }
 

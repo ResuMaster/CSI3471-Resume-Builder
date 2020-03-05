@@ -15,9 +15,9 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-                ResumeFile rf = ResumeFileManager.importFile("./test.json");
+                ResumeFile rf = ResumeFileManager.importFile("./src/main/resources/test.json");
                 if (rf != null) {
-                    new EditorFrame(rf.getResume());
+                    new EditorFrame(rf);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

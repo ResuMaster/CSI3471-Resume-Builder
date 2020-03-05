@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "created": "Feb 23, 2020, 10:25:31 PM",
+    "last_modified": "Feb 23, 2020, 10:25:31 PM",
+    "email": "bob@gmail.com"
+  },
+  "resume": {
+    "category_list": [
+      {
+        "type": "HEADER",
+        "name": "john",
+        "display_name": "cena",
+        "id": "590",
+        "visible": true
+      },
+      {
+        "type": "TEXT",
+        "name": "noah",
+        "display_name": "lee",
+        "id": "617",
+        "visible": false
+      },
+      {
+        "type": "EXPERIENCE",
+        "name": "ash",
+        "display_name": "ketchup",
+        "id": "55",
+        "visible": true
+      },
+      {
+        "type": "BULLETS",
+        "name": "michael",
+        "display_name": "faraday",
+        "id": "805",
+        "visible": false
+      }
+    ]
+  }
+}
