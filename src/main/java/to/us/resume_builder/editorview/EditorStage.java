@@ -16,11 +16,16 @@ import javax.swing.SwingUtilities;
 import to.us.resume_builder.resume_components.category.Category;
 import to.us.resume_builder.resume_components.category.TextCategory;
 
+/**
+ * @author Jaocb
+ * @author Micah
+ */
 public class EditorStage extends JPanel {
     private JPanel editContainer;
     private EditorCategoryHeader header;
     private EditPane edit;
     private EditorController controller = null;
+    private Category category;
 
     public EditorStage(Category startingCategory) {
         JButton saveButton;
@@ -30,7 +35,8 @@ public class EditorStage extends JPanel {
         editContainer = new JPanel();
         editContainer.setLayout(new BoxLayout(editContainer, BoxLayout.Y_AXIS));
 
-        header = new EditorCategoryHeader(startingCategory);
+        category = startingCategory;
+        header = new EditorCategoryHeader(startingCategory, () -> controller.removeCategory(category.getID()));
         edit = getEditor(startingCategory);
         editContainer.add(header);
         editContainer.add(edit);
@@ -39,14 +45,11 @@ public class EditorStage extends JPanel {
 
         // Save button
         saveButton = new JButton("Save");
-        saveButton.addActionListener(e -> {
-            edit.save();
-        });
+        saveButton.addActionListener(e -> edit.save());
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Assemble.
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(Box.createVerticalGlue());
         add(scroller);
         add(Box.createRigidArea(new Dimension(0, 5)));
         add(saveButton);
@@ -59,9 +62,11 @@ public class EditorStage extends JPanel {
      */
     public void showInEditor(Category toEdit) {
         if (edit != null)
-            remove(edit);
+            editContainer.remove(edit);
+        category = toEdit;
+        header.updateHeader(toEdit);
         edit = getEditor(toEdit);
-        add(edit);
+        editContainer.add(edit);
         revalidate();
     }
 
@@ -77,12 +82,16 @@ public class EditorStage extends JPanel {
         // TODO Connect with A&B's editors
         switch (toEdit.getType()) {
 //        case BULLETS:
+//            editPane = new BulletCategoryEditPane(toEdit);
 //            break;
 //        case EXPERIENCE:
+//            editPane = new ExperienceCategoryEditPane();
 //            break;
 //        case HEADER:
+//            editPane = new HeaderCategoryEditPane();
 //            break;
 //        case TEXT:
+//            editPane = new TextCategoryEditPane();
 //            break;
         default:
             editPane = new ConcreteEditPane(toEdit.getDisplayName());
@@ -113,18 +122,4 @@ public class EditorStage extends JPanel {
         }
     }
 
-    /**
-     * Temporary main for testing.
-     * 
-     * @param args Command-line arguments
-     */
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            JFrame f = new JFrame("Tester");
-//            f.add(new EditorStage(new TextCategory("heya")));
-//            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            f.pack();
-//            f.setVisible(true);
-//        });
-//    }
 }

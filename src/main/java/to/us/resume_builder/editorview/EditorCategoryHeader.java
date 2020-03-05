@@ -13,6 +13,10 @@ import javax.swing.JTextField;
 import to.us.resume_builder.AlertUtilities;
 import to.us.resume_builder.resume_components.category.Category;
 
+/**
+ * @author Micah
+ * @author Jacob
+ */
 public class EditorCategoryHeader extends JPanel {
 
     private Category category;
@@ -20,7 +24,7 @@ public class EditorCategoryHeader extends JPanel {
     private JCheckBox toggled;
     private JButton delete;
 
-    public EditorCategoryHeader(Category startingCategory) {
+    public EditorCategoryHeader(Category startingCategory, DeleteCategory deleteHandle) {
         super(new FlowLayout(FlowLayout.CENTER));
 
         JPanel left, right;
@@ -33,12 +37,8 @@ public class EditorCategoryHeader extends JPanel {
         right = createActionPanel();
 
         // Connect GUI to actions
-        toggled.addItemListener(e -> {
-            toggleCategory(e.getStateChange() == ItemEvent.SELECTED);
-        });
-        delete.addActionListener(e -> {
-            deleteCategory();
-        });
+        toggled.addItemListener(e -> toggleCategory(e.getStateChange() == ItemEvent.SELECTED));
+        delete.addActionListener(e -> deleteHandle.delete());
 
         add(left);
         add(right);
@@ -73,14 +73,6 @@ public class EditorCategoryHeader extends JPanel {
     private void toggleCategory(boolean toggleOn) {
         category.setVisible(toggleOn);
         System.out.println("Toggled! visible=" + toggleOn);
-    }
-
-    /**
-     * Deletes the underlying {@link Category}.
-     */
-    private void deleteCategory() {
-        // TODO implement
-        AlertUtilities.showError(this, "Not implemented");
     }
 
     /**
@@ -128,5 +120,9 @@ public class EditorCategoryHeader extends JPanel {
         right.add(toggled);
         right.add(delete);
         return right;
+    }
+
+    public interface DeleteCategory {
+        void delete();
     }
 }

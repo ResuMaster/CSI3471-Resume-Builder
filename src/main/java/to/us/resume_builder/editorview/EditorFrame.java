@@ -1,24 +1,32 @@
 package to.us.resume_builder.editorview;
 
+import to.us.resume_builder.file.ResumeFile;
 import to.us.resume_builder.resume_components.Resume;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Jacob
+ * @author Micah
+ */
 public class EditorFrame extends JFrame {
     private EditorStage stage;
     private EditorMenuBar menuBar;
     private EditorCategorySelector sideList;
 
-    public EditorFrame(Resume r) {
+    public EditorFrame(ResumeFile r) {
         super("Test");
 
-        menuBar = new EditorMenuBar();
-        sideList = new EditorCategorySelector(r);
-        stage = new EditorStage(r.getCategoryList().get(0));
+        Resume resume = r.getResume();
 
-        EditorController controller = EditorController.create(stage, menuBar, sideList);
-        registerController(controller);
+        menuBar = new EditorMenuBar();
+        sideList = new EditorCategorySelector(resume);
+        stage = new EditorStage(resume.getCategoryList().get(0));
+
+        EditorController controller = EditorController.create(stage, sideList, resume);
+        MenuController menuController = new MenuController(r);
+        registerControllers(controller, menuController);
 
         setLayout(new BorderLayout());
         setJMenuBar(menuBar);
@@ -29,8 +37,8 @@ public class EditorFrame extends JFrame {
         setVisible(true);
     }
 
-    public void registerController(EditorController e) {
-        menuBar.setController(e);
+    public void registerControllers(EditorController e, MenuController m) {
+        menuBar.setController(m);
         e.registerSideList(sideList);
         e.registerStage(stage);
     }
