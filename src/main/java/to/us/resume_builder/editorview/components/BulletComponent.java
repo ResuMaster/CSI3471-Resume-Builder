@@ -1,4 +1,6 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.editorview.components;
+
+import to.us.resume_builder.editorview.BulletComponentTableModel;
 
 import javax.swing.*;
 import java.util.Vector;

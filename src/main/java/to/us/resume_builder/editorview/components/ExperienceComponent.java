@@ -1,11 +1,13 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.editorview.components;
 
+import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.Experience;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExperienceComponent extends JPanel{
     private JTextField organization;
@@ -15,11 +17,14 @@ public class ExperienceComponent extends JPanel{
     private JCheckBox visible;
     private JButton save;
 
+    private Experience experience;
+
     /**
      *
      * @param exp the experience to use to fill the fields and change when the time comes
      */
     public ExperienceComponent(Experience exp) {
+        this.experience = exp;
         this.setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
@@ -83,29 +88,15 @@ public class ExperienceComponent extends JPanel{
         grid.gridy = 1;
         grid.weightx = .5;
         add(visible, grid);
-
-        actionListener(exp);
-
+        
         setVisible(true);
     }
 
-    private void actionListener(Experience experience) {
-        visible.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                experience.setVisible(visible.isSelected());
-            }
-        });
-
-        save.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                experience.setOrganization(organization.getText());
-                experience.setLocation(location.getText());
-                experience.setDate(date.getText());
-                experience.setTitle(title.getText());
-                experience.setVisible(visible.isSelected());
-            }
-        });
+    public void save() {
+        experience.setOrganization(organization.getText());
+        experience.setLocation(location.getText());
+        experience.setDate(date.getText());
+        experience.setTitle(title.getText());
+        experience.setVisible(visible.isSelected());
     }
 }

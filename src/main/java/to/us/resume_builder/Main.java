@@ -1,6 +1,6 @@
 package to.us.resume_builder;
 
-import to.us.resume_builder.editorview.*;
+import to.us.resume_builder.editorview.components.ExperienceComponent;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.category.BulletCategory;
 import to.us.resume_builder.resume_components.category.ExperienceCategory;

@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.editorview.categoryEditPanes;
 
 import to.us.resume_builder.resume_components.category.HeaderCategory;
 
