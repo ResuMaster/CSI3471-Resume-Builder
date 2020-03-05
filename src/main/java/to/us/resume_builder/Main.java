@@ -1,25 +1,27 @@
 package to.us.resume_builder;
 
-import to.us.resume_builder.editorview.EditorCategorySelector;
-import to.us.resume_builder.editorview.EditorMenuBar;
-import to.us.resume_builder.editorview.EditorStage;
+import to.us.resume_builder.editorview.*;
+import to.us.resume_builder.file.ResumeFile;
+import to.us.resume_builder.file.ResumeFileManager;
+import to.us.resume_builder.resume_components.Resume;
+import to.us.resume_builder.resume_components.category.CategoryType;
 import to.us.resume_builder.resume_components.category.TextCategory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame f = new JFrame("Tester");
-            f.setLayout(new BorderLayout());
-            f.setJMenuBar(new EditorMenuBar());
-            JList<String> categories = new JList<>();
-            f.add(new EditorCategorySelector(categories), BorderLayout.WEST);
-            f.add(new EditorStage(new TextCategory("heya")), BorderLayout.CENTER);
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.pack();
-            f.setVisible(true);
+            try {
+                ResumeFile rf = ResumeFileManager.importFile("./test.json");
+                if (rf != null) {
+                    new EditorFrame(rf.getResume());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 }
