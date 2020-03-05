@@ -1,5 +1,8 @@
 package to.us.resume_builder.editorview;
 
+import to.us.resume_builder.resume_components.Resume;
+import to.us.resume_builder.resume_components.category.Category;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -7,13 +10,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class EditorCategorySelector extends JPanel implements ListSelectionListener {
-    private JList<String> categories;
+    private JList<Category> categories;
     private JScrollPane scroll;
+    private EditorController controller = null;
 
-    public EditorCategorySelector(JList<String> jList) {
+    public void removeCategory(String id) {
+
+    }
+
+    public void setController(EditorController controller) {
+        this.controller = controller;
+    }
+
+    public EditorCategorySelector(Resume r) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        categories = jList;
+        categories = new JList<>();
         scroll = new JScrollPane();
 
         categories.addListSelectionListener(this);

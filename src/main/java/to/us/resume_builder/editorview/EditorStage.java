@@ -20,6 +20,7 @@ public class EditorStage extends JPanel {
     private JPanel editContainer;
     private EditorCategoryHeader header;
     private EditPane edit;
+    private EditorController controller = null;
 
     public EditorStage(Category startingCategory) {
         JButton saveButton;
@@ -89,6 +90,10 @@ public class EditorStage extends JPanel {
         }
 
         return editPane;
+    }
+
+    public void setController(EditorController controller) {
+        this.controller = controller;
     }
 
     /**

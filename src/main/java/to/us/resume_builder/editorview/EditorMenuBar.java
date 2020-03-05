@@ -10,6 +10,11 @@ public class EditorMenuBar extends JMenuBar implements ActionListener {
     private JMenuItem exportDataFile;
     private JMenuItem exportResume;
     private JMenuItem exit;
+    private EditorController controller = null;
+
+    public void setController(EditorController controller) {
+        this.controller = controller;
+    }
 
     public EditorMenuBar() {
         file = new JMenu("File");

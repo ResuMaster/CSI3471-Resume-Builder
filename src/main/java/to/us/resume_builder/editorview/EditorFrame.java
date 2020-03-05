@@ -1,7 +1,6 @@
 package to.us.resume_builder.editorview;
 
 import to.us.resume_builder.resume_components.Resume;
-import to.us.resume_builder.resume_components.category.TextCategory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,15 +9,16 @@ public class EditorFrame extends JFrame {
     private EditorStage stage;
     private EditorMenuBar menuBar;
     private EditorCategorySelector sideList;
-    private Resume resume;
 
     public EditorFrame(Resume r) {
         super("Test");
 
-        this.resume = r;
         menuBar = new EditorMenuBar();
         sideList = new EditorCategorySelector(r);
         stage = new EditorStage(r.getCategoryList().get(0));
+
+        EditorController controller = EditorController.create(stage, menuBar, sideList);
+        registerController(controller);
 
         setLayout(new BorderLayout());
         setJMenuBar(menuBar);
@@ -34,4 +34,5 @@ public class EditorFrame extends JFrame {
         e.registerSideList(sideList);
         e.registerStage(stage);
     }
+
 }
