@@ -20,8 +20,7 @@ public class BulletComponent extends JPanel {
      * @param bullets
      */
     public BulletComponent(List<Bullet> bullets) {
-        super(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        super(new BorderLayout());
 
         String[] columnNames = { "Visible", "Text" };
 
@@ -33,10 +32,10 @@ public class BulletComponent extends JPanel {
 
         JScrollPane scrollPane = new JScrollPane(table);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        add(scrollPane);
+        add(scrollPane, BorderLayout.CENTER);
 
         this.setPreferredSize(new Dimension(200,200));
+        this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 
     public void save() {

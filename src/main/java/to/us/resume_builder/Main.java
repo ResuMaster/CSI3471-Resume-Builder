@@ -100,7 +100,7 @@ public class Main {
 
         frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
 //        frame.pack();
-        frame.setSize(500, 200);
+        frame.setSize(600, 800);
         frame.setVisible(true);
     }
 }
