@@ -79,6 +79,15 @@ public class ExperienceCategory extends Category {
     }
 
     /**
+     * Get the current List experienceList for this instance.
+     *
+     * @return the current experienceList
+     */
+    public List<Experience> getExperienceList() {
+        return experiences;
+    }
+
+    /**
      * Get the result of serializing this object using the specified template.
      *
      * @param template The template to format this object with.

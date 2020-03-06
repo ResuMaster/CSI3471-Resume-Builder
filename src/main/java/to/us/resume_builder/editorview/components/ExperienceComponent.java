@@ -1,95 +1,96 @@
 package to.us.resume_builder.editorview.components;
 
-import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.Experience;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class ExperienceComponent extends JPanel{
+
+public class ExperienceComponent extends JPanel {
     private JTextField organization;
     private JTextField location;
     private JTextField date;
     private JTextField title;
-    private JCheckBox visible;
-    private JButton save;
+    private BulletComponent bulletComponent;
 
     private Experience experience;
 
     /**
-     *
-     * @param exp the experience to use to fill the fields and change when the time comes
+     * @param exp the experience to use to fill the fields and change when the
+     *            time comes
      */
     public ExperienceComponent(Experience exp) {
         this.experience = exp;
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints grid = new GridBagConstraints();
-        grid.fill = GridBagConstraints.HORIZONTAL;
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JLabel [] labels = {
-                new JLabel("Organization:"),
-                new JLabel("Location:"),
-                new JLabel("Date:"),
-                new JLabel("Title:")};
+        // Setup GridBagConstraints
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 1;
 
-        visible = new JCheckBox();
-        visible.setSelected(exp.getVisible());
+        // Create the labels
+        JLabel[] labels = {
+            new JLabel("Organization/School", SwingConstants.RIGHT),
+            new JLabel("Location", SwingConstants.CENTER),
+            new JLabel("Date", SwingConstants.CENTER),
+            new JLabel("Position/Degree", SwingConstants.RIGHT)
+        };
 
-        organization = new JTextField(exp.getOrganization());
-        labels[0].setLabelFor(organization);
+        // Create panels
+        JPanel topPanel = new JPanel(new GridBagLayout());
+        JPanel bottomPanel = new JPanel(new GridBagLayout());
+        this.add(topPanel);
+        this.add(bottomPanel);
+        this.add(new JSeparator(SwingConstants.HORIZONTAL));
+        this.add(new BulletComponent(this.experience.getBulletList()));
 
-        location = new JTextField(exp.getLocation());
-        labels[1].setLabelFor(location);
+        // Organization field
+        gbc.gridy = 0;
+        this.organization = new JTextField(exp.getOrganization());
+        labels[0].setLabelFor(this.organization);
 
-        date = new JTextField(exp.getDate());
-        labels[2].setLabelFor(date);
+        gbc.gridx = 0;
+        gbc.weightx = 0.0;
+        topPanel.add(labels[0], gbc);
 
-        title = new JTextField(exp.getTitle());
-        labels[3].setLabelFor(title);
+        gbc.gridx = 1;
+        gbc.weightx = 5.0;
+        topPanel.add(organization, gbc);
 
-        grid.gridx = 1;
-        grid.gridy = 1;
-        grid.gridwidth = 1;
-        add(labels[0], grid);
+        // Title field
+        gbc.gridy = 1;
+        this.title = new JTextField(exp.getTitle());
+        labels[3].setLabelFor(this.title);
 
-        grid.gridx = 2;
-        add(organization, grid);
+        gbc.gridx = 0;
+        gbc.weightx = 0.0;
+        topPanel.add(labels[3], gbc);
 
-        grid.gridx = 1;
-        grid.gridy = 2;
-        add(labels[1], grid);
+        gbc.gridx = 1;
+        gbc.weightx = 5.0;
+        topPanel.add(this.title, gbc);
 
-        grid.gridx = 2;
-        add(location, grid);
+        // Location field
+        gbc.gridx = 0;
+        this.location = new JTextField(exp.getLocation());
+        labels[1].setLabelFor(this.location);
 
-        grid.gridx = 1;
-        grid.gridy = 3;
-        add(labels[2], grid);
+        gbc.gridy = 0;
+        bottomPanel.add(labels[1], gbc);
 
-        grid.gridx = 2;
-        add(date, grid);
+        gbc.gridy = 1;
+        bottomPanel.add(this.location, gbc);
 
-        grid.gridx = 1;
-        grid.gridy = 4;
-        add(labels[3], grid);
+        // Date field
+        gbc.gridx = 1;
+        this.date = new JTextField(exp.getDate());
+        labels[2].setLabelFor(this.date);
 
-        grid.gridx = 2;
-        add(title, grid);
+        gbc.gridy = 0;
+        bottomPanel.add(labels[2], gbc);
 
-        grid.gridx = 1;
-        grid.gridy = 5;
-        save = new JButton("Save");
-        add(save, grid);
-
-        grid.gridx = 0;
-        grid.gridy = 1;
-        grid.weightx = .5;
-        add(visible, grid);
-        
-        setVisible(true);
+        gbc.gridy = 1;
+        bottomPanel.add(this.date, gbc);
     }
 
     public void save() {
@@ -97,6 +98,6 @@ public class ExperienceComponent extends JPanel{
         experience.setLocation(location.getText());
         experience.setDate(date.getText());
         experience.setTitle(title.getText());
-        experience.setVisible(visible.isSelected());
+        bulletComponent.save();
     }
 }
