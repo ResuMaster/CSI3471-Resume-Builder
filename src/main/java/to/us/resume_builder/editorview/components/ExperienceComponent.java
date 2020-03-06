@@ -42,7 +42,8 @@ public class ExperienceComponent extends JPanel {
         this.add(topPanel);
         this.add(bottomPanel);
         this.add(new JSeparator(SwingConstants.HORIZONTAL));
-        this.add(new BulletComponent(this.experience.getBulletList()));
+        bulletComponent = new BulletComponent(this.experience.getBulletList());
+        this.add(bulletComponent);
 
         // Organization field
         gbc.gridy = 0;
@@ -91,6 +92,8 @@ public class ExperienceComponent extends JPanel {
 
         gbc.gridy = 1;
         bottomPanel.add(this.date, gbc);
+
+        this.setMaximumSize(new Dimension(2000, this.bulletComponent.getPreferredSize().height + 100));
     }
 
     public void save() {

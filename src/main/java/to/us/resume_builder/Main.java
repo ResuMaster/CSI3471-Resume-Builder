@@ -99,7 +99,8 @@ public class Main {
         Resume r = getTestResume();
 
         frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
-        frame.pack();
+//        frame.pack();
+        frame.setSize(500, 200);
         frame.setVisible(true);
     }
 }
