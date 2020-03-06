@@ -1,12 +1,15 @@
 package to.us.resume_builder.editorview;
 
+import to.us.resume_builder.resume_components.Bullet;
+
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
+import java.util.List;
 import java.util.Vector;
 
 public class BulletComponentTableModel extends AbstractTableModel implements TableModel {
 
-    Vector<Object[]> data;
+    List<Bullet> data;
     String[] columnNames;
 
     /**
@@ -14,8 +17,7 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      * @param data
      * @param columnNames
      */
-    public BulletComponentTableModel(Vector<Object[]> data, String[] columnNames) {
-        super();
+    public BulletComponentTableModel(List<Bullet> data, String[] columnNames) {
         this.columnNames = columnNames;
         this.data = data;
     }
@@ -68,7 +70,13 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return data.get(columnIndex).getClass();
+        switch(columnIndex) {
+            case 0:
+                return boolean.class;
+            case 1:
+                return String.class;
+        }
+        return null;
     }
 
     /**
@@ -93,7 +101,13 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return data.get(columnIndex)[rowIndex];
+        switch(columnIndex) {
+            case 0:
+                return data.get(rowIndex).getVisible();
+            case 1:
+                return data.get(rowIndex).getText();
+        }
+        return null;
     }
 
     /**
@@ -106,7 +120,14 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      */
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        super.setValueAt(aValue, rowIndex, columnIndex);
+        switch(columnIndex) {
+            case 0:
+                data.get(rowIndex).setVisible((Boolean) aValue);
+                break;
+            case 1:
+                data.get(rowIndex).setText((String) aValue);
+                break;
+        }
     }
 }
 
