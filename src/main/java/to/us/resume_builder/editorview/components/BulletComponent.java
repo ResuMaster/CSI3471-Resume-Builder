@@ -10,11 +10,13 @@ import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BulletComponent extends JPanel {
     private JTable table;
     private List<Bullet> bulletList;
+    private List<Bullet> ref;
 
     /**
      * Creates a bullet component that is used in in BulletCategory and
@@ -27,7 +29,8 @@ public class BulletComponent extends JPanel {
 
         String[] columnNames = { "Visible", "Text" };
 
-        bulletList = bullets;
+        bulletList = new ArrayList<>(bullets);
+        ref = bullets;
 
         table = new JTable(new BulletComponentTableModel(bulletList, columnNames));
         table.getTableHeader().setResizingAllowed(false);
@@ -105,6 +108,7 @@ public class BulletComponent extends JPanel {
     }
 
     public void save() {
-
+        ref.clear();
+        ref.addAll(bulletList);
     }
 }
