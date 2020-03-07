@@ -1,6 +1,8 @@
 package to.us.resume_builder.editorview.components;
 
 import to.us.resume_builder.editorview.BulletComponentTableModel;
+import to.us.resume_builder.editorview.MultilineCellEditor;
+import to.us.resume_builder.editorview.MultilineCellRenderer;
 import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.IBulletContainer;
 
@@ -34,15 +36,17 @@ public class BulletComponent extends JPanel {
 
         table.getColumnModel().getColumn(0).setMaxWidth(45);
 
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        int lines = 2;
+        table.setRowHeight( table.getRowHeight() * lines);
+        table.setDefaultRenderer(String.class, new MultilineCellRenderer());
+        table.setDefaultEditor(String.class, new MultilineCellEditor());
+        table.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
         JScrollPane scrollPane = new JScrollPane(table);
 
         add(scrollPane, BorderLayout.CENTER);
 
-        this.setPreferredSize(new Dimension(200,100));
+        this.setPreferredSize(new Dimension(200,150));
         this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 
