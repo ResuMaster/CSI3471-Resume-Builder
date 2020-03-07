@@ -1,18 +1,16 @@
 package to.us.resume_builder.editorview.components;
 
 import to.us.resume_builder.editorview.BulletComponentTableModel;
+import to.us.resume_builder.editorview.MultilineCellEditor;
+import to.us.resume_builder.editorview.MultilineCellRenderer;
 import to.us.resume_builder.resume_components.Bullet;
-import to.us.resume_builder.resume_components.IBulletContainer;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Vector;
-import java.util.stream.Collectors;
 
 public class BulletComponent extends JPanel {
     private JTable table;
@@ -36,6 +34,14 @@ public class BulletComponent extends JPanel {
         table.getTableHeader().setReorderingAllowed(false);
 
         table.getColumnModel().getColumn(0).setMaxWidth(45);
+
+        int lines = 2;
+        table.setRowHeight(table.getRowHeight() * lines);
+        table.setDefaultRenderer(String.class, new MultilineCellRenderer());
+        table.setDefaultEditor(String.class, new MultilineCellEditor());
+        table.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 
         JScrollPane scrollPane = new JScrollPane(table);
 
