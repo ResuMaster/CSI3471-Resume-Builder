@@ -88,7 +88,7 @@ public class ExperienceComponent extends JPanel{
         grid.gridy = 1;
         grid.weightx = .5;
         add(visible, grid);
-        
+
         setVisible(true);
     }
 
