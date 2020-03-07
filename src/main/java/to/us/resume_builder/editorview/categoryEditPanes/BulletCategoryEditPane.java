@@ -1,6 +1,6 @@
 package to.us.resume_builder.editorview.categoryEditPanes;
 
-import to.us.resume_builder.resume_components.category.Category;
+import to.us.resume_builder.resume_components.category.BulletCategory;
 
 public class BulletCategoryEditPane extends CategoryEditPane {
 
@@ -8,7 +8,7 @@ public class BulletCategoryEditPane extends CategoryEditPane {
      *
      * @param category the category to display in the JPanel
      */
-    public BulletCategoryEditPane(Category category) {
+    public BulletCategoryEditPane(BulletCategory category) {
         super();
 
     }

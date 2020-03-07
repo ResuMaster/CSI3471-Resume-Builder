@@ -1,6 +1,8 @@
 package to.us.resume_builder;
 
+import to.us.resume_builder.editorview.categoryEditPanes.BulletCategoryEditPane;
 import to.us.resume_builder.editorview.categoryEditPanes.ExperienceCategoryEditPane;
+import to.us.resume_builder.editorview.components.BulletComponent;
 import to.us.resume_builder.editorview.components.ExperienceComponent;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.Resume;
@@ -10,13 +12,17 @@ import javax.swing.*;
 import java.util.Objects;
 
 public class Main {
+    public static String headerID;
+    public static String profileID;
     public static String experienceID;
+    public static String educationID;
+    public static String miscID;
 
     public static Resume getTestResume() {
         Resume r = new Resume();
 
         // Header
-        String headerID = r.createCategory(CategoryType.HEADER);
+        headerID = r.createCategory(CategoryType.HEADER);
         HeaderCategory header = (HeaderCategory) r.getCategoryByID(headerID);
         header.setName("Header");
         header.setDisplayName("Matthew McCaskill");
@@ -26,14 +32,14 @@ public class Main {
         header.setPhoneNumber("(623) 377-3772");
 
         // Profile
-        String profileID = r.createCategory(CategoryType.TEXT);
+        profileID = r.createCategory(CategoryType.TEXT);
         TextCategory profile = (TextCategory) r.getCategoryByID(profileID);
         profile.setName("Profile");
         profile.setDisplayName("Career Profile");
         profile.setText("Highly motivated Computer Science candidate with a strong foundation in software development. Strong ability to quickly resolve hardware and software problems to minimize disruptions in operations. Proven history of facilitating adoption of innovative solutions and training end users on new software. Excited to contribute to a mission-driven environment.");
 
         // Education
-        String educationID = r.createCategory(CategoryType.EXPERIENCE);
+        educationID = r.createCategory(CategoryType.EXPERIENCE);
         ExperienceCategory education = (ExperienceCategory) r.getCategoryByID(educationID);
         education.setName("Education");
         education.setDisplayName("Education");
@@ -51,7 +57,6 @@ public class Main {
         baylorEdu.getBulletByID(baylorEdu.addBullet()).setText("Relevant Coursework: Introduction to Computer Science I & II, Discrete Mathematics, Data Structures, Software Engineering, and Algorithms");
 
         // Experience
-//        String experienceID = r.createCategory(CategoryType.EXPERIENCE);
         experienceID = r.createCategory(CategoryType.EXPERIENCE);
         ExperienceCategory experience = (ExperienceCategory) r.getCategoryByID(experienceID);
         experience.setName("Experience");
@@ -79,7 +84,7 @@ public class Main {
         kidsMinExp.getBulletByID(kidsMinExp.addBullet()).setText("Responded to various emergency situations with calmness and efficiency");
 
         // Additional
-        String miscID = r.createCategory(CategoryType.BULLETS);
+        miscID = r.createCategory(CategoryType.BULLETS);
         BulletCategory misc = (BulletCategory) r.getCategoryByID(miscID);
         misc.setName("Miscellaneous");
         misc.setDisplayName("Additional");
@@ -98,7 +103,8 @@ public class Main {
 
         Resume r = getTestResume();
 
-        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
+//        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
+        frame.setContentPane(new BulletCategoryEditPane(r.getCategoryByID(miscID)));
 //        frame.pack();
         frame.setSize(600, 800);
         frame.setVisible(true);
