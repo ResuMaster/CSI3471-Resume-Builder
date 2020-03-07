@@ -5,8 +5,11 @@ import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.IBulletContainer;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 import java.util.stream.Collectors;
@@ -17,7 +20,7 @@ public class BulletComponent extends JPanel {
 
     /**
      * Creates a bullet component that is used in in BulletCategory and
-     *  ExperienceComponent.
+     * ExperienceComponent.
      *
      * @param bullets The list of bullets to fill the table with.
      */
@@ -34,15 +37,63 @@ public class BulletComponent extends JPanel {
 
         table.getColumnModel().getColumn(0).setMaxWidth(45);
 
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-
         JScrollPane scrollPane = new JScrollPane(table);
 
-        add(scrollPane, BorderLayout.CENTER);
+        JPanel buttonGroup = new JPanel();
+        buttonGroup.setLayout(new BoxLayout(buttonGroup, BoxLayout.LINE_AXIS));
+        buttonGroup.add(Box.createHorizontalGlue());
+        JButton add = new JButton("Add Bullet");
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
-        this.setPreferredSize(new Dimension(200,100));
+            }
+        });
+        buttonGroup.add(add);
+
+        JButton remove = new JButton("Remove Bullet");
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        buttonGroup.add(remove);
+
+        JButton moveUp = new JButton("Move Selected Up");
+        moveUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = table.getSelectedRow();
+                if (index != -1 && index != 0) {
+                    ((BulletComponentTableModel) table.getModel()).moveUp(index);
+                    ((AbstractTableModel) table.getModel()).fireTableDataChanged();
+                    table.setRowSelectionInterval(index - 1, index - 1);
+                }
+            }
+        });
+        buttonGroup.add(moveUp);
+
+        JButton moveDown = new JButton("Move Selected Down");
+        moveDown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = table.getSelectedRow();
+                if (index != -1 && index != table.getRowCount()) {
+                    ((BulletComponentTableModel) table.getModel()).moveDown(index);
+                    ((AbstractTableModel) table.getModel()).fireTableDataChanged();
+                    table.setRowSelectionInterval(index + 1, index + 1);
+                }
+            }
+        });
+        buttonGroup.add(moveDown);
+
+        buttonGroup.add(Box.createHorizontalGlue());
+        this.add(buttonGroup, BorderLayout.PAGE_START);
+
+        this.add(scrollPane, BorderLayout.CENTER);
+
+        this.setPreferredSize(new Dimension(200, 150));
         this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 

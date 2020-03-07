@@ -4,16 +4,27 @@ import to.us.resume_builder.resume_components.Bullet;
 
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
+import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 public class BulletComponentTableModel extends AbstractTableModel implements TableModel {
 
     List<Bullet> data;
     String[] columnNames;
 
+
+
+    public void moveUp(int index){
+        Collections.swap(data, index, index - 1);
+    }
+
+    public void moveDown(int index){
+        Collections.swap(data, index, index + 1);
+    }
+
     /**
      * Creates a TableModel for a BulletComponent
+     *
      * @param data
      * @param columnNames
      */
@@ -25,8 +36,8 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     /**
      * Returns the number of rows in the model. A
      * <code>JTable</code> uses this method to determine how many rows it
-     * should display.  This method should be quick, as it
-     * is called frequently during rendering.
+     * should display.  This method should be quick, as it is called frequently
+     * during rendering.
      *
      * @return the number of rows in the model
      * @see #getColumnCount
@@ -50,11 +61,12 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     }
 
     /**
-     * Returns a default name for the column using spreadsheet conventions:
-     * A, B, C, ... Z, AA, AB, etc.  If <code>column</code> cannot be found,
+     * Returns a default name for the column using spreadsheet conventions: A,
+     * B, C, ... Z, AA, AB, etc.  If <code>column</code> cannot be found,
      * returns an empty string.
      *
      * @param column the column being queried
+     *
      * @return a string containing the default name of <code>column</code>
      */
     @Override
@@ -66,11 +78,12 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      * Returns <code>Object.class</code> regardless of <code>columnIndex</code>.
      *
      * @param columnIndex the column being queried
+     *
      * @return the Object.class
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        switch(columnIndex) {
+        switch (columnIndex) {
             case 0:
                 return Boolean.class;
             case 1:
@@ -84,6 +97,7 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      *
      * @param rowIndex    the row being queried
      * @param columnIndex the column being queried
+     *
      * @return false
      */
     @Override
@@ -97,11 +111,12 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      *
      * @param rowIndex    the row whose value is to be queried
      * @param columnIndex the column whose value is to be queried
+     *
      * @return the value Object at the specified cell
      */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        switch(columnIndex) {
+        switch (columnIndex) {
             case 0:
                 return data.get(rowIndex).getVisible();
             case 1:
@@ -120,7 +135,7 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      */
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        switch(columnIndex) {
+        switch (columnIndex) {
             case 0:
                 data.get(rowIndex).setVisible((Boolean) aValue);
                 break;
