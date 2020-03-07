@@ -9,6 +9,8 @@ import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.util.EventObject;
 
 public class MultilineCellEditor extends AbstractCellEditor implements TableCellEditor {
     JTextArea component = new JTextArea();
@@ -44,21 +46,30 @@ public class MultilineCellEditor extends AbstractCellEditor implements TableCell
         });
     }
 
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int rowIndex, int vColIndex) {
-        if (isSelected) {
-            component.setForeground(table.getSelectionForeground());
-            component.setBackground(table.getSelectionBackground());
-        } else {
-            component.setForeground(table.getForeground());
-            component.setBackground(table.getBackground());
-        }
+        component.setForeground(table.getForeground());
+        component.setBackground(table.getBackground());
         component.setText((String) value);
         component.setFont(table.getFont());
 
         return component;
     }
 
+    @Override
     public Object getCellEditorValue() {
         return component.getText();
+    }
+
+    @Override
+    public boolean isCellEditable(EventObject e) {
+        if (super.isCellEditable(e)) {
+            if (e instanceof MouseEvent) {
+                MouseEvent me = (MouseEvent) e;
+
+                return me.getClickCount() >= 2;
+            }
+        }
+        return false;
     }
 }
