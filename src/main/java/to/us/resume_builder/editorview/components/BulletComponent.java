@@ -85,7 +85,8 @@ public class BulletComponent extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = table.getSelectedRow();
-                if (index != -1 && index != table.getRowCount()) {
+                System.out.println(index);
+                if (index != -1 && index + 1 != table.getRowCount()) {
                     ((BulletComponentTableModel) table.getModel()).moveDown(index);
                     ((AbstractTableModel) table.getModel()).fireTableDataChanged();
                     table.setRowSelectionInterval(index + 1, index + 1);
