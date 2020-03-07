@@ -99,7 +99,7 @@ public class BulletComponent extends JPanel {
 
         this.add(scrollPane, BorderLayout.CENTER);
 
-        this.setPreferredSize(new Dimension(200, 150));
+        this.setPreferredSize(new Dimension(200, 175));
         this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 

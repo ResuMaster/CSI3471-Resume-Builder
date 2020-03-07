@@ -26,7 +26,7 @@ public class MultilineCellEditor extends AbstractCellEditor implements TableCell
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    e.consume();
+                    MultilineCellEditor.this.stopCellEditing();
                 }
             }
 
@@ -34,6 +34,7 @@ public class MultilineCellEditor extends AbstractCellEditor implements TableCell
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     e.consume();
+                    MultilineCellEditor.this.stopCellEditing();
                 }
             }
 
@@ -41,6 +42,7 @@ public class MultilineCellEditor extends AbstractCellEditor implements TableCell
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     e.consume();
+                    MultilineCellEditor.this.stopCellEditing();
                 }
             }
         });
