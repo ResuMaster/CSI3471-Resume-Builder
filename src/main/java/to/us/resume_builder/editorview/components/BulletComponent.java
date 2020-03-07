@@ -5,6 +5,7 @@ import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.IBulletContainer;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.util.List;
 import java.util.Vector;
@@ -15,9 +16,10 @@ public class BulletComponent extends JPanel {
     private List<Bullet> bulletList;
 
     /**
-     * Creates a bullet component that
+     * Creates a bullet component that is used in in BulletCategory and
+     *  ExperienceComponent.
      *
-     * @param bullets
+     * @param bullets The list of bullets to fill the table with.
      */
     public BulletComponent(List<Bullet> bullets) {
         super(new BorderLayout());
@@ -30,11 +32,17 @@ public class BulletComponent extends JPanel {
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
+        table.getColumnModel().getColumn(0).setMaxWidth(45);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+
         JScrollPane scrollPane = new JScrollPane(table);
 
         add(scrollPane, BorderLayout.CENTER);
 
-        this.setPreferredSize(new Dimension(200,200));
+        this.setPreferredSize(new Dimension(200,100));
         this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 

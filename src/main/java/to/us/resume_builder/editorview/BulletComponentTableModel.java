@@ -72,7 +72,7 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     public Class<?> getColumnClass(int columnIndex) {
         switch(columnIndex) {
             case 0:
-                return boolean.class;
+                return Boolean.class;
             case 1:
                 return String.class;
         }
