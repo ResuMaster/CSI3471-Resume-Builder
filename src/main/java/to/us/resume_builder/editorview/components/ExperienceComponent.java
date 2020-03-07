@@ -103,4 +103,8 @@ public class ExperienceComponent extends JPanel {
         experience.setTitle(title.getText());
         bulletComponent.save();
     }
+
+    public Experience getExperience() {
+        return experience;
+    }
 }
