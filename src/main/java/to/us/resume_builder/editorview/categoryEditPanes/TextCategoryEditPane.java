@@ -15,45 +15,47 @@ public class TextCategoryEditPane extends CategoryEditPane {
     private TextCategory textCategory;
 
 
+    /**
+     * Constructor for a Text Category Edit Pane
+     * @param tc the Text Category that is being edited through the edit pane
+     */
     public TextCategoryEditPane(TextCategory tc) {
-        this.setLayout(new GridBagLayout());
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-
-        textCategory = tc;
-
-        visible = new JCheckBox("Visible", true);
-
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
-        grid.anchor = GridBagConstraints.LINE_START;
-        JPanel info = new JPanel();
-        JLabel textLabel = new JLabel("Text: ", SwingConstants.LEFT);
 
-        int xPos = 0;
-        int yPos = 0;
-
-        grid.gridx = xPos;
-        grid.gridy = yPos++;
-        info.add(visible, grid);
-
+        textCategory = tc;
+        visible = new JCheckBox("Visible", true);
         text = new JTextArea(tc.getText());
         text.setWrapStyleWord(true);
         text.setLineWrap(true);
-        textLabel.setLabelFor(text);
 
-        grid.weightx = 0;
-        grid.gridx = xPos;
-        grid.gridy = yPos++;
-        info.add(textLabel, grid);
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.PAGE_AXIS));
+        JPanel infoPanel = new JPanel(new GridLayout(2, 1));
 
-        grid.gridy = yPos;
-        grid.gridwidth = 2;
-        info.add(text, grid);
+        JScrollPane scrollPane = new JScrollPane(textPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        JScrollPane scrollPane = new JScrollPane(info, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        this.add(scrollPane, grid);
+        JLabel textLabel = new JLabel("Text: ", SwingConstants.LEFT);
+
+        grid.gridx = 0;
+        grid.gridy = 0;
+        infoPanel.add(visible, grid);
+
+        grid.gridx = 0;
+        grid.gridy = 1;
+        infoPanel.add(textLabel, grid);
+
+        textPanel.add(text);
+
+        this.add(infoPanel);
+        this.add(textPanel);
+//        this.add(scrollPane);
     }
 
+    /**
+     * Saves all changes made in Text Edit Pane
+     */
     @Override
     public void save() {
         textCategory.setText(text.getText());
