@@ -13,20 +13,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class HeaderCategoryEditPane extends CategoryEditPane {
     private JTextField fields[];
     private HeaderCategory headerCategory;
+    private JCheckBox visible;
 
     /**
      * Constructor for Category edit pane
      * @param hc
      */
     public HeaderCategoryEditPane(HeaderCategory hc) {
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
         headerCategory = hc;
 
         // Button for removing Header Category
-        JButton removeHeaderCategory = new JButton("Remove Category");
-        JCheckBox visible = new JCheckBox("Visible", true);
+        visible = new JCheckBox("Visible", true);
         JPanel info = new JPanel(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
@@ -48,22 +48,24 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         int xPos = 0;
         int yPos = 0;
 
+        grid.gridwidth = 1;
         grid.gridx = xPos;
-        grid.gridy = yPos;
+        grid.gridy = yPos++;
         info.add(visible, grid);
 
-        grid.gridx = xPos + 1;
-        grid.gridy = yPos++;
-        info.add(removeHeaderCategory, grid);
-
         for (int i = 0; i < labels.length; i++) {
+            fields[i].setMinimumSize(new Dimension(200, fields[i].getHeight()));
+            fields[i].setMaximumSize(new Dimension(this.getWidth(), fields[i].getHeight()));
+
             labels[i].setLabelFor(fields[i]);
 
+            grid.gridwidth = 1;
             grid.weightx = 0;
             grid.gridx = xPos;
             grid.gridy = yPos++;
             info.add(labels[i], grid);
 
+            grid.gridwidth = 2;
             grid.weightx = 1;
             grid.gridx = xPos + 1;
             info.add(fields[i], grid);
@@ -71,14 +73,6 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
 
         JScrollPane scrollPane = new JScrollPane(info);
         this.add(scrollPane, BorderLayout.CENTER);
-
-        removeHeaderCategory.addActionListener(new ActionListener() {
-               @Override
-               public void actionPerformed(ActionEvent e) {
-                    // TODO
-               }
-           }
-        );
     }
 
     /**
@@ -90,5 +84,6 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         headerCategory.setAddress(fields[1].getText());
         headerCategory.setEmail(fields[2].getText());
         headerCategory.setPhoneNumber(fields[3].getText());
+        headerCategory.setVisible(visible.isSelected());
     }
 }
