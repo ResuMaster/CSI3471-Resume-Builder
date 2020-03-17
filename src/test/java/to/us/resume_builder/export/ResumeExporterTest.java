@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ResumeExporterTest {
-    @Test
+    @org.junit.Test
     public void exportDefault() {
         // Setup configuration
         ApplicationConfiguration.getInstance();

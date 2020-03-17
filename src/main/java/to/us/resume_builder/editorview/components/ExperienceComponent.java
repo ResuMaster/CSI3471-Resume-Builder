@@ -21,6 +21,7 @@ public class ExperienceComponent extends JPanel {
      */
     public ExperienceComponent(Experience exp) {
         this.experience = exp;
+
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         // Setup GridBagConstraints
@@ -94,6 +95,7 @@ public class ExperienceComponent extends JPanel {
         bottomPanel.add(this.date, gbc);
 
         this.setMaximumSize(new Dimension(2000, this.bulletComponent.getPreferredSize().height + 100));
+
     }
 
     public void save() {

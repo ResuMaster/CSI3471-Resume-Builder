@@ -2,6 +2,9 @@ package to.us.resume_builder;
 
 import to.us.resume_builder.editorview.categoryEditPanes.BulletCategoryEditPane;
 import to.us.resume_builder.editorview.categoryEditPanes.ExperienceCategoryEditPane;
+
+import to.us.resume_builder.editorview.categoryEditPanes.HeaderCategoryEditPane;
+import to.us.resume_builder.editorview.categoryEditPanes.TextCategoryEditPane;
 import to.us.resume_builder.editorview.components.BulletComponent;
 import to.us.resume_builder.editorview.components.ExperienceComponent;
 import to.us.resume_builder.resume_components.Experience;
@@ -9,6 +12,7 @@ import to.us.resume_builder.resume_components.Resume;
 import to.us.resume_builder.resume_components.category.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Objects;
 
 public class Main {
@@ -99,12 +103,15 @@ public class Main {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
+        frame.setLayout(new GridLayout(2, 2));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         Resume r = getTestResume();
 
 //        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
-        frame.setContentPane(new BulletCategoryEditPane((BulletCategory) r.getCategoryByID(miscID)));
+//        frame.setContentPane(new BulletCategoryEditPane((BulletCategory) r.getCategoryByID(miscID)));
+        frame.setContentPane(new TextCategoryEditPane((TextCategory) r.getCategoryByID(profileID)));
+//        frame.setContentPane(new HeaderCategoryEditPane((HeaderCategory) r.getCategoryByID(headerID)));
 //        frame.pack();
         frame.setSize(600, 800);
         frame.setVisible(true);
