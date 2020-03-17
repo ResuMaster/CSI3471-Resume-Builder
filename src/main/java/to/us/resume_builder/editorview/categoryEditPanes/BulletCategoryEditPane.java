@@ -22,4 +22,12 @@ public class BulletCategoryEditPane extends CategoryEditPane {
     public void save() {
         bulletComponent.save();
     }
+
+    /**
+     * Determines if the current Category has been modified
+     * @return boolean indicating whether the Category was edited
+     */
+    public boolean isModified() {
+        return false;
+    }
 }

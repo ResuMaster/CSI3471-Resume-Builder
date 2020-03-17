@@ -110,8 +110,8 @@ public class Main {
 
 //        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
 //        frame.setContentPane(new BulletCategoryEditPane((BulletCategory) r.getCategoryByID(miscID)));
-//        frame.setContentPane(new TextCategoryEditPane((TextCategory) r.getCategoryByID(profileID)));
-        frame.setContentPane(new HeaderCategoryEditPane((HeaderCategory) r.getCategoryByID(headerID)));
+        frame.setContentPane(new TextCategoryEditPane((TextCategory) r.getCategoryByID(profileID)));
+//        frame.setContentPane(new HeaderCategoryEditPane((HeaderCategory) r.getCategoryByID(headerID)));
 //        frame.pack();
         frame.setSize(600, 800);
         frame.setVisible(true);

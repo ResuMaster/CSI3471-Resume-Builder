@@ -117,4 +117,12 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
         experienceList.updateUI();
     }
+
+    /**
+     * Determines if the current Category has been modified
+     * @return boolean indicating whether the Category was edited
+     */
+    public boolean isModified() {
+        return false;
+    }
 }

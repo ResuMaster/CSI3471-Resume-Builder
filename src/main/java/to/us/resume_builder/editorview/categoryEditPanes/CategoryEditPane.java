@@ -37,4 +37,10 @@ public abstract class CategoryEditPane extends JPanel {
 	 * RAM</em>.
 	 */
 	public abstract void save();
+
+	/**
+	 * Determines if the current Category has been modified
+	 * @return boolean indicating whether the Category was edited
+	 */
+	public abstract boolean isModified();
 }

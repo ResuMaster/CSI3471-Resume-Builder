@@ -81,4 +81,17 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         headerCategory.setEmail(fields[2].getText());
         headerCategory.setPhoneNumber(fields[3].getText());
     }
+
+    /**
+     * Determines if the current Category has been modified
+     * @return boolean indicating whether the Category was edited
+     */
+    public boolean isModified() {
+        if(headerCategory.getLink().equals(fields[0].getText()) &&
+            headerCategory.getEmail().equals(fields[1].getText()) &&
+            headerCategory.getAddress().equals(fields[2].getText()) &&
+            headerCategory.getPhoneNumber().equals(fields[3].getText()))
+            return true;
+        return false;
+    }
 }
