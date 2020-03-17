@@ -78,8 +78,8 @@ public class TextCategoryEditPane extends CategoryEditPane {
      */
     public boolean isModified() {
         if(textCategory.getText().equals(text.getText()))
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
     /**
