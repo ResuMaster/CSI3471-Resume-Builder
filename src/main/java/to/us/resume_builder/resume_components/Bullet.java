@@ -1,37 +1,38 @@
-package to.us.resume_builder.resume_components.category;
+package to.us.resume_builder.resume_components;
 
+import to.us.resume_builder.export.ILaTeXConvertable;
 import to.us.resume_builder.export.ResumeTemplate;
 import to.us.resume_builder.util.MiscUtils;
 
-public class TextCategory extends Category {
+public class Bullet extends ResumeComponent implements ILaTeXConvertable {
 
     /**
-     * The text that is displayed on the resume.
+     * The string that is displayed in the resume.
      */
     private String text;
 
     /**
-     * Creates an instance of TextCategory with id.
+     * Creates a bullet constructor with a specific id.
      *
-     * @param id the ID for this instance of Category.
+     * @param id The id for this bullet.
      */
-    public TextCategory(String id) {
-        super(id, CategoryType.TEXT);
+    public Bullet(String id) {
+        super(id);
     }
 
     /**
-     * Returns the current String text for the instance.
+     * Get the current String text for this instance.
      *
-     * @return text The String text in the category.
+     * @return The current string text.
      */
     public String getText() {
         return text;
     }
 
     /**
-     * Sets the String text.
+     * Set the value of text for this instance.
      *
-     * @param text the String to set text to.
+     * @param text The String to set text to.
      */
     public void setText(String text) {
         this.text = text;
@@ -47,8 +48,7 @@ public class TextCategory extends Category {
      */
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
-        return template.getCategoryTemplate(this.type)
-            .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
+        return template.getFieldTemplate()
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
             .toString();
     }
