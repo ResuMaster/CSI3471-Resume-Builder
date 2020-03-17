@@ -7,6 +7,10 @@
   "resume": {
     "category_list": [
       {
+        "link": null,
+        "email": null,
+        "phone_number": null,
+        "address": null,
         "type": "HEADER",
         "name": "john",
         "display_name": "cena",
@@ -14,6 +18,7 @@
         "visible": true
       },
       {
+        "text": null,
         "type": "TEXT",
         "name": "noah",
         "display_name": "lee",
@@ -21,6 +26,7 @@
         "visible": false
       },
       {
+        "experiences": null,
         "type": "EXPERIENCE",
         "name": "ash",
         "display_name": "ketchup",
@@ -28,6 +34,8 @@
         "visible": true
       },
       {
+        "bullets": [],
+        "column_count": 0,
         "type": "BULLETS",
         "name": "michael",
         "display_name": "faraday",

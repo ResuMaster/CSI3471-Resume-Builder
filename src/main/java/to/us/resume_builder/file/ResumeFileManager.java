@@ -5,6 +5,7 @@ import to.us.resume_builder.resume_components.category.Category;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.util.Collection;
 
 /**
  * This class allows for importing and exporting of ResumeFiles.
@@ -16,6 +17,7 @@ public class ResumeFileManager {
     private static Gson gson = new GsonBuilder()
         .serializeNulls()
         .registerTypeAdapter(Category.class, new CategoryDeserializer())
+        .registerTypeHierarchyAdapter(Collection.class, new ListSerializer())
         .setDateFormat(DateFormat.FULL)
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .setPrettyPrinting()
