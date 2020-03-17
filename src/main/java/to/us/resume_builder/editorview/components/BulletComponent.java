@@ -1,8 +1,5 @@
 package to.us.resume_builder.editorview.components;
 
-import to.us.resume_builder.editorview.BulletComponentTableModel;
-import to.us.resume_builder.editorview.MultilineCellEditor;
-import to.us.resume_builder.editorview.MultilineCellRenderer;
 import to.us.resume_builder.resume_components.Bullet;
 
 import javax.swing.*;
@@ -13,9 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO REDO constructor to take an IBulletContainer(add and remove need id generation)
 public class BulletComponent extends JPanel {
     private JTable table;
-    private List<Bullet> bulletList;
     private List<Bullet> ref;
 
     /**
@@ -29,10 +26,9 @@ public class BulletComponent extends JPanel {
 
         String[] columnNames = { "Visible", "Text" };
 
-        bulletList = new ArrayList<>(bullets);
         ref = bullets;
 
-        table = new JTable(new BulletComponentTableModel(bulletList, columnNames));
+        table = new JTable(new BulletComponentTableModel(new ArrayList<>(bullets), columnNames));
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
@@ -55,7 +51,8 @@ public class BulletComponent extends JPanel {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ((BulletComponentTableModel) table.getModel()).addBullet();
+                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
             }
         });
         buttonGroup.add(add);
@@ -64,7 +61,9 @@ public class BulletComponent extends JPanel {
         remove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int index = table.getSelectedRow();
+                ((BulletComponentTableModel) table.getModel()).removeBullet(index);
+                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
             }
         });
         buttonGroup.add(remove);
@@ -108,6 +107,6 @@ public class BulletComponent extends JPanel {
 
     public void save() {
         ref.clear();
-        ref.addAll(bulletList);
+        ref.addAll(((BulletComponentTableModel) table.getModel()).data);
     }
 }

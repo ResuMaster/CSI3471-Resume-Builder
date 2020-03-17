@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.editorview.components;
 
 import to.us.resume_builder.resume_components.Bullet;
 
@@ -14,19 +14,37 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
 
 
 
-    public void moveUp(int index){
+    public void addBullet(){
+
+    }
+
+    public void removeBullet(int index){
+
+    }
+
+    /**
+     * Move a given bullet up one position.
+     *
+     * @param index The index of the one to move up.
+     */
+    public void moveUp(int index) {
         Collections.swap(data, index, index - 1);
     }
 
-    public void moveDown(int index){
+    /**
+     * Move a given bullet down one position.
+     *
+     * @param index The index of the one to move down.
+     */
+    public void moveDown(int index) {
         Collections.swap(data, index, index + 1);
     }
 
     /**
-     * Creates a TableModel for a BulletComponent
+     * Creates a TableModel for a BulletComponent.
      *
-     * @param data
-     * @param columnNames
+     * @param data        The data to fill the table with.
+     * @param columnNames The names for the columns.
      */
     public BulletComponentTableModel(List<Bullet> data, String[] columnNames) {
         this.columnNames = columnNames;

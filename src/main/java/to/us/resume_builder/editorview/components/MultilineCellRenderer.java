@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.editorview.components;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

@@ -104,7 +104,7 @@ public class Main {
         Resume r = getTestResume();
 
 //        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
-        frame.setContentPane(new BulletCategoryEditPane(r.getCategoryByID(miscID)));
+        frame.setContentPane(new BulletCategoryEditPane((BulletCategory) r.getCategoryByID(miscID)));
 //        frame.pack();
         frame.setSize(600, 800);
         frame.setVisible(true);

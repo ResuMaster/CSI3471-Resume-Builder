@@ -1,20 +1,25 @@
 package to.us.resume_builder.editorview.categoryEditPanes;
 
+import to.us.resume_builder.editorview.components.BulletComponent;
 import to.us.resume_builder.resume_components.category.BulletCategory;
 
-public class BulletCategoryEditPane extends CategoryEditPane {
+import java.awt.*;
 
+public class BulletCategoryEditPane extends CategoryEditPane {
+    private BulletComponent bulletComponent;
     /**
-     *
+     * Creates a Bullet Category pane to see
      * @param category the category to display in the JPanel
      */
     public BulletCategoryEditPane(BulletCategory category) {
-        super();
+        this.setLayout(new BorderLayout());
+        bulletComponent = new BulletComponent(category.getBulletList());
 
+        add(bulletComponent, BorderLayout.CENTER);
     }
 
     @Override
     public void save() {
-
+        bulletComponent.save();
     }
 }
