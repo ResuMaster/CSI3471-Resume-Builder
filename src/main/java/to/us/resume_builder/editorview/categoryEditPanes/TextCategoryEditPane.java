@@ -7,13 +7,17 @@ import javax.swing.JLabel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * Facilitates editing of the TextCategory resume component.
+ * 
+ * @author Brooklynn, Micah
+ */
 public class TextCategoryEditPane extends CategoryEditPane {
     private JTextArea text;
     private TextCategory textCategory;
@@ -45,7 +49,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
         add(label, gbc);
 
         // Create text area's size moderator
-        TextFieldSizeModerator mod = new TextFieldSizeModerator(text);
+        TextFieldWidthModerator mod = new TextFieldWidthModerator(text);
         text.addComponentListener(mod);
         text.getDocument().addDocumentListener(mod);
 
@@ -66,11 +70,17 @@ public class TextCategoryEditPane extends CategoryEditPane {
     public void save() {
         textCategory.setText(text.getText());
     }
-    
-    private class TextFieldSizeModerator extends ComponentAdapter implements DocumentListener {
-        private Component monitored;
 
-        public TextFieldSizeModerator(Component monitored) {
+    /**
+     * Monitors a JTextArea and re-sizes it to fill the amount of horizontal space
+     * required by its parent component.
+     * 
+     * @author Micah
+     */
+    private class TextFieldWidthModerator extends ComponentAdapter implements DocumentListener {
+        private JTextArea monitored;
+
+        public TextFieldWidthModerator(JTextArea monitored) {
             super();
             this.monitored = monitored;
         }
@@ -94,7 +104,11 @@ public class TextCategoryEditPane extends CategoryEditPane {
         public void changedUpdate(DocumentEvent e) {
             updateMonitoredSize();
         }
-        
+
+        /**
+         * Updates the size of the monitored JTextArea to make it fill only as much
+         * horizontal space as its parent component decides for it.
+         */
         private void updateMonitoredSize() {
             int prefHeight = (int) monitored.getMinimumSize().getHeight();
             monitored.setPreferredSize(new Dimension(0, prefHeight));
