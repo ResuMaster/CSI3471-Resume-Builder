@@ -26,7 +26,7 @@
         "visible": false
       },
       {
-        "experiences": null,
+        "experiences": [],
         "type": "EXPERIENCE",
         "name": "ash",
         "display_name": "ketchup",
