@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview.components;
+package to.us.resume_builder.editor_view.components;
 
 import to.us.resume_builder.resume_components.Bullet;
 

@@ -1,14 +1,9 @@
-package to.us.resume_builder.editorview.categoryEditPanes;
+package to.us.resume_builder.editor_view.category_edit_panes;
 
 import to.us.resume_builder.resume_components.category.HeaderCategory;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class HeaderCategoryEditPane extends CategoryEditPane {
     private JTextField fields[];

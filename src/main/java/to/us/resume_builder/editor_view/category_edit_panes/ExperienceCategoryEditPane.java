@@ -1,6 +1,6 @@
-package to.us.resume_builder.editorview.categoryEditPanes;
+package to.us.resume_builder.editor_view.category_edit_panes;
 
-import to.us.resume_builder.editorview.components.ExperienceComponent;
+import to.us.resume_builder.editor_view.components.ExperienceComponent;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.category.ExperienceCategory;
 

@@ -1,19 +1,12 @@
 package to.us.resume_builder;
 
-import to.us.resume_builder.editorview.categoryEditPanes.BulletCategoryEditPane;
-import to.us.resume_builder.editorview.categoryEditPanes.ExperienceCategoryEditPane;
-
-import to.us.resume_builder.editorview.categoryEditPanes.HeaderCategoryEditPane;
-import to.us.resume_builder.editorview.categoryEditPanes.TextCategoryEditPane;
-import to.us.resume_builder.editorview.components.BulletComponent;
-import to.us.resume_builder.editorview.components.ExperienceComponent;
+import to.us.resume_builder.editor_view.category_edit_panes.TextCategoryEditPane;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.Resume;
 import to.us.resume_builder.resume_components.category.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class Main {
     public static String headerID;
