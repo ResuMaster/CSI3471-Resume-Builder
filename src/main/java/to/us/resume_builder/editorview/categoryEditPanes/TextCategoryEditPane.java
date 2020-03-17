@@ -1,56 +1,62 @@
 package to.us.resume_builder.editorview.categoryEditPanes;
 
-import to.us.resume_builder.resume_components.category.HeaderCategory;
 import to.us.resume_builder.resume_components.category.TextCategory;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class TextCategoryEditPane extends CategoryEditPane {
-    private JTextField fields[];
     private JTextArea text;
-    private JCheckBox visible;
     private TextCategory textCategory;
-
 
     /**
      * Constructor for a Text Category Edit Pane
+     * 
      * @param tc the Text Category that is being edited through the edit pane
      */
     public TextCategoryEditPane(TextCategory tc) {
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        GridBagConstraints grid = new GridBagConstraints();
-        grid.fill = GridBagConstraints.HORIZONTAL;
-
+        // Prepare to create UI
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         textCategory = tc;
-        visible = new JCheckBox("Visible", true);
+
+        // Create UI parts
+        JLabel label = new JLabel("Text:");
         text = new JTextArea(tc.getText());
         text.setWrapStyleWord(true);
         text.setLineWrap(true);
 
-        JPanel textPanel = new JPanel();
-        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.PAGE_AXIS));
-        JPanel infoPanel = new JPanel(new GridLayout(2, 1));
+        // Add label to panel
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        add(label, gbc);
 
-        JScrollPane scrollPane = new JScrollPane(textPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        // Create text area's size moderator
+        TextFieldSizeModerator mod = new TextFieldSizeModerator(text);
+        text.addComponentListener(mod);
+        text.getDocument().addDocumentListener(mod);
 
-        JLabel textLabel = new JLabel("Text: ", SwingConstants.LEFT);
-
-        grid.gridx = 0;
-        grid.gridy = 0;
-        infoPanel.add(visible, grid);
-
-        grid.gridx = 0;
-        grid.gridy = 1;
-        infoPanel.add(textLabel, grid);
-
-        textPanel.add(text);
-
-        this.add(infoPanel);
-        this.add(textPanel);
-//        this.add(scrollPane);
+        // Add text area to panel
+        gbc.gridy = 1;
+        gbc.gridwidth = 4;
+        gbc.gridheight = 3;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(text, gbc);
     }
 
     /**
@@ -59,8 +65,39 @@ public class TextCategoryEditPane extends CategoryEditPane {
     @Override
     public void save() {
         textCategory.setText(text.getText());
-        textCategory.setName(fields[0].getText());
-        textCategory.setDisplayName(fields[1].getText());
-        textCategory.setVisible(visible.isSelected());
+    }
+    
+    private class TextFieldSizeModerator extends ComponentAdapter implements DocumentListener {
+        private Component monitored;
+
+        public TextFieldSizeModerator(Component monitored) {
+            super();
+            this.monitored = monitored;
+        }
+
+        @Override
+        public void componentResized(ComponentEvent e) {
+            updateMonitoredSize();
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            updateMonitoredSize();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            updateMonitoredSize();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            updateMonitoredSize();
+        }
+        
+        private void updateMonitoredSize() {
+            int prefHeight = (int) monitored.getMinimumSize().getHeight();
+            monitored.setPreferredSize(new Dimension(0, prefHeight));
+        }
     }
 }
