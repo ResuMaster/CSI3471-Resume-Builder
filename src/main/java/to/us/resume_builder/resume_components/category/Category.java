@@ -97,6 +97,6 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
      */
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
 }
