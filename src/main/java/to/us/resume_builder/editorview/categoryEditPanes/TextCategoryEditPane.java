@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 public class TextCategoryEditPane extends CategoryEditPane {
     private JTextField fields[];
     private JTextArea text;
-    private JCheckBox visible;
     private TextCategory textCategory;
 
 
@@ -20,17 +19,15 @@ public class TextCategoryEditPane extends CategoryEditPane {
      * @param tc the Text Category that is being edited through the edit pane
      */
     public TextCategoryEditPane(TextCategory tc) {
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        GridBagConstraints grid = new GridBagConstraints();
-        grid.fill = GridBagConstraints.HORIZONTAL;
+        this.setLayout(new BorderLayout());
+        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 4));
 
         textCategory = tc;
-        visible = new JCheckBox("Visible", true);
         text = new JTextArea(tc.getText());
         text.setWrapStyleWord(true);
         text.setLineWrap(true);
 
-        JPanel textPanel = new JPanel();
+        JPanel textPanel = new JPanel(new BorderLayout());
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.PAGE_AXIS));
         JPanel infoPanel = new JPanel(new GridLayout(2, 1));
 
@@ -38,19 +35,12 @@ public class TextCategoryEditPane extends CategoryEditPane {
 
         JLabel textLabel = new JLabel("Text: ", SwingConstants.LEFT);
 
-        grid.gridx = 0;
-        grid.gridy = 0;
-        infoPanel.add(visible, grid);
+        infoPanel.add(textLabel, BorderLayout.NORTH);
+        textPanel.add(text, BorderLayout.NORTH);
 
-        grid.gridx = 0;
-        grid.gridy = 1;
-        infoPanel.add(textLabel, grid);
-
-        textPanel.add(text);
-
-        this.add(infoPanel);
-        this.add(textPanel);
-//        this.add(scrollPane);
+        this.add(infoPanel, BorderLayout.NORTH);
+//        this.add(scrollPane, BorderLayout.NORTH);
+        this.add(textPanel, BorderLayout.NORTH);
     }
 
     /**
@@ -61,6 +51,5 @@ public class TextCategoryEditPane extends CategoryEditPane {
         textCategory.setText(text.getText());
         textCategory.setName(fields[0].getText());
         textCategory.setDisplayName(fields[1].getText());
-        textCategory.setVisible(visible.isSelected());
     }
 }

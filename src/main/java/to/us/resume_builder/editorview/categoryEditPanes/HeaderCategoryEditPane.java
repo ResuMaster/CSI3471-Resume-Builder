@@ -13,20 +13,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class HeaderCategoryEditPane extends CategoryEditPane {
     private JTextField fields[];
     private HeaderCategory headerCategory;
-    private JCheckBox visible;
 
     /**
      * Constructor for Category edit pane
      * @param hc
      */
     public HeaderCategoryEditPane(HeaderCategory hc) {
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        this.setLayout(new BorderLayout());
+        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
 
         headerCategory = hc;
 
         // Button for removing Header Category
-        visible = new JCheckBox("Visible", true);
         JPanel info = new JPanel(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
@@ -50,8 +48,6 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
 
         grid.gridwidth = 1;
         grid.gridx = xPos;
-        grid.gridy = yPos++;
-        info.add(visible, grid);
 
         for (int i = 0; i < labels.length; i++) {
             fields[i].setMinimumSize(new Dimension(200, fields[i].getHeight()));
@@ -72,7 +68,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         }
 
         JScrollPane scrollPane = new JScrollPane(info);
-        this.add(scrollPane, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.NORTH);
     }
 
     /**
@@ -84,6 +80,5 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         headerCategory.setAddress(fields[1].getText());
         headerCategory.setEmail(fields[2].getText());
         headerCategory.setPhoneNumber(fields[3].getText());
-        headerCategory.setVisible(visible.isSelected());
     }
 }
