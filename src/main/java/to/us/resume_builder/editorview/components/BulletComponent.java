@@ -1,6 +1,7 @@
 package to.us.resume_builder.editorview.components;
 
 import to.us.resume_builder.resume_components.Bullet;
+import to.us.resume_builder.resume_components.IBulletContainer;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -10,25 +11,25 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO REDO constructor to take an IBulletContainer(add and remove need id generation)
 public class BulletComponent extends JPanel {
     private JTable table;
     private List<Bullet> ref;
+    private IBulletContainer bulletC;
 
     /**
      * Creates a bullet component that is used in in BulletCategory and
      * ExperienceComponent.
      *
-     * @param bullets The list of bullets to fill the table with.
+     * @param bulletContainer The bullet container being edited.
      */
-    public BulletComponent(List<Bullet> bullets) {
+    public BulletComponent(IBulletContainer bulletContainer) {
         super(new BorderLayout());
 
         String[] columnNames = { "Visible", "Text" };
 
-        ref = bullets;
+        ref = bulletContainer.getBulletList();
 
-        table = new JTable(new BulletComponentTableModel(new ArrayList<>(bullets), columnNames));
+        table = new JTable(new BulletComponentTableModel(new ArrayList<>(bulletContainer.getBulletList()), columnNames));
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
