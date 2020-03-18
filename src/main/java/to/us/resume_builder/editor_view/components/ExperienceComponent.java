@@ -71,7 +71,7 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
         this.add(topPanel);
         this.add(bottomPanel);
         this.add(new JSeparator(SwingConstants.HORIZONTAL));
-        bulletComponent = new BulletComponent(this.experience.getBulletList());
+        bulletComponent = new BulletComponent(this.experience);
         this.add(bulletComponent);
 
         // Organization field

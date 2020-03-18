@@ -35,7 +35,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
 
         ref = bulletContainer.getBulletList();
 
-        table = new JTable(new BulletComponentTableModel(new ArrayList<>(bulletContainer.getBulletList()), columnNames));
+        table = new JTable(new BulletComponentTableModel(new ArrayList<>(bulletContainer.getBulletList()), columnNames, bulletContainer));
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
@@ -65,20 +65,20 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
 
         JButton remove = new JButton("Remove Bullet");
         remove.addActionListener(e -> {
-            this.modified = true;
-
             int index = table.getSelectedRow();
-            ((BulletComponentTableModel) table.getModel()).removeBullet(index);
-            ((AbstractTableModel) table.getModel()).fireTableDataChanged();
+            if (index != -1) {
+                this.modified = true;
+                ((BulletComponentTableModel) table.getModel()).removeBullet(index);
+                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
+            }
         });
         buttonGroup.add(remove);
 
         JButton moveUp = new JButton("Move Selected Up");
         moveUp.addActionListener(e -> {
-            this.modified = true;
-
             int index = table.getSelectedRow();
             if (index != -1 && index != 0) {
+                this.modified = true;
                 ((BulletComponentTableModel) table.getModel()).moveUp(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
                 table.setRowSelectionInterval(index - 1, index - 1);
@@ -88,11 +88,10 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
 
         JButton moveDown = new JButton("Move Selected Down");
         moveDown.addActionListener(e -> {
-            this.modified = true;
-
             int index = table.getSelectedRow();
             System.out.println(index);
             if (index != -1 && index + 1 != table.getRowCount()) {
+                this.modified = true;
                 ((BulletComponentTableModel) table.getModel()).moveDown(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
                 table.setRowSelectionInterval(index + 1, index + 1);

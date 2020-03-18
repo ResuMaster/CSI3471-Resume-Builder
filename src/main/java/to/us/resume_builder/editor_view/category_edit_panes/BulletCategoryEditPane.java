@@ -13,7 +13,7 @@ public class BulletCategoryEditPane extends CategoryEditPane {
      */
     public BulletCategoryEditPane(BulletCategory category) {
         this.setLayout(new BorderLayout());
-        bulletComponent = new BulletComponent(category.getBulletList());
+        bulletComponent = new BulletComponent(category);
 
         add(bulletComponent, BorderLayout.CENTER);
     }

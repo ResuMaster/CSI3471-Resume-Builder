@@ -1,6 +1,7 @@
 package to.us.resume_builder.editor_view.components;
 
 import to.us.resume_builder.resume_components.Bullet;
+import to.us.resume_builder.resume_components.IBulletContainer;
 
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -11,15 +12,14 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
 
     List<Bullet> data;
     String[] columnNames;
-
-
+    IBulletContainer bulletC;
 
     public void addBullet(){
-
+        data.add(bulletC.getBulletByID(bulletC.addBullet()));
     }
 
     public void removeBullet(int index){
-
+        data.remove(index);
     }
 
     /**
@@ -46,9 +46,10 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      * @param data        The data to fill the table with.
      * @param columnNames The names for the columns.
      */
-    public BulletComponentTableModel(List<Bullet> data, String[] columnNames) {
+    public BulletComponentTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
         this.columnNames = columnNames;
         this.data = data;
+        this.bulletC = bulletC;
     }
 
     /**
