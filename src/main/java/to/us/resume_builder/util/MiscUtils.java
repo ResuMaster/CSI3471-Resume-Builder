@@ -34,11 +34,15 @@ public final class MiscUtils {
      * @return The LaTeX-escaped version of s.
      */
     public static String escapeLaTeX(String s) {
-        return s
-            .replaceAll("&", "\\\\&")
-            .replaceAll("#", "\\\\#")
-            .replaceAll("%", "\\\\%")
-            .replaceAll("\\{", "\\\\{")
-            .replaceAll("}", "\\\\}");
+        if (s == null) {
+            return "";
+        } else {
+            return s
+                .replaceAll("&", "\\\\&")
+                .replaceAll("#", "\\\\#")
+                .replaceAll("%", "\\\\%")
+                .replaceAll("\\{", "\\\\{")
+                .replaceAll("}", "\\\\}");
+        }
     }
 }
