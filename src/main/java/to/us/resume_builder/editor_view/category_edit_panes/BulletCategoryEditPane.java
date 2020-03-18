@@ -28,6 +28,6 @@ public class BulletCategoryEditPane extends CategoryEditPane {
      * @return boolean indicating whether the Category was edited
      */
     public boolean isModified() {
-        return false;
+        return bulletComponent.isModified();
     }
 }
