@@ -4,6 +4,8 @@ import to.us.resume_builder.editor_view.IEncapsulatedEditor;
 import to.us.resume_builder.resume_components.Bullet;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -97,7 +99,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         });
         buttonGroup.add(moveDown);
 
-        // TODO: change listener for table for isModified
+        this.table.getModel().addTableModelListener(e -> BulletComponent.this.modified = true);
 
         buttonGroup.add(Box.createHorizontalGlue());
         this.add(buttonGroup, BorderLayout.PAGE_START);
