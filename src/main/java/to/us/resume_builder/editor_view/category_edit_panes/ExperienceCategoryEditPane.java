@@ -56,6 +56,8 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
     @Override
     public void save() {
+        this.experienceComponentList.forEach(ExperienceComponent::save);
+
         this.ref.clear();
         this.ref.addAll(this.experienceComponentList.stream().map(ExperienceComponent::getExperience).collect(Collectors.toList()));
         this.modified = false;

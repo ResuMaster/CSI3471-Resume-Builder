@@ -16,7 +16,6 @@ import java.util.List;
 
 public class BulletComponent extends JPanel implements IEncapsulatedEditor {
     private JTable table;
-    private List<Bullet> ref;
     private boolean modified;
     private IBulletContainer bulletC;
 
@@ -30,10 +29,9 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         super(new BorderLayout());
 
         this.modified = false;
+        this.bulletC = bulletContainer;
 
         String[] columnNames = { "Visible", "Text" };
-
-        ref = bulletContainer.getBulletList();
 
         table = new JTable(new BulletComponentTableModel(new ArrayList<>(bulletContainer.getBulletList()), columnNames, bulletContainer));
         table.getTableHeader().setResizingAllowed(false);
@@ -113,8 +111,8 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
     public void save() {
         this.modified = false;
 
-        ref.clear();
-        ref.addAll(((BulletComponentTableModel) table.getModel()).data);
+        this.bulletC.getBulletList().clear();
+        this.bulletC.getBulletList().addAll(((BulletComponentTableModel) table.getModel()).data);
     }
 
     @Override

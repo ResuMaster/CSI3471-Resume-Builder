@@ -131,11 +131,11 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
     }
 
     public void save() {
-        experience.setOrganization(organization.getText());
-        experience.setLocation(location.getText());
-        experience.setDate(date.getText());
-        experience.setTitle(title.getText());
-        bulletComponent.save();
+        this.experience.setOrganization(organization.getText());
+        this.experience.setLocation(location.getText());
+        this.experience.setDate(date.getText());
+        this.experience.setTitle(title.getText());
+        this.bulletComponent.save();
 
         this.modified = false;
     }
@@ -145,6 +145,6 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
     }
 
     public Experience getExperience() {
-        return experience;
+        return this.experience;
     }
 }

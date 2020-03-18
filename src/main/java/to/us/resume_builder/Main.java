@@ -1,13 +1,16 @@
 package to.us.resume_builder;
 
-import to.us.resume_builder.editor_view.category_edit_panes.ExperienceCategoryEditPane;
-import to.us.resume_builder.editor_view.category_edit_panes.TextCategoryEditPane;
+import to.us.resume_builder.editor_view.category_edit_panes.*;
+import to.us.resume_builder.export.ResumeExporter;
+import to.us.resume_builder.export.ResumeTemplate;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.Resume;
 import to.us.resume_builder.resume_components.category.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 public class Main {
     public static String headerID;
@@ -97,16 +100,34 @@ public class Main {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
-        frame.setLayout(new GridLayout(2, 2));
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         Resume r = getTestResume();
 
-        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
-//        frame.setContentPane(new BulletCategoryEditPane((BulletCategory) r.getCategoryByID(miscID)));
-//        frame.setContentPane(new TextCategoryEditPane((TextCategory) r.getCategoryByID(profileID)));
-//        frame.setContentPane(new HeaderCategoryEditPane((HeaderCategory) r.getCategoryByID(headerID)));
-//        frame.pack();
+//        CategoryEditPane cep = cep);
+//        CategoryEditPane cep = new BulletCategoryEditPane((BulletCategory) r.getCategoryByID(miscID));
+//        CategoryEditPane cep = new TextCategoryEditPane((TextCategory) r.getCategoryByID(profileID));
+        CategoryEditPane cep = new HeaderCategoryEditPane((HeaderCategory) r.getCategoryByID(headerID));
+//        CategoryEditPane cep = new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID));
+        frame.add(cep);
+
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(e -> cep.save());
+        frame.add(saveButton);
+
+        JButton exportButton = new JButton("Export");
+        exportButton.addActionListener(e -> {
+            ResumeExporter exporter = new ResumeExporter(r);
+
+            try {
+                exporter.export(Paths.get("./export.pdf"), ResumeTemplate.DEFAULT);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        frame.add(exportButton);
+
         frame.setSize(600, 800);
         frame.setVisible(true);
     }
