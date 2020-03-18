@@ -1,5 +1,6 @@
 package to.us.resume_builder;
 
+import to.us.resume_builder.editor_view.category_edit_panes.ExperienceCategoryEditPane;
 import to.us.resume_builder.editor_view.category_edit_panes.TextCategoryEditPane;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.Resume;
@@ -101,9 +102,9 @@ public class Main {
 
         Resume r = getTestResume();
 
-//        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
+        frame.setContentPane(new ExperienceCategoryEditPane((ExperienceCategory) r.getCategoryByID(experienceID)));
 //        frame.setContentPane(new BulletCategoryEditPane((BulletCategory) r.getCategoryByID(miscID)));
-        frame.setContentPane(new TextCategoryEditPane((TextCategory) r.getCategoryByID(profileID)));
+//        frame.setContentPane(new TextCategoryEditPane((TextCategory) r.getCategoryByID(profileID)));
 //        frame.setContentPane(new HeaderCategoryEditPane((HeaderCategory) r.getCategoryByID(headerID)));
 //        frame.pack();
         frame.setSize(600, 800);

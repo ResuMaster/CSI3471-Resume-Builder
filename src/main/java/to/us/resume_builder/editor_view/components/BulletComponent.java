@@ -1,5 +1,6 @@
 package to.us.resume_builder.editor_view.components;
 
+import to.us.resume_builder.editor_view.IEncapsulatedEditor;
 import to.us.resume_builder.resume_components.Bullet;
 
 import javax.swing.*;
@@ -11,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO REDO constructor to take an IBulletContainer(add and remove need id generation)
-public class BulletComponent extends JPanel {
+public class BulletComponent extends JPanel implements IEncapsulatedEditor {
     private JTable table;
     private List<Bullet> ref;
+    private boolean modified;
 
     /**
      * Creates a bullet component that is used in in BulletCategory and
@@ -23,6 +25,8 @@ public class BulletComponent extends JPanel {
      */
     public BulletComponent(List<Bullet> bullets) {
         super(new BorderLayout());
+
+        this.modified = false;
 
         String[] columnNames = { "Visible", "Text" };
 
@@ -48,54 +52,52 @@ public class BulletComponent extends JPanel {
         buttonGroup.setLayout(new BoxLayout(buttonGroup, BoxLayout.LINE_AXIS));
         buttonGroup.add(Box.createHorizontalGlue());
         JButton add = new JButton("Add Bullet");
-        add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ((BulletComponentTableModel) table.getModel()).addBullet();
-                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
-            }
+        add.addActionListener(e -> {
+            this.modified = true;
+
+            ((BulletComponentTableModel) table.getModel()).addBullet();
+            ((AbstractTableModel) table.getModel()).fireTableDataChanged();
         });
         buttonGroup.add(add);
 
         JButton remove = new JButton("Remove Bullet");
-        remove.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = table.getSelectedRow();
-                ((BulletComponentTableModel) table.getModel()).removeBullet(index);
-                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
-            }
+        remove.addActionListener(e -> {
+            this.modified = true;
+
+            int index = table.getSelectedRow();
+            ((BulletComponentTableModel) table.getModel()).removeBullet(index);
+            ((AbstractTableModel) table.getModel()).fireTableDataChanged();
         });
         buttonGroup.add(remove);
 
         JButton moveUp = new JButton("Move Selected Up");
-        moveUp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = table.getSelectedRow();
-                if (index != -1 && index != 0) {
-                    ((BulletComponentTableModel) table.getModel()).moveUp(index);
-                    ((AbstractTableModel) table.getModel()).fireTableDataChanged();
-                    table.setRowSelectionInterval(index - 1, index - 1);
-                }
+        moveUp.addActionListener(e -> {
+            this.modified = true;
+
+            int index = table.getSelectedRow();
+            if (index != -1 && index != 0) {
+                ((BulletComponentTableModel) table.getModel()).moveUp(index);
+                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
+                table.setRowSelectionInterval(index - 1, index - 1);
             }
         });
         buttonGroup.add(moveUp);
 
         JButton moveDown = new JButton("Move Selected Down");
-        moveDown.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = table.getSelectedRow();
-                System.out.println(index);
-                if (index != -1 && index + 1 != table.getRowCount()) {
-                    ((BulletComponentTableModel) table.getModel()).moveDown(index);
-                    ((AbstractTableModel) table.getModel()).fireTableDataChanged();
-                    table.setRowSelectionInterval(index + 1, index + 1);
-                }
+        moveDown.addActionListener(e -> {
+            this.modified = true;
+
+            int index = table.getSelectedRow();
+            System.out.println(index);
+            if (index != -1 && index + 1 != table.getRowCount()) {
+                ((BulletComponentTableModel) table.getModel()).moveDown(index);
+                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
+                table.setRowSelectionInterval(index + 1, index + 1);
             }
         });
         buttonGroup.add(moveDown);
+
+        // TODO: change listener for table for isModified
 
         buttonGroup.add(Box.createHorizontalGlue());
         this.add(buttonGroup, BorderLayout.PAGE_START);
@@ -107,7 +109,14 @@ public class BulletComponent extends JPanel {
     }
 
     public void save() {
+        this.modified = false;
+
         ref.clear();
         ref.addAll(((BulletComponentTableModel) table.getModel()).data);
+    }
+
+    @Override
+    public boolean isModified() {
+        return this.modified;
     }
 }

@@ -1,5 +1,6 @@
 package to.us.resume_builder.editor_view.category_edit_panes;
 
+import to.us.resume_builder.editor_view.IEncapsulatedEditor;
 import to.us.resume_builder.resume_components.category.Category;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import javax.swing.*;
  * 
  * @author Micah
  */
-public abstract class CategoryEditPane extends JPanel {
+public abstract class CategoryEditPane extends JPanel implements IEncapsulatedEditor {
 
 	/**
 	 * Version on 2/21.
@@ -31,16 +32,4 @@ public abstract class CategoryEditPane extends JPanel {
 
 		contents = new JPanel();
 	}
-
-	/**
-	 * Saves the data in this EditPane to the copy of the ResumeData <em>in
-	 * RAM</em>.
-	 */
-	public abstract void save();
-
-	/**
-	 * Determines if the current Category has been modified
-	 * @return boolean indicating whether the Category was edited
-	 */
-	public abstract boolean isModified();
 }
