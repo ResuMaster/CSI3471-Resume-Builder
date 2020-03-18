@@ -36,6 +36,11 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      */
     private List<Bullet> bullets;
 
+    /**
+     * The number of columns for the bullet list
+     */
+    private int columnCount;
+
 
     /**
      * Creates an instance of an item with id.
@@ -126,6 +131,22 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      */
     public List<Bullet> getBulletList() {
         return bullets;
+    }
+
+    /**
+     * Set the number of columns in the bullet list.
+     * @param number The value to set columns to.
+     */
+    public void setColumn(int number){
+        this.columnCount = number;
+    }
+
+    /**
+     * Get the number of columns in the bullet list.
+     * @return The number of columns.
+     */
+    public int getColumn(){
+        return this.columnCount;
     }
 
     /**

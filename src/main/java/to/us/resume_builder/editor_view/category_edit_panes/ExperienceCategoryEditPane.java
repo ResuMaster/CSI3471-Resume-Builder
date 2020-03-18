@@ -1,6 +1,6 @@
-package to.us.resume_builder.editorview.categoryEditPanes;
+package to.us.resume_builder.editor_view.category_edit_panes;
 
-import to.us.resume_builder.editorview.components.ExperienceComponent;
+import to.us.resume_builder.editor_view.components.ExperienceComponent;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.category.ExperienceCategory;
 
@@ -17,15 +17,19 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
     private List<ExperienceComponent> experienceComponentList;
     private List<Experience> ref;
     private JPanel experienceList;
+    private boolean modified;
 
     public ExperienceCategoryEditPane(ExperienceCategory ec) {
         this.ref = ec.getExperienceList();
         this.experienceComponentList = new ArrayList<>();
+        this.modified = false;
 
         this.setLayout(new BorderLayout());
 
         JButton addButton = new JButton("Add Experience");
         addButton.addActionListener(e-> {
+            this.modified = true;
+
             this.experienceComponentList.add(new ExperienceComponent(ec.getExperienceByID(ec.addExperience())));
             this.updateExperienceListUI();
         });
@@ -54,6 +58,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
     public void save() {
         this.ref.clear();
         this.ref.addAll(this.experienceComponentList.stream().map(ExperienceComponent::getExperience).collect(Collectors.toList()));
+        this.modified = false;
     }
 
     public void updateExperienceListUI() {
@@ -72,12 +77,18 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
             // Visibility
             JCheckBox visibilityControl = new JCheckBox("Visible", true);
-            visibilityControl.addItemListener(evt -> ec.getExperience().setVisible(evt.getStateChange() == ItemEvent.SELECTED));
+            visibilityControl.addItemListener(evt -> {
+                this.modified = true;
+
+                ec.getExperience().setVisible(evt.getStateChange() == ItemEvent.SELECTED);
+            });
             controlButtons.add(visibilityControl);
 
             // Remove experience
             JButton removeControl = new JButton("Remove Experience");
             removeControl.addActionListener(evt -> {
+                this.modified = true;
+
                 this.experienceComponentList.remove(ec);
                 experienceList.remove(experiencePanel);
                 experienceList.updateUI();
@@ -89,6 +100,8 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
             // Move up
             JButton moveUpControl = new JButton("▲");
             moveUpControl.addActionListener(evt -> {
+                this.modified = true;
+
                 if (index > 0) {
                     Collections.swap(this.experienceComponentList, index - 1, index);
                 }
@@ -116,5 +129,13 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
         }
 
         experienceList.updateUI();
+    }
+
+    /**
+     * Determines if the current Category has been modified
+     * @return boolean indicating whether the Category was edited
+     */
+    public boolean isModified() {
+        return this.modified || this.experienceComponentList.stream().anyMatch(ExperienceComponent::isModified);
     }
 }

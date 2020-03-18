@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview.components;
+package to.us.resume_builder.editor_view.components;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;

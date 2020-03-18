@@ -18,6 +18,11 @@ public class BulletCategory extends Category implements IBulletContainer {
     private List<Bullet> bullets;
 
     /**
+     * The number of columns for the bullet list
+     */
+    private int columnCount;
+
+    /**
      * Creates an instance of BulletCategory with id.
      *
      * @param id The ID for this instance of Category.
@@ -35,6 +40,22 @@ public class BulletCategory extends Category implements IBulletContainer {
      */
     public List<Bullet> getBulletList() {
         return bullets;
+    }
+
+    /**
+     * Set the number of columns in the bullet list.
+     * @param number The value to set columns to.
+     */
+    public void setColumn(int number){
+        this.columnCount = number;
+    }
+
+    /**
+     * Get the number of columns in the bullet list.
+     * @return The number of columns.
+     */
+    public int getColumn(){
+        return this.columnCount;
     }
 
     /**

@@ -1,7 +1,6 @@
-package to.us.resume_builder.editorview.components;
+package to.us.resume_builder.editor_view.components;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
