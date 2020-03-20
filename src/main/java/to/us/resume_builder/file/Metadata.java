@@ -8,17 +8,22 @@ import java.util.Date;
  * This class contains metadata for a resume, such as the User attached to it
  * and when it was created and last modified.
  *
- * @author Jacob
+ * @author Jacob Curtis
  */
 public class Metadata {
-
-    // When the Resume was created
+    /**
+     * When the Resume was created
+     */
     private Date created;
 
-    // When the Resume was last changed
+    /**
+     * When the Resume was last changed
+     */
     private Date lastModified;
 
-    // The User's email
+    /**
+     * The User's email
+     */
     private String email;
 
     /**
