@@ -120,6 +120,10 @@ public class BulletCategory extends Category implements IBulletContainer {
      */
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
+        if (this.bullets == null) {
+            this.bullets = new LinkedList<>();
+        }
+
         return template.getCategoryTemplate(this.type)
             .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
             .replaceVariable("content",

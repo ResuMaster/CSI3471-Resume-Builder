@@ -98,6 +98,10 @@ public class ExperienceCategory extends Category {
      */
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
+        if (this.experiences == null) {
+            this.experiences = new LinkedList<>();
+        }
+
         return template.getCategoryTemplate(this.type)
             .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
             .replaceVariable("content", experiences.stream()
