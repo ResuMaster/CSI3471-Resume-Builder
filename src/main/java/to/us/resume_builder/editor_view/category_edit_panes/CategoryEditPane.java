@@ -17,19 +17,4 @@ public abstract class CategoryEditPane extends JPanel implements IEncapsulatedEd
 	 * Version on 2/21.
 	 */
 	private static final long serialVersionUID = 3001154674271049780L;
-
-	/**
-	 * JPanel which we will add the separate JPanels from
-	 */
-	protected JPanel contents;
-	protected JTextField name;
-	protected JTextField displayName;
-
-	public void editPane(Category category) {
-
-		JTextField name = new JTextField(category.getName());
-		JTextField displayName = new JTextField(category.getDisplayName());
-
-		contents = new JPanel();
-	}
 }
