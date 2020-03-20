@@ -2,7 +2,6 @@ package to.us.resume_builder.main_window;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.ItemEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -40,7 +39,6 @@ public class EditorCategoryHeader extends CategoryEditPane {
         right = createActionPanel();
 
         // Connect GUI to actions and data
-        toggled.addItemListener(e -> toggleCategory(e.getStateChange() == ItemEvent.SELECTED));
         delete.addActionListener(e -> deleteHandle.delete());
         updateHeader(startingCategory);
 
@@ -89,15 +87,6 @@ public class EditorCategoryHeader extends CategoryEditPane {
         return toggled.getModel().isSelected() != category.getVisible()
                 || !displayName.getText().contentEquals(category.getDisplayName())
                 || !name.getText().contentEquals(category.getName());
-    }
-
-    /**
-     * Toggles the visibility of the underlying {@link Category}.
-     * 
-     * @param toggleOn Whether or not the category is visible.
-     */
-    private void toggleCategory(boolean toggleOn) {
-        category.setVisible(toggleOn);
     }
 
     /**

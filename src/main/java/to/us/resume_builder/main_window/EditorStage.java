@@ -29,6 +29,8 @@ import to.us.resume_builder.resume_components.category.TextCategory;
  * @author Micah Schiewe
  */
 public class EditorStage extends JPanel {
+    private static final String UNSAVED_PROMPT = "You have changes not stored to this session's Resume.\n\nDo you want to stash these changes?";
+
     /**
      * The container for the currently-selected CategoryEditPane; needed to change
      * category editors.
@@ -88,13 +90,15 @@ public class EditorStage extends JPanel {
 
     /**
      * Displays the given category to edit. If there are unsaved changes to the
-     * category
+     * category, it prompts for the user to fix them. If the user cancels, then the
+     * switch is aborted.
      * 
      * @param toEdit The category to replace the current category with
      */
     public void showInEditor(Category toEdit) {
-        // Remove the old category
-        clearCurrentEditor();
+        // Remove the old category. If clear fails, abort changing categories
+        if (!clearCurrentEditor())
+            return;
 
         // Register the new category
         category = toEdit;
@@ -115,21 +119,41 @@ public class EditorStage extends JPanel {
         this.controller = controller;
     }
 
-    private void clearCurrentEditor() {
-        // If the editor is null, then there is nothing to clear
+    /**
+     * Clears the editor. If there are changes which have not been stashed to the
+     * resume in RAM, then it prompts the user for whether or not to save these
+     * changes. The clear is aborted if the user cancels saving unsaved changes.
+     * 
+     * @return Whether or not the editor was cleared successfully.
+     */
+    private boolean clearCurrentEditor() {
+        // If the editor is null, then there is nothing to clear, so the clear succeeded
         if (edit == null)
-            return;
+            return true;
+
+        boolean returnFlag = true;
 
         // If there are unsaved changes, prompt for and save them.
-        if (edit.isModified() && JOptionPane.showConfirmDialog(this,
-                "You have changes not stored to this session's Resume.\n\nDo you want to stash these changes?") == JOptionPane.YES_OPTION) {
-            save();
+        if (edit.isModified() || header.isModified()) {
+            int result = JOptionPane.showConfirmDialog(this, UNSAVED_PROMPT);
+            switch (result) {
+            case JOptionPane.YES_OPTION:
+                save();
+                break;
+            case JOptionPane.CANCEL_OPTION:
+                returnFlag = false;
+                break;
+            default:
+                break;
+            }
         }
 
-        // Dispose of the now-unneeded editor
-        editContainer.remove(edit);
-        edit = null;
-
+        // Dispose of the now-unneeded editor, if the clear wasn't cancelled
+        if (returnFlag) {
+            editContainer.remove(edit);
+            edit = null;
+        }
+        return returnFlag;
     }
 
     /**
