@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.main_window;
 
 import to.us.resume_builder.resume_components.Resume;
 import to.us.resume_builder.resume_components.ResumeComponent;
@@ -7,9 +7,6 @@ import to.us.resume_builder.resume_components.category.Category;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 

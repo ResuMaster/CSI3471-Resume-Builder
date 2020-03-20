@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.main_window;
 
 import to.us.resume_builder.file.ResumeFile;
 import to.us.resume_builder.resume_components.Resume;

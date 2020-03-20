@@ -1,14 +1,10 @@
 package to.us.resume_builder;
 
-import to.us.resume_builder.editorview.*;
+import to.us.resume_builder.main_window.*;
 import to.us.resume_builder.file.ResumeFile;
 import to.us.resume_builder.file.ResumeFileManager;
-import to.us.resume_builder.resume_components.Resume;
-import to.us.resume_builder.resume_components.category.CategoryType;
-import to.us.resume_builder.resume_components.category.TextCategory;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class Main {
