@@ -5,16 +5,22 @@ import to.us.resume_builder.resume_components.Resume;
 /**
  * Wrapper class to be used for importing and exporting a Resume.
  *
- * @author Jacob
+ * @author Jacob Curtis
  */
 public class ResumeFile {
-    // The path to the resume data file
+    /**
+     * The path to the resume data file
+     */
     private transient String filePath;
 
-    // The metadata associated with the Resume
+    /**
+     * The metadata associated with the Resume
+     */
     private Metadata metadata;
 
-    // The resume attached to the file
+    /**
+     * The resume attached to the file
+     */
     private Resume resume;
 
     /**
@@ -46,10 +52,18 @@ public class ResumeFile {
         return resume;
     }
 
+    /**
+     * This method sets the ResumeFile's file path.
+     */
     public void setFilePath(String path) {
         this.filePath = path;
     }
 
+    /**
+     * This method returns the ResumeFile's filepath.
+     *
+     * @return The file path associated with the ResumeFile
+     */
     public String getFilePath() {
         return filePath;
     }

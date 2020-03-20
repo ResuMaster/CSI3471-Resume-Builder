@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Class to resolve serializing empty lists to JSON.
  *
- * @author Jacob
+ * @author Jacob Curtis
  */
 class ListSerializer implements JsonSerializer<List<?>> {
     /**

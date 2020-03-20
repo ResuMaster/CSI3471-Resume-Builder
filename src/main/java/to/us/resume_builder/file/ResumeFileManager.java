@@ -10,10 +10,12 @@ import java.util.Collection;
 /**
  * This class allows for importing and exporting of ResumeFiles.
  *
- * @author Jacob
+ * @author Jacob Curtis
  */
 public class ResumeFileManager {
-    // Used for marshalling/unmarshalling json
+    /**
+     * A static Gson instance to marshal/unmarshal JSON
+     */
     private static Gson gson = new GsonBuilder()
         .serializeNulls()
         .registerTypeAdapter(Category.class, new CategoryDeserializer())

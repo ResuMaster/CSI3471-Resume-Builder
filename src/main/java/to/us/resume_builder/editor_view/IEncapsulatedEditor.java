@@ -1,5 +1,9 @@
 package to.us.resume_builder.editor_view;
 
+/**
+ *
+ * @author Matthew McCaskill
+ */
 public interface IEncapsulatedEditor {
     /**
      * Saves the data in this EditPane to the copy of the ResumeData <em>in

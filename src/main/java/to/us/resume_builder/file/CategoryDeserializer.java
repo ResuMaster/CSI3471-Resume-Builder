@@ -10,9 +10,13 @@ import java.util.Map;
 /**
  * Class to resolve deserializing the abstract category class from JSON.
  *
- * @author Jacob
+ * @author Jacob Curtis
  */
 public class CategoryDeserializer implements JsonDeserializer<Category> {
+    /**
+     * A map containing the different Category types for their corresponding
+     * string key.
+     */
     static private Map<String, Class<?>> typeToClass = new HashMap<>();
 
     static {

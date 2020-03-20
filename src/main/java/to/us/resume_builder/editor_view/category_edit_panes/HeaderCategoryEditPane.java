@@ -5,6 +5,11 @@ import to.us.resume_builder.resume_components.category.HeaderCategory;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ *
+ * @author Brooklyn Stone
+ */
 public class HeaderCategoryEditPane extends CategoryEditPane {
     private JTextField fields[];
     private HeaderCategory headerCategory;

@@ -8,7 +8,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
-
+/**
+ *
+ * @author Matthew McCaskill
+ * @author Brooklyn Stone
+ */
 public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
     private JTextField organization;
     private JTextField location;

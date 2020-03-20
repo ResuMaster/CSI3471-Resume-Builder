@@ -16,7 +16,8 @@ import java.awt.event.ComponentEvent;
 /**
  * Facilitates editing of the TextCategory resume component.
  * 
- * @author Brooklynn, Micah
+ * @author Brooklynn Stone
+ * @author Micah Schiewe
  */
 public class TextCategoryEditPane extends CategoryEditPane {
     private JTextArea text;

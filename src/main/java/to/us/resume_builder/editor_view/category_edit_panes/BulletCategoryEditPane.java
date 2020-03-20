@@ -5,6 +5,10 @@ import to.us.resume_builder.resume_components.category.BulletCategory;
 
 import java.awt.*;
 
+/**
+ *
+ * @author Ashley Lu Couch
+ */
 public class BulletCategoryEditPane extends CategoryEditPane {
     private BulletComponent bulletComponent;
     /**

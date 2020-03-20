@@ -4,6 +4,10 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
+/**
+ *
+ * @author Matthew McCaskill
+ */
 public class MultilineCellRenderer extends JTextArea implements TableCellRenderer {
     public MultilineCellRenderer() {
         setLineWrap(true);
