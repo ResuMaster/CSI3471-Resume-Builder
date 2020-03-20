@@ -14,15 +14,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Facilitates editing of an Experience Category Edit Pane with a UI
  *
  * @author Matthew McCaskill
  */
 public class ExperienceCategoryEditPane extends CategoryEditPane {
+    /**
+     * A list of the Experience Components to be displayed
+     */
     private List<ExperienceComponent> experienceComponentList;
+    /**
+     * A list of the Experiences held within the Experience Category
+     */
     private List<Experience> ref;
+    /**
+     * A JPanel to display the Experience Components within
+     */
     private JPanel experienceList;
+    /**
+     * A boolean to keep track of whether this Edit Pane was modified
+     */
     private boolean modified;
 
+    /**
+     * Constructs a UI to view and edit an Experience Category
+     * @param ec The Experience Category to display and edit
+     */
     public ExperienceCategoryEditPane(ExperienceCategory ec) {
         this.ref = ec.getExperienceList();
         this.experienceComponentList = new ArrayList<>();
@@ -58,6 +75,9 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
+    /**
+     * Saves changes from the Experience Category UI to the given Experience Category
+     */
     @Override
     public void save() {
         this.experienceComponentList.forEach(ExperienceComponent::save);
@@ -138,8 +158,8 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * Determines if the current Category has been modified
-     * @return boolean indicating whether the Category was edited
+     * Determines if the current Experience Category has been modified
+     * @return boolean indicating whether the Experience Category was edited
      */
     public boolean isModified() {
         return this.modified || this.experienceComponentList.stream().anyMatch(ExperienceComponent::isModified);
