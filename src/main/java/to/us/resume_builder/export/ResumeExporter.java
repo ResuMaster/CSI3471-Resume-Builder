@@ -29,6 +29,10 @@ public class ResumeExporter {
      * @param resume The resume to export.
      */
     public ResumeExporter(Resume resume) {
+        if (resume == null) {
+            throw new NullPointerException();
+        }
+
         this.resume = resume;
     }
 
