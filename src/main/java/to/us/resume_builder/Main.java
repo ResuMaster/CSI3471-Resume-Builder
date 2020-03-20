@@ -24,6 +24,10 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             FileRetriever t = new FileRetriever();
             String file = t.getFile();
+            // Cancel opening the editor if the user did not select a file.
+            if (file == null) {
+                return;
+            }
             try {
                 ResumeFile rf = ResumeFileManager.importFile(file);
                 if (rf != null) {
