@@ -1,9 +1,8 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.main_window;
 
 import to.us.resume_builder.export.ResumeExporter;
 import to.us.resume_builder.file.ResumeFile;
 import to.us.resume_builder.file.ResumeFileManager;
-import to.us.resume_builder.resume_components.Resume;
 
 import java.io.IOException;
 import java.nio.file.Path;

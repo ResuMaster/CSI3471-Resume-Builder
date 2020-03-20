@@ -1,10 +1,7 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.main_window;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+
 import to.us.resume_builder.util.FileDialog;
 
 /**

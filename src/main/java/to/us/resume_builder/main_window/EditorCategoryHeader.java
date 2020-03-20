@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.main_window;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -10,7 +10,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import to.us.resume_builder.AlertUtilities;
 import to.us.resume_builder.resume_components.category.Category;
 
 /**
@@ -72,7 +71,6 @@ public class EditorCategoryHeader extends JPanel {
      */
     private void toggleCategory(boolean toggleOn) {
         category.setVisible(toggleOn);
-        System.out.println("Toggled! visible=" + toggleOn);
     }
 
     /**

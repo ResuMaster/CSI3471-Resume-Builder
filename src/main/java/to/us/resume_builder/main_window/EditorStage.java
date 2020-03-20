@@ -1,4 +1,4 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.main_window;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -6,15 +6,11 @@ import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 
-import to.us.resume_builder.resume_components.category.Category;
-import to.us.resume_builder.resume_components.category.TextCategory;
+import to.us.resume_builder.editor_view.category_edit_panes.*;
+import to.us.resume_builder.resume_components.category.*;
 
 /**
  * @author Jaocb
@@ -23,7 +19,7 @@ import to.us.resume_builder.resume_components.category.TextCategory;
 public class EditorStage extends JPanel {
     private JPanel editContainer;
     private EditorCategoryHeader header;
-    private EditPane edit;
+    private CategoryEditPane edit;
     private EditorController controller = null;
     private Category category;
 
@@ -76,25 +72,24 @@ public class EditorStage extends JPanel {
      * @param toEdit The category to get an editor for
      * @return A GUI editor for the provided {@link Category}
      */
-    private EditPane getEditor(Category toEdit) {
-        EditPane editPane = null;
+    private CategoryEditPane getEditor(Category toEdit) {
+        CategoryEditPane editPane = null;
         // This switch controls creating different editors for each CategoryType
         // TODO Connect with A&B's editors
         switch (toEdit.getType()) {
-//        case BULLETS:
-//            editPane = new BulletCategoryEditPane(toEdit);
-//            break;
-//        case EXPERIENCE:
-//            editPane = new ExperienceCategoryEditPane();
-//            break;
-//        case HEADER:
-//            editPane = new HeaderCategoryEditPane();
-//            break;
-//        case TEXT:
-//            editPane = new TextCategoryEditPane();
-//            break;
+        case BULLETS:
+            editPane = new BulletCategoryEditPane((BulletCategory)toEdit);
+            break;
+        case EXPERIENCE:
+            editPane = new ExperienceCategoryEditPane((ExperienceCategory)toEdit);
+            break;
+        case HEADER:
+            editPane = new HeaderCategoryEditPane((HeaderCategory)toEdit);
+            break;
+        case TEXT:
+            editPane = new TextCategoryEditPane((TextCategory)toEdit);
+            break;
         default:
-            editPane = new ConcreteEditPane(toEdit.getDisplayName());
             break;
         }
 
@@ -110,16 +105,21 @@ public class EditorStage extends JPanel {
      * 
      * @author Micah
      */
-    private class ConcreteEditPane extends EditPane {
-        ConcreteEditPane(String text) {
-            JLabel label = new JLabel(text);
-            add(label);
-        }
-
-        @Override
-        public void save() {
-            JOptionPane.showMessageDialog(this, "Dummy save message.");
-        }
-    }
+//    private class ConcreteEditPane extends CategoryEditPane {
+//        ConcreteEditPane(String text) {
+//            JLabel label = new JLabel(text);
+//            add(label);
+//        }
+//
+//        @Override
+//        public void save() {
+//            JOptionPane.showMessageDialog(this, "Dummy save message.");
+//        }
+//
+//        @Override
+//        public boolean isModified() {
+//            super();
+//        }
+//    }
 
 }
