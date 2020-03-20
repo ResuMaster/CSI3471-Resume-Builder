@@ -8,6 +8,8 @@ import to.us.resume_builder.resume_components.Resume;
  * @author Jacob
  */
 public class ResumeFile {
+    // The path to the resume data file
+    private transient String filePath;
 
     // The metadata associated with the Resume
     private Metadata metadata;
@@ -42,6 +44,14 @@ public class ResumeFile {
      */
     public Resume getResume() {
         return resume;
+    }
+
+    public void setFilePath(String path) {
+        this.filePath = path;
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 
 }
