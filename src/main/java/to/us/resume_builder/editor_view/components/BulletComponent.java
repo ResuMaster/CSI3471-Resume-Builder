@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Ashley Lu Couch
+ */
 public class BulletComponent extends JPanel implements IEncapsulatedEditor {
     private JTable table;
     private boolean modified;

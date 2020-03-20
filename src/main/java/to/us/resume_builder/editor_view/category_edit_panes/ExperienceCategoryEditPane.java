@@ -13,6 +13,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author Matthew McCaskill
+ */
 public class ExperienceCategoryEditPane extends CategoryEditPane {
     private List<ExperienceComponent> experienceComponentList;
     private List<Experience> ref;

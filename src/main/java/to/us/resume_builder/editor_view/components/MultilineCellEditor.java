@@ -8,6 +8,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 
+/**
+ *
+ * @author Matthew McCaskill
+ */
 public class MultilineCellEditor extends AbstractCellEditor implements TableCellEditor {
     JTextArea component = new JTextArea();
 

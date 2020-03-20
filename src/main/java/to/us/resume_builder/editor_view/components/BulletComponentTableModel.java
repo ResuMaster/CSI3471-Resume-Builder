@@ -8,6 +8,10 @@ import javax.swing.table.TableModel;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *
+ * @author Ashley Lu Couch
+ */
 public class BulletComponentTableModel extends AbstractTableModel implements TableModel {
 
     List<Bullet> data;
