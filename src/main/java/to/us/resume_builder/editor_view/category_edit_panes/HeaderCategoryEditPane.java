@@ -7,15 +7,27 @@ import java.awt.*;
 
 
 /**
+ * Facilitates editing of the HeaderCategory resume component.
  *
  * @author Brooklyn Stone
  */
 public class HeaderCategoryEditPane extends CategoryEditPane {
+    /**
+     * An array of each of the editable Text Fields for a Header Category.
+     *      0: Link
+     *      1: Email
+     *      2: Address
+     *      3: Phone Number
+     */
     private JTextField fields[];
+    /**
+     * The Header Category to display
+     */
     private HeaderCategory headerCategory;
 
     /**
-     * Constructor for Category edit pane
+     * Constructor for Header Category edit pane which displays each of the Header
+     * fields in a UI
      * @param hc
      */
     public HeaderCategoryEditPane(HeaderCategory hc) {
@@ -72,7 +84,8 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * Saves information in each of the fields
+     * Saves information in each of the fields of the Header Category Edit Pane
+     * to the Header Category
      */
     @Override
     public void save() {
@@ -83,8 +96,8 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * Determines if the current Category has been modified
-     * @return boolean indicating whether the Category was edited
+     * Determines if the current Header Category has been modified
+     * @return boolean indicating whether the Category was edited by the user
      */
     public boolean isModified() {
         if(headerCategory.getLink().equals(fields[0].getText()) &&
