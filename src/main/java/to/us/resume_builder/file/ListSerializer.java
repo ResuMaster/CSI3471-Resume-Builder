@@ -25,10 +25,10 @@ class ListSerializer implements JsonSerializer<List<?>> {
             return array;
         }
 
-        for (Object child : objects) {
+        objects.forEach(child -> {
             JsonElement element = jsonSerializationContext.serialize(child);
             array.add(element);
-        }
+        });
 
         return array;
     }
