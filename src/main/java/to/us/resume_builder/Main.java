@@ -22,8 +22,8 @@ public class Main {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            FileRetriever t = new FileRetriever();
-            String file = t.getFile();
+            FileDialog fileDialog = new FileDialog("json", null);
+            String file = fileDialog.getFile();
             // Cancel opening the editor if the user did not select a file.
             if (file == null) {
                 return;
@@ -37,34 +37,5 @@ public class Main {
                 e.printStackTrace();
             }
         });
-    }
-}
-
-/**
- * Class that will prompt the user to select a Resume Data File before
- * the application will open.
- *
- * @author Jacob Curtis
- */
-class FileRetriever extends JPanel {
-    /**
-     * File dialog to retrieve the file from.
-     */
-    private FileDialog fileDialog;
-
-    /**
-     * Constructs the file retriever to only accept JSON.
-     */
-    public FileRetriever() {
-        fileDialog = new FileDialog("json", this);
-    }
-
-    /**
-     * Gets the Resume Data File the user wants to open in the edtior.
-     *
-     * @return The selected file.
-     */
-    public String getFile() {
-        return fileDialog.getFile();
     }
 }
