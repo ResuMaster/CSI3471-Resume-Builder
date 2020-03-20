@@ -3,6 +3,7 @@ package to.us.resume_builder.resume_components.category;
 import to.us.resume_builder.export.ResumeTemplate;
 import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.IBulletContainer;
+import to.us.resume_builder.resume_components.ResumeComponent;
 import to.us.resume_builder.util.MiscUtils;
 
 import java.util.LinkedList;
@@ -127,6 +128,7 @@ public class BulletCategory extends Category implements IBulletContainer {
             .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
             .replaceVariable("content",
                 bullets.stream()
+                    .filter(ResumeComponent::getVisible)
                     .map(f -> f.formatLaTeXString(template))
                     .reduce((a, b) -> a + b)
                     .orElse("")

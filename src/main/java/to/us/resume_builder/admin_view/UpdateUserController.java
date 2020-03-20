@@ -1,4 +1,4 @@
-package to.us.resume_builder.adminView;
+package to.us.resume_builder.admin_view;
 
 import to.us.resume_builder.user.User;
 import to.us.resume_builder.user.UserDBC;

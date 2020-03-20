@@ -221,6 +221,7 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
             .replaceVariable("location", MiscUtils.escapeLaTeX(this.location))
             .replaceVariable("date", MiscUtils.escapeLaTeX(this.date))
             .replaceVariable("content", this.bullets.stream()
+                .filter(ResumeComponent::getVisible)
                 .map(f -> f.formatLaTeXString(template))
                 .reduce((a, b) -> a + b)
                 .orElse("")

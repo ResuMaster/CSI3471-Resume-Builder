@@ -2,6 +2,7 @@ package to.us.resume_builder.resume_components.category;
 
 import to.us.resume_builder.export.ResumeTemplate;
 import to.us.resume_builder.resume_components.Experience;
+import to.us.resume_builder.resume_components.ResumeComponent;
 import to.us.resume_builder.util.MiscUtils;
 
 import java.util.LinkedList;
@@ -79,6 +80,15 @@ public class ExperienceCategory extends Category {
     }
 
     /**
+     * Get the current List experienceList for this instance.
+     *
+     * @return the current experienceList
+     */
+    public List<Experience> getExperienceList() {
+        return experiences;
+    }
+
+    /**
      * Get the result of serializing this object using the specified template.
      *
      * @param template The template to format this object with.
@@ -95,6 +105,7 @@ public class ExperienceCategory extends Category {
         return template.getCategoryTemplate(this.type)
             .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
             .replaceVariable("content", experiences.stream()
+                .filter(ResumeComponent::getVisible)
                 .map(f -> f.formatLaTeXString(template))
                 .reduce((a, b) -> a + b)
                 .orElse("")
