@@ -1,5 +1,6 @@
-package to.us.resume_builder.editorview;
+package to.us.resume_builder.editor_view.category_edit_panes;
 
+import to.us.resume_builder.editor_view.IEncapsulatedEditor;
 import to.us.resume_builder.resume_components.category.Category;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import javax.swing.*;
  * 
  * @author Micah
  */
-public abstract class EditPane extends JPanel {
+public abstract class CategoryEditPane extends JPanel implements IEncapsulatedEditor {
 
     /**
      * Version on 2/21.
@@ -21,17 +22,14 @@ public abstract class EditPane extends JPanel {
 	 * JPanel which we will add the separate JPanels from
 	 */
 	protected JPanel contents;
+	protected JTextField name;
+	protected JTextField displayName;
 
 	public void editPane(Category category) {
+
 		JTextField name = new JTextField(category.getName());
 		JTextField displayName = new JTextField(category.getDisplayName());
 
 		contents = new JPanel();
 	}
-
-	/**
-	 * Saves the data in this EditPane to the copy of the ResumeData <em>in
-	 * RAM</em>.
-	 */
-	public abstract void save();
 }

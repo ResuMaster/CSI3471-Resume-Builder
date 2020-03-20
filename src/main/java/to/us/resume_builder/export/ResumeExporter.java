@@ -2,6 +2,7 @@ package to.us.resume_builder.export;
 
 import to.us.resume_builder.ApplicationConfiguration;
 import to.us.resume_builder.resume_components.Resume;
+import to.us.resume_builder.resume_components.ResumeComponent;
 import to.us.resume_builder.resume_components.category.Category;
 import to.us.resume_builder.util.MiscUtils;
 
@@ -29,6 +30,10 @@ public class ResumeExporter {
      * @param resume The resume to export.
      */
     public ResumeExporter(Resume resume) {
+        if (resume == null) {
+            throw new NullPointerException();
+        }
+
         this.resume = resume;
     }
 
@@ -93,7 +98,8 @@ public class ResumeExporter {
         StringJoiner contents = new StringJoiner(template.getSeparatorTemplate().toString());
 
         // Get the LaTeX for each of the categories
-        resume.getCategoryList()
+        resume.getCategoryList().stream()
+            .filter(ResumeComponent::getVisible)
             .forEach(c -> contents.add(c.formatLaTeXString(template)));
 
         // Replace the <content> tag in the resume template with the actual contents

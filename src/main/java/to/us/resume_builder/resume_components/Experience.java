@@ -211,12 +211,17 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      */
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
+        if (this.bullets == null) {
+            this.bullets = new LinkedList<>();
+        }
+
         return template.getExperienceTemplate()
             .replaceVariable("organization", MiscUtils.escapeLaTeX(this.organization))
             .replaceVariable("title", MiscUtils.escapeLaTeX(this.title))
             .replaceVariable("location", MiscUtils.escapeLaTeX(this.location))
             .replaceVariable("date", MiscUtils.escapeLaTeX(this.date))
-            .replaceVariable("content", bullets.stream()
+            .replaceVariable("content", this.bullets.stream()
+                .filter(ResumeComponent::getVisible)
                 .map(f -> f.formatLaTeXString(template))
                 .reduce((a, b) -> a + b)
                 .orElse("")
