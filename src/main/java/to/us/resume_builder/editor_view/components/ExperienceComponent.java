@@ -9,20 +9,44 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 /**
+ * Facilitates editing of an Experience Category
  *
  * @author Matthew McCaskill
- * @author Brooklyn Stone
+ * @author Brooklynn Stone
  */
 public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
+    /**
+     * A Text Field to edit the Experience's Organization
+     */
     private JTextField organization;
+    /**
+     * A Text Field to edit the Experience's Location
+     */
     private JTextField location;
+    /**
+     * A Text Field to edit the Experience's Date
+     */
     private JTextField date;
+    /**
+     * A Text Field to edit the Experience's Title
+     */
     private JTextField title;
+    /**
+     * The Bullet Component which holds the Bullet associated with this Experience
+     */
     private BulletComponent bulletComponent;
-
+    /**
+     * The Experience to display in the UI
+     */
     private Experience experience;
+    /**
+     * A boolean which monitors whether the Experience component has been edited
+     */
     private boolean modified;
 
+    /**
+     *
+     */
     private static class ModifiedDocumentListener implements DocumentListener {
         private ExperienceComponent exp;
 
@@ -47,6 +71,8 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
     }
 
     /**
+     * Constructs a JPanel with the Experience's fields displayed and editable
+     *
      * @param exp the experience to use to fill the fields and change when the
      *            time comes
      */
@@ -134,6 +160,9 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
 
     }
 
+    /**
+     * Saves information in the Experience Component UI to the Experience
+     */
     public void save() {
         this.experience.setOrganization(organization.getText());
         this.experience.setLocation(location.getText());
@@ -144,10 +173,18 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
         this.modified = false;
     }
 
+    /**
+     * Returns the status of the modified boolean
+     * @return a boolean indicating whether the Bullet Component had been edited
+     */
     public boolean isModified() {
         return this.modified || bulletComponent.isModified();
     }
 
+    /**
+     * Getter for the Experience
+     * @return the Experience being displayed in this Experience Component
+     */
     public Experience getExperience() {
         return this.experience;
     }
