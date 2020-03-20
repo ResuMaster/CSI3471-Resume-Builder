@@ -11,29 +11,85 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @author Jacob
- * @author Micah
+ * Selector for the Editor Category List. Controlled by an EditorController.
+ *
+ * @author Jacob Curtis
+ * @author Micah Schiewe
  */
 public class EditorCategorySelector extends JPanel implements ListSelectionListener {
+    /**
+     * The categories to be selected from.
+     */
     private JList<Category> categories;
-    private DefaultListModel<Category> model;
-    private Map<String, Category> idToCategory;
-    private JScrollPane scroll;
-    private EditorController controller = null;
 
     /**
-     * Assumes you only can remove a
+     * Default implementation for the list selector model.
+     */
+    private DefaultListModel<Category> model;
+
+    /**
+     * Mapping from Category ID to Category.
+     */
+    private Map<String, Category> idToCategory;
+
+    /**
+     * The scroll pane for the list selector.
+     */
+    private JScrollPane scroll;
+
+    /**
+     * The controller which allows updating sibling editor components.
+     */
+    private EditorController controller = null;
+
+
+    /**
+     * Constructs an EditorCategorySelector given a Resume object.
      *
-     * @param id
+     * @param r The resume to construct the EditorCategorySelector from.
+     */
+    public EditorCategorySelector(Resume r) {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        // Initialize model and categories
+        model = new DefaultListModel<>();
+        model.addAll(r.getCategoryList());
+        categories = new JList<>(model);
+
+        // Populate map of Category ID to Category
+        idToCategory = r.getCategoryList()
+            .stream()
+            .collect(Collectors.toMap(ResumeComponent::getID, v -> v));
+
+        scroll = new JScrollPane();
+
+        // Listen to events, which are delegated to the EditorController.
+        categories.addListSelectionListener(this);
+
+        scroll.add(categories);
+        scroll.getViewport().setView(categories);
+        add(scroll);
+    }
+
+    /**
+     * Allows you to remove a Category from the list by its ID.
+     * Assumes you cannot remove the last Category.
+     *
+     * @param id The ID of the category to be removed.
      */
     public void removeCategory(String id) {
+        // Return if no selection or only one category available
         if (categories.isSelectionEmpty() || model.getSize() == 1) {
             return;
         }
+
+        // Get the Category for the iD
         Category c = idToCategory.get(id);
         if (c == null) {
             return;
         }
+
+        // Update selected index since Category was deleted, and re-render.
         int ndx = model.indexOf(c);
         model.removeElement(c);
         if (ndx == model.getSize()) {
@@ -43,27 +99,22 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         categories.setSelectedIndex(ndx);
     }
 
+    /**
+     * Sets the EditorController that this class will communicate to when
+     * the list is changed.
+     *
+     * @param controller The EditorController to be communicated with.
+     */
     public void setController(EditorController controller) {
         this.controller = controller;
     }
 
-    public EditorCategorySelector(Resume r) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        model = new DefaultListModel<>();
-        model.addAll(r.getCategoryList());
-        categories = new JList<>(model);
-        idToCategory = r.getCategoryList().stream().collect(Collectors.toMap(ResumeComponent::getID, v -> v));
-
-        scroll = new JScrollPane();
-
-        categories.addListSelectionListener(this);
-
-        scroll.add(categories);
-        scroll.getViewport().setView(categories);
-        add(scroll);
-    }
-
+    /**
+     * Informs the EditorController that a new Category is selected and should
+     * be rendered in the main editor.
+     *
+     * @param e The list selection event.
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() || categories.isSelectionEmpty()) {

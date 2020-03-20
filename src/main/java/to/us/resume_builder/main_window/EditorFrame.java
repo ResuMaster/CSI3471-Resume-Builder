@@ -7,14 +7,34 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author Jacob
- * @author Micah
+ * The main editor frame which houses the more granular aspects of the
+ * Editor.
+ *
+ * @author Jacob Curtis
+ * @author Micah Schiewe
  */
 public class EditorFrame extends JFrame {
+    /**
+     * The stage shows the information stored in each category and allows
+     * for modifying the data.
+     */
     private EditorStage stage;
+
+    /**
+     * Menu bar for exporting the Resume data file and Resume PDF.
+     */
     private EditorMenuBar menuBar;
+
+    /**
+     * Side list for selecting which category you want to view in the stage.
+     */
     private EditorCategorySelector sideList;
 
+    /**
+     * Constructs the EditorFrame from a given ResumeFile.
+     *
+     * @param r The ResumeFile to construct the EditorFrame from.
+     */
     public EditorFrame(ResumeFile r) {
         super("Test");
 
@@ -37,6 +57,13 @@ public class EditorFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Register the controller for the menu bar, side list, and stage using
+     * the provided controllers.
+     *
+     * @param e The controller for the Editor
+     * @param m The controller for the Menu Bar.
+     */
     public void registerControllers(EditorController e, MenuController m) {
         menuBar.setController(m);
         e.registerSideList(sideList);
