@@ -116,7 +116,8 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         this.modified = false;
 
         this.bulletC.getBulletList().clear();
-        this.bulletC.getBulletList().addAll(((BulletComponentTableModel) table.getModel()).data);
+//        this.bulletC.getBulletList().addAll(((BulletComponentTableModel) table.getModel()).data);
+        ((BulletComponentTableModel) this.table.getModel()).data.forEach(b -> this.bulletC.addBullet(b));
     }
 
     @Override

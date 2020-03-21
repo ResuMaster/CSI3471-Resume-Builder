@@ -19,7 +19,8 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     IBulletContainer bulletC;
 
     public void addBullet(){
-        data.add(bulletC.getBulletByID(bulletC.addBullet()));
+//        data.add(bulletC.getBulletByID(bulletC.addBullet()));
+        data.add(new Bullet("YYY"));
     }
 
     public void removeBullet(int index){
