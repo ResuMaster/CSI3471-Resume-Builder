@@ -5,7 +5,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import to.us.resume_builder.util.FileDialog;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -75,6 +77,17 @@ public class EditorMenuBar extends JMenuBar {
 
                 // Export Resume
                 controller.export(chosenFile);
+
+                // Open the file if it exists
+                if (Files.exists(chosenFile)) {
+                    if (Desktop.isDesktopSupported()) {
+                        try {
+                            Desktop.getDesktop().open(chosenFile.toFile());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
             }
         });
 

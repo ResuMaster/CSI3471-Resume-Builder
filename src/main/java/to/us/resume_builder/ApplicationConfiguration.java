@@ -57,6 +57,7 @@ public class ApplicationConfiguration {
     private void setDefaults() {
         setIfNotPresent("templates.directory", "./templates/");
         setIfNotPresent("export.tempLocation", "./temp/");
+        setIfNotPresent("export.timeout", 30L);
     }
 
     /**
@@ -84,6 +85,22 @@ public class ApplicationConfiguration {
         if (configuration.containsKey(key)) {
             return configuration.get(key).toString();
         } else {
+            return null;
+        }
+    }
+
+    /**
+     * Get a long value from the configuration map.
+     *
+     * @param key The key to query for.
+     *
+     * @return The value at <code>key</code>. If the key does not exist in the
+     *     map, this returns <code>null</code>.
+     */
+    public Long getLong(String key) {
+        try {
+            return Long.parseLong(configuration.get(key).toString());
+        } catch (Exception e) {
             return null;
         }
     }

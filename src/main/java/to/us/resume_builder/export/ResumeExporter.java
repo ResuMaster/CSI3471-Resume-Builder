@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
@@ -127,14 +129,19 @@ public class ResumeExporter {
             // TODO: add dedicated log file
             builder.redirectOutput(new File("./export.log"));
             builder.redirectError(new File("./export.log"));
+
+            // Run the process
             Process p = builder.start();
-            // TODO: add config option for this
-            p.waitFor(30L, TimeUnit.SECONDS);
+            p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS);
 
             // Clean up artifacts
             // TODO: have way to clean up rest of artifacts
-            for (String extension : ARTIFACTS_TO_DELETE) {
-                Files.deleteIfExists(filePath.resolveSibling(filePath.getFileName().toString().split("\\.")[0] + "." + extension));
+
+            // Delete artifacts
+            for (File f : Objects.requireNonNull(filePath.toFile().listFiles())) {
+                if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
+                    Files.deleteIfExists(f.toPath());
+                }
             }
 
             return true;
