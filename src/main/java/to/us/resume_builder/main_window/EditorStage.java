@@ -23,7 +23,7 @@ import to.us.resume_builder.resume_components.category.TextCategory;
 
 /**
  * Class to tie together the various Category editors into a standard interface.
- * Allows saving to the RAM Resume.
+ * Allows saving to the resume in RAM.
  * 
  * @author Jacob Curtis
  * @author Micah Schiewe
@@ -32,24 +32,21 @@ public class EditorStage extends JPanel {
     private static final String UNSAVED_PROMPT = "You have changes not stored to this session's Resume.\n\nDo you want to stash these changes?";
 
     /**
-     * The container for the currently-selected CategoryEditPane; needed to change
-     * category editors.
+     * The component parent of the currently-selected {@link CategoryEditPane};
+     * needed to change category editors.
      */
     private JPanel editContainer;
 
     /**
-     * The editor for the currently-selected Category; needed to swap category
-     * editors.
+     * The editor for the currently-selected {@link Category}; needed to change
+     * category editors.
      */
     private CategoryEditPane edit;
 
-    /** Editor for the name, display name, and visibility of the current Category */
+    /** Editor for attributes common to all {@link Category Categories} */
     private EditorCategoryHeader header;
 
-    /**
-     * Controller for the editor. Synchronizes actions across the different
-     * graphical components.
-     */
+    /** Synchronizes actions across different components. */
     private EditorController controller = null;
 
     /** The category currently loaded to edit. */
@@ -58,7 +55,7 @@ public class EditorStage extends JPanel {
     /**
      * Constructs a EditorStage ready to edit the provided category.
      * 
-     * @param startingCategory The category to initially edit. CANNOT BE NULL.
+     * @param startingCategory The category to initially edit. Cannot be null.
      */
     public EditorStage(Category startingCategory) {
         JButton saveButton;
@@ -135,7 +132,10 @@ public class EditorStage extends JPanel {
 
         // If there are unsaved changes, prompt for and save them.
         if (edit.isModified() || header.isModified()) {
+            // Ask if the user wants to save their changes
             int result = JOptionPane.showConfirmDialog(this, UNSAVED_PROMPT);
+
+            // Parse response
             switch (result) {
             case JOptionPane.YES_OPTION:
                 save();

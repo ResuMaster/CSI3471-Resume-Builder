@@ -9,26 +9,44 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import to.us.resume_builder.editor_view.category_edit_panes.CategoryEditPane;
 import to.us.resume_builder.resume_components.category.Category;
 
 /**
  * Header for all Category editors (in the EditStage). Gives user interface for
- * editing name, display name, and visibility of a category, as well as deletion
- * of the category.
+ * generic {@link Category} edits (editing name, display name, and visibility of
+ * a category, as well as deletion of the category).
  * 
  * @author Micah Schiewe
  * @author Jacob Curtis
  */
-public class EditorCategoryHeader extends CategoryEditPane {
+public class EditorCategoryHeader extends JPanel {
 
     private static final int NUM_COLS = 20;
 
+    /** The category edited by this header */
     private Category category;
+
+    /** The fields containing and allowing edits to the name and display name */
     private JTextField name, displayName;
+
+    /** The component containing and allowing edits to category's visibility */
     private JCheckBox toggled;
+
+    /** The component enabling deletion of the category */
     private JButton delete;
 
+    /**
+     * Creates a new EditorCategoryHeader, prepared to perform generic
+     * {@link Category} edits on startingCategory.
+     * 
+     * @param startingCategory The category the editor defaults to editing. This
+     *                         cannot be null.
+     * @param deleteHandle     The method to call to delete the category being
+     *                         edited. This should be a lambda passed from the
+     *                         creating function which removes the category, and
+     *                         also facilitates a callback to load a new category to
+     *                         display.
+     */
     public EditorCategoryHeader(Category startingCategory, DeleteCategory deleteHandle) {
         setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -49,9 +67,9 @@ public class EditorCategoryHeader extends CategoryEditPane {
     }
 
     /**
-     * Updates this header with the data in the new category to render.
+     * Updates this header with the data in the new {@link Category} to render.
      * 
-     * @param newCategory The new category to display.
+     * @param newCategory The new category to display and edit.
      */
     public void updateHeader(Category newCategory) {
         category = newCategory;
@@ -68,7 +86,9 @@ public class EditorCategoryHeader extends CategoryEditPane {
         repaint();
     }
 
-    @Override
+    /**
+     * Saves the currently-edited data to the resume in RAM.
+     */
     public void save() {
         // Save display name
         if (!displayName.getText().contentEquals(""))
@@ -82,7 +102,9 @@ public class EditorCategoryHeader extends CategoryEditPane {
         category.setVisible(toggled.getModel().isSelected());
     }
 
-    @Override
+    /**
+     * Determines whether the user has made any basic {@link Category} edits.
+     */
     public boolean isModified() {
         return toggled.getModel().isSelected() != category.getVisible()
                 || !displayName.getText().contentEquals(category.getDisplayName())
@@ -135,6 +157,16 @@ public class EditorCategoryHeader extends CategoryEditPane {
         return right;
     }
 
+    /**
+     * A handle used by the EditorCategoryHeader to report that the user has decided
+     * to delete the currently-selected {@link Category}. This is the only action
+     * the {@link EditorCategoryHeader} takes on this report, meaning that the
+     * delete() method must handle confirming and removing the category, as well as
+     * re-populating the {@link EditorCategoryHeader} with a new {@link Category}.
+     * 
+     * @author Micah
+     */
+    @FunctionalInterface
     public interface DeleteCategory {
         void delete();
     }
