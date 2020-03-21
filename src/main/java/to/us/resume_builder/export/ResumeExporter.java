@@ -133,15 +133,16 @@ public class ResumeExporter {
 
             // Run the process
             Process p = builder.start();
-            if (p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
-                // Clean up artifacts
-                for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
-                    if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
-                        Files.deleteIfExists(f.toPath());
-                    }
-                }
-            } else {
+            if (!p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
+                p.destroy();
                 JOptionPane.showMessageDialog(null, "Resume exporter took too long. Contact IT for additional assistance.");
+            }
+
+            // Clean up artifacts
+            for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
+                if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
+                    Files.deleteIfExists(f.toPath());
+                }
             }
 
             return true;
