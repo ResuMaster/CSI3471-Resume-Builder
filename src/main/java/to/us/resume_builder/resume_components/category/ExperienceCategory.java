@@ -1,6 +1,7 @@
 package to.us.resume_builder.resume_components.category;
 
 import to.us.resume_builder.export.ResumeTemplate;
+import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.ResumeComponent;
 import to.us.resume_builder.util.MiscUtils;
@@ -55,6 +56,34 @@ public class ExperienceCategory extends Category {
             id = this.id + "." + rand.nextInt(1000);
         } while (checkExperienceListID(id));
         experiences.add(new Experience(id));
+        return id;
+    }
+
+    /**
+     * Adds an experience with a random generated id.
+     *
+     * @return The id of the new experience.
+     */
+    public String addExperience(Experience e) {
+        String id;
+        do {
+            // generate id with current id in the front
+            Random rand = new Random();
+            id = this.id + "." + rand.nextInt(1000);
+        } while (checkExperienceListID(id));
+
+        Experience copy = new Experience(id);
+        copy.setVisible(e.getVisible());
+        copy.setTitle(e.getTitle());
+        copy.setDate(e.getDate());
+        copy.setLocation(e.getLocation());
+        copy.setOrganization(e.getOrganization());
+        for (Bullet b : e.getBulletList()) {
+            copy.getBulletByID(copy.addBullet()).setText(b.getText());
+        }
+
+        experiences.add(copy);
+
         return id;
     }
 

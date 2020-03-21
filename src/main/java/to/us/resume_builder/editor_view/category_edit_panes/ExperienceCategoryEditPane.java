@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
  */
 public class ExperienceCategoryEditPane extends CategoryEditPane {
     private List<ExperienceComponent> experienceComponentList;
-    private List<Experience> ref;
+    private ExperienceCategory ref;
     private JPanel experienceList;
     private boolean modified;
 
     public ExperienceCategoryEditPane(ExperienceCategory ec) {
-        this.ref = ec.getExperienceList();
+        this.ref = ec;
         this.experienceComponentList = new ArrayList<>();
         this.modified = false;
 
@@ -34,7 +34,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
         addButton.addActionListener(e-> {
             this.modified = true;
 
-            this.experienceComponentList.add(new ExperienceComponent(ec.getExperienceByID(ec.addExperience())));
+            this.experienceComponentList.add(new ExperienceComponent(new Experience("XXX")));
             this.updateExperienceListUI();
         });
         this.add(addButton, BorderLayout.PAGE_START);
@@ -47,7 +47,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
         };
         experienceList.setLayout(new BoxLayout(experienceList, BoxLayout.PAGE_AXIS));
 
-        this.ref.forEach(e -> experienceComponentList.add(new ExperienceComponent(e)));
+        this.ref.getExperienceList().forEach(e -> experienceComponentList.add(new ExperienceComponent(e)));
 
         updateExperienceListUI();
 
@@ -56,15 +56,6 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
         JScrollPane scrollPane = new JScrollPane(wrapper);
         this.add(scrollPane, BorderLayout.CENTER);
-    }
-
-    @Override
-    public void save() {
-        this.experienceComponentList.forEach(ExperienceComponent::save);
-
-        this.ref.clear();
-        this.ref.addAll(this.experienceComponentList.stream().map(ExperienceComponent::getExperience).collect(Collectors.toList()));
-        this.modified = false;
     }
 
     public void updateExperienceListUI() {
@@ -135,6 +126,15 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
         }
 
         experienceList.updateUI();
+    }
+
+    @Override
+    public void save() {
+        this.experienceComponentList.forEach(ExperienceComponent::save);
+
+        this.ref.getExperienceList().clear();
+        this.experienceComponentList.forEach(e -> this.ref.addExperience(e.getExperience()));
+        this.modified = false;
     }
 
     /**
