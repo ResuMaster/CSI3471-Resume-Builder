@@ -57,7 +57,7 @@ public class ApplicationConfiguration {
     private void setDefaults() {
         setIfNotPresent("templates.directory", "./templates/");
         setIfNotPresent("export.tempLocation", "./temp/");
-        setIfNotPresent("export.timeout", 30L);
+        setIfNotPresent("export.timeout", 60L);
     }
 
     /**

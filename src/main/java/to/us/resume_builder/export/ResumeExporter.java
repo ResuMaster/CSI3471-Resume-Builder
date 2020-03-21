@@ -6,6 +6,7 @@ import to.us.resume_builder.resume_components.ResumeComponent;
 import to.us.resume_builder.resume_components.category.Category;
 import to.us.resume_builder.util.MiscUtils;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -132,13 +133,15 @@ public class ResumeExporter {
 
             // Run the process
             Process p = builder.start();
-            p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS);
-
-            // Clean up artifacts
-            for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
-                if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
-                    Files.deleteIfExists(f.toPath());
+            if (p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
+                // Clean up artifacts
+                for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
+                    if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
+                        Files.deleteIfExists(f.toPath());
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Resume exporter took too long. Contact IT for additional assistance.");
             }
 
             return true;
