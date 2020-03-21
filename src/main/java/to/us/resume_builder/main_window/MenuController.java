@@ -30,10 +30,10 @@ public class MenuController {
         saveData(resume.getFilePath());
     }
 
-    public void export(String path) {
+    public void export(Path path) {
         ResumeExporter r = new ResumeExporter(resume.getResume());
         try {
-            r.export(Path.of(path));
+            r.export(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
