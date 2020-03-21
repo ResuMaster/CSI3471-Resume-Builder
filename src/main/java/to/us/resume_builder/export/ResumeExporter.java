@@ -135,10 +135,7 @@ public class ResumeExporter {
             p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS);
 
             // Clean up artifacts
-            // TODO: have way to clean up rest of artifacts
-
-            // Delete artifacts
-            for (File f : Objects.requireNonNull(filePath.toFile().listFiles())) {
+            for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
                 if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
                     Files.deleteIfExists(f.toPath());
                 }
