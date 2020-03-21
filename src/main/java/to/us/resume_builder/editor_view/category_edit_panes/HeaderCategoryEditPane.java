@@ -16,10 +16,13 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
      * An array of each of the editable Text Fields for a Header Category.
      *      0: Link
      *      1: Email
-     *      2: Address
-     *      3: Phone Number
+     *      2: Phone Number
      */
     private JTextField fields[];
+    /**
+     * A JTextArea which can hold multi-line addresses from the user
+     */
+    private JTextArea address;
     /**
      * The Header Category to display
      */
@@ -41,27 +44,37 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
 
+        // Initialize each text field
         fields = new JTextField[] {
             new JTextField(hc.getLink(), SwingConstants.LEFT),
             new JTextField(hc.getEmail(), SwingConstants.LEFT),
-            new JTextField(hc.getAddress(), SwingConstants.LEFT),
             new JTextField(hc.getPhoneNumber(), SwingConstants.LEFT)
         };
 
+        // Address text area with default 2 lines
+        address = new JTextArea(hc.getAddress());
+        address.setLineWrap(true);
+        address.setWrapStyleWord(true);
+        address.setRows(2);
+        address.setBorder(fields[0].getBorder());
+
+        // Labels for each editable field
         JLabel labels[] = {
             new JLabel("Link: ", SwingConstants.LEFT),
             new JLabel("Email: ", SwingConstants.LEFT),
-            new JLabel("Address: ", SwingConstants.LEFT),
-            new JLabel("Phone Number: ", SwingConstants.LEFT)
+            new JLabel("Phone Number: ", SwingConstants.LEFT),
+            new JLabel("Address: ", SwingConstants.LEFT)
         };
 
+        // Starting X and Y for elements in the Panel
         int xPos = 0;
         int yPos = 0;
 
         grid.gridwidth = 1;
         grid.gridx = xPos;
 
-        for (int i = 0; i < labels.length; i++) {
+        // Iterate through each text field and add it to the information panel
+        for (int i = 0; i < fields.length; i++) {
             fields[i].setMinimumSize(new Dimension(200, fields[i].getHeight()));
             fields[i].setMaximumSize(new Dimension(this.getWidth(), fields[i].getHeight()));
 
@@ -79,6 +92,19 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
             info.add(fields[i], grid);
         }
 
+        // Add address label and text area
+        grid.gridwidth = 1;
+        grid.weightx = 0;
+        grid.gridx = xPos;
+        grid.gridy = yPos++;
+        info.add(labels[3], grid);
+
+        grid.gridwidth = 2;
+        grid.weightx = 1;
+        grid.gridx = xPos + 1;
+        info.add(address, grid);
+
+        // Set ScrollPane
         JScrollPane scrollPane = new JScrollPane(info);
         this.add(scrollPane, BorderLayout.NORTH);
     }
@@ -90,9 +116,9 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
     @Override
     public void save() {
         headerCategory.setLink(fields[0].getText());
-        headerCategory.setAddress(fields[1].getText());
-        headerCategory.setEmail(fields[2].getText());
-        headerCategory.setPhoneNumber(fields[3].getText());
+        headerCategory.setEmail(fields[1].getText());
+        headerCategory.setPhoneNumber(fields[2].getText());
+        headerCategory.setAddress(address.getText());
     }
 
     /**
