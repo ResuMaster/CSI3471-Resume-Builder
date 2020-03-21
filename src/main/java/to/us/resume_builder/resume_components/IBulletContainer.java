@@ -28,6 +28,13 @@ public interface IBulletContainer {
     String addBullet();
 
     /**
+     * Copy a new bullet for bullets list with a random generated id
+     *
+     * @return the id created for the new bullet
+     */
+    String addBullet(Bullet b);
+
+    /**
      * Removes the list item that matches the id.
      *
      * @param id The String to search for id.
