@@ -42,7 +42,8 @@ public final class MiscUtils {
                 .replaceAll("#", "\\\\#")
                 .replaceAll("%", "\\\\%")
                 .replaceAll("\\{", "\\\\{")
-                .replaceAll("}", "\\\\}");
+                .replaceAll("}", "\\\\}")
+                .replaceAll("_", "\\\\_");
         }
     }
 }
