@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Ashley Lu Couch
  */
-public class BulletComponentTableModel extends AbstractTableModel implements TableModel {
+public class BulletListEditorTableModel extends AbstractTableModel implements TableModel {
 
     List<Bullet> data;
     String[] columnNames;
@@ -51,7 +51,7 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      * @param data        The data to fill the table with.
      * @param columnNames The names for the columns.
      */
-    public BulletComponentTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
+    public BulletListEditorTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
         this.columnNames = columnNames;
         this.data = data;
         this.bulletC = bulletC;

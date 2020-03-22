@@ -2,6 +2,7 @@ package to.us.resume_builder.editor_view.components;
 
 import to.us.resume_builder.editor_view.IEncapsulatedEditor;
 import to.us.resume_builder.resume_components.Experience;
+import to.us.resume_builder.resume_components.category.ExperienceCategory;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -9,24 +10,37 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 
 /**
+ * This class is an editor for individual experiences.
  *
  * @author Matthew McCaskill
  * @author Brooklyn Stone
  */
-public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
+public class ExperienceEditor extends JPanel implements IEncapsulatedEditor {
+    // Individual editor components
     private JTextField organization;
     private JTextField location;
     private JTextField date;
     private JTextField title;
-    private BulletComponent bulletComponent;
+    private BulletListEditor bulletListEditor;
 
+    /**
+     * The {@link Experience} being edited.
+     */
     private Experience experience;
+
+    /**
+     * Boolean flag to determine whether the category has been edited.
+     */
     private boolean modified;
 
-    private static class ModifiedDocumentListener implements DocumentListener {
-        private ExperienceComponent exp;
+    /**
+     * Internal class which marks the editor as modified any time a text field
+     * detects a change.
+     */
+    private static class ExperienceModifiedDocumentListener implements DocumentListener {
+        private ExperienceEditor exp;
 
-        private ModifiedDocumentListener(ExperienceComponent exp) {
+        private ExperienceModifiedDocumentListener(ExperienceEditor exp) {
             this.exp = exp;
         }
 
@@ -47,13 +61,17 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
     }
 
     /**
-     * @param exp the experience to use to fill the fields and change when the
-     *            time comes
+     * Construct an <code>ExperienceEditor</code> corresponding to the given
+     * {@link Experience}.
+     *
+     * @param exp The experience to be edited.
      */
-    public ExperienceComponent(Experience exp) {
+    public ExperienceEditor(Experience exp) {
+        // Initialize fields
         this.experience = exp;
         this.modified = false;
 
+        // Set the layout of this JPanel
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         // Setup GridBagConstraints
@@ -69,20 +87,26 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
             new JLabel("Position/Degree", SwingConstants.RIGHT)
         };
 
-        // Create panels
+        // Create top panel
         JPanel topPanel = new JPanel(new GridBagLayout());
-        JPanel bottomPanel = new JPanel(new GridBagLayout());
         this.add(topPanel);
-        this.add(bottomPanel);
+
+        // Create middle panel
+        JPanel middlePanel = new JPanel(new GridBagLayout());
+        this.add(middlePanel);
+
+        // Create a separator
         this.add(new JSeparator(SwingConstants.HORIZONTAL));
-        bulletComponent = new BulletComponent(this.experience);
-        this.add(bulletComponent);
+
+        // Create thee bullet list editor
+        bulletListEditor = new BulletListEditor(this.experience);
+        this.add(bulletListEditor);
 
         // Organization field
         gbc.gridy = 0;
         this.organization = new JTextField(exp.getOrganization());
         labels[0].setLabelFor(this.organization);
-        this.organization.getDocument().addDocumentListener(new ModifiedDocumentListener(this));
+        this.organization.getDocument().addDocumentListener(new ExperienceModifiedDocumentListener(this));
 
         gbc.gridx = 0;
         gbc.weightx = 0.0;
@@ -96,7 +120,7 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
         gbc.gridy = 1;
         this.title = new JTextField(exp.getTitle());
         labels[3].setLabelFor(this.title);
-        this.title.getDocument().addDocumentListener(new ModifiedDocumentListener(this));
+        this.title.getDocument().addDocumentListener(new ExperienceModifiedDocumentListener(this));
 
         gbc.gridx = 0;
         gbc.weightx = 0.0;
@@ -110,45 +134,60 @@ public class ExperienceComponent extends JPanel implements IEncapsulatedEditor {
         gbc.gridx = 0;
         this.location = new JTextField(exp.getLocation());
         labels[1].setLabelFor(this.location);
-        this.location.getDocument().addDocumentListener(new ModifiedDocumentListener(this));
+        this.location.getDocument().addDocumentListener(new ExperienceModifiedDocumentListener(this));
 
         gbc.gridy = 0;
-        bottomPanel.add(labels[1], gbc);
+        middlePanel.add(labels[1], gbc);
 
         gbc.gridy = 1;
-        bottomPanel.add(this.location, gbc);
+        middlePanel.add(this.location, gbc);
 
         // Date field
         gbc.gridx = 1;
         this.date = new JTextField(exp.getDate());
         labels[2].setLabelFor(this.date);
-        this.date.getDocument().addDocumentListener(new ModifiedDocumentListener(this));
+        this.date.getDocument().addDocumentListener(new ExperienceModifiedDocumentListener(this));
 
         gbc.gridy = 0;
-        bottomPanel.add(labels[2], gbc);
+        middlePanel.add(labels[2], gbc);
 
         gbc.gridy = 1;
-        bottomPanel.add(this.date, gbc);
+        middlePanel.add(this.date, gbc);
 
-        this.setMaximumSize(new Dimension(2000, this.bulletComponent.getPreferredSize().height + 100));
-
+        // Set the size of the ExperienceEditor
+        this.setMaximumSize(new Dimension(2000, this.bulletListEditor.getPreferredSize().height + 100));
     }
 
+    /**
+     * Get the experience being edited by this editor.
+     *
+     * @return The experience being edited.
+     */
+    public Experience getExperience() {
+        return this.experience;
+    }
+
+    /**
+     * Save the temporary changes to the {@link Experience} to the reference
+     * object.
+     */
+    @Override
     public void save() {
+        // Update the experience
         this.experience.setOrganization(organization.getText());
         this.experience.setLocation(location.getText());
         this.experience.setDate(date.getText());
         this.experience.setTitle(title.getText());
-        this.bulletComponent.save();
 
+        // Save the bullet list
+        this.bulletListEditor.save();
+
+        // Mark as no longer modified
         this.modified = false;
     }
 
+    @Override
     public boolean isModified() {
-        return this.modified || bulletComponent.isModified();
-    }
-
-    public Experience getExperience() {
-        return this.experience;
+        return this.modified || bulletListEditor.isModified();
     }
 }
