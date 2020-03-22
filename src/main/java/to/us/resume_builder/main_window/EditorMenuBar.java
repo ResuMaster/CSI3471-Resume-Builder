@@ -76,10 +76,10 @@ public class EditorMenuBar extends JMenuBar {
                 }
 
                 // Export Resume
-                controller.export(chosenFile);
+                boolean status = controller.export(chosenFile);
 
                 // Open the file if it exists
-                if (Files.exists(chosenFile)) {
+                if (status && Files.exists(chosenFile)) {
                     if (Desktop.isDesktopSupported()) {
                         try {
                             Desktop.getDesktop().open(chosenFile.toFile());

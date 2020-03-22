@@ -84,7 +84,7 @@ public class ResumeExporter {
         boolean status = compileResumePDF(latexPath);
 
         // Save the pdf to the specified location
-        Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
+        if (status) Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
 
         return status;
     }
@@ -122,6 +122,7 @@ public class ResumeExporter {
     private boolean compileResumePDF(Path filePath) throws IOException {
         // Temporary artifacts
         final String[] ARTIFACTS_TO_DELETE = { "aux", "log", "tex" };
+        boolean status = true;
 
         // Attempt to generate the resume
         try {
@@ -136,6 +137,7 @@ public class ResumeExporter {
             if (!p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
                 p.destroy();
                 JOptionPane.showMessageDialog(null, "Resume exporter took too long. Contact IT for additional assistance.");
+                status = false;
             }
 
             // Clean up artifacts
@@ -144,10 +146,10 @@ public class ResumeExporter {
                     Files.deleteIfExists(f.toPath());
                 }
             }
-
-            return true;
         } catch (InterruptedException e) {
-            return false;
+            status = false;
         }
+
+        return status;
     }
 }

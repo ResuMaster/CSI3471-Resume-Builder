@@ -30,12 +30,13 @@ public class MenuController {
         saveData(resume.getFilePath());
     }
 
-    public void export(Path path) {
+    public boolean export(Path path) {
         ResumeExporter r = new ResumeExporter(resume.getResume());
         try {
-            r.export(path);
+            return r.export(path);
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
