@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- *
  * @author Ashley Lu Couch
  */
 public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
@@ -106,12 +105,15 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 
+    @Override
     public void save() {
         this.modified = false;
 
         this.bulletC.getBulletList().clear();
 //        this.bulletC.getBulletList().addAll(((BulletComponentTableModel) table.getModel()).data);
-        ((BulletListEditorTableModel) this.table.getModel()).data.forEach(b -> this.bulletC.addBullet(b));
+        ((BulletListEditorTableModel) this.table.getModel()).data.stream().peek(b -> {
+            if (b.getText() == null) b.setText("");
+        }).forEach(b -> this.bulletC.addBullet(b));
     }
 
     @Override
