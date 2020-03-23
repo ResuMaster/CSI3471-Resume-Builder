@@ -64,7 +64,8 @@ public class EditorController {
      * @param id The ID of the new category to select.
      */
     public void loadCategory(String id) {
-        stage.showInEditor(resume.getCategoryByID(id));
+        if (!stage.showInEditor(resume.getCategoryByID(id)))
+            sideList.setFocus(stage.getEditID());
     }
 
     /**

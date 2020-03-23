@@ -18,7 +18,7 @@ public class EditorAddCategoryButton extends JButton {
     private static final String LABEL = "Add Category...";
     private static final String GET_TYPE_MESSAGE = "Select a category type:";
 
-    /** Controller which can add the category to the resume */
+    /** Controller which can add the category to the resume. */
     private EditorController controller;
 
     /**
@@ -51,6 +51,11 @@ public class EditorAddCategoryButton extends JButton {
                 null, values, values[0]);
     }
 
+    /**
+     * Registers the controller to alert of add category requests.
+     * 
+     * @param e The controller to contact.
+     */
     public void setController(EditorController e) {
         controller = e;
     }

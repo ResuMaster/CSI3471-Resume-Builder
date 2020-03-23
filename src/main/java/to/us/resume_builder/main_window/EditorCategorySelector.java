@@ -107,9 +107,14 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
      * @param newCat The category to add into the EditorCategorySelector
      */
     public void addCategory(Category newCat) {
-        if (newCat == null || idToCategory.get(newCat.getID()) != null)
+        if (newCat == null)
             return;
+        String newID = newCat.getID();
+        if (idToCategory.get(newID) != null)
+            return;
+
         model.addElement(newCat);
+        idToCategory.put(newID, newCat);
         revalidate();
     }
 
@@ -130,10 +135,14 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
      */
     public void setFocus(String id) {
         Category c;
-        if (id != null || (c = idToCategory.get(id)) == null)
+        if (id == null || (c = idToCategory.get(id)) == null)
             return;
 
+        // Temporarily disable list change listening while swapping selection
+        categories.removeListSelectionListener(this);
         categories.setSelectedIndex(model.indexOf(c));
+        categories.addListSelectionListener(this);
+        repaint();
     }
 
     /**
