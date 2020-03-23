@@ -3,11 +3,7 @@ package to.us.resume_builder.main_window;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import to.us.resume_builder.resume_components.category.Category;
 
@@ -57,7 +53,12 @@ public class EditorCategoryHeader extends JPanel {
         right = createActionPanel();
 
         // Connect GUI to actions and data
-        delete.addActionListener(e -> deleteHandle.delete());
+        delete.addActionListener(e -> {
+            int choice = JOptionPane.showConfirmDialog(this, "Are you sure you would like to delete this category?", "Confirm", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                deleteHandle.delete();
+            }
+        });
         updateHeader(startingCategory);
 
         // Assemble GUI
