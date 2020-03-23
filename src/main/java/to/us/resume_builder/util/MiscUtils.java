@@ -38,13 +38,13 @@ public final class MiscUtils {
             return "";
         } else {
             return s
-                .replaceAll("&", "\\\\&")
-                .replaceAll("#", "\\\\#")
-                .replaceAll("%", "\\\\%")
-                .replaceAll("\\{", "\\\\{")
-                .replaceAll("}", "\\\\}")
-                .replaceAll("_", "\\\\_")
-                .replaceAll("$", "\\\\$");
+                .replace("&", "\\&")
+                .replace("#", "\\#")
+                .replace("%", "\\%")
+                .replace("{", "\\{")
+                .replace("}", "\\}")
+                .replace("_", "\\_")
+                .replace("$", "\\$");
         }
     }
 }
