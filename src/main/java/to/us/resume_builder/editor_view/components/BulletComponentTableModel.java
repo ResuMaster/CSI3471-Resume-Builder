@@ -31,7 +31,8 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      * Adds a new Bullet ID to data initialized blank
      */
     public void addBullet(){
-        data.add(bulletC.getBulletByID(bulletC.addBullet()));
+//        data.add(bulletC.getBulletByID(bulletC.addBullet()));
+        data.add(new Bullet("YYY"));
     }
 
     /**
