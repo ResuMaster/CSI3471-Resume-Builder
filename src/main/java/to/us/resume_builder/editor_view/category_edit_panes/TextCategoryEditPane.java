@@ -20,13 +20,19 @@ import java.awt.event.ComponentEvent;
  * @author Micah Schiewe
  */
 public class TextCategoryEditPane extends CategoryEditPane {
+    /**
+     * Holds the Text Category information for this resume in the UI
+     */
     private JTextArea text;
+    /**
+     * The Text Category to display
+     */
     private TextCategory textCategory;
 
     /**
-     * Constructor for a Text Category Edit Pane
+     * Constructs a Text Category Edit Pane in a JPanel with a JTextArea that is editable
      * 
-     * @param tc the Text Category that is being edited through the edit pane
+     * @param tc the Text Category that is being display in the Edit Pane
      */
     public TextCategoryEditPane(TextCategory tc) {
         // Prepare to create UI
@@ -66,7 +72,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * Saves all changes made in Text Edit Pane
+     * Saves all changes made in the JTextArea to the Text Category
      */
     @Override
     public void save() {
@@ -74,7 +80,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * Determines if the current Category has been modified
+     * Determines if the current Text Category has been modified
      * @return boolean indicating whether the Category was edited
      */
     public boolean isModified() {

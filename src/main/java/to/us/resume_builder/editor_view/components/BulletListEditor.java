@@ -1,26 +1,29 @@
 package to.us.resume_builder.editor_view.components;
 
 import to.us.resume_builder.editor_view.IEncapsulatedEditor;
-import to.us.resume_builder.resume_components.Bullet;
 import to.us.resume_builder.resume_components.IBulletContainer;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- *
+ * Facilitates editing of a Bullet
  * @author Ashley Lu Couch
  */
-public class BulletComponent extends JPanel implements IEncapsulatedEditor {
+public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
+    /**
+     * A table which holds each bullet and its visibility
+     */
     private JTable table;
+    /**
+     * A boolean to indicate whether this Bullet Component had been changed
+     */
     private boolean modified;
+    /**
+     * An object which holds the Bullets of a Bullet Category or Experience Component
+     */
     private IBulletContainer bulletC;
 
     /**
@@ -29,7 +32,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
      *
      * @param bulletContainer The bullet container being edited.
      */
-    public BulletComponent(IBulletContainer bulletContainer) {
+    public BulletListEditor(IBulletContainer bulletContainer) {
         super(new BorderLayout());
 
         this.modified = false;
@@ -37,7 +40,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
 
         String[] columnNames = { "Visible", "Text" };
 
-        table = new JTable(new BulletComponentTableModel(new ArrayList<>(bulletContainer.getBulletList()), columnNames, bulletContainer));
+        table = new JTable(new BulletListEditorTableModel(new ArrayList<>(bulletContainer.getBulletList()), columnNames, bulletContainer));
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
@@ -60,7 +63,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         add.addActionListener(e -> {
             this.modified = true;
 
-            ((BulletComponentTableModel) table.getModel()).addBullet();
+            ((BulletListEditorTableModel) table.getModel()).addBullet();
             ((AbstractTableModel) table.getModel()).fireTableDataChanged();
         });
         buttonGroup.add(add);
@@ -70,7 +73,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
             int index = table.getSelectedRow();
             if (index != -1) {
                 this.modified = true;
-                ((BulletComponentTableModel) table.getModel()).removeBullet(index);
+                ((BulletListEditorTableModel) table.getModel()).removeBullet(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
             }
         });
@@ -81,7 +84,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
             int index = table.getSelectedRow();
             if (index != -1 && index != 0) {
                 this.modified = true;
-                ((BulletComponentTableModel) table.getModel()).moveUp(index);
+                ((BulletListEditorTableModel) table.getModel()).moveUp(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
                 table.setRowSelectionInterval(index - 1, index - 1);
             }
@@ -94,14 +97,14 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
             System.out.println(index);
             if (index != -1 && index + 1 != table.getRowCount()) {
                 this.modified = true;
-                ((BulletComponentTableModel) table.getModel()).moveDown(index);
+                ((BulletListEditorTableModel) table.getModel()).moveDown(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
                 table.setRowSelectionInterval(index + 1, index + 1);
             }
         });
         buttonGroup.add(moveDown);
 
-        this.table.getModel().addTableModelListener(e -> BulletComponent.this.modified = true);
+        this.table.getModel().addTableModelListener(e -> BulletListEditor.this.modified = true);
 
         buttonGroup.add(Box.createHorizontalGlue());
         this.add(buttonGroup, BorderLayout.PAGE_START);
@@ -112,14 +115,24 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 
+    /**
+     * Saves changes made in the Bullet UI to the given Bullet
+     */
+    @Override
     public void save() {
         this.modified = false;
 
         this.bulletC.getBulletList().clear();
 //        this.bulletC.getBulletList().addAll(((BulletComponentTableModel) table.getModel()).data);
-        ((BulletComponentTableModel) this.table.getModel()).data.forEach(b -> this.bulletC.addBullet(b));
+        ((BulletListEditorTableModel) this.table.getModel()).data.stream().peek(b -> {
+            if (b.getText() == null) b.setText("");
+        }).forEach(b -> this.bulletC.addBullet(b));
     }
 
+    /**
+     * Returns the status of the modified boolean
+     * @return a boolean indicating whether the Bullet Component had been edited
+     */
     @Override
     public boolean isModified() {
         return this.modified;

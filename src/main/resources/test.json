@@ -7,10 +7,10 @@
   "resume": {
     "category_list": [
       {
-        "link": null,
-        "email": null,
-        "phone_number": null,
-        "address": null,
+        "link": "http://resume-builder.us.to/",
+        "email": "john_cena@baylor.edu",
+        "phone_number": "222-222-2222",
+        "address": "9999 WWE Street\nWest Newbury, MA 02761",
         "type": "HEADER",
         "name": "john",
         "display_name": "cena",
@@ -18,7 +18,7 @@
         "visible": true
       },
       {
-        "text": null,
+        "text": "sample text",
         "type": "TEXT",
         "name": "noah",
         "display_name": "lee",

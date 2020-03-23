@@ -1,6 +1,8 @@
 package to.us.resume_builder.editor_view;
 
 /**
+ * This interface provides common {@link #save() save} and {@link #isModified()
+ * isModified} methods for editors.
  *
  * @author Matthew McCaskill
  */
@@ -13,6 +15,7 @@ public interface IEncapsulatedEditor {
 
     /**
      * Determines if the current Category has been modified
+     *
      * @return boolean indicating whether the Category was edited
      */
     boolean isModified();
