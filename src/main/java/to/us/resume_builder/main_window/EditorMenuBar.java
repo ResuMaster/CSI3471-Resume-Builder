@@ -37,7 +37,7 @@ public class EditorMenuBar extends JMenuBar {
      * exporting the data file, and to PDF.
      */
     public EditorMenuBar() {
-        file = new JMenu("File");
+        file = new JMenu("Export");
         file.add(exportDataFile = new JMenuItem("Export Data File"));
         file.add(exportResume = new JMenuItem("Export Resume"));
 
