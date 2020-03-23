@@ -40,32 +40,11 @@ public class EditorController {
             throw new IllegalArgumentException();
         }
         EditorController e = new EditorController();
-        e.stage = stage;
-        e.sideList = sideList;
-        e.resume = resume;
+        e.registerSideList(sideList);
+        e.registerStage(stage);
+        e.loadResume(resume);
+
         return e;
-    }
-
-    /**
-     * Links a new {@link EditorCategorySelector} with the
-     * {@link EditorController#stage current stage}.
-     * 
-     * @param sideList The new category selector
-     */
-    public void registerSideList(EditorCategorySelector sideList) {
-        this.sideList = sideList;
-        this.sideList.setController(this);
-    }
-
-    /**
-     * Links a new {@link EditorStage} with the {@link EditorController#sideList
-     * current category selector}.
-     * 
-     * @param stage The new editor
-     */
-    public void registerStage(EditorStage stage) {
-        this.stage = stage;
-        this.stage.setController(this);
     }
 
     /**
@@ -117,4 +96,27 @@ public class EditorController {
         sideList.setFocus(catID);
         stage.showInEditor(newCat);
     }
+
+    /**
+     * Links a new {@link EditorCategorySelector} with the
+     * {@link EditorController#stage current stage}.
+     * 
+     * @param sideList The new category selector
+     */
+    private void registerSideList(EditorCategorySelector sideList) {
+        this.sideList = sideList;
+        this.sideList.setController(this);
+    }
+
+    /**
+     * Links a new {@link EditorStage} with the {@link EditorController#sideList
+     * current category selector}.
+     * 
+     * @param stage The new editor
+     */
+    private void registerStage(EditorStage stage) {
+        this.stage = stage;
+        this.stage.setController(this);
+    }
 }
+

@@ -52,9 +52,10 @@ public class EditorFrame extends JFrame {
         stage = new EditorStage(resume.getCategoryList().get(0));
 
         // Create and connect controllers
-        EditorController controller = EditorController.create(stage, sideList, resume);
+        EditorController editorController = EditorController.create(stage, sideList, resume);
         MenuController menuController = new MenuController(r);
-        registerControllers(controller, menuController);
+        addButton.setController(editorController);
+        menuBar.setController(menuController);
 
         // Assemble side panel
         JPanel selectorPanel = new JPanel(new BorderLayout());
@@ -69,19 +70,5 @@ public class EditorFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setVisible(true);
-    }
-
-    /**
-     * Register the controller for the menu bar, side list, and stage using the
-     * provided controllers.
-     *
-     * @param e The controller for the Editor
-     * @param m The controller for the Menu Bar.
-     */
-    public void registerControllers(EditorController e, MenuController m) {
-        menuBar.setController(m);
-        addButton.setController(e);
-        e.registerSideList(sideList);
-        e.registerStage(stage);
     }
 }
