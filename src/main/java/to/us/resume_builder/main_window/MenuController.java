@@ -56,13 +56,16 @@ public class MenuController {
      * resume} as a formatted pdf, ready to upload to a job.
      * 
      * @param path The location to save the pdf to.
+     *
+     * @return Whether or not the exporter succeeded.
      */
-    public void export(String path) {
+    public boolean export(Path path) {
         ResumeExporter r = new ResumeExporter(resume.getResume());
         try {
-            r.export(Path.of(path));
+            return r.export(path);
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
