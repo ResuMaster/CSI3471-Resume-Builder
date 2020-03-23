@@ -9,11 +9,21 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
+ * Facilitates editing of a Bullet
  * @author Ashley Lu Couch
  */
 public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
+    /**
+     * A table which holds each bullet and its visibility
+     */
     private JTable table;
+    /**
+     * A boolean to indicate whether this Bullet Component had been changed
+     */
     private boolean modified;
+    /**
+     * An object which holds the Bullets of a Bullet Category or Experience Component
+     */
     private IBulletContainer bulletC;
 
     /**
@@ -105,6 +115,9 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         this.setBackground(Color.RED.brighter().brighter().brighter());
     }
 
+    /**
+     * Saves changes made in the Bullet UI to the given Bullet
+     */
     @Override
     public void save() {
         this.modified = false;
@@ -116,6 +129,10 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         }).forEach(b -> this.bulletC.addBullet(b));
     }
 
+    /**
+     * Returns the status of the modified boolean
+     * @return a boolean indicating whether the Bullet Component had been edited
+     */
     @Override
     public boolean isModified() {
         return this.modified;

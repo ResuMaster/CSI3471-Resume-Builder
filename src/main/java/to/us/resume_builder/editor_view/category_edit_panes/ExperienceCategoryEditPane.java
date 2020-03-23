@@ -185,8 +185,8 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * Save the temporary changes to the {@link ExperienceCategory} to the reference
-     * object.
+     * Save the temporary changes to the {@link ExperienceCategory} to the
+     * reference object.
      */
     @Override
     public void save() {
@@ -204,7 +204,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
     /**
      * Determine if the current {@link ExperienceCategory} has been modified.
      *
-     * @return Whether or not the {@link ExperienceCategory} was edited.
+     * @return boolean indicating whether the Experience Category was edited
      */
     public boolean isModified() {
         return this.modified || this.experienceComponentList.stream().anyMatch(ExperienceEditor::isModified);

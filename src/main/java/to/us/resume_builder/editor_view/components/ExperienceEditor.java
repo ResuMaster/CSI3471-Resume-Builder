@@ -13,14 +13,30 @@ import java.awt.*;
  * This class is an editor for individual experiences.
  *
  * @author Matthew McCaskill
- * @author Brooklyn Stone
+ * @author Brooklynn Stone
  */
 public class ExperienceEditor extends JPanel implements IEncapsulatedEditor {
     // Individual editor components
+    /**
+     * A text field to edit the Experience's organization.
+     */
     private JTextField organization;
+    /**
+     * A text field to edit the Experience's location.
+     */
     private JTextField location;
+    /**
+     * A text field to edit the Experience's date.
+     */
     private JTextField date;
+    /**
+     * A text field to edit the Experience's title.
+     */
     private JTextField title;
+
+    /**
+     * The bullet list associated with the Experience.
+     */
     private BulletListEditor bulletListEditor;
 
     /**
