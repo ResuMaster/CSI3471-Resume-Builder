@@ -54,7 +54,8 @@ public class EditorCategoryHeader extends JPanel {
 
         // Connect GUI to actions and data
         delete.addActionListener(e -> {
-            int choice = JOptionPane.showConfirmDialog(this, "Are you sure you would like to delete this category?", "Confirm", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this, 
+                "Are you sure you would like to delete this category?", "Confirm", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 deleteHandle.delete();
             }
