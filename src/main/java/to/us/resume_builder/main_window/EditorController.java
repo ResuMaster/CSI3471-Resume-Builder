@@ -1,6 +1,8 @@
 package to.us.resume_builder.main_window;
 
 import to.us.resume_builder.resume_components.Resume;
+import to.us.resume_builder.resume_components.category.Category;
+import to.us.resume_builder.resume_components.category.CategoryType;
 
 /**
  * The main controller for the editor interface. Connects the
@@ -94,5 +96,25 @@ public class EditorController {
      */
     public void removeCategory(String id) {
         sideList.removeCategory(id);
+    }
+
+    /**
+     * Adds a category of the specified type to the resume, updating the UI to
+     * acknowledge this change.
+     * 
+     * @param type The type of category to add to the resume.
+     */
+    public void addCategory(CategoryType type) {
+        String catID = resume.createCategory(type);
+        Category newCat = resume.getCategoryByID(catID);
+
+        // Initialize category
+        newCat.setName("New " + type.toString());
+        newCat.setDisplayName(type.toString());
+
+        // Register and display category
+        sideList.addCategory(newCat);
+        sideList.setFocus(catID);
+        stage.showInEditor(newCat);
     }
 }
