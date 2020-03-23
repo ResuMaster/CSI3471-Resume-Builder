@@ -43,7 +43,8 @@ public final class MiscUtils {
                 .replaceAll("%", "\\\\%")
                 .replaceAll("\\{", "\\\\{")
                 .replaceAll("}", "\\\\}")
-                .replaceAll("_", "\\\\_");
+                .replaceAll("_", "\\\\_")
+                .replaceAll("$", "\\\\$");
         }
     }
 }
