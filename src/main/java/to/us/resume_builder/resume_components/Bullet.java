@@ -18,7 +18,7 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
      */
     public Bullet(String id) {
         super(id);
-        this.text = "";
+//        this.text = "";
     }
 
     /**

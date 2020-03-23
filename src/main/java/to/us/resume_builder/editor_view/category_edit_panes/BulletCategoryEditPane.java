@@ -1,6 +1,6 @@
 package to.us.resume_builder.editor_view.category_edit_panes;
 
-import to.us.resume_builder.editor_view.components.BulletComponent;
+import to.us.resume_builder.editor_view.components.BulletListEditor;
 import to.us.resume_builder.resume_components.category.BulletCategory;
 
 import java.awt.*;
@@ -11,19 +11,17 @@ import java.awt.*;
  * @author Ashley Lu Couch
  */
 public class BulletCategoryEditPane extends CategoryEditPane {
-    /**
-     * The Bullet Component held by the Bullet Category to be displayed in the UI
-     */
-    private BulletComponent bulletComponent;
+    private BulletListEditor bulletListEditor;
+
     /**
      * Creates a Bullet Category edit pane displaying the bullet component
      * @param category the Bullet Category to display in the JPanel
      */
     public BulletCategoryEditPane(BulletCategory category) {
         this.setLayout(new BorderLayout());
-        bulletComponent = new BulletComponent(category);
+        bulletListEditor = new BulletListEditor(category);
 
-        add(bulletComponent, BorderLayout.CENTER);
+        add(bulletListEditor, BorderLayout.CENTER);
     }
 
     /**
@@ -32,7 +30,7 @@ public class BulletCategoryEditPane extends CategoryEditPane {
      */
     @Override
     public void save() {
-        bulletComponent.save();
+        bulletListEditor.save();
     }
 
     /**
@@ -40,6 +38,6 @@ public class BulletCategoryEditPane extends CategoryEditPane {
      * @return boolean indicating whether the Bullet Category was edited
      */
     public boolean isModified() {
-        return bulletComponent.isModified();
+        return bulletListEditor.isModified();
     }
 }

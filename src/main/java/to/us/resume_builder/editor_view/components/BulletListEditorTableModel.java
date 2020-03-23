@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Ashley Lu Couch
  */
-public class BulletComponentTableModel extends AbstractTableModel implements TableModel {
+public class BulletListEditorTableModel extends AbstractTableModel implements TableModel {
     /**
      * A list of each bullet to be displayed in the TableModel
      */
@@ -23,23 +23,25 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      */
     String[] columnNames;
     /**
-     * An object which holds the Bullets of a Bullet Category or Experience Component
+     * An object which holds the Bullets of a Bullet Category or Experience
+     * Component
      */
     IBulletContainer bulletC;
 
     /**
      * Adds a new Bullet ID to data initialized blank
      */
-    public void addBullet(){
+    public void addBullet() {
 //        data.add(bulletC.getBulletByID(bulletC.addBullet()));
         data.add(new Bullet("YYY"));
     }
 
     /**
      * Removes a Bullet from data by the index in the Bullet list
+     *
      * @param index the index of the Bullet to remove
      */
-    public void removeBullet(int index){
+    public void removeBullet(int index) {
         data.remove(index);
     }
 
@@ -67,7 +69,7 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      * @param data        The data to fill the table with.
      * @param columnNames The names for the columns.
      */
-    public BulletComponentTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
+    public BulletListEditorTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
         this.columnNames = columnNames;
         this.data = data;
         this.bulletC = bulletC;
