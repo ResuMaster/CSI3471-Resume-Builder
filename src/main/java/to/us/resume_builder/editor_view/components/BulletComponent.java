@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Ashley Lu Couch
+ * @author Matthew McCaskill
  */
 public class BulletComponent extends JPanel implements IEncapsulatedEditor {
     private JTable table;
@@ -37,7 +37,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
 
         String[] columnNames = { "Visible", "Text" };
 
-        table = new JTable(new BulletComponentTableModel(new ArrayList<>(bulletContainer.getBulletList()), columnNames, bulletContainer));
+        table = new JTable(new BulletComponentTableModel(columnNames, bulletContainer));
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
@@ -53,6 +53,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
 
         JScrollPane scrollPane = new JScrollPane(table);
 
+        // add a button to add a bullet
         JPanel buttonGroup = new JPanel();
         buttonGroup.setLayout(new BoxLayout(buttonGroup, BoxLayout.LINE_AXIS));
         buttonGroup.add(Box.createHorizontalGlue());
@@ -65,6 +66,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         });
         buttonGroup.add(add);
 
+        // add a button to remove a selected bullet
         JButton remove = new JButton("Remove Bullet");
         remove.addActionListener(e -> {
             int index = table.getSelectedRow();
@@ -76,6 +78,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         });
         buttonGroup.add(remove);
 
+        // add a button to move a bullet up
         JButton moveUp = new JButton("Move Selected Up");
         moveUp.addActionListener(e -> {
             int index = table.getSelectedRow();
@@ -88,6 +91,7 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
         });
         buttonGroup.add(moveUp);
 
+        // add a button to move a bullet down
         JButton moveDown = new JButton("Move Selected Down");
         moveDown.addActionListener(e -> {
             int index = table.getSelectedRow();
@@ -108,8 +112,8 @@ public class BulletComponent extends JPanel implements IEncapsulatedEditor {
 
         this.add(scrollPane, BorderLayout.CENTER);
 
-        this.setPreferredSize(new Dimension(200, 175));
-        this.setBackground(Color.RED.brighter().brighter().brighter());
+        // To make it not scroll by default
+        this.setPreferredSize(new Dimension(650, 400));
     }
 
     public void save() {

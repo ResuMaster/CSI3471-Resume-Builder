@@ -9,20 +9,52 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author Ashley Lu Couch
  */
 public class BulletComponentTableModel extends AbstractTableModel implements TableModel {
 
-    List<Bullet> data;
-    String[] columnNames;
-    IBulletContainer bulletC;
+    /**
+     * The List of bullets to fill the table with.
+     */
+    protected List<Bullet> data;
 
-    public void addBullet(){
+    /**
+     * The list of strings to be at the top of table.
+     */
+    private String[] columnNames;
+
+    /**
+     * The IBulletContainer for this instance, used to get the bullet list and
+     * add a bullet.
+     */
+    private IBulletContainer bulletC;
+
+    /**
+     * Creates a TableModel for a BulletComponent.
+     *
+     * @param columnNames The names for the columns.
+     * @param bulletC     The IBulletContainer for this instance. Used to also
+     *                    get the data to fill the table with.
+     */
+    public BulletComponentTableModel(String[] columnNames, IBulletContainer bulletC) {
+        this.columnNames = columnNames;
+        this.data = bulletC.getBulletList();
+        this.bulletC = bulletC;
+    }
+
+    /**
+     * Adds a bullet to data.
+     */
+    public void addBullet() {
         data.add(bulletC.getBulletByID(bulletC.addBullet()));
     }
 
-    public void removeBullet(int index){
+    /**
+     * Removes a selected bullet from data.
+     *
+     * @param index The index for the bullet to remove.
+     */
+    public void removeBullet(int index) {
         data.remove(index);
     }
 
@@ -42,18 +74,6 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
      */
     public void moveDown(int index) {
         Collections.swap(data, index, index + 1);
-    }
-
-    /**
-     * Creates a TableModel for a BulletComponent.
-     *
-     * @param data        The data to fill the table with.
-     * @param columnNames The names for the columns.
-     */
-    public BulletComponentTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
-        this.columnNames = columnNames;
-        this.data = data;
-        this.bulletC = bulletC;
     }
 
     /**
