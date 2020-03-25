@@ -1,6 +1,6 @@
 package to.us.resume_builder.editor_view.category_edit_panes;
 
-import to.us.resume_builder.editor_view.components.ExperienceComponent;
+import to.us.resume_builder.editor_view.components.ExperienceEditor;
 import to.us.resume_builder.resume_components.Experience;
 import to.us.resume_builder.resume_components.category.ExperienceCategory;
 
@@ -11,34 +11,62 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
+ * This class is an editor pane for experience categories.
  *
  * @author Matthew McCaskill
  */
 public class ExperienceCategoryEditPane extends CategoryEditPane {
-    private List<ExperienceComponent> experienceComponentList;
-    private List<Experience> ref;
+    /**
+     * The list of {@link Experience} editors.
+     */
+    private List<ExperienceEditor> experienceComponentList;
+
+    /**
+     * A reference to the {@link ExperienceCategory} being edited.
+     */
+    private ExperienceCategory ref;
+
+    /**
+     * The panel containing the list of {@link ExperienceEditor
+     * ExperienceComponents}.
+     */
     private JPanel experienceList;
+
+    /**
+     * Boolean flag to determine whether the category has been edited.
+     */
     private boolean modified;
 
+    /**
+     * Constructs an <code>ExperienceCategoryEditPane</code> corresponding to an
+     * {@link ExperienceCategory}.
+     *
+     * @param ec The {@link ExperienceCategory} to edit.
+     */
     public ExperienceCategoryEditPane(ExperienceCategory ec) {
-        this.ref = ec.getExperienceList();
+        // Initialize fields
+        this.ref = ec;
         this.experienceComponentList = new ArrayList<>();
         this.modified = false;
 
+        // Set the layout of this JPanel
         this.setLayout(new BorderLayout());
 
+        // Add Experience button
         JButton addButton = new JButton("Add Experience");
-        addButton.addActionListener(e-> {
+        addButton.addActionListener(e -> {
+            // Mark this component as modified
             this.modified = true;
 
-            this.experienceComponentList.add(new ExperienceComponent(ec.getExperienceByID(ec.addExperience())));
+            // Add an experience editor to the view
+            this.experienceComponentList.add(new ExperienceEditor(new Experience("XXX")));
             this.updateExperienceListUI();
         });
         this.add(addButton, BorderLayout.PAGE_START);
 
+        // Create the ExperienceEditor container
         this.experienceList = new JPanel() {
             @Override
             public Dimension getMaximumSize() {
@@ -47,90 +75,109 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
         };
         experienceList.setLayout(new BoxLayout(experienceList, BoxLayout.PAGE_AXIS));
 
-        this.ref.forEach(e -> experienceComponentList.add(new ExperienceComponent(e)));
-
+        // Create the ExperienceEditors
+        this.ref.getExperienceList().forEach(e -> experienceComponentList.add(new ExperienceEditor(e)));
         updateExperienceListUI();
 
+        // Create a wrapper panel for the ExperienceEditors to push them to the top of the panel
         JPanel wrapper = new JPanel(new BorderLayout());
         wrapper.add(experienceList, BorderLayout.PAGE_START);
 
+        // Create the ExperienceEditor scroll pane
         JScrollPane scrollPane = new JScrollPane(wrapper);
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
-    @Override
-    public void save() {
-        this.experienceComponentList.forEach(ExperienceComponent::save);
-
-        this.ref.clear();
-        this.ref.addAll(this.experienceComponentList.stream().map(ExperienceComponent::getExperience).collect(Collectors.toList()));
-        this.modified = false;
-    }
-
+    /**
+     * Update and repaint the experience editor list.
+     */
     public void updateExperienceListUI() {
+        // Clear the list
         experienceList.removeAll();
 
+        // Create the experience editor wrapper and controls
         for (int i = 0; i < experienceComponentList.size(); i++) {
+            // Create a final int for use in the lambdas
             final int index = i;
-            ExperienceComponent ec = experienceComponentList.get(i);
 
+            // Get the ExperienceEditor to be wrapped
+            ExperienceEditor ec = experienceComponentList.get(i);
+
+            // Create the experience panel
             JPanel experiencePanel = new JPanel();
             experiencePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
             experiencePanel.setLayout(new BoxLayout(experiencePanel, BoxLayout.PAGE_AXIS));
 
+            // Create the control buttons panel
             JPanel controlButtons = new JPanel();
             controlButtons.setLayout(new BoxLayout(controlButtons, BoxLayout.LINE_AXIS));
 
-            // Visibility
+            // Visibility checkbox
             JCheckBox visibilityControl = new JCheckBox("Visible", true);
             visibilityControl.addItemListener(evt -> {
+                // Mark this component as modified
                 this.modified = true;
 
+                // Store the visibility state
                 ec.getExperience().setVisible(evt.getStateChange() == ItemEvent.SELECTED);
             });
             controlButtons.add(visibilityControl);
 
-            // Remove experience
+            // Remove Experience button
             JButton removeControl = new JButton("Remove Experience");
             removeControl.addActionListener(evt -> {
+                // Mark this component as modified
                 this.modified = true;
 
+                // Remove the specified experience and update the UI
                 this.experienceComponentList.remove(ec);
                 experienceList.remove(experiencePanel);
                 experienceList.updateUI();
             });
             controlButtons.add(removeControl);
 
+            // Add a spacer
             controlButtons.add(Box.createHorizontalGlue());
 
-            // Move up
+            // Move Up button
             JButton moveUpControl = new JButton("▲");
             moveUpControl.addActionListener(evt -> {
-                this.modified = true;
-
                 if (index > 0) {
-                    Collections.swap(this.experienceComponentList, index - 1, index);
-                }
+                    // Mark this component as modified
+                    this.modified = true;
 
-                updateExperienceListUI();
+                    // Move up if possible
+                    Collections.swap(this.experienceComponentList, index - 1, index);
+
+                    // Repaint the UI
+                    updateExperienceListUI();
+                }
             });
             controlButtons.add(moveUpControl);
 
-            // Move down
+            // Move Down button
             JButton moveDownControl = new JButton("▼");
             moveDownControl.addActionListener(evt -> {
                 if (index < this.experienceComponentList.size() - 1) {
+                    // Mark this component as modified
+                    this.modified = true;
+
+                    // Move down if possible
+
                     Collections.swap(this.experienceComponentList, index + 1, index);
-                    experienceList.updateUI();
+
+                    // Repaint the UI
+                    updateExperienceListUI();
                 }
 
-                updateExperienceListUI();
             });
             controlButtons.add(moveDownControl);
 
+            // Add the internal panels to the wrapper
             experiencePanel.add(controlButtons);
             experiencePanel.add(ec);
 
+            // Add the experience panel to the list
             experienceList.add(experiencePanel);
         }
 
@@ -138,10 +185,28 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * Determines if the current Category has been modified
-     * @return boolean indicating whether the Category was edited
+     * Save the temporary changes to the {@link ExperienceCategory} to the
+     * reference object.
+     */
+    @Override
+    public void save() {
+        // Save each experience
+        this.experienceComponentList.forEach(ExperienceEditor::save);
+
+        // Update the experience list
+        this.ref.getExperienceList().clear();
+        this.experienceComponentList.forEach(e -> this.ref.addExperience(e.getExperience()));
+
+        // Mark as no longer modified
+        this.modified = false;
+    }
+
+    /**
+     * Determine if the current {@link ExperienceCategory} has been modified.
+     *
+     * @return boolean indicating whether the Experience Category was edited
      */
     public boolean isModified() {
-        return this.modified || this.experienceComponentList.stream().anyMatch(ExperienceComponent::isModified);
+        return this.modified || this.experienceComponentList.stream().anyMatch(ExperienceEditor::isModified);
     }
 }
