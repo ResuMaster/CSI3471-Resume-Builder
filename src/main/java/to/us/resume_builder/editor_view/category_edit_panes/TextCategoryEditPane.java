@@ -15,7 +15,7 @@ import java.awt.event.ComponentEvent;
 
 /**
  * Facilitates editing of the TextCategory resume component.
- * 
+ *
  * @author Brooklynn Stone
  * @author Micah Schiewe
  */
@@ -25,7 +25,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
 
     /**
      * Constructor for a Text Category Edit Pane
-     * 
+     *
      * @param tc the Text Category that is being edited through the edit pane
      */
     public TextCategoryEditPane(TextCategory tc) {
@@ -35,20 +35,20 @@ public class TextCategoryEditPane extends CategoryEditPane {
         textCategory = tc;
 
         // Create UI parts
-        JLabel label = new JLabel("Text:");
+//        JLabel label = new JLabel("Text:");
         text = new JTextArea(tc.getText());
         text.setWrapStyleWord(true);
         text.setLineWrap(true);
 
 
         // Add label to panel
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0;
-        gbc.weighty = 0;
-        add(label, gbc);
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        gbc.gridwidth = 1;
+//        gbc.gridheight = 1;
+//        gbc.weightx = 0;
+//        gbc.weighty = 0;
+//        add(label, gbc);
 
         // Create text area's size moderator
         TextFieldWidthModerator mod = new TextFieldWidthModerator(text);
@@ -75,18 +75,19 @@ public class TextCategoryEditPane extends CategoryEditPane {
 
     /**
      * Determines if the current Category has been modified
+     *
      * @return boolean indicating whether the Category was edited
      */
     public boolean isModified() {
-        if(textCategory.getText().equals(text.getText()))
+        if (textCategory.getText().equals(text.getText()))
             return false;
         return true;
     }
 
     /**
-     * Monitors a JTextArea and re-sizes it to fill the amount of horizontal space
-     * required by its parent component.
-     * 
+     * Monitors a JTextArea and re-sizes it to fill the amount of horizontal
+     * space required by its parent component.
+     *
      * @author Micah
      */
     private class TextFieldWidthModerator extends ComponentAdapter implements DocumentListener {
@@ -118,8 +119,8 @@ public class TextCategoryEditPane extends CategoryEditPane {
         }
 
         /**
-         * Updates the size of the monitored JTextArea to make it fill only as much
-         * horizontal space as its parent component decides for it.
+         * Updates the size of the monitored JTextArea to make it fill only as
+         * much horizontal space as its parent component decides for it.
          */
         private void updateMonitoredSize() {
             int prefHeight = (int) monitored.getMinimumSize().getHeight();
