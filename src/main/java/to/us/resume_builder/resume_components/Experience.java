@@ -182,6 +182,28 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
     }
 
     /**
+     * Copy a new bullet for bullets list with a random generated id.
+     *
+     * @return The id created for the new bullet.
+     */
+    public String addBullet(Bullet b) {
+        String id;
+        do {
+            // generate id with current id in the front
+            Random rand = new Random();
+            id = this.id + "." + rand.nextInt(1000);
+        } while (checkBulletListID(id));
+
+        Bullet copy = new Bullet(id);
+        copy.setText(b.getText());
+        copy.setVisible(b.getVisible());
+
+        // add new element to bullets
+        bullets.add(copy);
+        return id;
+    }
+
+    /**
      * Removes the list item that matches the id.
      *
      * @param id the ID used to find the Bullet to remove.

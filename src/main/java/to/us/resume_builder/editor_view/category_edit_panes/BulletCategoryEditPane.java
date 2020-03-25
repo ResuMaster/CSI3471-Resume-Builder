@@ -1,37 +1,43 @@
 package to.us.resume_builder.editor_view.category_edit_panes;
 
-import to.us.resume_builder.editor_view.components.BulletComponent;
+import to.us.resume_builder.editor_view.components.BulletListEditor;
 import to.us.resume_builder.resume_components.category.BulletCategory;
 
 import java.awt.*;
 
 /**
+ * Facilitates editing of the BulletCategory resume component.
  *
  * @author Ashley Lu Couch
  */
 public class BulletCategoryEditPane extends CategoryEditPane {
-    private BulletComponent bulletComponent;
+    private BulletListEditor bulletListEditor;
+
     /**
-     * Creates a Bullet Category pane to see
-     * @param category the category to display in the JPanel
+     * Creates a Bullet Category edit pane displaying the bullet component
+     * @param category the Bullet Category to display in the JPanel
      */
     public BulletCategoryEditPane(BulletCategory category) {
         this.setLayout(new BorderLayout());
-        bulletComponent = new BulletComponent(category);
+        bulletListEditor = new BulletListEditor(category);
 
-        add(bulletComponent, BorderLayout.CENTER);
-    }
-
-    @Override
-    public void save() {
-        bulletComponent.save();
+        add(bulletListEditor, BorderLayout.CENTER);
     }
 
     /**
-     * Determines if the current Category has been modified
-     * @return boolean indicating whether the Category was edited
+     * Saves the information currently in the Bullet Component in the UI
+     * to the Bullet Category
+     */
+    @Override
+    public void save() {
+        bulletListEditor.save();
+    }
+
+    /**
+     * Determines if the current Bullet Category has been modified
+     * @return boolean indicating whether the Bullet Category was edited
      */
     public boolean isModified() {
-        return bulletComponent.isModified();
+        return bulletListEditor.isModified();
     }
 }

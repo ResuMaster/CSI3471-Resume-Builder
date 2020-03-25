@@ -9,50 +9,38 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Custom table model for a list of Bullets
+ *
  * @author Ashley Lu Couch
  */
-public class BulletComponentTableModel extends AbstractTableModel implements TableModel {
-
+public class BulletListEditorTableModel extends AbstractTableModel implements TableModel {
     /**
-     * The List of bullets to fill the table with.
+     * A list of each bullet to be displayed in the TableModel
      */
-    protected List<Bullet> data;
-
+    List<Bullet> data;
     /**
-     * The list of strings to be at the top of table.
+     * An array of Strings indicating each column names
      */
-    private String[] columnNames;
-
+    String[] columnNames;
     /**
-     * The IBulletContainer for this instance, used to get the bullet list and
-     * add a bullet.
+     * An object which holds the Bullets of a Bullet Category or Experience
+     * Component
      */
-    private IBulletContainer bulletC;
+    IBulletContainer bulletC;
 
     /**
-     * Creates a TableModel for a BulletComponent.
-     *
-     * @param columnNames The names for the columns.
-     * @param bulletC     The IBulletContainer for this instance. Used to also
-     *                    get the data to fill the table with.
-     */
-    public BulletComponentTableModel(String[] columnNames, IBulletContainer bulletC) {
-        this.columnNames = columnNames;
-        this.data = bulletC.getBulletList();
-        this.bulletC = bulletC;
-    }
-
-    /**
-     * Adds a bullet to data.
+     * Adds a new Bullet ID to data initialized blank
      */
     public void addBullet() {
-        data.add(bulletC.getBulletByID(bulletC.addBullet()));
+//        data.add(bulletC.getBulletByID(bulletC.addBullet()));
+        data.add(new Bullet("YYY"));
     }
 
     /**
-     * Removes a selected bullet from data.
+     * Removes a Bullet from data by the index in the Bullet list
      *
-     * @param index The index for the bullet to remove.
+     * @param index the index of the Bullet to remove
+>>>>>>> master:src/main/java/to/us/resume_builder/editor_view/components/BulletListEditorTableModel.java
      */
     public void removeBullet(int index) {
         data.remove(index);
@@ -61,7 +49,7 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     /**
      * Move a given bullet up one position.
      *
-     * @param index The index of the one to move up.
+     * @param index The index of the Bullet to move up.
      */
     public void moveUp(int index) {
         Collections.swap(data, index, index - 1);
@@ -70,10 +58,22 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     /**
      * Move a given bullet down one position.
      *
-     * @param index The index of the one to move down.
+     * @param index The index of the Bullet to move down.
      */
     public void moveDown(int index) {
         Collections.swap(data, index, index + 1);
+    }
+
+    /**
+     * Creates a TableModel for a BulletComponent.
+     *
+     * @param data        The data to fill the table with.
+     * @param columnNames The names for the columns.
+     */
+    public BulletListEditorTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
+        this.columnNames = columnNames;
+        this.data = data;
+        this.bulletC = bulletC;
     }
 
     /**
@@ -104,13 +104,11 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     }
 
     /**
-     * Returns a default name for the column using spreadsheet conventions: A,
-     * B, C, ... Z, AA, AB, etc.  If <code>column</code> cannot be found,
-     * returns an empty string.
+     * Returns the column name from the column names array
      *
      * @param column the column being queried
      *
-     * @return a string containing the default name of <code>column</code>
+     * @return a string containing the name of <code>column</code>
      */
     @Override
     public String getColumnName(int column) {
@@ -118,11 +116,12 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     }
 
     /**
-     * Returns <code>Object.class</code> regardless of <code>columnIndex</code>.
+     * Returns <code>Boolean.class</code> or <code>String.class</code> if the
+     * index is 0 or 1 respectively.
      *
      * @param columnIndex the column being queried
      *
-     * @return the Object.class
+     * @return Boolean if columnIndex = 0 or String if columnIndex = 1
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -136,12 +135,12 @@ public class BulletComponentTableModel extends AbstractTableModel implements Tab
     }
 
     /**
-     * Returns false.  This is the default implementation for all cells.
+     * Returns true so that all cells are editable
      *
      * @param rowIndex    the row being queried
      * @param columnIndex the column being queried
      *
-     * @return false
+     * @return true
      */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {

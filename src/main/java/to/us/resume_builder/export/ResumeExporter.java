@@ -6,11 +6,14 @@ import to.us.resume_builder.resume_components.ResumeComponent;
 import to.us.resume_builder.resume_components.category.Category;
 import to.us.resume_builder.util.MiscUtils;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
@@ -81,7 +84,7 @@ public class ResumeExporter {
         boolean status = compileResumePDF(latexPath);
 
         // Save the pdf to the specified location
-        Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
+        if (status) Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
 
         return status;
     }
@@ -119,6 +122,7 @@ public class ResumeExporter {
     private boolean compileResumePDF(Path filePath) throws IOException {
         // Temporary artifacts
         final String[] ARTIFACTS_TO_DELETE = { "aux", "log", "tex" };
+        boolean status = true;
 
         // Attempt to generate the resume
         try {
@@ -127,19 +131,25 @@ public class ResumeExporter {
             // TODO: add dedicated log file
             builder.redirectOutput(new File("./export.log"));
             builder.redirectError(new File("./export.log"));
-            Process p = builder.start();
-            // TODO: add config option for this
-            p.waitFor(30L, TimeUnit.SECONDS);
 
-            // Clean up artifacts
-            // TODO: have way to clean up rest of artifacts
-            for (String extension : ARTIFACTS_TO_DELETE) {
-                Files.deleteIfExists(filePath.resolveSibling(filePath.getFileName().toString().split("\\.")[0] + "." + extension));
+            // Run the process
+            Process p = builder.start();
+            if (!p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
+                p.destroy();
+                JOptionPane.showMessageDialog(null, "Resume exporter took too long. Contact IT for additional assistance.");
+                status = false;
             }
 
-            return true;
+            // Clean up artifacts
+            for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
+                if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
+                    Files.deleteIfExists(f.toPath());
+                }
+            }
         } catch (InterruptedException e) {
-            return false;
+            status = false;
         }
+
+        return status;
     }
 }
