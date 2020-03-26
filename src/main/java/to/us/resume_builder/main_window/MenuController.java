@@ -3,6 +3,8 @@ package to.us.resume_builder.main_window;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import javax.swing.JOptionPane;
+
 import to.us.resume_builder.export.ResumeExporter;
 import to.us.resume_builder.file.ResumeFile;
 import to.us.resume_builder.file.ResumeFileManager;
@@ -37,8 +39,10 @@ public class MenuController {
     public void saveData(String path) {
         try {
             ResumeFileManager.exportFile(resume, path);
+            JOptionPane.showMessageDialog(null, "Export successful!");
         } catch (IOException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Export failed; please contact IT for assistance.");
         }
     }
 
