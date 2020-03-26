@@ -129,7 +129,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         if(headerCategory.getLink().equals(fields[0].getText()) &&
             headerCategory.getEmail().equals(fields[1].getText()) &&
             headerCategory.getPhoneNumber().equals(fields[2].getText()) &&
-            headerCategory.getAddress().equals(address.getText()) )
+            headerCategory.getAddress().equals(address.getText()))
             return false;
         return true;
     }

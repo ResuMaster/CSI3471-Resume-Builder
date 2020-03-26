@@ -1,7 +1,6 @@
 package to.us.resume_builder.main_window;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -120,7 +119,14 @@ public class EditorCategoryHeader extends JPanel {
      */
     private JPanel createLabelPanel() {
         // Set up return panel
-        JPanel left = new JPanel();
+        JPanel left = new JPanel(new GridBagLayout());
+        GridBagConstraints grid = new GridBagConstraints();
+        grid.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel displayNameLabel = new JLabel("Display Name: ", SwingConstants.LEFT);
+        JLabel nickNameLabel = new JLabel("Name: ", SwingConstants.LEFT);
+        displayNameLabel.setLabelFor(displayName);
+        nickNameLabel.setLabelFor(name);
 
         // Create display name field
         displayName = new JTextField(NUM_COLS);
@@ -130,10 +136,20 @@ public class EditorCategoryHeader extends JPanel {
         name = new JTextField(NUM_COLS);
         name.setEditable(true);
 
-        // Finalize and return component
-        left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
-        left.add(displayName);
-        left.add(name);
+        grid.gridx = 0;
+        grid.gridy = 0;
+        left.add(displayNameLabel, grid);
+
+        grid.gridy = 1;
+        left.add(nickNameLabel, grid);
+
+        grid.gridwidth = 2;
+        grid.gridx = 1;
+        grid.gridy = 0;
+        left.add(displayName, grid);
+        grid.gridy = 1;
+        left.add(name, grid);
+
         return left;
     }
 
