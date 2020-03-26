@@ -68,7 +68,7 @@ public class EditorFrame extends JFrame {
         add(selectorPanel, BorderLayout.WEST);
         add(stage, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(900, 700);
         setVisible(true);
     }
 }

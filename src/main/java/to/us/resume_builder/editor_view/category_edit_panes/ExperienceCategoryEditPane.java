@@ -74,6 +74,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
             }
         };
         experienceList.setLayout(new BoxLayout(experienceList, BoxLayout.PAGE_AXIS));
+        experienceList.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
         // Create the ExperienceEditors
         this.ref.getExperienceList().forEach(e -> experienceComponentList.add(new ExperienceEditor(e)));
@@ -179,6 +180,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
             // Add the experience panel to the list
             experienceList.add(experiencePanel);
+            experienceList.add(Box.createVerticalStrut(10));
         }
 
         experienceList.updateUI();

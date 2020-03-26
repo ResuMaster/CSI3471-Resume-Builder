@@ -51,11 +51,15 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         table.setRowHeight(table.getRowHeight() * lines);
         table.setDefaultRenderer(String.class, new MultilineCellRenderer());
         table.setDefaultEditor(String.class, new MultilineCellEditor());
-        table.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+//        table.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 
+
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+        scrollPane.setForeground(Color.red);
+        scrollPane.getViewport().setBackground(new Color(205, 205, 205));
 
         // add a button to add a bullet
         JPanel buttonGroup = new JPanel();
@@ -117,7 +121,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         this.add(scrollPane, BorderLayout.CENTER);
 
         // To make it not scroll by default
-        this.setPreferredSize(new Dimension(650, 400));
+        this.setPreferredSize(new Dimension(650, 200));
     }
 
     /**
