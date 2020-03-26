@@ -123,8 +123,8 @@ public class EditorCategoryHeader extends JPanel {
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel displayNameLabel = new JLabel("Display Name: ", SwingConstants.LEFT);
-        JLabel nickNameLabel = new JLabel("Name: ", SwingConstants.LEFT);
+        JLabel displayNameLabel = new JLabel("Resume Category Name: ", SwingConstants.LEFT);
+        JLabel nickNameLabel = new JLabel("Local Category Nickname: ", SwingConstants.LEFT);
         displayNameLabel.setLabelFor(displayName);
         nickNameLabel.setLabelFor(name);
 
@@ -162,14 +162,18 @@ public class EditorCategoryHeader extends JPanel {
         JPanel right = new JPanel();
 
         // Create toggle box
+        JLabel VisibleLabel = new JLabel("Category Visible: ", SwingConstants.LEFT);
+        VisibleLabel.setLabelFor(toggled);
         toggled = new JCheckBox();
 
         // Create delete button
-        delete = new JButton("X");
+        delete = new JButton("Delete Category");
         delete.setBackground(Color.RED);
 
         // Finalize and return component
         right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
+        // TODO Fix this so formatting is better
+        right.add(VisibleLabel);
         right.add(toggled);
         right.add(delete);
         return right;
