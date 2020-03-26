@@ -46,17 +46,17 @@
             "bullets": [
               {
                 "text": "Graduates with distinistion.",
-                "id": "532.111.205",
+                "id": "532.989.651",
                 "visible": true
               },
               {
                 "text": "Voted class president.",
-                "id": "532.111.930",
+                "id": "532.989.103",
                 "visible": true
               }
             ],
-            "column_count": 0,
-            "id": "532.111",
+            "column_count": 1,
+            "id": "532.989",
             "visible": true
           }
         ],
@@ -64,7 +64,7 @@
         "name": "My Education",
         "display_name": "Education",
         "id": "532",
-        "visible": true
+        "visible": false
       },
       {
         "experiences": [
