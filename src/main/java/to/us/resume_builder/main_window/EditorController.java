@@ -1,6 +1,8 @@
 package to.us.resume_builder.main_window;
 
 import to.us.resume_builder.resume_components.Resume;
+import to.us.resume_builder.resume_components.category.Category;
+import to.us.resume_builder.resume_components.category.CategoryType;
 
 /**
  * The main controller for the editor interface. Connects the
@@ -38,32 +40,11 @@ public class EditorController {
             throw new IllegalArgumentException();
         }
         EditorController e = new EditorController();
-        e.stage = stage;
-        e.sideList = sideList;
-        e.resume = resume;
+        e.registerSideList(sideList);
+        e.registerStage(stage);
+        e.loadResume(resume);
+
         return e;
-    }
-
-    /**
-     * Links a new {@link EditorCategorySelector} with the
-     * {@link EditorController#stage current stage}.
-     * 
-     * @param sideList The new category selector
-     */
-    public void registerSideList(EditorCategorySelector sideList) {
-        this.sideList = sideList;
-        this.sideList.setController(this);
-    }
-
-    /**
-     * Links a new {@link EditorStage} with the {@link EditorController#sideList
-     * current category selector}.
-     * 
-     * @param stage The new editor
-     */
-    public void registerStage(EditorStage stage) {
-        this.stage = stage;
-        this.stage.setController(this);
     }
 
     /**
@@ -83,7 +64,8 @@ public class EditorController {
      * @param id The ID of the new category to select.
      */
     public void loadCategory(String id) {
-        stage.showInEditor(resume.getCategoryByID(id));
+        if (!stage.showInEditor(resume.getCategoryByID(id)))
+            sideList.setFocus(stage.getEditID());
     }
 
     /**
@@ -95,4 +77,47 @@ public class EditorController {
     public void removeCategory(String id) {
         sideList.removeCategory(id);
     }
+
+    /**
+     * Adds a category of the specified type to the resume, updating the UI to
+     * acknowledge this change.
+     * 
+     * @param type The type of category to add to the resume.
+     */
+    public void addCategory(CategoryType type) {
+        String catID = resume.createCategory(type);
+        Category newCat = resume.getCategoryByID(catID);
+
+        // Initialize category
+        newCat.setName("New " + type.toString());
+        newCat.setDisplayName(type.toString());
+
+        // Register and display category
+        sideList.addCategory(newCat);
+        sideList.setFocus(catID);
+        stage.showInEditor(newCat);
+    }
+
+    /**
+     * Links a new {@link EditorCategorySelector} with the
+     * {@link EditorController#stage current stage}.
+     * 
+     * @param sideList The new category selector
+     */
+    private void registerSideList(EditorCategorySelector sideList) {
+        this.sideList = sideList;
+        this.sideList.setController(this);
+    }
+
+    /**
+     * Links a new {@link EditorStage} with the {@link EditorController#sideList
+     * current category selector}.
+     * 
+     * @param stage The new editor
+     */
+    private void registerStage(EditorStage stage) {
+        this.stage = stage;
+        this.stage.setController(this);
+    }
 }
+

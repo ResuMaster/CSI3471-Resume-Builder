@@ -90,12 +90,14 @@ public class EditorStage extends JPanel {
      * category, it prompts for the user to fix them. If the user cancels, then the
      * switch is aborted.
      * 
-     * @param toEdit The category to replace the current category with
+     * @param toEdit The category to replace the current category with.
+     * 
+     * @return Whether or not the switch was aborted.
      */
-    public void showInEditor(Category toEdit) {
+    public boolean showInEditor(Category toEdit) {
         // Remove the old category. If clear fails, abort changing categories
         if (!clearCurrentEditor())
-            return;
+            return false;
 
         // Register the new category
         category = toEdit;
@@ -105,6 +107,7 @@ public class EditorStage extends JPanel {
 
         // Alert Swing that the component hierarchy has changed
         revalidate();
+        return true;
     }
 
     /**
@@ -114,6 +117,15 @@ public class EditorStage extends JPanel {
      */
     public void setController(EditorController controller) {
         this.controller = controller;
+    }
+
+    /**
+     * Gets the ID of the currently-selected category.
+     * 
+     * @return The ID of the category open in the editor.
+     */
+    public String getEditID() {
+        return category.getID();
     }
 
     /**

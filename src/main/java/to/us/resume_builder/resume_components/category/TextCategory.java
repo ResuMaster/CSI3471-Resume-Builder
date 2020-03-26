@@ -8,7 +8,7 @@ public class TextCategory extends Category {
     /**
      * The text that is displayed on the resume.
      */
-    private String text;
+    private String text = "";
 
     /**
      * Creates an instance of TextCategory with id.
