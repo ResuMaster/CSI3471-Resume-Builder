@@ -1,14 +1,19 @@
 package to.us.resume_builder.main_window;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import to.us.resume_builder.resume_components.Resume;
 import to.us.resume_builder.resume_components.ResumeComponent;
 import to.us.resume_builder.resume_components.category.Category;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Selector for the Editor Category List. Controlled by an EditorController.
@@ -42,7 +47,6 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
      */
     private EditorController controller = null;
 
-
     /**
      * Constructs an EditorCategorySelector given a Resume object.
      *
@@ -57,9 +61,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         categories = new JList<>(model);
 
         // Populate map of Category ID to Category
-        idToCategory = r.getCategoryList()
-            .stream()
-            .collect(Collectors.toMap(ResumeComponent::getID, v -> v));
+        idToCategory = r.getCategoryList().stream().collect(Collectors.toMap(ResumeComponent::getID, v -> v));
 
         scroll = new JScrollPane();
 
@@ -72,8 +74,8 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     }
 
     /**
-     * Allows you to remove a Category from the list by its ID.
-     * Assumes you cannot remove the last Category.
+     * Allows you to remove a Category from the list by its ID. Assumes you cannot
+     * remove the last Category.
      *
      * @param id The ID of the category to be removed.
      */
@@ -100,8 +102,25 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     }
 
     /**
-     * Sets the EditorController that this class will communicate to when
-     * the list is changed.
+     * Adds the specified {@link Category} into the list of possible categories.
+     * 
+     * @param newCat The category to add into the EditorCategorySelector
+     */
+    public void addCategory(Category newCat) {
+        if (newCat == null)
+            return;
+        String newID = newCat.getID();
+        if (idToCategory.get(newID) != null)
+            return;
+
+        model.addElement(newCat);
+        idToCategory.put(newID, newCat);
+        revalidate();
+    }
+
+    /**
+     * Sets the EditorController that this class will communicate to when the list
+     * is changed.
      *
      * @param controller The EditorController to be communicated with.
      */
@@ -110,8 +129,25 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     }
 
     /**
-     * Informs the EditorController that a new Category is selected and should
-     * be rendered in the main editor.
+     * Switches the focus of the list to a specific category.
+     * 
+     * @param id The ID of the {@link Category} to select.
+     */
+    public void setFocus(String id) {
+        Category c;
+        if (id == null || (c = idToCategory.get(id)) == null)
+            return;
+
+        // Temporarily disable list change listening while swapping selection
+        categories.removeListSelectionListener(this);
+        categories.setSelectedIndex(model.indexOf(c));
+        categories.addListSelectionListener(this);
+        repaint();
+    }
+
+    /**
+     * Informs the EditorController that a new Category is selected and should be
+     * rendered in the main editor.
      *
      * @param e The list selection event.
      */

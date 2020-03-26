@@ -20,7 +20,7 @@ public class BulletCategory extends Category implements IBulletContainer {
     /**
      * The number of columns for the bullet list
      */
-    private int columnCount;
+    private int columnCount = 1;
 
     /**
      * Creates an instance of BulletCategory with id.

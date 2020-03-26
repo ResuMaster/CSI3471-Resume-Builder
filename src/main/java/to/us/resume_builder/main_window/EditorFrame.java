@@ -1,10 +1,12 @@
 package to.us.resume_builder.main_window;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import to.us.resume_builder.file.ResumeFile;
 import to.us.resume_builder.resume_components.Resume;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * The main editor frame which houses the more granular aspects of the
@@ -30,6 +32,9 @@ public class EditorFrame extends JFrame {
      */
     private EditorCategorySelector sideList;
 
+    /** Button to add a new category into the resume. */
+    private EditorAddCategoryButton addButton;
+
     /**
      * Constructs the EditorFrame from a given ResumeFile.
      *
@@ -40,35 +45,30 @@ public class EditorFrame extends JFrame {
 
         Resume resume = r.getResume();
 
+        // Create editor components
         menuBar = new EditorMenuBar();
         sideList = new EditorCategorySelector(resume);
+        addButton = new EditorAddCategoryButton();
         stage = new EditorStage(resume.getCategoryList().get(0));
 
-        EditorController controller = EditorController.create(stage, sideList, resume);
+        // Create and connect controllers
+        EditorController editorController = EditorController.create(stage, sideList, resume);
         MenuController menuController = new MenuController(r);
-        registerControllers(controller, menuController);
+        addButton.setController(editorController);
+        menuBar.setController(menuController);
 
+        // Assemble side panel
+        JPanel selectorPanel = new JPanel(new BorderLayout());
+        selectorPanel.add(sideList, BorderLayout.CENTER);
+        selectorPanel.add(addButton, BorderLayout.SOUTH);
+
+        // Assemble main UI
         setLayout(new BorderLayout());
         setJMenuBar(menuBar);
-        add(sideList, BorderLayout.WEST);
+        add(selectorPanel, BorderLayout.WEST);
         add(stage, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
-//        pack();
         setVisible(true);
     }
-
-    /**
-     * Register the controller for the menu bar, side list, and stage using
-     * the provided controllers.
-     *
-     * @param e The controller for the Editor
-     * @param m The controller for the Menu Bar.
-     */
-    public void registerControllers(EditorController e, MenuController m) {
-        menuBar.setController(m);
-        e.registerSideList(sideList);
-        e.registerStage(stage);
-    }
-
 }

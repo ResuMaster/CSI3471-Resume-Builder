@@ -9,7 +9,7 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
     /**
      * The string that is displayed in the resume.
      */
-    private String text;
+    private String text = "";
 
     /**
      * Creates a bullet constructor with a specific id.
@@ -18,7 +18,6 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
      */
     public Bullet(String id) {
         super(id);
-//        this.text = "";
     }
 
     /**

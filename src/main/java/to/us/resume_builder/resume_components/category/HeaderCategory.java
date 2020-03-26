@@ -9,22 +9,22 @@ public class HeaderCategory extends Category {
     /**
      * The link that the user want to have in the header, usually linkedin.com.
      */
-    private String link;
+    private String link = "";
 
     /**
      * The user's email address that they want on the resume.
      */
-    private String email;
+    private String email = "";
 
     /**
      * The user's phone number that they want on the resume.
      */
-    private String phoneNumber;
+    private String phoneNumber = "";
 
     /**
      * The user's address than they want on the resume.
      */
-    private String address;
+    private String address = "";
 
     /**
      * Creates an instance of HeaderCategory with id.
