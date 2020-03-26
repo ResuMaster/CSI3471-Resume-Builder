@@ -128,8 +128,8 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
     public boolean isModified() {
         if(headerCategory.getLink().equals(fields[0].getText()) &&
             headerCategory.getEmail().equals(fields[1].getText()) &&
-            headerCategory.getAddress().equals(fields[2].getText()) &&
-            headerCategory.getPhoneNumber().equals(fields[3].getText()))
+            headerCategory.getPhoneNumber().equals(fields[2].getText()) &&
+            headerCategory.getAddress().equals(address.getText()) )
             return false;
         return true;
     }

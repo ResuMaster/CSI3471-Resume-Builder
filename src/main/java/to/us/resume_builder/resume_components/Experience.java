@@ -12,24 +12,24 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
     /**
      * The name of the organization worked for, or the name of the school.
      */
-    private String organization;
+    private String organization = "";
 
     /**
      * The location where work for organization took place.
      */
-    private String location;
+    private String location = "";
 
     /**
      * The date that the user want to display, it is a String and user is
      * responsible to format it.
      */
-    private String date;
+    private String date = "";
 
     /**
      * The position of the user, this is major for school or job title for
      * work.
      */
-    private String title;
+    private String title = "";
 
     /**
      * The list of bullets that follow an item.
@@ -39,7 +39,7 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
     /**
      * The number of columns for the bullet list
      */
-    private int columnCount;
+    private int columnCount = 1;
 
 
     /**

@@ -14,11 +14,11 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
      * The name of the category, it is used for internal and outline
      * information.
      */
-    protected String name;
+    protected String name = "";
     /**
      * The title of the category, it is used in the resume document.
      */
-    protected String displayName;
+    protected String displayName = "";
 
     /**
      * An abstract category constructor.
