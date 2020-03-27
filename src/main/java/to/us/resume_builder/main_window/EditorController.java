@@ -119,5 +119,12 @@ public class EditorController {
         this.stage = stage;
         this.stage.setController(this);
     }
+
+    /**
+     * Repaint the side list.
+     */
+    public void repaintSideList() {
+        sideList.repaint();
+    }
 }
 

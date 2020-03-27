@@ -1,10 +1,8 @@
 {
-    "metadata" : {
-        "first_name": "Matthew",
-        "last_name": "McCaskill",
-        "email": "me@mattrm.dev",
-        "created": "2020-02-14T04:54:44Z",
-        "last_modified": "2020-02-14T04:54:44Z"
+    "metadata": {
+        "created": "Feb 23, 2020, 10:25:31 PM",
+        "last_modified": "Feb 23, 2020, 10:25:31 PM",
+        "email": "me@mattrm.dev"
     },
     "categories": [
         {

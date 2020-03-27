@@ -3,12 +3,7 @@ package to.us.resume_builder.main_window;
 import java.awt.Component;
 import java.awt.Dimension;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import to.us.resume_builder.editor_view.category_edit_panes.BulletCategoryEditPane;
 import to.us.resume_builder.editor_view.category_edit_panes.CategoryEditPane;
@@ -29,7 +24,7 @@ import to.us.resume_builder.resume_components.category.TextCategory;
  * @author Micah Schiewe
  */
 public class EditorStage extends JPanel {
-    private static final String UNSAVED_PROMPT = "You have changes not stored to this session's Resume.\n\nDo you want to stash these changes?";
+    private static final String UNSAVED_PROMPT = "You have unsaved changes. Do you want to save?";
 
     /**
      * The component parent of the currently-selected {@link CategoryEditPane};
@@ -63,12 +58,13 @@ public class EditorStage extends JPanel {
 
         // Create central UI
         editContainer = new JPanel();
-        editContainer.setLayout(new BoxLayout(editContainer, BoxLayout.Y_AXIS));
+        editContainer.setLayout(new BoxLayout(editContainer, BoxLayout.PAGE_AXIS));
 
         category = startingCategory;
         header = new EditorCategoryHeader(startingCategory, () -> controller.removeCategory(category.getID()));
         edit = getEditor(startingCategory);
         editContainer.add(header);
+        editContainer.add(new JSeparator(JSeparator.HORIZONTAL));
         editContainer.add(edit);
         scroller = new JScrollPane(editContainer, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -79,9 +75,9 @@ public class EditorStage extends JPanel {
         saveButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Assemble.
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         add(scroller);
-        add(Box.createRigidArea(new Dimension(0, 5)));
+//        add(Box.createRigidArea(new Dimension(0, 5)));
         add(saveButton);
     }
 
@@ -174,6 +170,7 @@ public class EditorStage extends JPanel {
     private void save() {
         edit.save();
         header.save();
+        controller.repaintSideList();
     }
 
     /**

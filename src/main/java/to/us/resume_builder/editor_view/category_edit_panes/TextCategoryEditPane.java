@@ -2,14 +2,11 @@ package to.us.resume_builder.editor_view.category_edit_panes;
 
 import to.us.resume_builder.resume_components.category.TextCategory;
 
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -46,7 +43,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
         text = new JTextArea(tc.getText());
         text.setWrapStyleWord(true);
         text.setLineWrap(true);
-
+        text.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
 
         // Add label to panel
 //        gbc.gridx = 0;

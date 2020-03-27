@@ -16,10 +16,12 @@ import to.us.resume_builder.resume_components.category.CategoryType;
  * @author Micah
  */
 public class EditorAddCategoryButton extends JButton {
-    private static final String LABEL = "Add Category...";
-    private static final String GET_TYPE_MESSAGE = "Select a category type:";
+    private static final String LABEL = "Add Section...";
+    private static final String GET_TYPE_MESSAGE = "Select a section type:";
 
-    /** Controller which can add the category to the resume. */
+    /**
+     * Controller which can add the category to the resume.
+     */
     private EditorController controller;
 
     /**
@@ -42,19 +44,19 @@ public class EditorAddCategoryButton extends JButton {
 
     /**
      * Gets the type of a desired new category from the user.
-     * 
-     * @return The {@link CategoryType} corresponding to the desired new
-     *         {@link Category}.
+     *
+     * @return The {@link CategoryType} corresponding to the desired new {@link
+     *     Category}.
      */
     private CategoryType getType() {
         CategoryType[] values = CategoryType.values();
         return (CategoryType) JOptionPane.showInputDialog(this, GET_TYPE_MESSAGE, LABEL, JOptionPane.PLAIN_MESSAGE,
-                null, values, values[0]);
+            null, values, values[0]);
     }
 
     /**
      * Registers the controller to alert of add category requests.
-     * 
+     *
      * @param e The controller to contact.
      */
     public void setController(EditorController e) {

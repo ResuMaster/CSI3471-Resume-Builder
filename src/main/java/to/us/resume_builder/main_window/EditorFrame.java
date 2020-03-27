@@ -2,8 +2,7 @@ package to.us.resume_builder.main_window;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import to.us.resume_builder.file.ResumeFile;
 import to.us.resume_builder.resume_components.Resume;
@@ -57,8 +56,24 @@ public class EditorFrame extends JFrame {
         addButton.setController(editorController);
         menuBar.setController(menuController);
 
+        // Create move button panel
+        // This block is by Ashley Lu Couch
+        JPanel moveButtons = new JPanel();
+        moveButtons.setLayout(new BoxLayout(moveButtons, BoxLayout.LINE_AXIS));
+        JButton upButton = new JButton("▲");
+        upButton.addActionListener(e -> {
+            sideList.moveCategoryUp();
+        });
+        JButton downButton = new JButton("▼");
+        downButton.addActionListener(e -> {
+            sideList.moveCategoryDown();
+        });
+        moveButtons.add(upButton);
+        moveButtons.add(downButton);
+
         // Assemble side panel
         JPanel selectorPanel = new JPanel(new BorderLayout());
+        selectorPanel.add(moveButtons, BorderLayout.NORTH);
         selectorPanel.add(sideList, BorderLayout.CENTER);
         selectorPanel.add(addButton, BorderLayout.SOUTH);
 
@@ -68,7 +83,7 @@ public class EditorFrame extends JFrame {
         add(selectorPanel, BorderLayout.WEST);
         add(stage, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(900, 700);
         setVisible(true);
     }
 }
