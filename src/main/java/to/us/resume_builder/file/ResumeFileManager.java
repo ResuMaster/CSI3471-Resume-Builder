@@ -51,7 +51,7 @@ public class ResumeFileManager {
      *
      * @param r The ResumeFile to be exported
      * @param path The path to the file to export to.
-     * @throws IOException exceptino creating, closing or writing to json file
+     * @throws IOException exception creating, closing or writing to json file
      */
     public static void exportFile(ResumeFile r, String path) throws IOException {
         String json = gson.toJson(r);
