@@ -74,8 +74,8 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     }
 
     /**
-     * Allows you to remove a Category from the list by its ID. Assumes you cannot
-     * remove the last Category.
+     * Allows you to remove a Category from the list by its ID. Assumes you
+     * cannot remove the last Category.
      *
      * @param id The ID of the category to be removed.
      */
@@ -102,8 +102,9 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     }
 
     /**
-     * Adds the specified {@link Category} into the list of possible categories.
-     * 
+     * Adds the specified {@link Category} into the list of possible
+     * categories.
+     *
      * @param newCat The category to add into the EditorCategorySelector
      */
     public void addCategory(Category newCat) {
@@ -119,8 +120,40 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     }
 
     /**
-     * Sets the EditorController that this class will communicate to when the list
-     * is changed.
+     * Moves the selected Category up one and updates the list.
+     *
+     * @author Ashley Lu Couch
+     */
+    public void moveCategoryUp() {
+        int index = categories.getSelectedIndex();
+        if (index > 0 && index < model.size()) {
+            Category temp = model.getElementAt(index);
+            model.setElementAt(model.getElementAt(index - 1), index);
+            model.setElementAt(temp, index - 1);
+            categories.setSelectedIndex(index - 1);
+        }
+        revalidate();
+    }
+
+    /**
+     * Moves the selected Category down one and updates the list.
+     *
+     * @author Ashley Lu Couch
+     */
+    public void moveCategoryDown() {
+        int index = categories.getSelectedIndex();
+        if (index >= 0 && index < model.size() - 1) {
+            Category temp = model.getElementAt(index);
+            model.setElementAt(model.getElementAt(index + 1), index);
+            model.setElementAt(temp, index + 1);
+            categories.setSelectedIndex(index + 1);
+        }
+        revalidate();
+    }
+
+    /**
+     * Sets the EditorController that this class will communicate to when the
+     * list is changed.
      *
      * @param controller The EditorController to be communicated with.
      */
@@ -130,7 +163,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
 
     /**
      * Switches the focus of the list to a specific category.
-     * 
+     *
      * @param id The ID of the {@link Category} to select.
      */
     public void setFocus(String id) {
@@ -146,8 +179,8 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     }
 
     /**
-     * Informs the EditorController that a new Category is selected and should be
-     * rendered in the main editor.
+     * Informs the EditorController that a new Category is selected and should
+     * be rendered in the main editor.
      *
      * @param e The list selection event.
      */
