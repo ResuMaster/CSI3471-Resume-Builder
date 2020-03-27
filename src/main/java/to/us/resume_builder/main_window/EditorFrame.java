@@ -60,11 +60,11 @@ public class EditorFrame extends JFrame {
         // This block is by Ashley Lu Couch
         JPanel moveButtons = new JPanel();
         moveButtons.setLayout(new BoxLayout(moveButtons, BoxLayout.LINE_AXIS));
-        JButton upButton = new JButton();
+        JButton upButton = new JButton("▲");
         upButton.addActionListener(e -> {
             sideList.moveCategoryUp();
         });
-        JButton downButton = new JButton();
+        JButton downButton = new JButton("▼");
         downButton.addActionListener(e -> {
             sideList.moveCategoryDown();
         });
