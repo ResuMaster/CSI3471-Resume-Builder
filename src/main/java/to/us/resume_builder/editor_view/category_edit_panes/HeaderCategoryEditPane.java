@@ -35,12 +35,13 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
      */
     public HeaderCategoryEditPane(HeaderCategory hc) {
         this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+//        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
         headerCategory = hc;
 
         // Button for removing Header Category
         JPanel info = new JPanel(new GridBagLayout());
+        info.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
 
@@ -106,6 +107,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
 
         // Set ScrollPane
         JScrollPane scrollPane = new JScrollPane(info);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
         this.add(scrollPane, BorderLayout.NORTH);
     }
 
