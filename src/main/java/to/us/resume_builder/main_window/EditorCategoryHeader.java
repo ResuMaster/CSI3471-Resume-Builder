@@ -131,8 +131,8 @@ public class EditorCategoryHeader extends JPanel {
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel displayNameLabel = new JLabel("Section Title: ", SwingConstants.LEFT);
-        JLabel nickNameLabel = new JLabel("Nickname (not visible): ", SwingConstants.LEFT);
+        JLabel displayNameLabel = new JLabel("Section Title ", SwingConstants.RIGHT);
+        JLabel nickNameLabel = new JLabel("Nickname (not visible) ", SwingConstants.RIGHT);
         displayNameLabel.setLabelFor(displayName);
         nickNameLabel.setLabelFor(name);
 
@@ -172,7 +172,7 @@ public class EditorCategoryHeader extends JPanel {
         // Create toggle box
         JPanel visibilityPanel = new JPanel();
         visibilityPanel.setLayout(new BoxLayout(visibilityPanel, BoxLayout.LINE_AXIS));
-        JLabel VisibleLabel = new JLabel("Section Visible: ", SwingConstants.LEFT);
+        JLabel VisibleLabel = new JLabel("Visibility ", SwingConstants.LEFT);
         VisibleLabel.setLabelFor(toggled);
         toggled = new JCheckBox();
         visibilityPanel.add(VisibleLabel);
