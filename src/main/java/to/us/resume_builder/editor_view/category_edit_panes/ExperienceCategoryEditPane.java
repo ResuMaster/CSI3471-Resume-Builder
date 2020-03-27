@@ -86,6 +86,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
         // Create the ExperienceEditor scroll pane
         JScrollPane scrollPane = new JScrollPane(wrapper);
+        scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
@@ -106,7 +107,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
             // Create the experience panel
             JPanel experiencePanel = new JPanel();
-            experiencePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            experiencePanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
             experiencePanel.setLayout(new BoxLayout(experiencePanel, BoxLayout.PAGE_AXIS));
 
             // Create the control buttons panel
