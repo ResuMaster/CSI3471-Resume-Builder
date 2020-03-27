@@ -48,8 +48,8 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
      */
     @Override
     public String formatLaTeXString(ResumeTemplate template) {
-        return template.getFieldTemplate()
+        return text != null && text.length() > 0 ? template.getFieldTemplate()
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
-            .toString();
+            .toString() : "";
     }
 }

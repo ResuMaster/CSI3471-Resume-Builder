@@ -84,7 +84,11 @@ public class ResumeExporter {
         boolean status = compileResumePDF(latexPath);
 
         // Save the pdf to the specified location
-        if (status) Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
+        if (status) {
+            Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
+        } else {
+            Files.deleteIfExists(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"));
+        }
 
         return status;
     }

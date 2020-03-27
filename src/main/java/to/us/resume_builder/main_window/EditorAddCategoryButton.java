@@ -9,9 +9,10 @@ import to.us.resume_builder.resume_components.Resume;
 import to.us.resume_builder.resume_components.category.CategoryType;
 
 /**
- * The button which handles requesting a new {@link to.us.resume_builder.resume_components.category.Category
- * Category} be added to the underlying {@link Resume}.
- *
+ * The button which handles requesting a new
+ * {@link {@link to.us.resume_builder.resume_components.category.Category}} be
+ * added to the underlying {@link Resume}.
+ * 
  * @author Micah
  */
 public class EditorAddCategoryButton extends JButton {
