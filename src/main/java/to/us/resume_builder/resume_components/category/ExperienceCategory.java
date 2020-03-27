@@ -50,9 +50,9 @@ public class ExperienceCategory extends Category {
      */
     public String addExperience() {
         String id;
+        Random rand = new Random();
         do {
             // generate id with current id in the front
-            Random rand = new Random();
             id = this.id + "." + rand.nextInt(1000);
         } while (checkExperienceListID(id));
         experiences.add(new Experience(id));

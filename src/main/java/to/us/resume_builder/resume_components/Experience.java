@@ -188,9 +188,9 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      */
     public String addBullet(Bullet b) {
         String id;
+        Random rand = new Random();
         do {
             // generate id with current id in the front
-            Random rand = new Random();
             id = this.id + "." + rand.nextInt(1000);
         } while (checkBulletListID(id));
 

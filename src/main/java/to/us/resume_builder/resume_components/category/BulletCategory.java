@@ -44,17 +44,19 @@ public class BulletCategory extends Category implements IBulletContainer {
 
     /**
      * Set the number of columns in the bullet list.
+     *
      * @param number The value to set columns to.
      */
-    public void setColumn(int number){
+    public void setColumn(int number) {
         this.columnCount = number;
     }
 
     /**
      * Get the number of columns in the bullet list.
+     *
      * @return The number of columns.
      */
-    public int getColumn(){
+    public int getColumn() {
         return this.columnCount;
     }
 
@@ -79,9 +81,9 @@ public class BulletCategory extends Category implements IBulletContainer {
      */
     public String addBullet() {
         String id;
+        Random rand = new Random();
         do {
             // generate id with current id in the front
-            Random rand = new Random();
             id = this.id + "." + rand.nextInt(1000);
         } while (checkBulletListID(id));
 

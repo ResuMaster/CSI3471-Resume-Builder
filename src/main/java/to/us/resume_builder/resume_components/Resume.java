@@ -32,8 +32,8 @@ public class Resume {
     public String createCategory(CategoryType type) {
         String id;
         // generate a random id and check that it is not being used
+        Random rand = new Random();
         do {
-            Random rand = new Random();
             id = String.valueOf(rand.nextInt(1000));
         } while (checkCategoryListID(id));
 
