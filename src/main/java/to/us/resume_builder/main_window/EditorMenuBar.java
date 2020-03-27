@@ -49,7 +49,54 @@ public class EditorMenuBar extends JMenuBar {
         file.add(exportDataFile = new JMenuItem("Export Data File"));
         file.add(exportResume = new JMenuItem("Export Resume"));
 
-        exportDataFile.addActionListener(e -> controller.saveData());
+        exportDataFile.addActionListener(e -> {
+            // Create the file chooser
+            JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "/Desktop") {
+                @Override
+                public void approveSelection() {
+                    File f = getSelectedFile();
+                    if (f.exists() && f.getAbsolutePath().endsWith(".json")) {
+                        int result = JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_CANCEL_OPTION);
+                        switch (result) {
+                            case JOptionPane.YES_OPTION:
+                                super.approveSelection();
+                                return;
+                            case JOptionPane.NO_OPTION:
+                            case JOptionPane.CLOSED_OPTION:
+                                return;
+                            case JOptionPane.CANCEL_OPTION:
+                                cancelSelection();
+                                return;
+                        }
+                    }
+                    super.approveSelection();
+                }
+            };
+
+            // Set file chooser options
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setDialogTitle("Export Resume Data");
+
+            // Set file filter
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            FileNameExtensionFilter restrict = new FileNameExtensionFilter("Resume Data File (JSON)", "json");
+            fileChooser.resetChoosableFileFilters();
+            fileChooser.addChoosableFileFilter(restrict);
+
+            // If "save" was selected, actually save the data file
+            if (fileChooser.showDialog(null, "Save Resume Data File") == JFileChooser.APPROVE_OPTION) {
+                Path chosenFile = fileChooser.getSelectedFile().toPath();
+
+                // Add .json if not already exists
+                if (!chosenFile.toAbsolutePath().toString().endsWith(".json")) {
+                    chosenFile = chosenFile.resolveSibling(chosenFile.getFileName() + ".json");
+                }
+
+                // Export Resume Data File
+                controller.saveData(chosenFile.toString());
+            }
+        });
+
         exportResume.addActionListener(e -> {
             // Create the file chooser
             JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "/Desktop") {
