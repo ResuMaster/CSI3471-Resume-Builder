@@ -21,16 +21,17 @@ public interface IBulletContainer {
     Bullet getBulletByID(String id);
 
     /**
-     * Create a new bullet for bullets list with a random generated id
+     * Create a new bullet for bullets list with a random generated id.
      *
-     * @return the id created for the new bullet
+     * @return the id created for the new bullet.
      */
     String addBullet();
 
     /**
-     * Copy a new bullet for bullets list with a random generated id
+     * Copy a new bullet for bullets list with a random generated id.
      *
-     * @return the id created for the new bullet
+     * @param b The bullet reference to add a copy.
+     * @return the id created for the new bullet.
      */
     String addBullet(Bullet b);
 

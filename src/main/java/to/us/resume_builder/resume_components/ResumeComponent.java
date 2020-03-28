@@ -36,13 +36,6 @@ public class ResumeComponent {
     }
 
     /**
-     * Toggles the visibility of the object.
-     */
-    void toggleVisibility(){
-        visible = !visible;
-    }
-
-    /**
      * Sets the visibility of the object.
      * @param visible The visibility to set to.
      */

@@ -13,8 +13,7 @@ import java.util.regex.Pattern;
  */
 public class StringTemplate implements Cloneable {
     /**
-     * The string template with formatting keys in the form
-     * <code><keyName></code>.
+     * The string template with formatting keys in the form.
      */
     private String template;
 

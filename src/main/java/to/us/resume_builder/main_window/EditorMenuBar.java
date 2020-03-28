@@ -31,7 +31,7 @@ public class EditorMenuBar extends JMenuBar {
     private JMenuItem exportDataFile;
 
     /**
-     * Menu item allowing you to export your Resume to PDF>
+     * Menu item allowing you to export your Resume to PDF.
      */
     private JMenuItem exportResume;
 

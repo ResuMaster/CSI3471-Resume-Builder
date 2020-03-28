@@ -62,6 +62,8 @@ public class ExperienceCategory extends Category {
     /**
      * Adds an experience with a random generated id.
      *
+     * @param e The experience that is being copied.
+     *
      * @return The id of the new experience.
      */
     public String addExperience(Experience e) {
@@ -81,9 +83,7 @@ public class ExperienceCategory extends Category {
         for (Bullet b : e.getBulletList()) {
             copy.getBulletByID(copy.addBullet()).setText(b.getText());
         }
-
         experiences.add(copy);
-
         return id;
     }
 

@@ -113,6 +113,8 @@ public class EditorCategoryHeader extends JPanel {
 
     /**
      * Determines whether the user has made any basic {@link Category} edits.
+     *
+     * @return A boolean telling if the Editor has been modified
      */
     public boolean isModified() {
         return toggled.getModel().isSelected() != category.getVisible()

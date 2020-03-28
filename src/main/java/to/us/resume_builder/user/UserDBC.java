@@ -26,7 +26,7 @@ public class UserDBC {
     /**
      * Updates the specified user's role.
      * 
-     * @param toUpdate The User who's data is to change.
+     * @param newRole The User who's data is to change.
      * @return Whether or not the update succeeded.
      */
     public boolean changeRole(UserRole newRole) {
@@ -38,7 +38,6 @@ public class UserDBC {
     /**
      * Get the UserRole associated with the given User in the database.
      * 
-     * @param user The User to get the role of.
      * @return the UserRole for the specified user, if the username and password
      *         exist.
      */

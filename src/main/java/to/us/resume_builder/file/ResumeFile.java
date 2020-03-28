@@ -54,6 +54,8 @@ public class ResumeFile {
 
     /**
      * This method sets the ResumeFile's file path.
+     *
+     * @param path The file path to set to.
      */
     public void setFilePath(String path) {
         this.filePath = path;
@@ -62,7 +64,7 @@ public class ResumeFile {
     /**
      * This method returns the ResumeFile's filepath.
      *
-     * @return The file path associated with the ResumeFile
+     * @return The file path associated with the ResumeFile.
      */
     public String getFilePath() {
         return filePath;

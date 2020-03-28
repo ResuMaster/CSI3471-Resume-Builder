@@ -13,10 +13,8 @@ import java.awt.*;
  */
 public class HeaderCategoryEditPane extends CategoryEditPane {
     /**
-     * An array of each of the editable Text Fields for a Header Category.
-     *      0: Link
-     *      1: Email
-     *      2: Phone Number
+     * An array of each of the editable Text Fields for a Header Category. 0:
+     * Link 1: Email 2: Phone Number
      */
     private JTextField fields[];
     /**
@@ -29,13 +27,13 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
     private HeaderCategory headerCategory;
 
     /**
-     * Constructor for Header Category edit pane which displays each of the Header
-     * fields in a UI
-     * @param hc
+     * Constructor for Header Category edit pane which displays each of the
+     * Header fields in a UI
+     *
+     * @param hc The HeaderCategory that is being displayed.
      */
     public HeaderCategoryEditPane(HeaderCategory hc) {
         this.setLayout(new BorderLayout());
-//        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
 
         headerCategory = hc;
 
@@ -125,10 +123,11 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
 
     /**
      * Determines if the current Header Category has been modified
+     *
      * @return boolean indicating whether the Category was edited by the user
      */
     public boolean isModified() {
-        if(headerCategory.getLink().equals(fields[0].getText()) &&
+        if (headerCategory.getLink().equals(fields[0].getText()) &&
             headerCategory.getEmail().equals(fields[1].getText()) &&
             headerCategory.getPhoneNumber().equals(fields[2].getText()) &&
             headerCategory.getAddress().equals(address.getText()))

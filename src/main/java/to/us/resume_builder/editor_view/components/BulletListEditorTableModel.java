@@ -40,7 +40,6 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
      * Removes a Bullet from data by the index in the Bullet list
      *
      * @param index the index of the Bullet to remove
->>>>>>> master:src/main/java/to/us/resume_builder/editor_view/components/BulletListEditorTableModel.java
      */
     public void removeBullet(int index) {
         data.remove(index);
@@ -69,6 +68,7 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
      *
      * @param data        The data to fill the table with.
      * @param columnNames The names for the columns.
+     * @param bulletC     The IBulletContainer being edited
      */
     public BulletListEditorTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
         this.columnNames = columnNames;

@@ -10,7 +10,7 @@ import to.us.resume_builder.resume_components.category.CategoryType;
 
 /**
  * The button which handles requesting a new
- * {@link {@link to.us.resume_builder.resume_components.category.Category}} be
+ * {@link to.us.resume_builder.resume_components.category.Category} be
  * added to the underlying {@link Resume}.
  * 
  * @author Micah
@@ -46,7 +46,7 @@ public class EditorAddCategoryButton extends JButton {
      * Gets the type of a desired new category from the user.
      *
      * @return The {@link CategoryType} corresponding to the desired new {@link
-     *     Category}.
+     *     to.us.resume_builder.resume_components.category.Category}.
      */
     private CategoryType getType() {
         CategoryType[] values = CategoryType.values();

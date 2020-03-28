@@ -39,20 +39,10 @@ public class TextCategoryEditPane extends CategoryEditPane {
         textCategory = tc;
 
         // Create UI parts
-//        JLabel label = new JLabel("Text:");
         text = new JTextArea(tc.getText());
         text.setWrapStyleWord(true);
         text.setLineWrap(true);
         text.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
-
-        // Add label to panel
-//        gbc.gridx = 0;
-//        gbc.gridy = 0;git
-//        gbc.gridwidth = 1;
-//        gbc.gridheight = 1;
-//        gbc.weightx = 0;
-//        gbc.weighty = 0;
-//        add(label, gbc);
 
         // Create text area's size moderator
         TextFieldWidthModerator mod = new TextFieldWidthModerator(text);
@@ -78,10 +68,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
     }
 
     /**
-     * <<<<<<< HEAD Determines if the current Category has been modified
-     * <p>
-     * ======= Determines if the current Text Category has been modified >>>>>>>
-     * 8c217d6e764efde5bc3e2ccc1f21a3ed241ee3fe
+     * Determines if the current Text Category has been modified
      *
      * @return boolean indicating whether the Category was edited
      */
