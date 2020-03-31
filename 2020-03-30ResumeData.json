@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "created": "Feb 23, 2020, 10:25:31 PM",
+    "last_modified": "Feb 23, 2020, 10:25:31 PM",
+    "email": "bob@gmail.com"
+  },
+  "resume": {
+    "category_list": [
+      {
+        "link": "www.linkedin.com/in/matthew-mccaskill",
+        "email": "me@mattrm.dev",
+        "phone_number": "(123) 456-7890",
+        "address": "Goodyear, AZ 85395",
+        "type": "HEADER",
+        "name": "Header",
+        "display_name": "Matthew McCaskill",
+        "id": "93",
+        "visible": true
+      },
+      {
+        "text": "Highly motivated Computer Science candidate with a strong foundation in software development. Strong ability to quickly resolve hardware and software problems to minimize disruptions in operations. Proven history of facilitating adoption of innovative solutions and training end users on new software. Excited to contribute to a mission-driven environment.\n",
+        "type": "TEXT",
+        "name": "Profile",
+        "display_name": "Career Profile",
+        "id": "617",
+        "visible": true
+      },
+      {
+        "experiences": [
+          {
+            "organization": "Baylor University",
+            "location": "Waco, Texas",
+            "date": "May 2022",
+            "title": "Bachelor of Science in Computer Science",
+            "bullets": [
+              {
+                "text": "Secondary Major in Mathematics",
+                "id": "532.180.126",
+                "visible": true
+              },
+              {
+                "text": "GPA 4.0",
+                "id": "532.180.386",
+                "visible": true
+              },
+              {
+                "text": "Active member of Computing 4 Compassion",
+                "id": "532.180.412",
+                "visible": true
+              },
+              {
+                "text": "Member of Association for Computing Machinery (ACM) and Alpha Lambda Delta",
+                "id": "532.180.663",
+                "visible": true
+              },
+              {
+                "text": "Relevant Coursework: Introduction to Computer Science I & II, Discrete Mathematics, Data Structures, Software Engineering, and Algorithms",
+                "id": "532.180.474",
+                "visible": true
+              }
+            ],
+            "column_count": 1,
+            "id": "532.180",
+            "visible": true
+          }
+        ],
+        "type": "EXPERIENCE",
+        "name": "Education",
+        "display_name": "Education",
+        "id": "532",
+        "visible": false
+      },
+      {
+        "experiences": [
+          {
+            "organization": "Baylor University - Academic Support Programs",
+            "location": "Waco, Texas",
+            "date": "2019-Present",
+            "title": "Supplemental Instruction Leader",
+            "bullets": [
+              {
+                "text": "Led biweekly group review sessions to improve student understanding of course content",
+                "id": "55.478.961",
+                "visible": true
+              },
+              {
+                "text": "Adapted teaching strategies to engage various learning styles",
+                "id": "55.478.28",
+                "visible": true
+              },
+              {
+                "text": "Functioned as an intermediary between students and professor",
+                "id": "55.478.40",
+                "visible": true
+              }
+            ],
+            "column_count": 1,
+            "id": "55.478",
+            "visible": true
+          }
+        ],
+        "type": "EXPERIENCE",
+        "name": "Experience",
+        "display_name": "Experience",
+        "id": "55",
+        "visible": true
+      },
+      {
+        "bullets": [
+          {
+            "text": "Proficient in C++, Java SE, HTML, CSS, JavaScript, LaTeX",
+            "id": "213.520",
+            "visible": true
+          },
+          {
+            "text": "Comfortable with jQuery, Bootstrap, Python, C#, Intel x86 Assembly",
+            "id": "213.186",
+            "visible": true
+          },
+          {
+            "text": "Taught fifth and sixth grade students basic programming skills through Computing 4 Compassion’s igniteCS division",
+            "id": "213.782",
+            "visible": true
+          },
+          {
+            "text": "Served as a Host Group Leader with Antioch Community Church",
+            "id": "213.239",
+            "visible": true
+          },
+          {
+            "text": "Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques",
+            "id": "213.78",
+            "visible": true
+          }
+        ],
+        "column_count": 1,
+        "type": "BULLETS",
+        "name": "Additional",
+        "display_name": "Additional",
+        "id": "213",
+        "visible": true
+      }
+    ]
+  }
+}

@@ -4,169 +4,171 @@
         "last_modified": "Feb 23, 2020, 10:25:31 PM",
         "email": "me@mattrm.dev"
     },
-    "categories": [
-        {
-            "id": 1,
-            "name": "Header",
-            "title": "Matthew McCaskill",
-            "type": "header",
-            "visible": true,
-            "link": "www.linkedin.com/in/matthew-mccaskill",
-            "email": "me@mattrm.dev",
-            "phone_number": "(623) 377-3772",
-            "address": "Goodyear, AZ 85395"
-        },
-        {
-            "id": 2,
-            "name": "Profile",
-            "title": "Career Profile",
-            "type": "text",
-            "visible": true,
-            "text": "Highly motivated Computer Science candidate with a strong foundation in software development. Strong ability to quickly resolve hardware and software problems to minimize disruptions in operations. Proven history of facilitating adoption of innovative solutions and training end users on new software. Excited to contribute to a mission-driven environment."
-        },
-        {
-            "id": 3,
-            "name": "Education",
-            "title": "Education",
-            "type": "experience",
-            "visible": true,
-            "items": [
-                {
-                    "id": 4,
-                    "organization": "Baylor University",
-                    "location": "Waco, Texas",
-                    "date": "May 2022",
-                    "title": "Bachelor of Science in Computer Science",
-                    "visible": true,
-                    "fields": [
-                        { 
-                            "id": 5,
-                            "text": "Secondary Major in Mathematics",
-                            "visible": true
-                        },
-                        {
-                            "id": 6,
-                            "text": "GPA 4.0",
-                            "visible": true
-                        },
-                        {
-                            "id": 7,
-                            "text": "Active member of Computing 4 Compassion",
-                            "visible": true
-                        },
-                        {
-                            "id": 8,
-                            "text": "Member of Association for Computing Machinery (ACM) and Alpha Lambda Delta",
-                            "visible": true
-                        },
-                        {
-                            "id": 9,
-                            "text": "Relevant Coursework: Introduction to Computer Science I & II, Discrete Mathematics, Data Structures, Software Engineering, and Algorithms",
-                            "visible": true
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": 10,
-            "name": "Experience",
-            "title": "Experience",
-            "type": "experience",
-            "visible": true,
-            "items": [
-                {
-                    "id": 11,
-                    "department": "Academic Support Programs",
-                    "organization": "Baylor University",
-                    "location": null,
-                    "date": "2019-Present",
-                    "title": "Supplemental Instruction Leader",
-                    "visible": true,
-                    "fields": [
-                        { 
-                            "id": 12,
-                            "text": "Led biweekly group review sessions to improve student understanding of course content",
-                            "visible": true
-                        },
-                        {
-                            "id": 13,
-                            "text": "Adapted teaching strategies to engage various learning styles",
-                            "visible": true
-                        },
-                        {
-                            "id": 14,
-                            "text": "Functioned as an intermediary between students and professor",
-                            "visible": true
-                        }
-                    ]
-                },
-                {
-                    "id": 15,
-                    "department": null,
-                    "organization": "The Refinery Christian Church",
-                    "location": null,
-                    "date": "Summer 2019",
-                    "title": "Kids Ministry Intern",
-                    "visible": true,
-                    "fields": [
-                        { 
-                            "id": 16,
-                            "text": "Planned and executed weekend programming for children of all ages weekly",
-                            "visible": true
-                        },
-                        {
-                            "id": 17,
-                            "text": "Learned effective management techniques to ensure smooth experience",
-                            "visible": true
-                        },
-                        {
-                            "id": 18,
-                            "text": "Mentored new volunteers in teaching confidence and techniques",
-                            "visible": true
-                        },
-                        {
-                            "id": 19,
-                            "text": "Responded to various emergency situations with calmness and efficiency",
-                            "visible": true
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": 20,
-            "name": "Additional",
-            "title": "Additional",
-            "type": "bullets",
-            "visible": true,
-            "fields": [
-                { 
-                    "id": 21,
-                    "text": "Proficient in C++, Java SE, HTML, CSS, JavaScript, LaTeX",
-                    "visible": true
-                },
-                {
-                    "id": 22,
-                    "text": "Comfortable with jQuery, Bootstrap, Python, C#, Intel x86 Assembly",
-                    "visible": true
-                },
-                {
-                    "id": 23,
-                    "text": "Taught fifth and sixth grade students basic programming skills through Computing 4 Compassion’s igniteCS division",
-                    "visible": true
-                },
-                {
-                    "id": 24,
-                    "text": "Served as a Host Group Leader with Antioch Community Church",
-                    "visible": true
-                },
-                {
-                    "id": 25,
-                    "text": "Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques",
-                    "visible": true
-                }
-            ]
-        }
-    ]
+    "resume": {
+        "categories": [
+            {
+                "link": "www.linkedin.com/in/matthew-mccaskill",
+                "email": "me@mattrm.dev",
+                "phone_number": "(623) 377-3772",
+                "name": "Header",
+                "address": "Goodyear, AZ 85395",
+                "display_name": "Matthew McCaskill",
+                "type": "HEADER",
+                "id": "234",
+                "visible": true
+            },
+            {
+                "id": "267",
+                "name": "Profile",
+                "title": "Career Profile",
+                "type": "TEXT",
+                "visible": true,
+                "text": "Highly motivated Computer Science candidate with a strong foundation in software development. Strong ability to quickly resolve hardware and software problems to minimize disruptions in operations. Proven history of facilitating adoption of innovative solutions and training end users on new software. Excited to contribute to a mission-driven environment."
+            },
+            {
+                "id": "361",
+                "name": "Education",
+                "title": "Education",
+                "type": "EXPERIENCE",
+                "visible": true,
+                "experiences": [
+                    {
+                        "id": "361.462",
+                        "organization": "Baylor University",
+                        "location": "Waco, Texas",
+                        "date": "May 2022",
+                        "title": "Bachelor of Science in Computer Science",
+                        "visible": true,
+                        "fields": [
+                            {
+                                "id": "361.462.7",
+                                "text": "Secondary Major in Mathematics",
+                                "visible": true
+                            },
+                            {
+                                "id": "361.462.342",
+                                "text": "GPA 4.0",
+                                "visible": true
+                            },
+                            {
+                                "id": "361.462.45",
+                                "text": "Active member of Computing 4 Compassion",
+                                "visible": true
+                            },
+                            {
+                                "id": "361.462.26",
+                                "text": "Member of Association for Computing Machinery (ACM) and Alpha Lambda Delta",
+                                "visible": true
+                            },
+                            {
+                                "id": "361.462.391",
+                                "text": "Relevant Coursework: Introduction to Computer Science I & II, Discrete Mathematics, Data Structures, Software Engineering, and Algorithms",
+                                "visible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "10",
+                "name": "Experience",
+                "title": "Experience",
+                "type": "EXPERIENCE",
+                "visible": true,
+                "experiences": [
+                    {
+                        "id": "11",
+                        "department": "Academic Support Programs",
+                        "organization": "Baylor University",
+                        "location": null,
+                        "date": "2019-Present",
+                        "title": "Supplemental Instruction Leader",
+                        "visible": true,
+                        "fields": [
+                            {
+                                "id": "12",
+                                "text": "Led biweekly group review sessions to improve student understanding of course content",
+                                "visible": true
+                            },
+                            {
+                                "id": "13",
+                                "text": "Adapted teaching strategies to engage various learning styles",
+                                "visible": true
+                            },
+                            {
+                                "id": "14",
+                                "text": "Functioned as an intermediary between students and professor",
+                                "visible": true
+                            }
+                        ]
+                    },
+                    {
+                        "id": "15",
+                        "department": "Kids Ministry Intern",
+                        "organization": "The Refinery Christian Church",
+                        "location": "Goodyear, AZ",
+                        "date": "Summer 2019",
+                        "title": "Kids Ministry Intern",
+                        "visible": true,
+                        "bullets": [
+                            {
+                                "id": "16",
+                                "text": "Planned and executed weekend programming for children of all ages weekly",
+                                "visible": true
+                            },
+                            {
+                                "id": "17",
+                                "text": "Learned effective management techniques to ensure smooth experience",
+                                "visible": true
+                            },
+                            {
+                                "id": "18",
+                                "text": "Mentored new volunteers in teaching confidence and techniques",
+                                "visible": true
+                            },
+                            {
+                                "id": "19",
+                                "text": "Responded to various emergency situations with calmness and efficiency",
+                                "visible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "20",
+                "name": "Additional",
+                "title": "Additional",
+                "type": "BULLETS",
+                "visible": true,
+                "bullets": [
+                    {
+                        "id": "21",
+                        "text": "Proficient in C++, Java SE, HTML, CSS, JavaScript, LaTeX",
+                        "visible": true
+                    },
+                    {
+                        "id": "22",
+                        "text": "Comfortable with jQuery, Bootstrap, Python, C#, Intel x86 Assembly",
+                        "visible": true
+                    },
+                    {
+                        "id": "23",
+                        "text": "Taught fifth and sixth grade students basic programming skills through Computing 4 Compassion’s igniteCS division",
+                        "visible": true
+                    },
+                    {
+                        "id": "24",
+                        "text": "Served as a Host Group Leader with Antioch Community Church",
+                        "visible": true
+                    },
+                    {
+                        "id": "25",
+                        "text": "Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques",
+                        "visible": true
+                    }
+                ]
+            }
+        ]
+    }
 }
