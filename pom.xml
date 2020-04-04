@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>to.us.resume-builder</groupId>
-    <artifactId>CSI3471-Resume-Builder</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <artifactId>ResuMaster</artifactId>
+    <version>0.2</version>
 
     <properties>
         <java.version>13</java.version>
@@ -39,6 +39,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>0.29</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -46,7 +51,7 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <finalName>Resume-Builder</finalName>
+<!--                    <finalName>ResuMaster</finalName>-->
                     <archive>
                         <manifest>
                             <mainClass>to.us.resume_builder.Main</mainClass>
