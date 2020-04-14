@@ -2,10 +2,11 @@ package to.us.resume_builder;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import to.us.resume_builder.main_window.*;
-import to.us.resume_builder.file.ResumeFile;
-import to.us.resume_builder.file.ResumeFileManager;
-import to.us.resume_builder.util.FileDialog;
+import to.us.resume_builder.business.ApplicationConfiguration;
+import to.us.resume_builder.business.resume_file_management.ResumeFile;
+import to.us.resume_builder.business.resume_file_management.ResumeFileManager;
+import to.us.resume_builder.presentation.EditorFrame;
+import to.us.resume_builder.business.util.FileDialog;
 
 import javax.swing.*;
 import java.io.IOException;
