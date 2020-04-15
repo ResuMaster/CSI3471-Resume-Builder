@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
+
+import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.data.resume_components.Resume;
 
@@ -15,20 +17,24 @@ public class BulletCategoryTester {
     private static BulletCategory bc;
     private static List<Bullet> bullets;
 
-    @BeforeAll
-    public static void init() {
+    @BeforeEach
+    public void init() {
         r = new Resume();
         bc = new BulletCategory(r.createCategory(CategoryType.BULLETS));
         bullets = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
             bullets.add(new Bullet(bc.addBullet()));
             bullets.get(i).setText("Bullet " + i + ".");
+            bc.getBulletByID(bullets.get(i).getID()).setText("Bullet " + i + ".");
         }
     }
 
     @Test
     public void testGetBulletList() {
-        assertEquals(bullets, bc.getBulletList());
+        for(int i = 0; i < bullets.size(); i++) {
+            assertEquals(bullets.get(i).getID()+bullets.get(i).getText(),
+                    bc.getBulletList().get(i).getID()+bc.getBulletList().get(i).getText());
+        }
     }
 
     @Test
@@ -44,13 +50,28 @@ public class BulletCategoryTester {
 
     @Test
     public void testGetBulletByID() {
-        assertEquals(bullets.get(2).getID(), bc.getBulletByID(bullets.get(2).getID()));
+        assertEquals(bullets.get(2).getText()+bullets.get(2).getID(),
+                bc.getBulletByID(bullets.get(2).getID()).getText() +
+                        bc.getBulletByID(bullets.get(2).getID()).getID());
     }
 
     @Test
     public void testAddBullet() {
-        bullets.add(new Bullet(bc.addBullet()));
+        String id = bc.addBullet();
+        assertTrue(bc.checkBulletListID(id));
         assertEquals(11, bc.getBulletList().size());
+    }
+
+    @Test
+    public void testAddBullet2() {
+        Bullet b = new Bullet("12345");
+        String id = bc.addBullet(b);
+        b = new Bullet(id);
+        assertTrue(bc.checkBulletListID(id));
+        assertEquals(11, bc.getBulletList().size());
+        Bullet temp = bc.getBulletList().get(bc.getBulletList().size()-1);
+        assertTrue((temp.getID()+temp.getText()+temp.getVisible()).
+                equals(b.getID()+b.getText()+b.getVisible()));
     }
 
     @Test
@@ -62,11 +83,23 @@ public class BulletCategoryTester {
 
     @Test
     public void testCheckBulletListID() {
+        Bullet temp = bullets.get(0);
+        assertTrue(bc.checkBulletListID(temp.getID()));
+    }
 
+    @Test
+    public void testCheckBulletListID2() {
+        Bullet temp = new Bullet("1234");
+        assertFalse(bc.checkBulletListID(temp.getID()));
     }
 
     @Test
     public void testFormatLaTeXString() {
-
+        String s = "\\begin{resumebulletcategory}{}\n    ";
+        for(int i = 0; i < 10; i++) {
+            s += "\\item Bullet " + i + ".\n";
+        }
+        s += "\n\\end{resumebulletcategory}\n\n";
+        assertEquals(s, bc.formatLaTeXString(ResumeTemplate.DEFAULT));
     }
 }
