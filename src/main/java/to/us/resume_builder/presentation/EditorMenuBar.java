@@ -154,19 +154,16 @@ public class EditorMenuBar extends JMenuBar {
         sendReviewEmail.addActionListener(e -> {
             JTextPane textArea = new JTextPane();
 
-            // TODO: get URLs
+            // TODO: get URL
             String pdfURL = "PDF URL";
-            String jsonURL = "JSON URL";
 
             String body = "Hello,\n" +
                 "\n" +
-                "I am currently working on my resume using ResuMaster and would like you to take a look. Click the links below to view and make comments on my resume:\n" +
+                "I am currently working on my resume using ResuMaster and would like you to take a look. Click the link below to view my resume:\n" +
                 "\n" +
                 "PDF: " + pdfURL + "\n" +
                 "\n" +
-                "Data file: " + jsonURL + "\n" +
-                "\n" +
-                "If you do not have ResuMaster, you can get it here: http://resume-builder.us.to/\n" +
+                "If you would like to try ResuMaster yourself, you can get it here: http://resume-builder.us.to/\n" +
                 "\n" +
                 "Thanks!";
 
