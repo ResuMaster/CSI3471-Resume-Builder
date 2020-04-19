@@ -7,8 +7,11 @@ import to.us.resume_builder.business.util.MiscUtils;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class Experience extends ResumeComponent implements ILaTeXConvertable, IBulletContainer {
+    private static Logger LOGGER = Logger.getLogger(Experience.class.getName());
+
     /**
      * The name of the organization worked for, or the name of the school.
      */
@@ -135,17 +138,19 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
 
     /**
      * Set the number of columns in the bullet list.
+     *
      * @param number The value to set columns to.
      */
-    public void setColumn(int number){
+    public void setColumn(int number) {
         this.columnCount = number;
     }
 
     /**
      * Get the number of columns in the bullet list.
+     *
      * @return The number of columns.
      */
-    public int getColumn(){
+    public int getColumn() {
         return this.columnCount;
     }
 
@@ -248,6 +253,6 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
                 .reduce((a, b) -> a + b)
                 .orElse("")
             )
-            .toString();
+            .toString(() -> LOGGER.info("Generated LaTeX for experience \"" + this.title + ", " + this.organization + "\"."));
     }
 }
