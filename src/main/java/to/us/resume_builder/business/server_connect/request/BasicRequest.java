@@ -1,7 +1,9 @@
 package to.us.resume_builder.business.server_connect.request;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -31,6 +33,8 @@ public abstract class BasicRequest<T> {
 		SITE = "http://localhost:8080";
 	}
 
+	/** Charset to send requests using */
+	protected static final String CHARSET = "UTF-8";
 	/** Separator for elements in a query string */
 	protected static final String SEPARATOR = "&";
 	/** Assignment for parameters in a query string */
@@ -90,9 +94,14 @@ public abstract class BasicRequest<T> {
 
 		for (int i = 0; i < arguments.length; i += 2) {
 			// varName=varVal
-			sb.append(arguments[i]);
-			sb.append(ASSIGN);
-			sb.append(arguments[i + 1]);
+			try {
+				sb.append(URLEncoder.encode(arguments[i], CHARSET));
+				sb.append(ASSIGN);
+				sb.append(URLEncoder.encode(arguments[i + 1], CHARSET));
+			} catch (UnsupportedEncodingException e) {
+				// Should not happen, UTF-8 is standard
+				e.printStackTrace();
+			}
 
 			// If there are more, add the variable separator
 			if (i + 1 < arguments.length)
