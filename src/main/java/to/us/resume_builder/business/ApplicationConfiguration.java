@@ -58,6 +58,7 @@ public class ApplicationConfiguration {
         setIfNotPresent("templates.directory", "./templates/");
         setIfNotPresent("export.tempLocation", "./temp/");
         setIfNotPresent("export.timeout", 60L);
+        setIfNotPresent("request.url", "http://localhost:8080");
     }
 
     /**
