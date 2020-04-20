@@ -1,17 +1,14 @@
 package to.us.resume_builder.business.controllers;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
 import to.us.resume_builder.business.export_LaTeX.ResumeExporter;
-import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.resume_file_management.ResumeFile;
 import to.us.resume_builder.business.resume_file_management.ResumeFileManager;
-import to.us.resume_builder.business.server_connect.PDFFacade;
 import to.us.resume_builder.business.server_connect.fileio_response.FileIOResponse;
 import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 import to.us.resume_builder.presentation.EditorMenuBar;
@@ -76,22 +73,7 @@ public class MenuController {
     public boolean export(Path path) {
         LOG.info("Requesting PDF export");
         ResumeExporter r = new ResumeExporter(resume.getResume());
-        byte[] bytes;
-        try {
-            bytes = PDFFacade.getPDFHandle().getPDF(r.getLaTeXString(ResumeTemplate.DEFAULT));
-        } catch (InterruptedException | FailedRequestException | IOException e) {
-            LOG.warning("Request to get PDF failed: " + e);
-            return false;
-        }
-
-        try {
-            Files.write(path, bytes);
-        } catch (IOException e) {
-            LOG.warning("Could not write returned PDF to " + path + ": " + e);
-            return false;
-        }
-        LOG.info("PDF export successful");
-        return true;
+        return r.export(path);
     }
 
     /**
@@ -107,6 +89,6 @@ public class MenuController {
     public FileIOResponse uploadPDF() throws InterruptedException, FailedRequestException, IOException {
         LOG.info("Attempting to upload PDF to https://file.io");
         ResumeExporter r = new ResumeExporter(resume.getResume());
-        return PDFFacade.getPDFHandle().uploadPDF(r.getLaTeXString(ResumeTemplate.DEFAULT));
+        return r.uploadPDF();
     }
 }

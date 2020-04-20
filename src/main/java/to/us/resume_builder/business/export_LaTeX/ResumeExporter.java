@@ -1,6 +1,9 @@
 package to.us.resume_builder.business.export_LaTeX;
 
 import to.us.resume_builder.business.ApplicationConfiguration;
+import to.us.resume_builder.business.server_connect.PDFFacade;
+import to.us.resume_builder.business.server_connect.fileio_response.FileIOResponse;
+import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 import to.us.resume_builder.business.util.MiscUtils;
@@ -14,6 +17,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * This class handles the exporting of a resume file to a PDF.
@@ -23,6 +27,8 @@ import java.util.concurrent.TimeUnit;
  * @see ResumeTemplate
  */
 public class ResumeExporter {
+    private static final Logger LOG = Logger.getLogger(ResumeExporter.class.getName());
+
     private Resume resume;
 
     /**
@@ -47,7 +53,7 @@ public class ResumeExporter {
      * @throws IOException Thrown if any errors occur during the export
      *                     process.
      */
-    public boolean export(Path exportLocation) throws IOException {
+    public boolean export(Path exportLocation) {
         return export(exportLocation, ResumeTemplate.DEFAULT);
     }
 
@@ -59,36 +65,56 @@ public class ResumeExporter {
      * @param template       The template to use to export the resume.
      *
      * @return Whether or not the export was successful.
-     * @throws IOException Thrown if any errors occur during the export
-     *                     process.
      */
-    public boolean export(Path exportLocation, ResumeTemplate template) throws IOException {
-        // Generate the LaTeX code
-        String latexCode;
-        latexCode = getLaTeXString(template);
+    public boolean export(Path exportLocation, ResumeTemplate template) {
+        boolean status = true;
 
-        // Get export location
-        Path latexPath = Path.of(ApplicationConfiguration.getInstance().getString("export.tempLocation"), MiscUtils.randomAlphanumericString(16) + ".tex");
-
-        // Generate the temp folder
-        if (!Files.exists(latexPath.getParent())) {
-            Files.createDirectory(latexPath.getParent());
+        byte[] bytes = null;
+        try {
+            bytes = PDFFacade.getPDFHandle().getPDF(getLaTeXString(template));
+        } catch (InterruptedException | FailedRequestException | IOException e) {
+            LOG.warning("Request to get PDF failed: " + e);
+            status = false;
         }
 
-        // Generate the LaTeX file
-        Files.writeString(latexPath, latexCode, StandardCharsets.UTF_8, StandardOpenOption.CREATE);
-
-        // Generate the PDF
-        boolean status = compileResumePDF(latexPath);
-
-        // Save the pdf to the specified location
-        if (status) {
-            Files.move(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"), exportLocation, StandardCopyOption.REPLACE_EXISTING);
-        } else {
-            Files.deleteIfExists(latexPath.resolveSibling(latexPath.getFileName().toString().split("\\.")[0] + ".pdf"));
+        try {
+            if (bytes != null)
+                Files.write(exportLocation, bytes);
+            LOG.info("PDF export successful");
+        } catch (IOException e) {
+            LOG.warning("Could not write returned PDF to " + exportLocation + ": " + e);
+            status = false;
         }
 
         return status;
+    }
+
+    /**
+     * Sends the {@link to.us.resume_builder.business.export_LaTeX.ResumeExporter#resume}
+     * to be exported to PDF and uploaded to file.io, with the response returned
+     * here.
+     *
+     * @return The response from https://file.io
+     * @throws InterruptedException The upload request was interrupted
+     * @throws FailedRequestException The response returned with an error
+     * @throws IOException The request failed to send or the response couldn't be received.
+     */
+    public FileIOResponse uploadPDF() throws InterruptedException, FailedRequestException, IOException {
+        return uploadPDF(ResumeTemplate.DEFAULT);
+    }
+
+    /**
+     * Sends the {@link to.us.resume_builder.business.export_LaTeX.ResumeExporter#resume}
+     * to be exported to PDF and uploaded to file.io, with the response returned
+     * here. Uses the specified ResumeTemplate to generate the LaTeX string.
+     *
+     * @return The response from https://file.io
+     * @throws InterruptedException The upload request was interrupted
+     * @throws FailedRequestException The response returned with an error
+     * @throws IOException The request failed to send or the response couldn't be received.
+     */
+    public FileIOResponse uploadPDF(ResumeTemplate template) throws InterruptedException, FailedRequestException, IOException {
+        return PDFFacade.getPDFHandle().uploadPDF(getLaTeXString(template));
     }
 
     /**
