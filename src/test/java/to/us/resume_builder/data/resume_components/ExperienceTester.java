@@ -9,12 +9,7 @@ import java.lang.Object;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.data.resume_components.category.BulletCategory;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
-import to.us.resume_builder.data.resume_components.category.HeaderCategory;
 
-/**
- * Test class for the {@link Bullet}
- * @author Brooklynn Stone
- */
 public class BulletTester {
     private static Resume r = null;
     private static BulletCategory bc = null;
