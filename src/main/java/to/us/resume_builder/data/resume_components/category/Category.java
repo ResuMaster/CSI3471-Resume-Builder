@@ -3,6 +3,8 @@ package to.us.resume_builder.data.resume_components.category;
 import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 
+import java.util.Objects;
+
 public abstract class Category extends ResumeComponent implements ILaTeXConvertable {
 
     /**
@@ -86,4 +88,31 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     public String toString() {
         return this.name;
     }
+
+    /**
+     * An equals for a category.
+     * @param o The other object to compare to.
+     * @return True if they are equal, else false.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
+        return getType() == category.getType() &&
+            Objects.equals(getID(), category.getID());
+    }
+
+    /**
+     * A way to hash a category.
+     * @return The hash for that category.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), getID());
+    }
 }
+
+
+
+
