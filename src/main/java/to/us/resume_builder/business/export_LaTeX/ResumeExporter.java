@@ -124,7 +124,7 @@ public class ResumeExporter {
      *
      * @return The LaTeX representation of this resume.
      */
-    public String getLaTeXString(ResumeTemplate template) {
+    private String getLaTeXString(ResumeTemplate template) {
         // Create a StringJoiner to hold the contents of the template
         StringJoiner contents = new StringJoiner(template.getSeparatorTemplate().toString());
 
