@@ -2,7 +2,8 @@ package to.us.resume_builder.data.resume_components;
 
 import java.util.List;
 
-public interface IBulletContainer {
+public interface
+IBulletContainer {
 
     /**
      * Get the current List of Bullets for this instance.
