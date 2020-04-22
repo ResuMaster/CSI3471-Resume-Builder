@@ -15,6 +15,6 @@ import static org.junit.Assert.*;
  * Test class for the {@link ExperienceCategory}
  * @author none
  */
-public class ExperienceCategoryTester {
+public class ExperienceCategoryTester extends CategoryTester {
 
 }

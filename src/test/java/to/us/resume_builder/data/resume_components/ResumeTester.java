@@ -123,6 +123,8 @@ public class ResumeTester {
         for (String id : categoryIDs){
             assertNotNull(r.getCategoryByID(id));
         }
+        // testing with an id that could never be generated
+        assertNull(r.getCategoryByID("1234"));
     }
 
     /**

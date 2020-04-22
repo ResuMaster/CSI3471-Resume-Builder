@@ -99,8 +99,7 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
         if (this == o) return true;
         if (!(o instanceof Category)) return false;
         Category category = (Category) o;
-        return getType() == category.getType() &&
-            Objects.equals(getID(), category.getID());
+        return Objects.equals(getID(), category.getID());
     }
 
     /**

@@ -11,6 +11,6 @@ import static org.junit.Assert.assertEquals;
  * Test class for the {@link HeaderCategory}
  * @author none
  */
-public class HeaderCategoryTester {
+public class HeaderCategoryTester extends CategoryTester {
 
 }

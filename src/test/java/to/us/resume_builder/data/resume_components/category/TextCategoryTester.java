@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * Test class for the {@link TextCategory}
  * @author Brooklynn Stone
  */
-public class TextCategoryTester {
+public class TextCategoryTester extends CategoryTester {
     /**
      * Test resume which generates an id for the {@link BulletCategory}
      */

@@ -15,7 +15,7 @@ import java.util.List;
  * Test class for the {@link BulletCategory}
  * @author Brooklynn Stone
  */
-public class BulletCategoryTester {
+public class BulletCategoryTester extends CategoryTester {
     private static Resume r;
     private static BulletCategory bc;
     private static List<Bullet> bullets;
