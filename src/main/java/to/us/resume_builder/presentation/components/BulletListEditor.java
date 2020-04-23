@@ -45,7 +45,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
-        table.getColumnModel().getColumn(0).setMaxWidth(45);
+        table.getColumnModel().getColumn(0).setMaxWidth(60);
 
         int lines = 2;
         table.setRowHeight(table.getRowHeight() * lines);
