@@ -5,9 +5,11 @@ import to.us.resume_builder.data.resume_components.category.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 
 public class Resume {
+    private static Logger LOGGER = Logger.getLogger(Resume.class.getName());
 
     /**
      * the list of categories that are associated with this resume.
@@ -52,6 +54,9 @@ public class Resume {
                 categoryList.add(new BulletCategory(id));
                 break;
         }
+
+        LOGGER.info("Created " + type.name() + " category with id " + id + ".");
+
         return id;
     }
 
@@ -96,6 +101,8 @@ public class Resume {
      * @param id the ID used to find the Category to remove.
      */
     public void removeCategoryByID(String id) {
+        LOGGER.info("Removed " + getCategoryByID(id).getType().name() + " category with id " + id + ".");
+
         categoryList.removeIf(b -> b.getID().equals(id));
     }
 }
