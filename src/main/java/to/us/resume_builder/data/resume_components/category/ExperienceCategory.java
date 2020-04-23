@@ -9,8 +9,10 @@ import to.us.resume_builder.business.util.MiscUtils;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class ExperienceCategory extends Category {
+    private static Logger LOGGER = Logger.getLogger(ExperienceCategory.class.getName());
 
     /**
      * A list to hold the experiences for this category.
@@ -138,8 +140,6 @@ public class ExperienceCategory extends Category {
                 .reduce((a, b) -> a + b)
                 .orElse("")
             )
-            .toString();
+            .toString(() -> LOGGER.info("Generated LaTeX for experience category \"" + this.displayName + "\"."));
     }
-
-
 }

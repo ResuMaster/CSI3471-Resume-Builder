@@ -89,6 +89,30 @@ public class StringTemplate implements Cloneable {
         return t;
     }
 
+
+    /**
+     * Get the string representation of this template, with all keys replaced,
+     * then run the callback.
+     *
+     * @param callback A function to call once the string is generated.
+     *
+     * @return The string representation of this template.
+     */
+    public String toString(Runnable callback) {
+        String t = template;
+
+        // Replace each <key> with its value.
+        for (Map.Entry<String, String> entry : replacements.entrySet()) {
+            if (entry.getValue() != null) {
+                t = t.replaceAll("<" + entry.getKey() + ">", Matcher.quoteReplacement(entry.getValue()));
+            }
+        }
+
+        callback.run();
+
+        return t;
+    }
+
     /**
      * Get a copy of this <code>StringTemplate</code> object.
      *
