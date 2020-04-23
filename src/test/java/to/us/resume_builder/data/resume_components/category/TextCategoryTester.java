@@ -32,6 +32,21 @@ public class TextCategoryTester extends CategoryTester {
         tc.setText("The text");
     }
 
+    @Override
+    void testGetType() {
+
+    }
+
+    @Override
+    void testDisplayName() {
+
+    }
+
+    @Override
+    void testName() {
+
+    }
+
     /**
      * Sets the text to something else and verifies that this change has been made internally
      */

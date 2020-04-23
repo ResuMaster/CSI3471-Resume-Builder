@@ -35,6 +35,21 @@ public class BulletCategoryTester extends CategoryTester {
         }
     }
 
+    @Override
+    void testGetType() {
+
+    }
+
+    @Override
+    void testDisplayName() {
+
+    }
+
+    @Override
+    void testName() {
+
+    }
+
     /**
      * Verify that the getter returns all 10 bullets with the expected text and identifications
      */
