@@ -9,8 +9,10 @@ import to.us.resume_builder.business.util.MiscUtils;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class BulletCategory extends Category implements IBulletContainer {
+    private static Logger LOGGER = Logger.getLogger(BulletCategory.class.getName());
 
     /**
      * A List of bullets.
@@ -157,6 +159,6 @@ public class BulletCategory extends Category implements IBulletContainer {
                     .reduce((a, b) -> a + b)
                     .orElse("")
             )
-            .toString();
+            .toString(() -> LOGGER.info("Generated LaTeX for bullet category \"" + this.displayName + "\"."));
     }
 }

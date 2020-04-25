@@ -4,7 +4,10 @@ package to.us.resume_builder.data.resume_components.category;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
 
+import java.util.logging.Logger;
+
 public class HeaderCategory extends Category {
+    private static Logger LOGGER = Logger.getLogger(HeaderCategory.class.getName());
 
     /**
      * The link that the user want to have in the header, usually linkedin.com.
@@ -123,6 +126,6 @@ public class HeaderCategory extends Category {
             .replaceVariable("phone", MiscUtils.escapeLaTeX(this.phoneNumber))
             .replaceVariable("link", MiscUtils.escapeLaTeX(this.link))
             .replaceVariable("email", MiscUtils.escapeLaTeX(this.email))
-            .toString();
+            .toString(() -> LOGGER.info("Generated LaTeX for header category \"" + this.displayName + "\"."));
     }
 }

@@ -6,6 +6,7 @@ import to.us.resume_builder.data.resume_components.category.*;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Class to resolve deserializing the abstract category class from JSON.
@@ -13,6 +14,8 @@ import java.util.Map;
  * @author Jacob Curtis
  */
 public class CategoryDeserializer implements JsonDeserializer<Category> {
+    private static Logger LOG = Logger.getLogger(CategoryDeserializer.class.getName());
+
     /**
      * A map containing the different Category types for their corresponding
      * string key.
@@ -37,11 +40,14 @@ public class CategoryDeserializer implements JsonDeserializer<Category> {
      */
     @Override
     public Category deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        LOG.fine("Verifying Category type before deserialization");
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String categoryType = jsonObject.get("type").getAsString();
         if (!typeToClass.containsKey(categoryType)) {
+            LOG.warning("Attempted deserialization on invalid Category: " + categoryType);
             throw new JsonParseException("Invalid Category Type");
         }
+        LOG.fine("Attempting to deserialize Category subtype");
         return jsonDeserializationContext.deserialize(jsonElement, typeToClass.get(categoryType));
     }
 }

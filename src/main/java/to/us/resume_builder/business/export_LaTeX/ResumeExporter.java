@@ -86,6 +86,7 @@ public class ResumeExporter {
             status = false;
         }
 
+        LOG.info("Export process complete.");
         return status;
     }
 
@@ -124,7 +125,7 @@ public class ResumeExporter {
      *
      * @return The LaTeX representation of this resume.
      */
-    private String getLaTeXString(ResumeTemplate template) {
+    public String getLaTeXString(ResumeTemplate template) {
         // Create a StringJoiner to hold the contents of the template
         StringJoiner contents = new StringJoiner(template.getSeparatorTemplate().toString());
 
@@ -136,7 +137,7 @@ public class ResumeExporter {
         // Replace the <content> tag in the resume template with the actual contents
         return template.getLatexTemplate()
             .replaceVariable("content", contents.toString())
-            .toString();
+            .toString(() -> LOG.info("Generated LaTeX document."));
     }
 
     /**
@@ -148,6 +149,8 @@ public class ResumeExporter {
      * @throws IOException Thrown if an I/O error occurs.
      */
     private boolean compileResumePDF(Path filePath) throws IOException {
+        LOG.info("Beginning resume compilation...");
+
         // Temporary artifacts
         final String[] ARTIFACTS_TO_DELETE = { "aux", "log", "tex" };
         boolean status = true;
@@ -159,11 +162,14 @@ public class ResumeExporter {
             // TODO: add dedicated log file
             builder.redirectOutput(new File("./export.log"));
             builder.redirectError(new File("./export.log"));
+            LOG.info("PDF compilation log can be found at " + Path.of("./export.log").toAbsolutePath().toString());
 
             // Run the process
+            LOG.info("Attempting to run process \"" + builder.command() + "\"...");
             Process p = builder.start();
             if (!p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
                 p.destroy();
+                LOG.warning("PDF compilation timed out.");
                 JOptionPane.showMessageDialog(null, "Resume exporter took too long. Contact IT for additional assistance.");
                 status = false;
             }
@@ -171,10 +177,12 @@ public class ResumeExporter {
             // Clean up artifacts
             for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
                 if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
+                    LOG.info("Attempting to delete artifact \"" + f.getAbsolutePath() + "\", if it exists.");
                     Files.deleteIfExists(f.toPath());
                 }
             }
         } catch (InterruptedException e) {
+            LOG.warning("Compilation process was interrupted. Exiting compilation.");
             status = false;
         }
 

@@ -3,7 +3,10 @@ package to.us.resume_builder.data.resume_components.category;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
 
+import java.util.logging.Logger;
+
 public class TextCategory extends Category {
+    private static Logger LOGGER = Logger.getLogger(TextCategory.class.getName());
 
     /**
      * The text that is displayed on the resume.
@@ -50,6 +53,6 @@ public class TextCategory extends Category {
         return template.getCategoryTemplate(this.type)
             .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
-            .toString();
+            .toString(() -> LOGGER.info("Generated LaTeX for text category \"" + this.displayName + "\"."));
     }
 }
