@@ -91,8 +91,8 @@ public class EditorController {
         Category newCat = resume.getCategoryByID(catID);
 
         // Initialize category
-        newCat.setName("New " + type.toString());
-        newCat.setDisplayName(type.toString());
+        newCat.setName("New " + type.getName());
+        newCat.setDisplayName(type.getName());
 
         // Register and display category
         sideList.addCategory(newCat);
