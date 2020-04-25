@@ -32,6 +32,18 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     }
 
     /**
+     * Facilitates cloning of categories
+     * 
+     * @param cat The Category to clone
+     */
+    public Category(Category cat) {
+        super(cat);
+        this.type = cat.type;
+        this.name = cat.name;
+        this.displayName = cat.displayName;
+    }
+
+    /**
      * Returns the CategoryType type of the category for this instance.
      *
      * @return type

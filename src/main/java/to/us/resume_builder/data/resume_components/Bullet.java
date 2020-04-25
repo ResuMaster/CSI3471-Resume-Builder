@@ -1,11 +1,10 @@
 package to.us.resume_builder.data.resume_components;
 
+import java.util.logging.Logger;
+
 import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
-
-import java.io.BufferedWriter;
-import java.util.logging.Logger;
 
 public class Bullet extends ResumeComponent implements ILaTeXConvertable {
     private static Logger LOGGER = Logger.getLogger(Bullet.class.getName());
@@ -22,6 +21,16 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
      */
     public Bullet(String id) {
         super(id);
+    }
+
+    /**
+     * Facilitates cloning bullets
+     * 
+     * @param bullet
+     */
+    public Bullet(Bullet bullet) {
+        super(bullet);
+        this.text = bullet.text;
     }
 
     /**
@@ -55,5 +64,10 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
         return text != null && text.length() > 0 ? template.getFieldTemplate()
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
             .toString(() -> LOGGER.info("Generated LaTeX for bullet \"" + this.text + "\".")) : "";
+    }
+
+    @Override
+    public ResumeComponent clone() {
+        return new Bullet(this);
     }
 }

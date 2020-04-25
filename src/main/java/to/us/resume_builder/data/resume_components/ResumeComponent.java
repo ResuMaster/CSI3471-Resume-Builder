@@ -13,6 +13,7 @@ public class ResumeComponent {
 
     /**
      * sets the resume id for the instance.
+     * 
      * @param id The new ID for this instance.
      */
     public ResumeComponent(String id) {
@@ -20,7 +21,18 @@ public class ResumeComponent {
     }
 
     /**
+     * Facilitates cloning of resume components
+     * 
+     * @param resumeComponent The component to clone
+     */
+    public ResumeComponent(ResumeComponent resumeComponent) {
+        this.id = resumeComponent.id;
+        this.visible = resumeComponent.visible;
+    }
+
+    /**
      * returns the ID for this instance.
+     * 
      * @return id The ID for this instance.
      */
     public String getID() {
@@ -29,17 +41,24 @@ public class ResumeComponent {
 
     /**
      * Get the current visibility for this instance.
+     * 
      * @return visible The current visibility of the item.
      */
-    public boolean getVisible(){
+    public boolean getVisible() {
         return visible;
     }
 
     /**
      * Sets the visibility of the object.
+     * 
      * @param visible The visibility to set to.
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    @Override
+    public ResumeComponent clone() {
+        return new ResumeComponent(this);
     }
 }

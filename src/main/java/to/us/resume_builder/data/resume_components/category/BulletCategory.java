@@ -1,15 +1,15 @@
 package to.us.resume_builder.data.resume_components.category;
 
-import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
-import to.us.resume_builder.data.resume_components.Bullet;
-import to.us.resume_builder.data.resume_components.IBulletContainer;
-import to.us.resume_builder.data.resume_components.ResumeComponent;
-import to.us.resume_builder.business.util.MiscUtils;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
+
+import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
+import to.us.resume_builder.business.util.MiscUtils;
+import to.us.resume_builder.data.resume_components.Bullet;
+import to.us.resume_builder.data.resume_components.IBulletContainer;
+import to.us.resume_builder.data.resume_components.ResumeComponent;
 
 public class BulletCategory extends Category implements IBulletContainer {
     private static Logger LOGGER = Logger.getLogger(BulletCategory.class.getName());
@@ -34,12 +34,27 @@ public class BulletCategory extends Category implements IBulletContainer {
         bullets = new LinkedList<>();
     }
 
+    /**
+     * Facilitates cloning of BulletCategories
+     * 
+     * @param other The BulletCategory to clone
+     */
+    protected BulletCategory(BulletCategory other) {
+        super(other);
+        this.columnCount = other.columnCount;
+
+        // Copy bullets
+        this.bullets = new LinkedList<>();
+        for (Bullet b : other.bullets)
+            this.bullets.add((Bullet) b.clone());
+    }
 
     /**
      * Get the current List of Bullets for this instance.
      *
      * @return the current Bullet List.
      */
+    @Override
     public List<Bullet> getBulletList() {
         return bullets;
     }
@@ -49,6 +64,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      *
      * @param number The value to set columns to.
      */
+    @Override
     public void setColumn(int number) {
         this.columnCount = number;
     }
@@ -58,6 +74,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      *
      * @return The number of columns.
      */
+    @Override
     public int getColumn() {
         return this.columnCount;
     }
@@ -69,6 +86,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      *
      * @return The bullet if found, or null if not found.
      */
+    @Override
     public Bullet getBulletByID(String id) {
         return bullets.stream()
             .filter(c -> c.getID().equals(id))
@@ -81,6 +99,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      *
      * @return The id created for the new bullet.
      */
+    @Override
     public String addBullet() {
         String id;
         Random rand = new Random();
@@ -99,6 +118,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      *
      * @return The id created for the new bullet.
      */
+    @Override
     public String addBullet(Bullet b) {
         String id;
         Random rand = new Random();
@@ -121,6 +141,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      *
      * @param id The String to find which instant.
      */
+    @Override
     public void removeBullet(String id) {
         bullets.removeIf(b -> b.getID().equals(id));
     }
@@ -132,6 +153,7 @@ public class BulletCategory extends Category implements IBulletContainer {
      *
      * @return True if found.
      */
+    @Override
     public boolean checkBulletListID(String id) {
         return getBulletByID(id) != null;
     }
@@ -160,5 +182,10 @@ public class BulletCategory extends Category implements IBulletContainer {
                     .orElse("")
             )
             .toString(() -> LOGGER.info("Generated LaTeX for bullet category \"" + this.displayName + "\"."));
+    }
+
+    @Override
+    public Category clone() {
+        return new BulletCategory(this);
     }
 }
