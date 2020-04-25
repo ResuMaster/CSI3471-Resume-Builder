@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.net.http.HttpResponse;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import to.us.resume_builder.business.server_connect.fileio_response.FileIOResponse;
 import to.us.resume_builder.business.server_connect.fileio_response.FileIOResponseParser;
@@ -12,6 +14,7 @@ import to.us.resume_builder.business.server_connect.request.FailedRequestExcepti
 import to.us.resume_builder.business.server_connect.request.impl.PDFRequest;
 
 public class PDFFacade {
+	private static final Logger LOG = Logger.getLogger(PDFFacade.class.getName());
 
 	/** The status code indicating the PDF compile request succeeded */
 	private static final int DOWNLOAD_SUCCESS = 200;
@@ -37,10 +40,12 @@ public class PDFFacade {
 	 */
 	public byte[] getPDF(String latex) throws IOException, InterruptedException, FailedRequestException {
 		// Get and vet response
+		LOG.logp(Level.INFO, getClass().getName(), "getPDF", "Sending PDF compilation request, url=false");
 		HttpResponse<InputStream> resp = req.sendRequest("latex", latex, "url", "false");
 		catchError(resp, DOWNLOAD_SUCCESS);
 
 		// Return file
+		LOG.logp(Level.INFO, getClass().getName(), "getPDF", "PDF compilation successful, returning bytes");
 		return resp.body().readAllBytes();
 	}
 
@@ -57,10 +62,12 @@ public class PDFFacade {
 	 */
 	public FileIOResponse uploadPDF(String latex) throws IOException, InterruptedException, FailedRequestException {
 		// Get and vet response
+		LOG.logp(Level.INFO, getClass().getName(), "uploadPDF", "Sending PDF compilation request, url=true");
 		HttpResponse<InputStream> resp = req.sendRequest("latex", latex, "url", "true");
 		catchError(resp, UPLOAD_SUCCESS);
 
 		// Send back response. Split up into multiple lines for readability.
+		LOG.logp(Level.INFO, getClass().getName(), "uploadPDF", "PDF compilation successful, returning FileIOResponse");
 		byte[] result = resp.body().readAllBytes();
 		String txtResp = StandardCharsets.UTF_8.decode(ByteBuffer.wrap(result)).toString();
 		return FileIOResponseParser.getManager().parseResponse(txtResp);
@@ -80,10 +87,13 @@ public class PDFFacade {
 	private <T> void catchError(HttpResponse<T> resp, int successCode) throws FailedRequestException {
 		if (resp.statusCode() != successCode) {
 			String error = resp.headers().firstValue("error").orElse(null);
-			if (error != null)
+			LOG.logp(Level.WARNING, getClass().getName(), "catchError", "Request received error code " + resp.statusCode());
+			if (error != null) {
+				LOG.logp(Level.WARNING, getClass().getName(), "catchError", "Error received: " + error);
 				throw new FailedRequestException(error, resp.statusCode());
-			else
+			} else {
 				throw new FailedRequestException(resp.statusCode());
+			}
 		}
 	}
 

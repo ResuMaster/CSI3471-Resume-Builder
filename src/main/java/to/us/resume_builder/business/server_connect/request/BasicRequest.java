@@ -64,7 +64,6 @@ public abstract class BasicRequest<T> {
 	/**
 	 * Creates and sends the specific request this class handles.
 	 * 
-	 * @param value
 	 * @param arguments
 	 * @return The http response from the request this class handles
 	 * @throws InterruptedException If the operation is interrupted
@@ -125,7 +124,7 @@ public abstract class BasicRequest<T> {
 	/**
 	 * Gets the URI for the request.
 	 * 
-	 * @param The arguments, in a Name1, Val1, ..., NameN, ValN format.
+	 * @param arguments in a Name1, Val1, ..., NameN, ValN format.
 	 * @return The URI for this request.
 	 */
 	protected abstract URI getURI(String... arguments);
