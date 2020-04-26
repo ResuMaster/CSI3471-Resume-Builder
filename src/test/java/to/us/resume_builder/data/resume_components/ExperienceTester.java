@@ -11,8 +11,22 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for the {@link Experience}
- * @author none
+ * @author Ashley Lu Couch
  */
 public class ExperienceTester {
+
+
+    @BeforeEach
+    public void init() {
+
+
+
+    }
+
+
+    @Test
+    public void test(){
+
+    }
 
 }
