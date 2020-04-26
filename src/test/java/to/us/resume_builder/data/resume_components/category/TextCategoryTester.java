@@ -30,21 +30,35 @@ public class TextCategoryTester extends CategoryTester {
         r = new Resume();
         tc = new TextCategory(r.createCategory(CategoryType.BULLETS));
         tc.setText("The text");
+        tc.setDisplayName("Display name");
+        tc.setName("name");
     }
 
+    /**
+     * Verify getType returns a Text CategoryType
+     */
+    @Test
     @Override
     void testGetType() {
-
+        assertEquals(CategoryType.HEADER, tc.getType());
     }
 
+    /**
+     * Testing get and set display name
+     */
+    @Test
     @Override
     void testDisplayName() {
-
+        assertEquals("Display name", tc.getDisplayName());
     }
 
+    /**
+     * Testing get and set name
+     */
+    @Test
     @Override
     void testName() {
-
+        assertEquals("name", tc.getName());
     }
 
     /**
