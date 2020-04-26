@@ -20,7 +20,9 @@ public class BulletTester {
     private static BulletCategory bc = null;
     private static Bullet b = null;
 
-
+    /**
+     * Initializes a Bullet with test data
+     */
     @BeforeEach
     public void init() {
         r = new Resume();
@@ -29,17 +31,26 @@ public class BulletTester {
         b.setText("This is a bullet.");
     }
 
+    /**
+     * Test getter for text of a bullet
+     */
     @Test
     public void testGetText() {
         assertEquals("This is a bullet.", b.getText());
     }
 
+    /**
+     * Test setter for a Bullet
+     */
     @Test
     public void testSetText() {
         b.setText("This is not a bullet.");
         assertEquals("This is not a bullet.", b.getText());
     }
 
+    /**
+     * Verify correct LaTeX String generated
+     */
     @Test
     public void testFormatLaTeXString() {
         assertEquals("\\item This is a bullet.\n", b.formatLaTeXString(ResumeTemplate.DEFAULT));
