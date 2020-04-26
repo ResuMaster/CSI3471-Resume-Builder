@@ -123,7 +123,7 @@ public class BulletCategoryTester extends CategoryTester {
     @Test
     public void testRemoveBullet() {
         bc.removeBullet(bullets.get(0).getID());
-        assertTrue(!bc.checkBulletListID(bullets.get(0).getID()));
+        assertFalse(bc.checkBulletListID(bullets.get(0).getID()));
         assertEquals(9, bc.getBulletList().size());
     }
 
