@@ -33,21 +33,35 @@ public class BulletCategoryTester extends CategoryTester {
             bullets.get(i).setText("Bullet " + i + ".");
             bc.getBulletByID(bullets.get(i).getID()).setText("Bullet " + i + ".");
         }
+        bc.setDisplayName("Display name");
+        bc.setName("name");
     }
 
+    /**
+     * Verifies that getType returns a Bullet CategoryType
+     */
     @Override
+    @Test
     void testGetType() {
-
+        assertEquals(CategoryType.BULLETS, bc.getType());
     }
 
+    /**
+     * Testing get and set display name
+     */
     @Override
+    @Test
     void testDisplayName() {
-
+        assertEquals("Display name", bc.getDisplayName());
     }
 
+    /**
+     * Testing get and set name
+     */
     @Override
+    @Test
     void testName() {
-
+        assertEquals("name", bc.getName());
     }
 
     /**
