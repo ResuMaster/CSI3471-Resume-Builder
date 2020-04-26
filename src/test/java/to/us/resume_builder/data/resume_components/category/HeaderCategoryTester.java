@@ -10,11 +10,14 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for the {@link HeaderCategory}
- * @author none
+ * @author Brooklynn Stone
  */
 public class HeaderCategoryTester extends CategoryTester {
     private HeaderCategory hc;
 
+    /**
+     * Initializes a Header Category with test input
+     */
     @BeforeEach
     public void init() {
         hc = new HeaderCategory("12345");
@@ -26,24 +29,36 @@ public class HeaderCategoryTester extends CategoryTester {
         hc.setName("Header Category");
     }
 
+    /**
+     * Verify getType returns a Header CategoryType
+     */
     @Test
     @Override
     void testGetType() {
         assertEquals(CategoryType.HEADER, hc.getType());
     }
 
+    /**
+     * Testing get and set display name
+     */
     @Test
     @Override
     void testDisplayName() {
         assertEquals("Display Name", hc.getDisplayName());
     }
 
+    /**
+     * Testing get and set name
+     */
     @Test
     @Override
     void testName() {
         assertEquals("Header Category", hc.getName());
     }
 
+    /**
+     * Verify the correct LaTeX String is generated
+     */
     @Test
     void testFormatLaTeXString() {
         String laTeX = "\\resumeheader{Display Name}" +
