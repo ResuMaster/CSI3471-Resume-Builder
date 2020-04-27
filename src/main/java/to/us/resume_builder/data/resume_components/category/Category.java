@@ -1,6 +1,7 @@
 package to.us.resume_builder.data.resume_components.category;
 
 import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
+import to.us.resume_builder.data.resume_components.CategoryVisitor;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 
 public abstract class Category extends ResumeComponent implements ILaTeXConvertable {
@@ -98,4 +99,11 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     public String toString() {
         return this.name;
     }
+
+    /**
+     * Allow a CategoryVisitor to visit this category.
+     * 
+     * @param v The visitor to this Category.
+     */
+    public abstract void accept(CategoryVisitor v);
 }

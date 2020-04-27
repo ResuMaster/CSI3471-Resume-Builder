@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
 import to.us.resume_builder.data.resume_components.Bullet;
+import to.us.resume_builder.data.resume_components.CategoryVisitor;
 import to.us.resume_builder.data.resume_components.IBulletContainer;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 
@@ -184,8 +185,13 @@ public class BulletCategory extends Category implements IBulletContainer {
             .toString(() -> LOGGER.info("Generated LaTeX for bullet category \"" + this.displayName + "\"."));
     }
 
+    /**
+     * Allow a CategoryVisitor to visit this BulletCategory.
+     * 
+     * @param v The visitor to this BulletCategory.
+     */
     @Override
-    public Category clone() {
-        return new BulletCategory(this);
+    public void accept(CategoryVisitor v) {
+        v.visit(this);
     }
 }
