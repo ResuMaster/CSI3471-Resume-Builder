@@ -5,6 +5,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import to.us.resume_builder.business.ApplicationConfiguration;
 import to.us.resume_builder.business.resume_file_management.ResumeFile;
 import to.us.resume_builder.business.resume_file_management.ResumeFileManager;
+import to.us.resume_builder.presentation.CreateOrOpenDialog;
 import to.us.resume_builder.presentation.EditorFrame;
 import to.us.resume_builder.business.util.FileDialog;
 
@@ -41,20 +42,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-            FileDialog fileDialog = new FileDialog("json", null);
-            String file = fileDialog.getFile();
-            // Cancel opening the editor if the user did not select a file.
-            if (file == null) {
-                return;
-            }
-            try {
-                ResumeFile rf = ResumeFileManager.importFile(file);
-                if (rf != null) {
-                    new EditorFrame(rf);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            new CreateOrOpenDialog();
         });
     }
 }

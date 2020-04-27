@@ -55,8 +55,8 @@ public class ApplicationConfiguration {
      * Set the default options for any options not specified.
      */
     private void setDefaults() {
-        setIfNotPresent("templates.directory", "./templates/");
-        setIfNotPresent("icons.directory", "./icons/");
+//        setIfNotPresent("templates.directory", "./templates/");
+//        setIfNotPresent("icons.directory", "images/");
         setIfNotPresent("export.tempLocation", "./temp/");
         setIfNotPresent("export.timeout", 60L);
         setIfNotPresent("theme.color", "light");

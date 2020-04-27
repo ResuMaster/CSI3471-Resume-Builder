@@ -35,6 +35,16 @@ public class ResumeFile {
     }
 
     /**
+     * Creates a ResumeFile given resume.
+     *
+     * @param resume The Resume to be attached to the ResumeFile
+     */
+    public ResumeFile(Resume resume) {
+        this.metadata = new Metadata();
+        this.resume = resume;
+    }
+
+    /**
      * This method returns the ResumeFile's Metadata.
      *
      * @return The Metadata associated with the ResumeFile

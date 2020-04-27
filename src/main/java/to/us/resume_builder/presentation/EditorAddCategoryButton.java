@@ -96,8 +96,7 @@ public class EditorAddCategoryButton extends JButton {
         panel.setLayout(new BorderLayout());
 
         try {
-            BufferedImage wPic = ImageIO.read(Path.of(ApplicationConfiguration.getInstance().getString("icons.directory"), type.getTemplateFileName() + ".png").toFile());
-            JLabel wIcon = new JLabel(new ImageIcon(wPic));
+            JLabel wIcon = new JLabel(new ImageIcon(MiscUtils.getImage("images/" + type.getTemplateFileName() + ".png")));
             wIcon.setSize(100, 100);
             panel.add(wIcon, BorderLayout.WEST);
         } catch (Exception e) {

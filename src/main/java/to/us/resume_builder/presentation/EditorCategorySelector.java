@@ -3,11 +3,7 @@ package to.us.resume_builder.presentation;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -83,7 +79,11 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
      */
     public void removeCategory(String id) {
         // Return if no selection or only one category available
-        if (categories.isSelectionEmpty() || model.getSize() == 1) {
+        if (categories.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "No section selected! Please select a section in the list on the left.", "Couldn't Remove Section", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (model.getSize() == 1) {
+            JOptionPane.showMessageDialog(null, "You must have at least one section.", "Couldn't Remove Section", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
