@@ -7,6 +7,8 @@ import to.us.resume_builder.data.resume_components.category.TextCategory;
 
 /**
  * Creates an interface for visiting the various Categories
+ * <p>
+ * Example of Design Pattern: Visitor (hence the name)
  * 
  * @author Micah
  */

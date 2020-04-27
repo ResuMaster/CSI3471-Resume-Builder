@@ -180,9 +180,12 @@ public class EditorStage extends JPanel {
     private CategoryEditPane getEditor(Category toEdit) {
         CategoryEditVisitor cev = new CategoryEditVisitor();
         CategoryEditPane toReturn = null;
+
+        // Usage of the Visitor design pattern.
         toEdit.accept(cev);
         toReturn = cev.getEditor();
         cev.resetEditor();
+
         return toReturn;
     }
 }

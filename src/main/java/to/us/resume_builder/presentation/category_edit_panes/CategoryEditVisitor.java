@@ -8,6 +8,8 @@ import to.us.resume_builder.data.resume_components.category.TextCategory;
 
 /**
  * Allows dynamic creation and retrieval of a CategoryEditPane
+ * <p>
+ * Implementation of Design Pattern: Visitor
  * 
  * @author Micah
  */

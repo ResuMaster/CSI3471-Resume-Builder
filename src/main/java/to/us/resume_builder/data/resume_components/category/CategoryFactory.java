@@ -24,7 +24,7 @@ public class CategoryFactory {
     /**
      * Provide access to the factory to create Categories
      * 
-     * @return
+     * @return The singleton CategoryFactory instance.
      */
     public static CategoryFactory getInstance() {
         if (fac == null) {
@@ -37,7 +37,7 @@ public class CategoryFactory {
     }
 
     /**
-     * Save set of possible categories to create.
+     * Initialize the set of possible categories to create.
      */
     private CategoryFactory() {
         clazzes = new HashMap<>();
@@ -50,6 +50,8 @@ public class CategoryFactory {
     /**
      * Public interface for creating a Category. May be fleshed out with more
      * constants to creation later if need be.
+     * <p>
+     * Example of Design Pattern: Factory Method
      * 
      * @param type The type of the category to create
      * @param id   The ID of the category to create
