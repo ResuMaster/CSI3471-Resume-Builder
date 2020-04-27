@@ -1,6 +1,4 @@
 {
-  "templates.directory": "./src/main/resources/templates/",
-  "icons.directory": "./src/main/resources/icons/",
   "export.tempLocation": "./temp/",
   "export.timeout": 60.0,
   "theme.color": "light"
