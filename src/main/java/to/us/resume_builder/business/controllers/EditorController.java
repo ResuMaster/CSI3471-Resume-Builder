@@ -16,16 +16,16 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
  */
 public class EditorController {
     /** The main UI editing the {@link EditorController#resume resume} */
-    private EditorStage stage;
+    protected EditorStage stage;
 
     /**
      * The UI allowing selection of a new {@link Category} to edit in the
      * {@link EditorController#stage stage}
      */
-    private EditorCategorySelector sideList;
+    protected EditorCategorySelector sideList;
 
     /** The resume currently under edit. */
-    private Resume resume;
+    protected Resume resume;
 
     /**
      * Constructs an EditorController linking the given components together.

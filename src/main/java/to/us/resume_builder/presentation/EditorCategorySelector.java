@@ -193,4 +193,11 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         int ndx = categories.getSelectedIndex();
         controller.loadCategory(model.getElementAt(ndx).getID());
     }
+
+    /**
+     * Getter for number of Categories currently being displayed
+     */
+    public int getCount() {
+        return model.getSize();
+    }
 }
