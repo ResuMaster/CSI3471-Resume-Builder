@@ -1,19 +1,33 @@
 package to.us.resume_builder.presentation;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
+import to.us.resume_builder.business.ApplicationConfiguration;
 import to.us.resume_builder.business.controllers.EditorController;
+import to.us.resume_builder.business.util.MiscUtils;
 import to.us.resume_builder.data.resume_components.Resume;
+import to.us.resume_builder.data.resume_components.category.Category;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 
 /**
- * The button which handles requesting a new
- * {@link to.us.resume_builder.data.resume_components.category.Category} be
- * added to the underlying {@link Resume}.
- * 
+ * The button which handles requesting a new {@link to.us.resume_builder.data.resume_components.category.Category}
+ * be added to the underlying {@link Resume}.
+ *
  * @author Micah
  */
 public class EditorAddCategoryButton extends JButton {
@@ -24,6 +38,8 @@ public class EditorAddCategoryButton extends JButton {
      * Controller which can add the category to the resume.
      */
     private EditorController controller;
+    private CategoryType selectedType;
+    private Map<CategoryType, JLabel> selectedLabels;
 
     /**
      * Creates a new button ready to pass a request for a new category to its
@@ -32,6 +48,8 @@ public class EditorAddCategoryButton extends JButton {
     public EditorAddCategoryButton() {
         super(LABEL);
         addActionListener(e -> addCategory());
+        selectedLabels = new HashMap<>();
+        selectedType = CategoryType.EXPERIENCE;
     }
 
     /**
@@ -50,9 +68,101 @@ public class EditorAddCategoryButton extends JButton {
      *     to.us.resume_builder.data.resume_components.category.Category}.
      */
     private CategoryType getType() {
+        int status = JOptionPane.showConfirmDialog(null, constructDialogContents(), GET_TYPE_MESSAGE, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (status == JOptionPane.CANCEL_OPTION || selectedType == null) {
+            return null;
+        }
+
+        return selectedType;
+    }
+
+    private JComponent constructDialogContents() {
         CategoryType[] values = CategoryType.values();
-        return (CategoryType) JOptionPane.showInputDialog(this, GET_TYPE_MESSAGE, LABEL, JOptionPane.PLAIN_MESSAGE,
-            null, values, values[0]);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout((values.length + 1) / 2, 2, -1, -1));
+        panel.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+
+        for (CategoryType value : values) {
+            panel.add(constructSelectionButton(value));
+        }
+
+        return panel;
+    }
+
+    private JComponent constructSelectionButton(CategoryType type) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        try {
+            BufferedImage wPic = ImageIO.read(Path.of(ApplicationConfiguration.getInstance().getString("icons.directory"), type.getTemplateFileName() + ".png").toFile());
+            JLabel wIcon = new JLabel(new ImageIcon(wPic));
+            wIcon.setSize(100, 100);
+            panel.add(wIcon, BorderLayout.WEST);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BorderLayout());
+        JLabel title = new JLabel(type.getName());
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setFont(title.getFont().deriveFont(title.getFont().getStyle() | Font.BOLD));
+        infoPanel.add(title, BorderLayout.NORTH);
+        JTextArea desc = new JTextArea(type.getDescription());
+        desc.setEditable(false);
+        JLabel selectedLabel = new JLabel("(Selected)");
+        selectedLabel.setForeground(Color.blue);
+        selectedLabel.setFont(selectedLabel.getFont().deriveFont(selectedLabel.getFont().getStyle() | Font.BOLD));
+        selectedLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        infoPanel.add(selectedLabel, BorderLayout.SOUTH);
+        selectedLabels.put(type, selectedLabel);
+        infoPanel.add(desc, BorderLayout.CENTER);
+        panel.add(infoPanel, BorderLayout.CENTER);
+        panel.setBackground(Color.RED);
+        panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
+        clearSelection();
+
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                EditorAddCategoryButton.this.selectedType = type;
+                super.mouseReleased(e);
+                clearSelection();
+                selectedLabels.get(type).setText("(Selected)");
+                selectedType = type;
+            }
+        });
+        title.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                EditorAddCategoryButton.this.selectedType = type;
+                super.mouseReleased(e);
+                clearSelection();
+                selectedLabels.get(type).setText("(Selected)");
+                selectedType = type;
+            }
+        });
+        desc.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                EditorAddCategoryButton.this.selectedType = type;
+                super.mouseReleased(e);
+                clearSelection();
+                selectedLabels.get(type).setText("(Selected)");
+                selectedType = type;
+            }
+        });
+
+        return panel;
+    }
+
+    private void clearSelection() {
+        selectedType = null;
+        selectedLabels.forEach((key, val) -> {
+            val.setText("");
+        });
     }
 
     /**

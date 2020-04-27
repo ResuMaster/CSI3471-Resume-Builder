@@ -9,13 +9,13 @@ import java.io.IOException;
  * @author Micah
  */
 public class FileDialog {
-    JFileChooser chooser;
-    Component parent;
+    private JFileChooser chooser;
+    private Component parent;
 
     public FileDialog(String acceptedFile, Component parent) {
         this.parent = parent;
         chooser = new JFileChooser(".");
-        chooser.setFileFilter(new FileNameExtensionFilter(null, acceptedFile));
+        chooser.setFileFilter(new FileNameExtensionFilter(acceptedFile, acceptedFile));
     }
 
     public String getFile() {

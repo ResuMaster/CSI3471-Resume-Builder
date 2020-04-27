@@ -1,6 +1,6 @@
 package to.us.resume_builder.presentation;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -61,7 +61,7 @@ public class EditorFrame extends JFrame {
         // Create move button panel
         // This block is by Ashley Lu Couch
         JPanel moveButtons = new JPanel();
-        moveButtons.setLayout(new BoxLayout(moveButtons, BoxLayout.LINE_AXIS));
+        moveButtons.setLayout(new GridLayout(1, 2));
         JButton upButton = new JButton("▲");
         upButton.addActionListener(e -> {
             sideList.moveCategoryUp();
