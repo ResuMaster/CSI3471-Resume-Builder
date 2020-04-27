@@ -36,21 +36,6 @@ public class BulletCategory extends Category implements IBulletContainer {
     }
 
     /**
-     * Facilitates cloning of BulletCategories
-     * 
-     * @param other The BulletCategory to clone
-     */
-    protected BulletCategory(BulletCategory other) {
-        super(other);
-        this.columnCount = other.columnCount;
-
-        // Copy bullets
-        this.bullets = new LinkedList<>();
-        for (Bullet b : other.bullets)
-            this.bullets.add((Bullet) b.clone());
-    }
-
-    /**
      * Get the current List of Bullets for this instance.
      *
      * @return the current Bullet List.

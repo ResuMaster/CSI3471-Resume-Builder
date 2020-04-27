@@ -21,16 +21,6 @@ public class ResumeComponent {
     }
 
     /**
-     * Facilitates cloning of resume components
-     * 
-     * @param resumeComponent The component to clone
-     */
-    public ResumeComponent(ResumeComponent resumeComponent) {
-        this.id = resumeComponent.id;
-        this.visible = resumeComponent.visible;
-    }
-
-    /**
      * returns the ID for this instance.
      * 
      * @return id The ID for this instance.
@@ -55,10 +45,5 @@ public class ResumeComponent {
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
-    }
-
-    @Override
-    public ResumeComponent clone() {
-        return new ResumeComponent(this);
     }
 }
