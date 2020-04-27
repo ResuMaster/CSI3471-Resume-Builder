@@ -6,22 +6,23 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
-import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
-import to.us.resume_builder.business.ApplicationConfiguration;
 import to.us.resume_builder.business.controllers.EditorController;
-import to.us.resume_builder.business.util.MiscUtils;
+import to.us.resume_builder.business.util.ImageCache;
 import to.us.resume_builder.data.resume_components.Resume;
-import to.us.resume_builder.data.resume_components.category.Category;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 
 /**
@@ -64,11 +65,12 @@ public class EditorAddCategoryButton extends JButton {
     /**
      * Gets the type of a desired new category from the user.
      *
-     * @return The {@link CategoryType} corresponding to the desired new {@link
+     * @return The {@link CategoryType} corresponding to the desired new {@link 
      *     to.us.resume_builder.data.resume_components.category.Category}.
      */
     private CategoryType getType() {
-        int status = JOptionPane.showConfirmDialog(null, constructDialogContents(), GET_TYPE_MESSAGE, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int status = JOptionPane.showConfirmDialog(null, constructDialogContents(), GET_TYPE_MESSAGE,
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (status == JOptionPane.CANCEL_OPTION || selectedType == null) {
             return null;
@@ -96,7 +98,8 @@ public class EditorAddCategoryButton extends JButton {
         panel.setLayout(new BorderLayout());
 
         try {
-            JLabel wIcon = new JLabel(new ImageIcon(MiscUtils.getImage("images/" + type.getTemplateFileName() + ".png")));
+            JLabel wIcon = new JLabel(new ImageIcon(
+                    ImageCache.getInstance().getImage("images/" + type.getTemplateFileName() + ".png")));
             wIcon.setSize(100, 100);
             panel.add(wIcon, BorderLayout.WEST);
         } catch (Exception e) {

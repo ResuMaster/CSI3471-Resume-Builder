@@ -1,7 +1,5 @@
 package to.us.resume_builder.business.util;
 
-import java.awt.*;
-import java.net.URL;
 import java.util.Random;
 
 /**
@@ -48,17 +46,5 @@ public final class MiscUtils {
                 .replace("_", "\\_")
                 .replace("$", "\\$");
         }
-    }
-
-    /**
-     * Loads a local image from inside of the JAR.
-     *
-     * @param pathAndFileName Path to the image file to load.
-     *
-     * @return A corresponding {@link Image} instance.
-     */
-    public static Image getImage(final String pathAndFileName) {
-        final URL url = Thread.currentThread().getContextClassLoader().getResource(pathAndFileName);
-        return Toolkit.getDefaultToolkit().getImage(url);
     }
 }
