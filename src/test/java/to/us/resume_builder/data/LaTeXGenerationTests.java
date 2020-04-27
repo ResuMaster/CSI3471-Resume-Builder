@@ -14,7 +14,7 @@ import to.us.resume_builder.data.resume_components.category.*;
 
 import java.util.stream.Stream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LaTeXGenerationTests {
     private static Stream<Arguments> bulletTests() {

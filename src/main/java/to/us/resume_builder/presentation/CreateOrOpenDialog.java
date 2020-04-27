@@ -49,6 +49,7 @@ public class CreateOrOpenDialog extends JFrame {
         createButton.addActionListener(evt -> {
             LOGGER.info("Creating new resume.");
             new EditorFrame(new ResumeFile(DEFAULT_RESUME));
+            this.setVisible(false);
         });
         JButton openButton = new JButton("Open an Existing Resume");
         openButton.addActionListener(evt -> {
@@ -86,5 +87,7 @@ public class CreateOrOpenDialog extends JFrame {
         this.add(panel);
         this.setSize(500, 400);
         this.setVisible(true);
+
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
