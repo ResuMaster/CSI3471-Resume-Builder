@@ -157,7 +157,6 @@ public class EditorMenuBar extends JMenuBar {
         review.add(sendReviewEmail = new JMenuItem("Send Review Email"));
 
         sendReviewEmail.addActionListener(e -> {
-            JTextPane textArea = new JTextPane();
             FileIOResponse response = null;
             try {
                 LOG.info("Uploading PDF to file.io");
@@ -167,6 +166,8 @@ public class EditorMenuBar extends JMenuBar {
             }
 
             if (response == null || !response.isSuccess()) {
+                LOG.warning("Response is failure.");
+                JOptionPane.showMessageDialog(this, "Could not upload PDF.");
                 return;
             }
 
@@ -196,6 +197,18 @@ public class EditorMenuBar extends JMenuBar {
                     LOG.info("Could not send email: " + ex);
                     JOptionPane.showMessageDialog(this, "Could not open email client.");
                 }
+            } else {
+                LOG.warning("Opening an email is not supported, opening a window with a message instead.");
+
+                JPanel panel = new JPanel();
+                panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+                panel.add(new JLabel("I could not open email client automatically, but here is a pre-generated email body to copy-and-paste:"));
+
+                JTextArea email = new JTextArea(body);
+                email.setEditable(false);
+                panel.add(email);
+
+                JOptionPane.showMessageDialog(this, panel);
             }
         });
 
