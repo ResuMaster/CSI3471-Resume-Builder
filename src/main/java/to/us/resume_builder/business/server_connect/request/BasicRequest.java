@@ -1,5 +1,7 @@
 package to.us.resume_builder.business.server_connect.request;
 
+import to.us.resume_builder.business.ApplicationConfiguration;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -30,7 +32,7 @@ public abstract class BasicRequest<T> {
 	/** Initializes the client and address to query. */
 	static {
 		CLIENT = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
-		SITE = "http://localhost:8080";
+		SITE = ApplicationConfiguration.getInstance().getString("request.url");
 	}
 
 	/** Charset to send requests using */
