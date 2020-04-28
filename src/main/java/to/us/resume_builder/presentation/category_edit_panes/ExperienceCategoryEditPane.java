@@ -1,5 +1,6 @@
 package to.us.resume_builder.presentation.category_edit_panes;
 
+import to.us.resume_builder.presentation.components.BulletListEditorTableModel;
 import to.us.resume_builder.presentation.components.ExperienceEditor;
 import to.us.resume_builder.data.resume_components.Experience;
 import to.us.resume_builder.data.resume_components.category.ExperienceCategory;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class is an editor pane for experience categories.
@@ -18,6 +21,8 @@ import java.util.List;
  * @author Matthew McCaskill
  */
 public class ExperienceCategoryEditPane extends CategoryEditPane {
+    private static final Logger LOG = Logger.getLogger(ExperienceCategoryEditPane.class.getName());
+
     /**
      * The list of {@link Experience} editors.
      */
@@ -94,6 +99,8 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
      * Update and repaint the experience editor list.
      */
     public void updateExperienceListUI() {
+        LOG.logp(Level.INFO, ExperienceCategoryEditPane.class.getName(), "updateExperienceListUI", "updating experience editor list and repainting");
+
         // Clear the list
         experienceList.removeAll();
 
@@ -194,6 +201,8 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
      */
     @Override
     public void save() {
+        LOG.logp(Level.INFO, ExperienceCategoryEditPane.class.getName(), "save", "saving the ExperienceCategory changes");
+
         // Save each experience
         this.experienceComponentList.forEach(ExperienceEditor::save);
 

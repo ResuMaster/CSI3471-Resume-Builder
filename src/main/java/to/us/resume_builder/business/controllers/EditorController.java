@@ -9,6 +9,8 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The main controller for the editor interface. Connects the
@@ -19,6 +21,8 @@ import java.util.List;
  * @author Micah Schiewe
  */
 public class EditorController {
+    private static final Logger LOG = Logger.getLogger(EditorController.class.getName());
+
     /** The main UI editing the {@link EditorController#resume resume} */
     private EditorStage stage;
 
@@ -43,13 +47,14 @@ public class EditorController {
     public static EditorController create(EditorStage stage, EditorCategorySelector sideList, Resume resume)
             throws IllegalArgumentException {
         if (stage == null || sideList == null || resume == null) {
+            LOG.logp(Level.WARNING, EditorController.class.getName(), "create", "Received null parameter");
             throw new IllegalArgumentException();
         }
         EditorController e = new EditorController();
         e.registerSideList(sideList);
         e.registerStage(stage);
         e.loadResume(resume);
-
+        LOG.logp(Level.INFO, EditorController.class.getName(), "create", "Registered EditorController");
         return e;
     }
 
@@ -102,6 +107,7 @@ public class EditorController {
         sideList.addCategory(newCat);
         sideList.setFocus(catID);
         stage.showInEditor(newCat);
+        LOG.logp(Level.INFO, EditorController.class.getName(), "addCategory", "Added new " + newCat.getType());
     }
 
     /**
@@ -113,6 +119,7 @@ public class EditorController {
     private void registerSideList(EditorCategorySelector sideList) {
         this.sideList = sideList;
         this.sideList.setController(this);
+        LOG.logp(Level.INFO, EditorController.class.getName(), "registerSideList", "Side List registered to controller");
     }
 
     /**
@@ -124,6 +131,7 @@ public class EditorController {
     private void registerStage(EditorStage stage) {
         this.stage = stage;
         this.stage.setController(this);
+        LOG.logp(Level.INFO, EditorController.class.getName(), "registerStage", "Stage registered to controller");
     }
 
     /**
@@ -145,6 +153,7 @@ public class EditorController {
         }
 
         resume.setCategoryList(categories);
+        LOG.logp(Level.INFO, EditorController.class.getName(), "saveCurrentCategoryOrder", "Category order saved");
     }
 }
 

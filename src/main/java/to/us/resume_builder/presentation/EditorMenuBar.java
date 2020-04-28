@@ -166,7 +166,11 @@ public class EditorMenuBar extends JMenuBar {
             }
 
             if (response == null || !response.isSuccess()) {
-                LOG.warning("Response is failure.");
+                if (response != null) {
+                    LOG.warning("Response is failure: " + response.getError());
+                } else {
+                    LOG.warning("Response is failure: null FileIOResponse");
+                }
                 JOptionPane.showMessageDialog(this, "Could not upload PDF.");
                 return;
             }
