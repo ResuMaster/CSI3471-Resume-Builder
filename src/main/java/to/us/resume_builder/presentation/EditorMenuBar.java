@@ -3,36 +3,28 @@ package to.us.resume_builder.presentation;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import net.moznion.uribuildertiny.URIBuilderTiny;
 import to.us.resume_builder.business.controllers.MenuController;
+import to.us.resume_builder.business.server_connect.fileio_response.FileIOResponse;
+import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.logging.Logger;
 
 /**
- * The menu bar of the main editor window, which has options for exporting
- * the user's data file, or a PDF of their resume.
+ * The menu bar of the main editor window, which has options for exporting the
+ * user's data file, or a PDF of their resume.
  *
  * @author Jacob Curtis
  * @author Micah Schiewe
  */
 public class EditorMenuBar extends JMenuBar {
-    /**
-     * The 'File' menu dropdown in the menu bar
-     */
-    private JMenu file;
-
-    /**
-     * Menu item allowing you to export your Resume Data File.
-     */
-    private JMenuItem exportDataFile;
-
-    /**
-     * Menu item allowing you to export your Resume to PDF.
-     */
-    private JMenuItem exportResume;
+    private static final Logger LOG = Logger.getLogger(EditorMenuBar.class.getName());
 
     /**
      * The controller which allows saving and exporting data.
@@ -40,12 +32,14 @@ public class EditorMenuBar extends JMenuBar {
     private MenuController controller = null;
 
     /**
-     * Constructs the EditorMenuBar with the File menu, with items for
-     * exporting the data file, and to PDF.
+     * Constructs the EditorMenuBar with the File menu, with items for exporting
+     * the data file, and to PDF.
      */
     public EditorMenuBar() {
-        file = new JMenu("Export");
+        JMenu file = new JMenu("Export");
+        JMenuItem exportDataFile;
         file.add(exportDataFile = new JMenuItem("Export Data File"));
+        JMenuItem exportResume;
         file.add(exportResume = new JMenuItem("Export Resume"));
 
         exportDataFile.addActionListener(e -> {
@@ -85,6 +79,7 @@ public class EditorMenuBar extends JMenuBar {
             // If "save" was selected, actually save the data file
             if (fileChooser.showDialog(null, "Save Resume Data File") == JFileChooser.APPROVE_OPTION) {
                 Path chosenFile = fileChooser.getSelectedFile().toPath();
+                LOG.info("Attempting to save resume data to " + chosenFile);
 
                 // Add .json if not already exists
                 if (!chosenFile.toAbsolutePath().toString().endsWith(".json")) {
@@ -148,7 +143,7 @@ public class EditorMenuBar extends JMenuBar {
                         try {
                             Desktop.getDesktop().open(chosenFile.toFile());
                         } catch (IOException ex) {
-                            ex.printStackTrace();
+                            LOG.warning("Could not open PDF: " + ex);
                         }
                     }
                 }
@@ -157,12 +152,61 @@ public class EditorMenuBar extends JMenuBar {
 
         add(file);
 
+        JMenu review = new JMenu("Review");
+        JMenuItem sendReviewEmail;
+        review.add(sendReviewEmail = new JMenuItem("Send Review Email"));
+
+        sendReviewEmail.addActionListener(e -> {
+            JTextPane textArea = new JTextPane();
+            FileIOResponse response = null;
+            try {
+                LOG.info("Uploading PDF to file.io");
+                response = controller.uploadPDF();
+            } catch (InterruptedException | FailedRequestException | IOException ex) {
+                LOG.warning("Failed to upload PDF: " + ex);
+            }
+
+            if (response == null || !response.isSuccess()) {
+                return;
+            }
+
+            String pdfURL = response.getLink();
+            String expiry = response.getExpiry();
+            String body = "Hello,\n" +
+                "\n" +
+                "I am currently working on my resume using ResuMaster and would like you to take a look. Click the link below to view my resume:\n" +
+                "\n" +
+                "PDF: " + pdfURL + " (URL expires: " + expiry + ")\n" +
+                "\n" +
+                "If you would like to try ResuMaster yourself, you can get it here: http://resume-builder.us.to/\n" +
+                "\n" +
+                "Thanks!";
+
+            Desktop d;
+            if (Desktop.isDesktopSupported() && (d = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
+                try {
+                    URI mailto = new URIBuilderTiny()
+                        .addQueryParameter("subject", "Please review my resume!")
+                        .addQueryParameter("body", body)
+                        .build();
+//                    System.out.println(mailto.toString());
+                    LOG.info("Sending email");
+                    d.mail(URI.create("mailto:"+mailto.toString().replace("+", "%20")));
+                } catch (IOException ex) {
+                    LOG.info("Could not send email: " + ex);
+                    JOptionPane.showMessageDialog(this, "Could not open email client.");
+                }
+            }
+        });
+
+        add(review);
+
         revalidate();
     }
 
     /**
-     * Sets the MenuController that this class will communicate to when
-     * the MenuBar has an event.
+     * Sets the MenuController that this class will communicate to when the
+     * MenuBar has an event.
      *
      * @param controller The MenuController to be communicated with.
      */

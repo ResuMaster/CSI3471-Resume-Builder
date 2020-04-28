@@ -1,4 +1,5 @@
 {
   "templates.directory": "./src/main/resources/templates/",
-  "export.tempLocation": "./temp/"
+  "export.tempLocation": "./temp/",
+  "request.url": "http://localhost:8080"
 }
