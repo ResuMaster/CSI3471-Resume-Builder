@@ -40,7 +40,7 @@ public class ApplicationConfiguration {
         setDefaults();
 
         // Create the default configuration file if needed
-        if (createConfigFile) {
+        //if (createConfigFile) {
             try {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String json = gson.toJson(configuration);
@@ -48,16 +48,18 @@ public class ApplicationConfiguration {
             } catch (IOException e) {
                 System.err.println("Could not write to configuration file.");
             }
-        }
+        //}
     }
 
     /**
      * Set the default options for any options not specified.
      */
     private void setDefaults() {
-        setIfNotPresent("templates.directory", "./templates/");
+//        setIfNotPresent("templates.directory", "./templates/");
+//        setIfNotPresent("icons.directory", "images/");
         setIfNotPresent("export.tempLocation", "./temp/");
         setIfNotPresent("export.timeout", 60L);
+        setIfNotPresent("theme.color", "light");
         setIfNotPresent("request.url", "http://localhost:8080");
     }
 
@@ -100,7 +102,7 @@ public class ApplicationConfiguration {
      */
     public Long getLong(String key) {
         try {
-            return Long.parseLong(configuration.get(key).toString());
+            return (long) Double.parseDouble(configuration.get(key).toString());
         } catch (Exception e) {
             return null;
         }

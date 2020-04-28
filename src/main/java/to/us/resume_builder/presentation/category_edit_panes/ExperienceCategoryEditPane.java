@@ -127,6 +127,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
 
             // Remove Experience button
             JButton removeControl = new JButton("Remove Experience");
+            removeControl.setBackground(new Color(255, 210, 210, 255));
             removeControl.addActionListener(evt -> {
                 // Mark this component as modified
                 this.modified = true;

@@ -183,7 +183,7 @@ public class EditorCategoryHeader extends JPanel {
         // Create delete button
         Box deleteWrapper = Box.createHorizontalBox();
         delete = new JButton("Delete Section");
-        delete.setBackground(Color.RED);
+        delete.setBackground(new Color(255, 210, 210, 255));
         deleteWrapper.add(delete);
         deleteWrapper.add(Box.createHorizontalGlue());
 

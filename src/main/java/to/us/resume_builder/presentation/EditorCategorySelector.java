@@ -3,11 +3,7 @@ package to.us.resume_builder.presentation;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -15,6 +11,7 @@ import to.us.resume_builder.business.controllers.EditorController;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 import to.us.resume_builder.data.resume_components.category.Category;
+import to.us.resume_builder.data.resume_components.category.CategoryType;
 
 /**
  * Selector for the Editor Category List. Controlled by an EditorController.
@@ -82,7 +79,11 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
      */
     public void removeCategory(String id) {
         // Return if no selection or only one category available
-        if (categories.isSelectionEmpty() || model.getSize() == 1) {
+        if (categories.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "No section selected! Please select a section in the list on the left.", "Couldn't Remove Section", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (model.getSize() == 1) {
+            JOptionPane.showMessageDialog(null, "You must have at least one section.", "Couldn't Remove Section", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -115,7 +116,11 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         if (idToCategory.get(newID) != null)
             return;
 
-        model.addElement(newCat);
+        if (newCat.getType() == CategoryType.HEADER) {
+            model.insertElementAt(newCat, (int) idToCategory.values().stream().filter(c -> c.getType() == CategoryType.HEADER).count());
+        } else {
+            model.addElement(newCat);
+        }
         idToCategory.put(newID, newCat);
         revalidate();
     }
@@ -128,10 +133,14 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     public void moveCategoryUp() {
         int index = categories.getSelectedIndex();
         if (index > 0 && index < model.size()) {
-            Category temp = model.getElementAt(index);
-            model.setElementAt(model.getElementAt(index - 1), index);
-            model.setElementAt(temp, index - 1);
-            categories.setSelectedIndex(index - 1);
+            if ((model.getElementAt(index - 1).getType() == CategoryType.HEADER &&
+                model.getElementAt(index).getType() == CategoryType.HEADER) ||
+                model.getElementAt(index - 1).getType() != CategoryType.HEADER) {
+                Category temp = model.getElementAt(index);
+                model.setElementAt(model.getElementAt(index - 1), index);
+                model.setElementAt(temp, index - 1);
+                categories.setSelectedIndex(index - 1);
+            }
         }
         revalidate();
     }
@@ -144,10 +153,14 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     public void moveCategoryDown() {
         int index = categories.getSelectedIndex();
         if (index >= 0 && index < model.size() - 1) {
-            Category temp = model.getElementAt(index);
-            model.setElementAt(model.getElementAt(index + 1), index);
-            model.setElementAt(temp, index + 1);
-            categories.setSelectedIndex(index + 1);
+            if ((model.getElementAt(index + 1).getType() == CategoryType.HEADER &&
+                model.getElementAt(index).getType() == CategoryType.HEADER) ||
+                categories.getModel().getElementAt(index).getType() != CategoryType.HEADER) {
+                Category temp = model.getElementAt(index);
+                model.setElementAt(model.getElementAt(index + 1), index);
+                model.setElementAt(temp, index + 1);
+                categories.setSelectedIndex(index + 1);
+            }
         }
         revalidate();
     }
