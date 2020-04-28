@@ -101,6 +101,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         }
         controller.loadCategory(model.getElementAt(ndx).getID());
         categories.setSelectedIndex(ndx);
+        controller.saveCurrentCategoryOrder();
     }
 
     /**
@@ -123,6 +124,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         }
         idToCategory.put(newID, newCat);
         revalidate();
+        controller.saveCurrentCategoryOrder();
     }
 
     /**
@@ -143,6 +145,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
             }
         }
         revalidate();
+        controller.saveCurrentCategoryOrder();
     }
 
     /**
@@ -163,6 +166,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
             }
         }
         revalidate();
+        controller.saveCurrentCategoryOrder();
     }
 
     /**
@@ -205,5 +209,14 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         }
         int ndx = categories.getSelectedIndex();
         controller.loadCategory(model.getElementAt(ndx).getID());
+    }
+
+    /**
+     * Returns the model of this <code>EditorCategorySelector</code>.
+     *
+     * @return The model of this <code>EditorCategorySelector</code>.
+     */
+    public DefaultListModel<Category> getModel() {
+        return model;
     }
 }

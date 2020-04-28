@@ -70,6 +70,13 @@ public class Resume {
     }
 
     /**
+     * Sets the current List categoryList for this instance.
+     */
+    public void setCategoryList(List<Category> newList) {
+        this.categoryList = newList;
+    }
+
+    /**
      * Returns the Category reference by the id.
      *
      * @param id the String to find the category.
