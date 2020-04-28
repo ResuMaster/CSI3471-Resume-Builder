@@ -42,7 +42,7 @@ public class EditorFrame extends JFrame {
      * @param r The ResumeFile to construct the EditorFrame from.
      */
     public EditorFrame(ResumeFile r) {
-        super("Test");
+        super("ResuMaster");
 
         Resume resume = r.getResume();
 

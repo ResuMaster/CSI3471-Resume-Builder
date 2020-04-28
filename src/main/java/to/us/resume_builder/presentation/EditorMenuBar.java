@@ -36,11 +36,11 @@ public class EditorMenuBar extends JMenuBar {
      * the data file, and to PDF.
      */
     public EditorMenuBar() {
-        JMenu file = new JMenu("Export");
+        JMenu file = new JMenu("File");
         JMenuItem exportDataFile;
-        file.add(exportDataFile = new JMenuItem("Export Data File"));
+        file.add(exportDataFile = new JMenuItem("Save Resume"));
         JMenuItem exportResume;
-        file.add(exportResume = new JMenuItem("Export Resume"));
+        file.add(exportResume = new JMenuItem("Export Resume PDF"));
 
         exportDataFile.addActionListener(e -> {
             // Create the file chooser
@@ -68,7 +68,7 @@ public class EditorMenuBar extends JMenuBar {
 
             // Set file chooser options
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setDialogTitle("Export Resume Data");
+            fileChooser.setDialogTitle("Save Resume Data");
 
             // Set file filter
             fileChooser.setAcceptAllFileFilterUsed(false);
