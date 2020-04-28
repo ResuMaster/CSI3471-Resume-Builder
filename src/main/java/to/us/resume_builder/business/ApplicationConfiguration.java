@@ -60,6 +60,7 @@ public class ApplicationConfiguration {
         setIfNotPresent("export.tempLocation", "./temp/");
         setIfNotPresent("export.timeout", 60L);
         setIfNotPresent("theme.color", "light");
+        setIfNotPresent("request.url", "http://localhost:8080");
     }
 
     /**
