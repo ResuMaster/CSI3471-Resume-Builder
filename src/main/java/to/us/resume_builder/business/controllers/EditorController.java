@@ -14,6 +14,8 @@ import java.util.List;
  * The main controller for the editor interface. Connects the
  * {@link EditorCategorySelector} and the {@link EditorStage} together and to
  * the {@link Resume} currently under edit.
+ * <p>
+ * Example of Design Pattern: Mediator
  * 
  * @author Jacob Curtis
  * @author Micah Schiewe

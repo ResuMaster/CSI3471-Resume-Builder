@@ -12,15 +12,19 @@ import java.util.Map;
 
 /**
  * This class enables the use of a configuration file with the program.
+ * <p>
+ * Example of Design Pattern: Singleton
  */
 public class ApplicationConfiguration {
     private static ApplicationConfiguration instance = null;
+    private static final Object LOCK = new Object();
+
     private Map<String, Object> configuration;
 
     /**
      * Construct the <code>ApplicationConfiguration</code> singleton instance.
      */
-    public ApplicationConfiguration() {
+    private ApplicationConfiguration() {
         // Read the configuration file
         boolean createConfigFile = false;
         try {
@@ -115,8 +119,12 @@ public class ApplicationConfiguration {
      */
     public static ApplicationConfiguration getInstance() {
         // Create the instance if it does not already exist
-        if (instance == null)
-            instance = new ApplicationConfiguration();
+        if (instance == null) {
+            synchronized (LOCK) {
+                if (instance == null)
+                    instance = new ApplicationConfiguration();
+            }
+        }
 
         return instance;
     }
