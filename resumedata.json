@@ -5,7 +5,7 @@
         "email": "me@mattrm.dev"
     },
     "resume": {
-        "categories": [
+        "category_list": [
             {
                 "link": "www.linkedin.com/in/matthew-mccaskill",
                 "email": "me@mattrm.dev",
@@ -39,6 +39,7 @@
                         "date": "May 2022",
                         "title": "Bachelor of Science in Computer Science",
                         "visible": true,
+						"bullets": [],
                         "fields": [
                             {
                                 "id": "361.462.7",
@@ -84,6 +85,7 @@
                         "date": "2019-Present",
                         "title": "Supplemental Instruction Leader",
                         "visible": true,
+						"bullets": [],
                         "fields": [
                             {
                                 "id": "12",
