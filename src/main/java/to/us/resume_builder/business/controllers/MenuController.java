@@ -87,7 +87,7 @@ public class MenuController {
      * @throws IOException The request failed to send or the response couldn't be received.
      */
     public FileIOResponse uploadPDF() throws InterruptedException, FailedRequestException, IOException {
-        LOG.info("Attempting to upload PDF to https://file.io");
+        LOG.info("Attempting to upload PDF to https://transfer.sh");
         ResumeExporter r = new ResumeExporter(resume.getResume());
         return r.uploadPDF();
     }
