@@ -167,7 +167,7 @@ public class EditorMenuBar extends JMenuBar {
 
             if (response == null || !response.isSuccess()) {
                 LOG.warning("Response is failure.");
-                JOptionPane.showMessageDialog(this, "Could not upload PDF. Try again later.");
+                JOptionPane.showMessageDialog(this, "Could not upload PDF. Try again later. If the problem persists, try to export a PDF and manually attach it to an email.");
                 return;
             }
 
