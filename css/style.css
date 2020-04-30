@@ -32,6 +32,10 @@ body {
     text-align: center;
 }
 
+.carousel {
+    height: 900px;
+}
+
 .carousel img {
     background-color: #e9ecef;
 }
