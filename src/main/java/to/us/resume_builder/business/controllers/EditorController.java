@@ -6,7 +6,6 @@ import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.Category;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,6 +22,10 @@ import java.util.logging.Logger;
  * @author Micah Schiewe
  */
 public class EditorController {
+    /**
+     * Logs the creation of the controller, adding/removing {@link Category}'s, and registering
+     * the other panels.
+     */
     private static final Logger LOG = Logger.getLogger(EditorController.class.getName());
 
     /** The main UI editing the {@link EditorController#resume resume} */
@@ -67,7 +70,6 @@ public class EditorController {
      */
     public void loadResume(Resume r) {
         this.resume = r;
-        // TODO load the given resume
     }
 
     /**
