@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -74,9 +76,14 @@ public class CreateOrOpenDialog extends JFrame {
         guideButton.addActionListener(evt -> {
             LOGGER.info("Opening user guide.");
             try {
-                Desktop.getDesktop().open(new File(Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("userguide.pdf")).getFile()));
-            } catch (IOException e) {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI("http://resume-builder.us.to/userguide.html"));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Could not open user guide.");
+                }
+            } catch (URISyntaxException | IOException e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Could not open user guide.");
             }
         });
         buttons.add(createButton);
