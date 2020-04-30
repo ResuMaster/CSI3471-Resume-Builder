@@ -16,6 +16,9 @@ import java.util.logging.Logger;
  * @author Matthew McCaskill
  */
 public class MultilineCellEditor extends AbstractCellEditor implements TableCellEditor {
+    /**
+     * Logs when the "enter" key is pressed to finish editing
+     */
     private static final Logger LOG = Logger.getLogger(MultilineCellEditor.class.getName());
 
     /**

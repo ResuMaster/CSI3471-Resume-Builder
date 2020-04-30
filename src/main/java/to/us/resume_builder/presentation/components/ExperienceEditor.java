@@ -17,6 +17,9 @@ import java.util.logging.Logger;
  * @author Brooklynn Stone
  */
 public class ExperienceEditor extends JPanel implements IEncapsulatedEditor {
+    /**
+     * Logs temporary saving of an {@link Experience} to the reference in memory
+     */
     private static final Logger LOG = Logger.getLogger(ExperienceEditor.class.getName());
 
     // Individual editor components

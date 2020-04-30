@@ -12,6 +12,9 @@ import java.util.logging.Logger;
  * @author Matthew McCaskill
  */
 public class MultilineCellRenderer extends JTextArea implements TableCellRenderer {
+    /**
+     * Logs information about the TableCellRenderer
+     */
     private static final Logger LOG = Logger.getLogger(MultilineCellRenderer.class.getName());
 
     /**
