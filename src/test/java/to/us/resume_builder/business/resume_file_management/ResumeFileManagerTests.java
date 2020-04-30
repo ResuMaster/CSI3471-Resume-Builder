@@ -82,7 +82,7 @@ public class ResumeFileManagerTests {
                         assertEquals("9999 WWE Street\nWest Newbury, MA 02761", c.getAddress());
                         assertEquals("john", c.getName());
                         assertEquals("cena", c.getDisplayName());
-                        assertEquals("550", c.getID());
+                        assertEquals("590", c.getID());
                         assertTrue(c.getVisible());
                         break;
                     }
