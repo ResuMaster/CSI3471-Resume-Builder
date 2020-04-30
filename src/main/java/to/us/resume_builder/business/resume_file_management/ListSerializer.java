@@ -11,6 +11,9 @@ import java.util.logging.Logger;
  * @author Jacob Curtis
  */
 class ListSerializer implements JsonSerializer<List<?>> {
+    /**
+     * Logs when a Serialization occurs
+     */
     private static Logger LOG = Logger.getLogger(ListSerializer.class.getName());
 
     /**
