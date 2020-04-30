@@ -6,12 +6,10 @@ import to.us.resume_builder.business.server_connect.fileio_response.FileIORespon
 import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
-import to.us.resume_builder.business.util.MiscUtils;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.Arrays;
 import java.util.Objects;
@@ -27,8 +25,14 @@ import java.util.logging.Logger;
  * @see ResumeTemplate
  */
 public class ResumeExporter {
+    /**
+     * Logs exports and uploads of a file to JSON and PDF
+     */
     private static final Logger LOG = Logger.getLogger(ResumeExporter.class.getName());
 
+    /**
+     *  The Resume to be exported
+     */
     private Resume resume;
 
     /**
