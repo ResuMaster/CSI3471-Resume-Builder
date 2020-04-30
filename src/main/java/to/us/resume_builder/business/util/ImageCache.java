@@ -16,9 +16,19 @@ import java.util.logging.Logger;
  * @author Micah
  */
 public class ImageCache {
+    /**
+     * Logs when an Image is being loaded
+     */
     private static final Logger LOG = Logger.getLogger(ImageCache.class.getName());
 
+    /**
+     * The only instance of an ImageCache
+     */
     private static ImageCache singleton;
+
+    /**
+     * An Object to ensure only a single instance of ImageCache is created by using a synchronization
+     */
     private static final Object LOCK = new Object();
 
     /** The cache of images, used to save memory */
