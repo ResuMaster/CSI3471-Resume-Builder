@@ -65,10 +65,6 @@ public class CreateOrOpenDialog extends JFrame {
             try {
                 ResumeFile rf = ResumeFileManager.importFile(file);
                 if (rf != null) {
-                    rf.getResume().getCategoryList()
-                        .stream()
-                        .filter(e -> e.getDisplayName() == null)
-                        .forEach(e -> e.setDisplayName(""));
                     new EditorFrame(rf);
                 }
             } catch (IOException e) {
