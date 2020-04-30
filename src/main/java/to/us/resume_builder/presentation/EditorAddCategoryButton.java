@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.lang.ModuleLayer.Controller;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -32,6 +34,8 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
  * @author Micah
  */
 public class EditorAddCategoryButton extends JButton {
+    private static final Logger LOG = Logger.getLogger(EditorAddCategoryButton.class.getName());
+
     private static final String LABEL = "Add Section...";
     private static final String GET_TYPE_MESSAGE = "Select a section type:";
 
@@ -58,6 +62,7 @@ public class EditorAddCategoryButton extends JButton {
      */
     private void addCategory() {
         CategoryType type = getType();
+        LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "addCategory", "adding new category of type " + type);
         if (type != null)
             controller.addCategory(type);
     }
@@ -80,6 +85,7 @@ public class EditorAddCategoryButton extends JButton {
     }
 
     private JComponent constructDialogContents() {
+        LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "constructDialogContents", "creating dialog panel");
         CategoryType[] values = CategoryType.values();
 
         JPanel panel = new JPanel();
@@ -94,6 +100,7 @@ public class EditorAddCategoryButton extends JButton {
     }
 
     private JComponent constructSelectionButton(CategoryType type) {
+        LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "constructDialogContents", "creating selection button panel");
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
@@ -126,6 +133,7 @@ public class EditorAddCategoryButton extends JButton {
         panel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
         clearSelection();
 
+        LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "constructDialogContents", "adding listeners for buttons in the panel");
         panel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -161,6 +169,7 @@ public class EditorAddCategoryButton extends JButton {
     }
 
     private void clearSelection() {
+        LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "clearSelection", "clearing the current selection");
         selectedType = null;
         selectedLabels.forEach((key, val) -> {
             val.setText("");

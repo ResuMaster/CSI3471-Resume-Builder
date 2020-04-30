@@ -1,5 +1,7 @@
 package to.us.resume_builder.presentation.components;
 
+import to.us.resume_builder.presentation.EditorAddCategoryButton;
+import to.us.resume_builder.presentation.EditorCategoryHeader;
 import to.us.resume_builder.presentation.IEncapsulatedEditor;
 import to.us.resume_builder.data.resume_components.IBulletContainer;
 
@@ -7,6 +9,8 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Facilitates editing of a Bullet
@@ -14,6 +18,8 @@ import java.util.ArrayList;
  * @author Matthew McCaskill
  */
 public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
+    private static final Logger LOG = Logger.getLogger(BulletListEditor.class.getName());
+
     /**
      * A table which holds each bullet and its visibility
      */
@@ -67,6 +73,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         buttonGroup.add(Box.createHorizontalGlue());
         JButton add = new JButton("Add Bullet");
         add.addActionListener(e -> {
+            LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "addBulletListener", "adding new bullet");
             this.modified = true;
 
             ((BulletListEditorTableModel) table.getModel()).addBullet();
@@ -81,6 +88,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
             int index = table.getSelectedRow();
             if (index != -1 && index != 0) {
                 this.modified = true;
+                LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "moveUpListener", "moving bullet selection up by one at index " + index);
                 ((BulletListEditorTableModel) table.getModel()).moveUp(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
                 table.setRowSelectionInterval(index - 1, index - 1);
@@ -95,6 +103,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
             System.out.println(index);
             if (index != -1 && index + 1 != table.getRowCount()) {
                 this.modified = true;
+                LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "moveDownListener", "moving bullet selection down by one at index " + index);
                 ((BulletListEditorTableModel) table.getModel()).moveDown(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
                 table.setRowSelectionInterval(index + 1, index + 1);
@@ -109,6 +118,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
             int index = table.getSelectedRow();
             if (index != -1) {
                 this.modified = true;
+                LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "removeListener", "removing bullet at index " + index);
                 ((BulletListEditorTableModel) table.getModel()).removeBullet(index);
                 ((AbstractTableModel) table.getModel()).fireTableDataChanged();
             }
@@ -131,6 +141,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
      */
     @Override
     public void save() {
+        LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "save", "saving bullet list to resume in memory");
         this.modified = false;
 
         this.bulletC.getBulletList().clear();
