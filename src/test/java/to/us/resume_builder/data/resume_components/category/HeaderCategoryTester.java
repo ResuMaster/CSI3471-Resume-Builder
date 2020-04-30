@@ -1,12 +1,9 @@
 package to.us.resume_builder.data.resume_components.category;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
-import to.us.resume_builder.data.resume_components.Resume;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for the {@link HeaderCategory}

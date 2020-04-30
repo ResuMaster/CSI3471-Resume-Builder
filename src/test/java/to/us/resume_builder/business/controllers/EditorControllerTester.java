@@ -6,8 +6,8 @@ import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 import to.us.resume_builder.presentation.EditorCategorySelector;
 import to.us.resume_builder.presentation.EditorStage;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests methods in the {@link EditorController} class
@@ -93,6 +93,6 @@ public class EditorControllerTester extends EditorController {
         ec.addCategory(CategoryType.BULLETS);
         String id = ec.resume.getCategoryList().get(0).getID();
         ec.removeCategory(id);
-        assertEquals(1, ec.sideList.getCount());
+        assertEquals(1, ec.sideList.getModel().getSize());
     }
 }
