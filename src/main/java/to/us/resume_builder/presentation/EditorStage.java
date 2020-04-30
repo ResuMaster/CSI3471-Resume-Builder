@@ -24,8 +24,14 @@ import to.us.resume_builder.presentation.category_edit_panes.CategoryEditVisitor
  * @author Micah Schiewe
  */
 public class EditorStage extends JPanel {
+    /**
+     * Logging {@link Category} movement into the stage
+     */
     private static final Logger LOG = Logger.getLogger(EditorStage.class.getName());
 
+    /**
+     * String prompt when the user tries to change windows without saving
+     */
     private static final String UNSAVED_PROMPT = "You have unsaved changes. Do you want to save?";
 
     /**
@@ -79,7 +85,6 @@ public class EditorStage extends JPanel {
         // Assemble.
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         add(scroller);
-//        add(Box.createRigidArea(new Dimension(0, 5)));
         add(saveButton);
     }
 

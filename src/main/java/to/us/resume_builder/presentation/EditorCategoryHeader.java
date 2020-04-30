@@ -17,6 +17,9 @@ import to.us.resume_builder.data.resume_components.category.Category;
  * @author Jacob Curtis
  */
 public class EditorCategoryHeader extends JPanel {
+    /**
+     * Logs saving, updating, and creating panels
+     */
     private static final Logger LOG = Logger.getLogger(EditorCategoryHeader.class.getName());
 
     private static final int NUM_COLS = 20;
