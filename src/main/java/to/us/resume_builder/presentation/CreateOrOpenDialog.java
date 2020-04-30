@@ -2,7 +2,6 @@ package to.us.resume_builder.presentation;
 
 import to.us.resume_builder.business.resume_file_management.ResumeFile;
 import to.us.resume_builder.business.resume_file_management.ResumeFileManager;
-import to.us.resume_builder.business.util.FileDialog;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 import to.us.resume_builder.data.resume_components.category.HeaderCategory;
@@ -74,7 +73,7 @@ public class CreateOrOpenDialog extends JFrame {
         JButton openButton = new JButton("Open an Existing Resume");
         openButton.addActionListener(evt -> {
             LOGGER.info("Opening existing resume.");
-            to.us.resume_builder.business.util.FileDialog fileDialog = new FileDialog("json", null);
+            to.us.resume_builder.presentation.FileDialog fileDialog = new FileDialog("json", null);
             String file = fileDialog.getFile();
             // Cancel opening the editor if the user did not select a file.
             if (file == null) {
