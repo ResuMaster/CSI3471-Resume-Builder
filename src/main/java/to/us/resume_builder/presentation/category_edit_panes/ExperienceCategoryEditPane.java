@@ -21,6 +21,9 @@ import java.util.logging.Logger;
  * @author Matthew McCaskill
  */
 public class ExperienceCategoryEditPane extends CategoryEditPane {
+    /**
+     * Logs updates and saves to the ExperienceCategoryEditPane
+     */
     private static final Logger LOG = Logger.getLogger(ExperienceCategoryEditPane.class.getName());
 
     /**

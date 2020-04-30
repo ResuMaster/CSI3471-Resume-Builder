@@ -37,7 +37,6 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
      * Adds a new Bullet ID to data initialized blank
      */
     public void addBullet() {
-//        data.add(bulletC.getBulletByID(bulletC.addBullet()));
         LOG.logp(Level.INFO, BulletListEditorTableModel.class.getName(), "addBullet", "adding new bullet");
         data.add(new Bullet("YYY"));
     }
