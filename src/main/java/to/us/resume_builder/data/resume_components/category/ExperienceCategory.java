@@ -1,16 +1,19 @@
 package to.us.resume_builder.data.resume_components.category;
 
-import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
-import to.us.resume_builder.data.resume_components.Bullet;
-import to.us.resume_builder.data.resume_components.Experience;
-import to.us.resume_builder.data.resume_components.ResumeComponent;
-import to.us.resume_builder.business.util.MiscUtils;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
+
+import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
+import to.us.resume_builder.business.util.MiscUtils;
+import to.us.resume_builder.data.resume_components.Bullet;
+import to.us.resume_builder.data.resume_components.CategoryVisitor;
+import to.us.resume_builder.data.resume_components.Experience;
+import to.us.resume_builder.data.resume_components.ResumeComponent;
 
 public class ExperienceCategory extends Category {
+    private static Logger LOGGER = Logger.getLogger(ExperienceCategory.class.getName());
 
     /**
      * A list to hold the experiences for this category.
@@ -138,8 +141,16 @@ public class ExperienceCategory extends Category {
                 .reduce((a, b) -> a + b)
                 .orElse("")
             )
-            .toString();
+            .toString(() -> LOGGER.info("Generated LaTeX for experience category \"" + this.displayName + "\"."));
     }
 
-
+    /**
+     * Allow a CategoryVisitor to visit this ExperienceCategory.
+     * 
+     * @param v The visitor to this ExperienceCategory.
+     */
+    @Override
+    public void accept(CategoryVisitor v) {
+        v.visit(this);
+    }
 }

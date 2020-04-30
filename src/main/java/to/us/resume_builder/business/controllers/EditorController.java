@@ -6,10 +6,16 @@ import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.Category;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * The main controller for the editor interface. Connects the
  * {@link EditorCategorySelector} and the {@link EditorStage} together and to
  * the {@link Resume} currently under edit.
+ * <p>
+ * Example of Design Pattern: Mediator
  * 
  * @author Jacob Curtis
  * @author Micah Schiewe
@@ -91,8 +97,8 @@ public class EditorController {
         Category newCat = resume.getCategoryByID(catID);
 
         // Initialize category
-        newCat.setName("New " + type.toString());
-        newCat.setDisplayName(type.toString());
+        newCat.setName("New " + type.getName());
+        newCat.setDisplayName(type.getName());
 
         // Register and display category
         sideList.addCategory(newCat);
@@ -127,6 +133,20 @@ public class EditorController {
      */
     public void repaintSideList() {
         sideList.repaint();
+    }
+
+    /**
+     * Saves the current category order in the {@link Resume}.
+     */
+    public void saveCurrentCategoryOrder() {
+        List<Category> categories = new LinkedList<>();
+        var model = sideList.getModel();
+
+        for (int i = 0; i < model.getSize(); i++) {
+            categories.add(model.getElementAt(i));
+        }
+
+        resume.setCategoryList(categories);
     }
 }
 

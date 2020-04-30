@@ -45,7 +45,7 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setReorderingAllowed(false);
 
-        table.getColumnModel().getColumn(0).setMaxWidth(45);
+        table.getColumnModel().getColumn(0).setMaxWidth(60);
 
         int lines = 2;
         table.setRowHeight(table.getRowHeight() * lines);
@@ -74,17 +74,6 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         });
         buttonGroup.add(add);
 
-        // add a button to remove a selected bullet
-        JButton remove = new JButton("Remove Bullet");
-        remove.addActionListener(e -> {
-            int index = table.getSelectedRow();
-            if (index != -1) {
-                this.modified = true;
-                ((BulletListEditorTableModel) table.getModel()).removeBullet(index);
-                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
-            }
-        });
-        buttonGroup.add(remove);
 
         // add a button to move a bullet up
         JButton moveUp = new JButton("Move Selected Up");
@@ -112,6 +101,19 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
             }
         });
         buttonGroup.add(moveDown);
+
+        // add a button to remove a selected bullet
+        JButton remove = new JButton("Remove Bullet");
+        remove.setBackground(new Color(255, 210, 210, 255));
+        remove.addActionListener(e -> {
+            int index = table.getSelectedRow();
+            if (index != -1) {
+                this.modified = true;
+                ((BulletListEditorTableModel) table.getModel()).removeBullet(index);
+                ((AbstractTableModel) table.getModel()).fireTableDataChanged();
+            }
+        });
+        buttonGroup.add(remove);
 
         this.table.getModel().addTableModelListener(e -> BulletListEditor.this.modified = true);
 

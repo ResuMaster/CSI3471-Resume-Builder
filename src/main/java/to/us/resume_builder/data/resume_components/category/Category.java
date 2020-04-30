@@ -1,6 +1,7 @@
 package to.us.resume_builder.data.resume_components.category;
 
 import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
+import to.us.resume_builder.data.resume_components.CategoryVisitor;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 
 import java.util.Objects;
@@ -90,26 +91,12 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
     }
 
     /**
-     * An equals for a category.
-     * @param o The other object to compare to.
-     * @return True if they are equal, else false.
+     * Allow a CategoryVisitor to visit this category.
+     * 
+     * @param v The visitor to this Category.
      */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Category)) return false;
-        Category category = (Category) o;
-        return Objects.equals(getID(), category.getID());
-    }
+    public abstract void accept(CategoryVisitor v);
 
-    /**
-     * A way to hash a category.
-     * @return The hash for that category.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(getType(), getID());
-    }
 }
 
 

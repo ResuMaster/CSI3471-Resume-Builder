@@ -1,13 +1,17 @@
 package to.us.resume_builder.data.resume_components;
 
-import to.us.resume_builder.data.resume_components.category.*;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
+
+import to.us.resume_builder.data.resume_components.category.Category;
+import to.us.resume_builder.data.resume_components.category.CategoryFactory;
+import to.us.resume_builder.data.resume_components.category.CategoryType;
 
 
 public class Resume {
+    private static Logger LOGGER = Logger.getLogger(Resume.class.getName());
 
     /**
      * the list of categories that are associated with this resume.
@@ -22,8 +26,7 @@ public class Resume {
     }
 
     /**
-     * add a Category of type to categoryList with a unique random generated
-     * id.
+     * add a Category of type to categoryList with a unique random generated id.
      *
      * @param type the type of category to be created.
      *
@@ -37,21 +40,10 @@ public class Resume {
             id = String.valueOf(rand.nextInt(1000));
         } while (checkCategoryListID(id));
 
-        // create a new category of type with the generated id
-        switch (type) {
-            case HEADER:
-                categoryList.add(new HeaderCategory(id));
-                break;
-            case TEXT:
-                categoryList.add(new TextCategory(id));
-                break;
-            case EXPERIENCE:
-                categoryList.add(new ExperienceCategory(id));
-                break;
-            case BULLETS:
-                categoryList.add(new BulletCategory(id));
-                break;
-        }
+        categoryList.add(CategoryFactory.getInstance().createCategory(type, id));
+
+        LOGGER.info("Created " + type.name() + " category with id " + id + ".");
+
         return id;
     }
 
@@ -65,18 +57,21 @@ public class Resume {
     }
 
     /**
+     * Sets the current List categoryList for this instance.
+     */
+    public void setCategoryList(List<Category> newList) {
+        this.categoryList = newList;
+    }
+
+    /**
      * Returns the Category reference by the id.
      *
      * @param id the String to find the category.
      *
-     * @return a reference to the Category if it is found, if not found return
-     *     null.
+     * @return a reference to the Category if it is found, if not found return null.
      */
     public Category getCategoryByID(String id) {
-        return categoryList.stream()
-            .filter(c -> c.getID().equals(id))
-            .findFirst()
-            .orElse(null);
+        return categoryList.stream().filter(c -> c.getID().equals(id)).findFirst().orElse(null);
     }
 
     /**
@@ -96,6 +91,8 @@ public class Resume {
      * @param id the ID used to find the Category to remove.
      */
     public void removeCategoryByID(String id) {
+        LOGGER.info("Removed " + getCategoryByID(id).getType().name() + " category with id " + id + ".");
+
         categoryList.removeIf(b -> b.getID().equals(id));
     }
 }

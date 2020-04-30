@@ -1,10 +1,13 @@
 package to.us.resume_builder.data.resume_components;
 
+import java.util.logging.Logger;
+
 import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
 
 public class Bullet extends ResumeComponent implements ILaTeXConvertable {
+    private static Logger LOGGER = Logger.getLogger(Bullet.class.getName());
 
     /**
      * The string that is displayed in the resume.
@@ -50,6 +53,6 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
     public String formatLaTeXString(ResumeTemplate template) {
         return text != null && text.length() > 0 ? template.getFieldTemplate()
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
-            .toString() : "";
+            .toString(() -> LOGGER.info("Generated LaTeX for bullet \"" + this.text + "\".")) : "";
     }
 }

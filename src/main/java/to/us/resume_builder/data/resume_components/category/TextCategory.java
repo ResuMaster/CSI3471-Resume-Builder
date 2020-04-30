@@ -1,9 +1,13 @@
 package to.us.resume_builder.data.resume_components.category;
 
+import java.util.logging.Logger;
+
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
+import to.us.resume_builder.data.resume_components.CategoryVisitor;
 
 public class TextCategory extends Category {
+    private static Logger LOGGER = Logger.getLogger(TextCategory.class.getName());
 
     /**
      * The text that is displayed on the resume.
@@ -50,6 +54,16 @@ public class TextCategory extends Category {
         return template.getCategoryTemplate(this.type)
             .replaceVariable("title", MiscUtils.escapeLaTeX(this.displayName))
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
-            .toString();
+            .toString(() -> LOGGER.info("Generated LaTeX for text category \"" + this.displayName + "\"."));
+    }
+
+    /**
+     * Allow a CategoryVisitor to visit this TextCategory.
+     * 
+     * @param v The visitor to this TextCategory.
+     */
+    @Override
+    public void accept(CategoryVisitor v) {
+        v.visit(this);
     }
 }
