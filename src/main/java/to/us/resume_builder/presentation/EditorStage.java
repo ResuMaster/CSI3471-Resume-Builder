@@ -4,19 +4,17 @@ import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 
 import to.us.resume_builder.business.controllers.EditorController;
-import to.us.resume_builder.presentation.category_edit_panes.BulletCategoryEditPane;
-import to.us.resume_builder.presentation.category_edit_panes.CategoryEditPane;
-import to.us.resume_builder.presentation.category_edit_panes.ExperienceCategoryEditPane;
-import to.us.resume_builder.presentation.category_edit_panes.HeaderCategoryEditPane;
-import to.us.resume_builder.presentation.category_edit_panes.TextCategoryEditPane;
-import to.us.resume_builder.data.resume_components.category.BulletCategory;
 import to.us.resume_builder.data.resume_components.category.Category;
-import to.us.resume_builder.data.resume_components.category.ExperienceCategory;
-import to.us.resume_builder.data.resume_components.category.HeaderCategory;
-import to.us.resume_builder.data.resume_components.category.TextCategory;
+import to.us.resume_builder.presentation.category_edit_panes.CategoryEditPane;
+import to.us.resume_builder.presentation.category_edit_panes.CategoryEditVisitor;
 
 /**
  * Class to tie together the various Category editors into a standard interface.
@@ -187,26 +185,14 @@ public class EditorStage extends JPanel {
      * @return A GUI editor for the provided {@link Category}
      */
     private CategoryEditPane getEditor(Category toEdit) {
-        CategoryEditPane editPane = null;
-        // This switch controls creating different editors for each CategoryType
-        // TODO replace with a visitor pattern.
-        switch (toEdit.getType()) {
-        case BULLETS:
-            editPane = new BulletCategoryEditPane((BulletCategory) toEdit);
-            break;
-        case EXPERIENCE:
-            editPane = new ExperienceCategoryEditPane((ExperienceCategory) toEdit);
-            break;
-        case HEADER:
-            editPane = new HeaderCategoryEditPane((HeaderCategory) toEdit);
-            break;
-        case TEXT:
-            editPane = new TextCategoryEditPane((TextCategory) toEdit);
-            break;
-        default:
-            break;
-        }
+        CategoryEditVisitor cev = new CategoryEditVisitor();
+        CategoryEditPane toReturn = null;
 
-        return editPane;
+        // Usage of the Visitor design pattern.
+        toEdit.accept(cev);
+        toReturn = cev.getEditor();
+        cev.resetEditor();
+
+        return toReturn;
     }
 }

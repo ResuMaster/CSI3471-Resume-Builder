@@ -1,11 +1,10 @@
 package to.us.resume_builder.data.resume_components;
 
+import java.util.logging.Logger;
+
 import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
-
-import java.io.BufferedWriter;
-import java.util.logging.Logger;
 
 public class Bullet extends ResumeComponent implements ILaTeXConvertable {
     private static Logger LOGGER = Logger.getLogger(Bullet.class.getName());

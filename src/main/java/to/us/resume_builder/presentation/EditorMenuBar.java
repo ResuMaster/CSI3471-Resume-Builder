@@ -166,12 +166,8 @@ public class EditorMenuBar extends JMenuBar {
             }
 
             if (response == null || !response.isSuccess()) {
-                if (response != null) {
-                    LOG.warning("Response is failure: " + response.getError());
-                } else {
-                    LOG.warning("Response is failure: null FileIOResponse");
-                }
-                JOptionPane.showMessageDialog(this, "Could not upload PDF.");
+                LOG.warning("Response is failure.");
+                JOptionPane.showMessageDialog(this, "Could not upload PDF. Try again later. If the problem persists, try exporting your resume as a PDF and manually attach it to an email.");
                 return;
             }
 
@@ -179,13 +175,11 @@ public class EditorMenuBar extends JMenuBar {
             String expiry = response.getExpiry();
             String body = "Hello,\n" +
                 "\n" +
-                "I am currently working on my resume using ResuMaster and would like you to take a look. Click the link below to view my resume:\n" +
+                "I am currently working on my resume using ResuMaster, and wanted to get some constructive feedback. My current draft can be found at: " + pdfURL + " (link expires after 14 days)\n" +
                 "\n" +
-                "PDF: " + pdfURL + " (URL expires: " + expiry + ")\n" +
+                "Thanks!\n" +
                 "\n" +
-                "If you would like to try ResuMaster yourself, you can get it here: http://resume-builder.us.to/\n" +
-                "\n" +
-                "Thanks!";
+                "Powered by ResuMaster\nhttp://resume-builder.us.to/";
 
             Desktop d;
             if (Desktop.isDesktopSupported() && (d = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {

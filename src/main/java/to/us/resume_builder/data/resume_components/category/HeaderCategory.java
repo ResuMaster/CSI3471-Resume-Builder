@@ -1,10 +1,11 @@
 package to.us.resume_builder.data.resume_components.category;
 
 
+import java.util.logging.Logger;
+
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
-
-import java.util.logging.Logger;
+import to.us.resume_builder.data.resume_components.CategoryVisitor;
 
 public class HeaderCategory extends Category {
     private static Logger LOGGER = Logger.getLogger(HeaderCategory.class.getName());
@@ -127,5 +128,15 @@ public class HeaderCategory extends Category {
             .replaceVariable("link", MiscUtils.escapeLaTeX(this.link))
             .replaceVariable("email", MiscUtils.escapeLaTeX(this.email))
             .toString(() -> LOGGER.info("Generated LaTeX for header category \"" + this.displayName + "\"."));
+    }
+
+    /**
+     * Allow a CategoryVisitor to visit this HeaderCategory.
+     * 
+     * @param v The visitor to this HeaderCategory.
+     */
+    @Override
+    public void accept(CategoryVisitor v) {
+        v.visit(this);
     }
 }
