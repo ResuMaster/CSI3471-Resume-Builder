@@ -45,7 +45,7 @@ public abstract class BasicRequest<T> {
 	protected static final String PARAM_SPLIT = "?";
 
 	/** Assumed timeout, in seconds, of the method */
-	protected static final int TIMEOUT = 15;
+	protected static final int TIMEOUT = 60;
 
 	/** The type of request this handles */
 	private RequestType type;
