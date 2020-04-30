@@ -26,16 +26,16 @@ public class EditorController {
     private static final Logger LOG = Logger.getLogger(EditorController.class.getName());
 
     /** The main UI editing the {@link EditorController#resume resume} */
-    private EditorStage stage;
+    protected EditorStage stage;
 
     /**
      * The UI allowing selection of a new {@link Category} to edit in the
      * {@link EditorController#stage stage}
      */
-    private EditorCategorySelector sideList;
+    protected EditorCategorySelector sideList;
 
     /** The resume currently under edit. */
-    private Resume resume;
+    protected Resume resume;
 
     /**
      * Constructs an EditorController linking the given components together.
