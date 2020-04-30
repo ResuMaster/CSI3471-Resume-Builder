@@ -40,16 +40,4 @@ public class ResumeExporterTester {
     public void testExport() {
         assertEquals(false, re.export(null));
     }
-
-    /**
-     *
-     */
-    @Test
-    public void testUploadPDF() {
-        try {
-            System.out.println(re.uploadPDF());
-        }catch(Exception e) {
-            System.out.println(e.getClass().toString() + " " + e.getCause());
-        }
-    }
 }
