@@ -78,15 +78,18 @@ public class ResumeExporter {
         }
 
         try {
-            if (bytes != null)
+            if (bytes != null) {
                 Files.write(exportLocation, bytes);
-            LOG.info("PDF export successful");
+                LOG.info("PDF export successful");
+            }
         } catch (IOException e) {
             LOG.warning("Could not write returned PDF to " + exportLocation + ": " + e);
             status = false;
         }
 
-        LOG.info("Export process complete.");
+        if (status) {
+            LOG.info("Export process complete.");
+        }
         return status;
     }
 

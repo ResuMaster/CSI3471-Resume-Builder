@@ -1,6 +1,8 @@
 package to.us.resume_builder.presentation;
 
 import java.awt.Component;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,6 +24,8 @@ import to.us.resume_builder.presentation.category_edit_panes.CategoryEditVisitor
  * @author Micah Schiewe
  */
 public class EditorStage extends JPanel {
+    private static final Logger LOG = Logger.getLogger(EditorStage.class.getName());
+
     private static final String UNSAVED_PROMPT = "You have unsaved changes. Do you want to save?";
 
     /**
@@ -90,8 +94,10 @@ public class EditorStage extends JPanel {
      */
     public boolean showInEditor(Category toEdit) {
         // Remove the old category. If clear fails, abort changing categories
-        if (!clearCurrentEditor())
+        if (!clearCurrentEditor()) {
+            LOG.logp(Level.WARNING, EditorStage.class.getName(), "showInEditor", "Failed to clear current editor, abort category change");
             return false;
+        }
 
         // Register the new category
         category = toEdit;
@@ -101,6 +107,7 @@ public class EditorStage extends JPanel {
 
         // Alert Swing that the component hierarchy has changed
         revalidate();
+        LOG.logp(Level.INFO, EditorStage.class.getName(), "showInEditor", "Category successfully changed in Editor");
         return true;
     }
 

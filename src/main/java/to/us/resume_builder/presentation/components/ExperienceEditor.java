@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class is an editor for individual experiences.
@@ -15,6 +17,8 @@ import java.awt.*;
  * @author Brooklynn Stone
  */
 public class ExperienceEditor extends JPanel implements IEncapsulatedEditor {
+    private static final Logger LOG = Logger.getLogger(ExperienceEditor.class.getName());
+
     // Individual editor components
     /**
      * A text field to edit the Experience's organization.
@@ -188,6 +192,8 @@ public class ExperienceEditor extends JPanel implements IEncapsulatedEditor {
      */
     @Override
     public void save() {
+        LOG.logp(Level.INFO, ExperienceEditor.class.getName(), "save", "saving Experience to resume in memory");
+
         // Update the experience
         this.experience.setOrganization(organization.getText());
         this.experience.setLocation(location.getText());

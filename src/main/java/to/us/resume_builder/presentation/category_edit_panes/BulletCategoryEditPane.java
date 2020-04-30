@@ -4,6 +4,8 @@ import to.us.resume_builder.presentation.components.BulletListEditor;
 import to.us.resume_builder.data.resume_components.category.BulletCategory;
 
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Facilitates editing of the BulletCategory resume component.
@@ -11,6 +13,8 @@ import java.awt.*;
  * @author Ashley Lu Couch
  */
 public class BulletCategoryEditPane extends CategoryEditPane {
+    private static final Logger LOG = Logger.getLogger(BulletCategoryEditPane.class.getName());
+
     private BulletListEditor bulletListEditor;
 
     /**
@@ -30,6 +34,7 @@ public class BulletCategoryEditPane extends CategoryEditPane {
      */
     @Override
     public void save() {
+        LOG.logp(Level.INFO, BulletCategoryEditPane.class.getName(), "save", "saving the BulletCategory changes");
         bulletListEditor.save();
     }
 

@@ -4,8 +4,10 @@ import to.us.resume_builder.business.resume_file_management.Metadata;
 import to.us.resume_builder.business.resume_file_management.ResumeFile;
 import to.us.resume_builder.business.resume_file_management.ResumeFileManager;
 import to.us.resume_builder.business.util.FileDialog;
+import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
+import to.us.resume_builder.data.resume_components.category.ExperienceCategory;
 import to.us.resume_builder.data.resume_components.category.HeaderCategory;
 
 import javax.swing.*;

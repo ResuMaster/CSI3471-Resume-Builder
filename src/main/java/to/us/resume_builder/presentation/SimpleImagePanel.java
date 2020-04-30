@@ -5,6 +5,7 @@ import javax.swing.*;
 import to.us.resume_builder.business.util.ImageCache;
 
 import java.awt.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SimpleImagePanel extends JPanel {
@@ -32,6 +33,7 @@ public class SimpleImagePanel extends JPanel {
         int imgWidth =  (int) (image.getWidth(this) * scale);
         int imgHeight = (int) (image.getHeight(this) * scale);
 
+        LOGGER.logp(Level.INFO, SimpleImagePanel.class.getName(), "paintComponent", "drawing image panel");
         g.drawImage(image, (this.getWidth() - imgWidth) / 2, (this.getHeight() - imgHeight) / 2, imgWidth, imgHeight, this);
     }
 }

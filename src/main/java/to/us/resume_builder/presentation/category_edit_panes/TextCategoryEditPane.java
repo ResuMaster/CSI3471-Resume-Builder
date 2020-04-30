@@ -1,6 +1,7 @@
 package to.us.resume_builder.presentation.category_edit_panes;
 
 import to.us.resume_builder.data.resume_components.category.TextCategory;
+import to.us.resume_builder.presentation.components.BulletListEditorTableModel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -9,6 +10,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Facilitates editing of the TextCategory resume component.
@@ -17,6 +20,8 @@ import java.awt.event.ComponentEvent;
  * @author Micah Schiewe
  */
 public class TextCategoryEditPane extends CategoryEditPane {
+    private static final Logger LOG = Logger.getLogger(TextCategoryEditPane.class.getName());
+
     /**
      * Holds the Text Category information for this resume in the UI
      */
@@ -64,6 +69,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
      */
     @Override
     public void save() {
+        LOG.logp(Level.INFO, TextCategoryEditPane.class.getName(), "save", "saving text");
         textCategory.setText(text.getText());
     }
 
