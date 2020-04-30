@@ -47,6 +47,7 @@ public class ResumeTester {
         categoryList.add(new BulletCategory(r.createCategory(CategoryType.BULLETS)));
         categoryList.get(index).setName("bullets Category.");
         categoryIDs.add(categoryList.get(index).id);
+        r.setCategoryList(categoryList);
     }
 
     /**
