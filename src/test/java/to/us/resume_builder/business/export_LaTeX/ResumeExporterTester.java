@@ -2,14 +2,9 @@ package to.us.resume_builder.business.export_LaTeX;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.BulletCategory;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
-
-import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 

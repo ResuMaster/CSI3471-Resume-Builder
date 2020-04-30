@@ -62,7 +62,7 @@ public class HeaderCategoryTester extends CategoryTester {
                 "{1234 Nowhere lane, Waco, TX 76798}" +
                 "{123 456-7890}" +
                 "{mylinkedin.com}" +
-                "{stone.brooklynn@gmail.com}\n\n";
+                "{stone.brooklynn@gmail.com}\n";
         assertEquals(laTeX, hc.formatLaTeXString(ResumeTemplate.DEFAULT));
     }
 }

@@ -39,7 +39,7 @@ public class TextCategoryTester extends CategoryTester {
     @Test
     @Override
     void testGetType() {
-        assertEquals(CategoryType.HEADER, tc.getType());
+        assertEquals(CategoryType.TEXT, tc.getType());
     }
 
     /**
@@ -93,6 +93,6 @@ public class TextCategoryTester extends CategoryTester {
     public void testFormatLaTeXString() {
         tc.setText("This is the text");
 
-        assertEquals("\\resumetextcategory{}{This is the text}\n\n", tc.formatLaTeXString(ResumeTemplate.DEFAULT));
+        assertEquals("\\resumetextcategory{Display name}{This is the text}\n", tc.formatLaTeXString(ResumeTemplate.DEFAULT));
     }
 }

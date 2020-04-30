@@ -165,11 +165,12 @@ public class BulletCategoryTester extends CategoryTester {
      */
     @Test
     public void testFormatLaTeXString() {
-        String s = "\\begin{resumebulletcategory}{}\n    ";
+        String s = "\\begin{resumebulletcategory}{Display name}\n";
         for(int i = 0; i < 10; i++) {
             s += "\\item Bullet " + i + ".\n";
         }
-        s += "\n\\end{resumebulletcategory}\n\n";
+        s = s.substring(0, s.length()-1);
+        s += "\n\\end{resumebulletcategory}\n";
         assertEquals(s, bc.formatLaTeXString(ResumeTemplate.DEFAULT));
     }
 }
