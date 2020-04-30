@@ -1,10 +1,7 @@
 package to.us.resume_builder.business.export_LaTeX;
 
-<<<<<<< Updated upstream:src/main/java/to/us/resume_builder/business/export_LaTeX/ResumeTemplate.java
 import to.us.resume_builder.business.ApplicationConfiguration;
-=======
 import to.us.resume_builder.data.resume_components.Resume;
->>>>>>> Stashed changes:src/main/java/to/us/resume_builder/business/export_LaTeX/ResumeTemplate.java
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 import to.us.resume_builder.business.util.StringTemplate;
 
@@ -75,7 +72,7 @@ public enum ResumeTemplate {
 
     private String readTemplate(String templateName, String fileName) throws IOException {
         StringBuilder template = new StringBuilder();
-        URL path = Thread.currentThread().getContextClassLoader().getResource("/templates/" + templateName + "/" + fileName);
+        URL path = Thread.currentThread().getContextClassLoader().getResource("templates/" + templateName + "/" + fileName);
         try (InputStream in = path.openStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
             String line="";
@@ -84,7 +81,7 @@ public enum ResumeTemplate {
             }
         }
 
-        System.out.println(template.toString());
+//        System.out.println(template.toString());
 
         return template.toString();
     }

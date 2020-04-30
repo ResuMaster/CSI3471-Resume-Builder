@@ -2,9 +2,5 @@
   "export.tempLocation": "./temp/",
   "export.timeout": 60.0,
   "theme.color": "light",
-<<<<<<< Updated upstream
-  "templates.directory": "./src/main/resources/templates/",
-=======
->>>>>>> Stashed changes
   "request.url": "http://api.mattrm.com:8080"
 }
