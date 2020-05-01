@@ -32,7 +32,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
     /**
      * The Text Category to display
      */
-    private TextCategory textCategory;
+    private transient TextCategory textCategory;
 
     /**
      * Constructs a Text Category Edit Pane in a JPanel with a JTextArea that is
@@ -93,7 +93,7 @@ public class TextCategoryEditPane extends CategoryEditPane {
      *
      * @author Micah
      */
-    private class TextFieldWidthModerator extends ComponentAdapter implements DocumentListener {
+    private static class TextFieldWidthModerator extends ComponentAdapter implements DocumentListener {
         private JTextArea monitored;
 
         public TextFieldWidthModerator(JTextArea monitored) {

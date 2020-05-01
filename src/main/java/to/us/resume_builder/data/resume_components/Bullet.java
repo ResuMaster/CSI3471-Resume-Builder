@@ -6,7 +6,7 @@ import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
 
-public class Bullet extends ResumeComponent implements ILaTeXConvertable {
+public class Bullet extends ResumeComponent implements ILaTeXConvertable, Cloneable {
     private static Logger LOGGER = Logger.getLogger(Bullet.class.getName());
 
     /**
@@ -21,6 +21,16 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
      */
     public Bullet(String id) {
         super(id);
+    }
+
+    /**
+     * Copy constructor to enable cloning
+     * 
+     * @param b The Bullet to clone
+     */
+    protected Bullet(Bullet b) {
+        super(b);
+        this.text = b.text;
     }
 
     /**
@@ -54,5 +64,10 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
         return text != null && text.length() > 0 ? template.getFieldTemplate()
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
             .toString(() -> LOGGER.info("Generated LaTeX for bullet \"" + this.text + "\".")) : "";
+    }
+
+    @Override
+    public Bullet clone() {
+        return new Bullet(this);
     }
 }

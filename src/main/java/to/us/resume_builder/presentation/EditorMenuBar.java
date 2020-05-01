@@ -25,6 +25,9 @@ import java.util.logging.Logger;
  * @author Micah Schiewe
  */
 public class EditorMenuBar extends JMenuBar {
+    /** SerialUID, valid as of Iteration 3 of development (4/30/2020) */
+    private static final long serialVersionUID = -4567901753019161685L;
+
     /**
      * Logs exporting a {@link Resume} as JSON/PDF and sending a {@link Resume} by email
      */
@@ -33,7 +36,7 @@ public class EditorMenuBar extends JMenuBar {
     /**
      * The controller which allows saving and exporting data.
      */
-    private MenuController controller = null;
+    private transient MenuController controller = null;
 
     /**
      * Constructs the EditorMenuBar with the File menu, with items for exporting
@@ -41,34 +44,14 @@ public class EditorMenuBar extends JMenuBar {
      */
     public EditorMenuBar() {
         JMenu file = new JMenu("File");
-        JMenuItem exportDataFile;
-        file.add(exportDataFile = new JMenuItem("Save Resume"));
-        JMenuItem exportResume;
-        file.add(exportResume = new JMenuItem("Export Resume PDF"));
+        JMenuItem exportDataFile = new JMenuItem("Save Resume");
+        file.add(exportDataFile);
+        JMenuItem exportResume = new JMenuItem("Export Resume PDF");
+        file.add(exportResume);
 
         exportDataFile.addActionListener(e -> {
             // Create the file chooser
-            JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "/Desktop") {
-                @Override
-                public void approveSelection() {
-                    File f = getSelectedFile();
-                    if (f.exists() && f.getAbsolutePath().endsWith(".json")) {
-                        int result = JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_CANCEL_OPTION);
-                        switch (result) {
-                            case JOptionPane.YES_OPTION:
-                                super.approveSelection();
-                                return;
-                            case JOptionPane.NO_OPTION:
-                            case JOptionPane.CLOSED_OPTION:
-                                return;
-                            case JOptionPane.CANCEL_OPTION:
-                                cancelSelection();
-                                return;
-                        }
-                    }
-                    super.approveSelection();
-                }
-            };
+            JFileChooser fileChooser = new OverwriteProtectedFileSelector("json");
 
             // Set file chooser options
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -97,27 +80,7 @@ public class EditorMenuBar extends JMenuBar {
 
         exportResume.addActionListener(e -> {
             // Create the file chooser
-            JFileChooser fileChooser = new JFileChooser(System.getProperty("user.home") + "/Desktop") {
-                @Override
-                public void approveSelection() {
-                    File f = getSelectedFile();
-                    if (f.exists() && f.getAbsolutePath().endsWith(".pdf")) {
-                        int result = JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file", JOptionPane.YES_NO_CANCEL_OPTION);
-                        switch (result) {
-                            case JOptionPane.YES_OPTION:
-                                super.approveSelection();
-                                return;
-                            case JOptionPane.NO_OPTION:
-                            case JOptionPane.CLOSED_OPTION:
-                                return;
-                            case JOptionPane.CANCEL_OPTION:
-                                cancelSelection();
-                                return;
-                        }
-                    }
-                    super.approveSelection();
-                }
-            };
+            JFileChooser fileChooser = new OverwriteProtectedFileSelector("pdf");
 
             // Set file chooser options
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -179,7 +142,7 @@ public class EditorMenuBar extends JMenuBar {
             String expiry = response.getExpiry();
             String body = "Hello,\n" +
                 "\n" +
-                "I am currently working on my resume using ResuMaster, and wanted to get some constructive feedback. My current draft can be found at: " + pdfURL + " (link expires after 14 days)\n" +
+                "I am currently working on my resume using ResuMaster, and wanted to get some constructive feedback. My current draft can be found at: " + pdfURL + " (link expires after " + expiry + " days)\n" +
                 "\n" +
                 "Thanks!\n" +
                 "\n" +
@@ -228,4 +191,52 @@ public class EditorMenuBar extends JMenuBar {
         this.controller = controller;
     }
 
+    /**
+     * Allows a file selector to verify an overwrite before performing it.
+     * 
+     * @author Jacob Curtis
+     * @author Micah Schiewe
+     */
+    private static class OverwriteProtectedFileSelector extends JFileChooser {
+
+        /** SerialUID, valid as of Iteration 3 of development (4/30/2020) */
+        private static final long serialVersionUID = 580461379557863423L;
+        
+        /** The extension indicating the filetype to accept */
+        final String extensionToSelect;
+
+        /**
+         * Initializes the file selector to the desktop, with the given extension to select.
+         * 
+         * @param extension The extension indicating the file type to choose.
+         */
+        OverwriteProtectedFileSelector(String extension) {
+            super(System.getProperty("user.home") + "/Desktop");
+            
+            if (extension.charAt(0) != '.')
+                extension = ".".concat(extension);
+            extensionToSelect = extension;
+        }
+
+        @Override
+        public void approveSelection() {
+            File f = getSelectedFile();
+            if (f.exists() && f.getAbsolutePath().endsWith(extensionToSelect)) {
+                int result = JOptionPane.showConfirmDialog(this, "The file exists, overwrite?", "Existing file",
+                        JOptionPane.YES_NO_CANCEL_OPTION);
+                switch (result) {
+                case JOptionPane.YES_OPTION:
+                    super.approveSelection();
+                    return;
+                case JOptionPane.NO_OPTION:
+                case JOptionPane.CLOSED_OPTION:
+                    return;
+                case JOptionPane.CANCEL_OPTION:
+                    cancelSelection();
+                    return;
+                }
+            }
+            super.approveSelection();
+        }
+    }
 }

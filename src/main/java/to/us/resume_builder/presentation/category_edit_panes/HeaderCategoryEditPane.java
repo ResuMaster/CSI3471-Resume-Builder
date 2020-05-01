@@ -1,11 +1,22 @@
 package to.us.resume_builder.presentation.category_edit_panes;
 
-import to.us.resume_builder.data.resume_components.category.HeaderCategory;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import to.us.resume_builder.data.resume_components.category.HeaderCategory;
 
 
 /**
@@ -14,6 +25,9 @@ import java.util.logging.Logger;
  * @author Brooklynn Stone
  */
 public class HeaderCategoryEditPane extends CategoryEditPane {
+    /** SerialUID, valid as of Iteration 3 of development (4/30/2020) */
+    private static final long serialVersionUID = 8917865735485157487L;
+    
     /**
      * Logs saving a HeaderCategoryEditPane
      */
@@ -31,7 +45,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
     /**
      * The Header Category to display
      */
-    private HeaderCategory headerCategory;
+    private transient HeaderCategory headerCategory;
 
     /**
      * Constructor for Header Category edit pane which displays each of the
@@ -102,7 +116,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
         grid.gridwidth = 1;
         grid.weightx = 0;
         grid.gridx = xPos;
-        grid.gridy = yPos++;
+        grid.gridy = yPos;
         info.add(labels[3], grid);
 
         grid.gridwidth = 2;
@@ -134,6 +148,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
      *
      * @return boolean indicating whether the Category was edited by the user
      */
+    @Override
     public boolean isModified() {
         if (headerCategory.getLink().equals(fields[0].getText()) &&
             headerCategory.getEmail().equals(fields[1].getText()) &&

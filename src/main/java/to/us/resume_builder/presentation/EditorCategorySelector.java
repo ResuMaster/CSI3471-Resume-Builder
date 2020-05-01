@@ -40,7 +40,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     /**
      * Mapping from Category ID to Category.
      */
-    private Map<String, Category> idToCategory;
+    private transient Map<String, Category> idToCategory;
 
     /**
      * The scroll pane for the list selector.
@@ -50,7 +50,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     /**
      * The controller which allows updating sibling editor components.
      */
-    private EditorController controller = null;
+    private transient EditorController controller = null;
 
     /**
      * Constructs an EditorCategorySelector given a Resume object.
