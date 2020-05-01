@@ -58,6 +58,7 @@ public class ExperienceCategory extends Category {
             id = this.id + "." + rand.nextInt(1000);
         } while (checkExperienceListID(id));
         experiences.add(new Experience(id));
+        LOGGER.info("Added bullet with " + id + " to an experience.");
         return id;
     }
 
@@ -95,6 +96,7 @@ public class ExperienceCategory extends Category {
      * @param id The String find the instance to remove by.
      */
     public void removeExperience(String id) {
+        LOGGER.info("Removed experience with " + id + ".");
         experiences.removeIf(b -> b.getID().equals(id));
     }
 
