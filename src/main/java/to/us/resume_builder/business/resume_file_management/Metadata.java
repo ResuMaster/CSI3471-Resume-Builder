@@ -33,8 +33,8 @@ public class Metadata {
      */
     public Metadata(String email, Date created, Date lastModified) {
         this.email = email;
-        this.created = created;
-        this.lastModified = lastModified;
+        this.created = new Date(created.getTime());
+        this.lastModified = new Date(lastModified.getTime());
     }
 
     /**

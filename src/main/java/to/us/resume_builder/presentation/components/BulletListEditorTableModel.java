@@ -25,7 +25,7 @@ public class BulletListEditorTableModel extends AbstractTableModel {
     /**
      * A list of each bullet to be displayed in the TableModel
      */
-    List<Bullet> data;
+    transient List<Bullet> data;
     /**
      * An array of Strings indicating each column names
      */
@@ -81,7 +81,7 @@ public class BulletListEditorTableModel extends AbstractTableModel {
      * @param columnNames The names for the columns.
      * @param bulletC     The IBulletContainer being edited
      */
-    public BulletListEditorTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
+    public BulletListEditorTableModel(List<Bullet> data, final String[] columnNames, IBulletContainer bulletC) {
         this.columnNames = columnNames;
         this.data = data;
         this.bulletC = bulletC;

@@ -26,13 +26,12 @@ class ListSerializer implements JsonSerializer<List<?>> {
      */
     @Override
     public JsonElement serialize(List<?> objects, Type type, JsonSerializationContext jsonSerializationContext) {
-        LOG.fine("Serializing " + objects.getClass());
         JsonArray array = new JsonArray();
         if (objects == null) {
             LOG.fine("List was null, returning empty JsonArray");
             return array;
         }
-
+        LOG.fine("Serializing " + objects.getClass());
         LOG.fine("Serializing List elements...");
         objects.forEach(child -> {
             JsonElement element = jsonSerializationContext.serialize(child);

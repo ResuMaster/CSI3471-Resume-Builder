@@ -50,7 +50,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
     /**
      * The controller which allows updating sibling editor components.
      */
-    private EditorController controller = null;
+    private transient EditorController controller = null;
 
     /**
      * Constructs an EditorCategorySelector given a Resume object.
