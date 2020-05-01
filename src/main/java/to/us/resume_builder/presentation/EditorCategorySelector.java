@@ -22,6 +22,9 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
  * @author Micah Schiewe
  */
 public class EditorCategorySelector extends JPanel implements ListSelectionListener {
+    /**
+     * Logs adding and removing {@link Category}'s
+     */
     private static final Logger LOG = Logger.getLogger(EditorCategorySelector.class.getName());
 
     /**

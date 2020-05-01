@@ -20,6 +20,9 @@ import java.util.logging.Logger;
  * @author Micah Schiewe
  */
 public class TextCategoryEditPane extends CategoryEditPane {
+    /**
+     * Logs the saving of a TextCategoryEditPane
+     */
     private static final Logger LOG = Logger.getLogger(TextCategoryEditPane.class.getName());
 
     /**

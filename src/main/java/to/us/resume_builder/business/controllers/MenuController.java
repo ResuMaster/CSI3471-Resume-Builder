@@ -21,6 +21,9 @@ import to.us.resume_builder.presentation.EditorMenuBar;
  * @author Micah Schiewe
  */
 public class MenuController {
+    /**
+     * Logs exports, uploads, and saves.
+     */
     private static final Logger LOG = Logger.getLogger(MenuController.class.getName());
 
     /** The resume currently loaded into the editor. */

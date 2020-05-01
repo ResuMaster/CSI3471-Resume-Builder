@@ -2,8 +2,6 @@ package to.us.resume_builder.presentation.components;
 
 import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.data.resume_components.IBulletContainer;
-import to.us.resume_builder.presentation.EditorStage;
-
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import java.util.Collections;
@@ -17,6 +15,9 @@ import java.util.logging.Logger;
  * @author Ashley Lu Couch
  */
 public class BulletListEditorTableModel extends AbstractTableModel implements TableModel {
+    /**
+     * Logs moving, adding, and removing Bullets
+     */
     private static final Logger LOG = Logger.getLogger(BulletListEditorTableModel.class.getName());
 
     /**
@@ -37,7 +38,6 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
      * Adds a new Bullet ID to data initialized blank
      */
     public void addBullet() {
-//        data.add(bulletC.getBulletByID(bulletC.addBullet()));
         LOG.logp(Level.INFO, BulletListEditorTableModel.class.getName(), "addBullet", "adding new bullet");
         data.add(new Bullet("YYY"));
     }

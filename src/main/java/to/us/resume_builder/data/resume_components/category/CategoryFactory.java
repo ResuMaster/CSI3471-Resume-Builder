@@ -7,15 +7,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Creates Categories based off of a provided { @link CategoryType }.
+ * Creates Categories based off of a provided {@link CategoryType}.
  * 
  * @author Micah
  */
 public class CategoryFactory {
-
+    /**
+     * Logs when an Exception is thrown in the getInstance method
+     */
     private static final Logger LOG = Logger.getLogger(CategoryFactory.class.getName());
 
+    /**
+     * The Factory which will be instantiated only once
+     */
     private static CategoryFactory fac = null;
+
+    /**
+     * An object to Synchronize with to ensure there is only one creation of a CategoryFactory
+     */
     private static final Object LOCK = new Object();
 
     /** The list of prototypical instances to produce from */

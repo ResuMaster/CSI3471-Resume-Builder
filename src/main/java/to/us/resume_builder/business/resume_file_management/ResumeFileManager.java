@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  * @author Jacob Curtis
  */
 public class ResumeFileManager {
+    /** Logs exporting and importing the JSON file */
     private static Logger LOG = Logger.getLogger(ResumeFileManager.class.getName());
 
     /**

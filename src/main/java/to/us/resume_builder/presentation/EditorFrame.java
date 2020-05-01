@@ -19,6 +19,9 @@ import to.us.resume_builder.data.resume_components.Resume;
  * @author Micah Schiewe
  */
 public class EditorFrame extends JFrame {
+    /**
+     * Logs creating and assembling the Frame
+     */
     private static final Logger LOG = Logger.getLogger(EditorFrame.class.getName());
 
     /**

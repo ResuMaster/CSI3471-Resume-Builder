@@ -7,6 +7,7 @@ import net.moznion.uribuildertiny.URIBuilderTiny;
 import to.us.resume_builder.business.controllers.MenuController;
 import to.us.resume_builder.business.server_connect.fileio_response.FileIOResponse;
 import to.us.resume_builder.business.server_connect.request.FailedRequestException;
+import to.us.resume_builder.data.resume_components.Resume;
 
 import java.awt.*;
 import java.io.File;
@@ -24,6 +25,9 @@ import java.util.logging.Logger;
  * @author Micah Schiewe
  */
 public class EditorMenuBar extends JMenuBar {
+    /**
+     * Logs exporting a {@link Resume} as JSON/PDF and sending a {@link Resume} by email
+     */
     private static final Logger LOG = Logger.getLogger(EditorMenuBar.class.getName());
 
     /**
@@ -188,7 +192,6 @@ public class EditorMenuBar extends JMenuBar {
                         .addQueryParameter("subject", "Please review my resume!")
                         .addQueryParameter("body", body)
                         .build();
-//                    System.out.println(mailto.toString());
                     LOG.info("Sending email");
                     d.mail(URI.create("mailto:"+mailto.toString().replace("+", "%20")));
                 } catch (IOException ex) {

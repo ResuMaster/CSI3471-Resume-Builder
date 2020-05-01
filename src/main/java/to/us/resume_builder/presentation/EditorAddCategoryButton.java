@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import to.us.resume_builder.data.resume_components.category.Category;
 import to.us.resume_builder.business.controllers.EditorController;
 import to.us.resume_builder.business.util.ImageCache;
 import to.us.resume_builder.data.resume_components.Resume;
@@ -34,16 +35,32 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
  * @author Micah
  */
 public class EditorAddCategoryButton extends JButton {
+    /**
+     * Logs creation of the category option panel and adding of categories
+     */
     private static final Logger LOG = Logger.getLogger(EditorAddCategoryButton.class.getName());
 
+    /**
+     * Label for the add {@link Category} button
+     */
     private static final String LABEL = "Add Section...";
+
+    /**
+     * Message at the top of the {@link Category} choices panel
+     */
     private static final String GET_TYPE_MESSAGE = "Select a section type:";
 
     /**
      * Controller which can add the category to the resume.
      */
     private EditorController controller;
+    /**
+     * Holds the type of Category the user chose
+     */
     private CategoryType selectedType;
+    /**
+     * Labels for the selected Category with a "(Selected)" underneath
+     */
     private Map<CategoryType, JLabel> selectedLabels;
 
     /**
@@ -84,6 +101,10 @@ public class EditorAddCategoryButton extends JButton {
         return selectedType;
     }
 
+    /**
+     * Constructs a panel with 4 panels, one for each {@link CategoryType}
+     * @return A panel containing each {@link CategoryType} with a button for each type
+     */
     private JComponent constructDialogContents() {
         LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "constructDialogContents", "creating dialog panel");
         CategoryType[] values = CategoryType.values();
@@ -99,6 +120,11 @@ public class EditorAddCategoryButton extends JButton {
         return panel;
     }
 
+    /**
+     * Constructs a Panel for the designated {@link CategoryType} and listens for any user selections
+     * @param type the {@link CategoryType} to create the button for
+     * @return a
+     */
     private JComponent constructSelectionButton(CategoryType type) {
         LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "constructDialogContents", "creating selection button panel");
         JPanel panel = new JPanel();
@@ -168,6 +194,9 @@ public class EditorAddCategoryButton extends JButton {
         return panel;
     }
 
+    /**
+     * If the user cancels creating a {@link Category}, remove any "Selected" {@link Category}'s
+     */
     private void clearSelection() {
         LOG.logp(Level.INFO, EditorAddCategoryButton.class.getName(), "clearSelection", "clearing the current selection");
         selectedType = null;

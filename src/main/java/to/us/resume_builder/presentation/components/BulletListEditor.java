@@ -1,10 +1,8 @@
 package to.us.resume_builder.presentation.components;
 
 import to.us.resume_builder.presentation.EditorAddCategoryButton;
-import to.us.resume_builder.presentation.EditorCategoryHeader;
 import to.us.resume_builder.presentation.IEncapsulatedEditor;
 import to.us.resume_builder.data.resume_components.IBulletContainer;
-
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
@@ -18,6 +16,9 @@ import java.util.logging.Logger;
  * @author Matthew McCaskill
  */
 public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
+    /**
+     * Logs the saving of a BulletList
+     */
     private static final Logger LOG = Logger.getLogger(BulletListEditor.class.getName());
 
     /**
@@ -57,7 +58,6 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         table.setRowHeight(table.getRowHeight() * lines);
         table.setDefaultRenderer(String.class, new MultilineCellRenderer());
         table.setDefaultEditor(String.class, new MultilineCellEditor());
-//        table.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
 
@@ -145,7 +145,6 @@ public class BulletListEditor extends JPanel implements IEncapsulatedEditor {
         this.modified = false;
 
         this.bulletC.getBulletList().clear();
-//        this.bulletC.getBulletList().addAll(((BulletComponentTableModel) table.getModel()).data);
         ((BulletListEditorTableModel) this.table.getModel()).data.stream().peek(b -> {
             if (b.getText() == null) b.setText("");
         }).forEach(b -> this.bulletC.addBullet(b));

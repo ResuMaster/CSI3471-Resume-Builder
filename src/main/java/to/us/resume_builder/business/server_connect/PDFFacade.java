@@ -21,6 +21,7 @@ import to.us.resume_builder.business.server_connect.request.impl.PDFRequest;
  * @author Micah
  */
 public class PDFFacade {
+	/** Logs uploads and error codes */
 	private static final Logger LOG = Logger.getLogger(PDFFacade.class.getName());
 
 	/** The status code indicating the PDF compile request succeeded */

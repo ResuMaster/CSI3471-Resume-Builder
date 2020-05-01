@@ -12,7 +12,14 @@ import to.us.resume_builder.data.resume_components.CategoryVisitor;
 import to.us.resume_builder.data.resume_components.IBulletContainer;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 
+/**
+ * A {@link Category} which contains {@link Bullet}s
+ * @author Ashley Lu Couch
+ */
 public class BulletCategory extends Category implements IBulletContainer {
+    /**
+     * Logs formatting a LaTeX String
+     */
     private static Logger LOGGER = Logger.getLogger(BulletCategory.class.getName());
 
     /**

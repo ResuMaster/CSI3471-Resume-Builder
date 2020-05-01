@@ -14,6 +14,9 @@ import java.util.logging.Logger;
  * @author Jacob Curtis
  */
 public class CategoryDeserializer implements JsonDeserializer<Category> {
+    /**
+     * Logs when a Deserialization occurs
+     */
     private static Logger LOG = Logger.getLogger(CategoryDeserializer.class.getName());
 
     /**
