@@ -53,7 +53,7 @@ public class EditorStage extends JPanel {
     private transient EditorController controller = null;
 
     /** The category currently loaded to edit. */
-    private Category category;
+    private transient Category category;
 
     /**
      * Constructs a EditorStage ready to edit the provided category.

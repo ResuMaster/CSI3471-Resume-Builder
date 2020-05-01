@@ -34,7 +34,7 @@ public class BulletListEditorTableModel extends AbstractTableModel {
      * An object which holds the Bullets of a Bullet Category or Experience
      * Component
      */
-    IBulletContainer bulletC;
+    transient IBulletContainer bulletC;
 
     /**
      * Adds a new Bullet ID to data initialized blank
