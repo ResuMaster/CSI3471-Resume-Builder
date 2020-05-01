@@ -60,6 +60,7 @@ public class Resume {
      * Sets the current List categoryList for this instance.
      */
     public void setCategoryList(List<Category> newList) {
+        LOGGER.info("Set the category list to a new list.");
         this.categoryList = newList;
     }
 
