@@ -14,6 +14,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 /**
@@ -101,10 +103,12 @@ public class CreateOrOpenDialog extends JFrame {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(new URI("http://resume-builder.us.to/userguide.html"));
                 } else {
+                    LOGGER.warning("Could not open user guide.");
                     JOptionPane.showMessageDialog(this, "Could not open user guide.");
                 }
             } catch (URISyntaxException | IOException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                LOGGER.severe("Could not open user guide.");
                 JOptionPane.showMessageDialog(this, "Could not open user guide.");
             }
         });

@@ -1,5 +1,7 @@
 package to.us.resume_builder.business.server_connect.request;
 
+import to.us.resume_builder.business.ApplicationConfiguration;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
