@@ -2,6 +2,5 @@
   "export.tempLocation": "./temp/",
   "export.timeout": 60.0,
   "theme.color": "light",
-  "templates.directory": "./src/main/resources/templates/",
   "request.url": "http://api.mattrm.com:8080"
 }

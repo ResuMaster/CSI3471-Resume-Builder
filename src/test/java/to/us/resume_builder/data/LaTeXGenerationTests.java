@@ -536,7 +536,7 @@ public class LaTeXGenerationTests {
             "\\item Completed a Christian Leadership course, expanding knowledge of leadership and communication techniques\n" +
             "\\end{resumebulletcategory}\n" +
             "\n" +
-            "\\end{document}";
+            "\\end{document}\n";
 
         ResumeExporter re = new ResumeExporter(testResume());
 

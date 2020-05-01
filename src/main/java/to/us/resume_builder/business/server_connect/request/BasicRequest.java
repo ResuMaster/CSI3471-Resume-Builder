@@ -1,13 +1,13 @@
 package to.us.resume_builder.business.server_connect.request;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandler;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -26,8 +26,6 @@ public abstract class BasicRequest<T> {
         CLIENT = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
     }
 
-    /** Charset to send requests using */
-    protected static final String CHARSET = "UTF-8";
     /** Separator for elements in a query string */
     protected static final String SEPARATOR = "&";
     /** Assignment for parameters in a query string */
@@ -36,7 +34,7 @@ public abstract class BasicRequest<T> {
     protected static final String PARAM_SPLIT = "?";
 
     /** Assumed timeout, in seconds, of the method */
-    protected static final int TIMEOUT = 15;
+    protected static final int TIMEOUT = 60;
 
     /** The type of request this handles */
     private RequestType type;
@@ -90,14 +88,9 @@ public abstract class BasicRequest<T> {
 
         for (int i = 0; i < arguments.length; i += 2) {
             // varName=varVal
-            try {
-                sb.append(URLEncoder.encode(arguments[i], CHARSET));
-                sb.append(ASSIGN);
-                sb.append(URLEncoder.encode(arguments[i + 1], CHARSET));
-            } catch (UnsupportedEncodingException e) {
-                // Should not happen, UTF-8 is standard
-                e.printStackTrace();
-            }
+            sb.append(URLEncoder.encode(arguments[i], StandardCharsets.UTF_8));
+            sb.append(ASSIGN);
+            sb.append(URLEncoder.encode(arguments[i + 1], StandardCharsets.UTF_8));
 
             // If there are more, add the variable separator
             if (i + 1 < arguments.length)
