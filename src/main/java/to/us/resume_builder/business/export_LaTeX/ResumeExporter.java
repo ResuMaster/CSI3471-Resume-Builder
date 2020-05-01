@@ -114,6 +114,7 @@ public class ResumeExporter {
      * to be exported to PDF and uploaded to file.io, with the response returned
      * here. Uses the specified ResumeTemplate to generate the LaTeX string.
      *
+     * @param template the template to use when uploading the {@link Resume} to a PDF
      * @return The response from https://file.io
      * @throws InterruptedException The upload request was interrupted
      * @throws FailedRequestException The response returned with an error

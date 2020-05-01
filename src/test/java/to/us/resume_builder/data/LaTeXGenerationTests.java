@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests each class's LaTeX generation against what it should be
- * @atuhor Matthew McCaskill
+ * @author Matthew McCaskill
  */
 public class LaTeXGenerationTests {
     /**
@@ -62,6 +62,7 @@ public class LaTeXGenerationTests {
     /**
      * Sets up some {@link to.us.resume_builder.data.resume_components.Bullet}s with text, empty text,
      * null, and false input.
+     * @param b The IBulletContainer to add the {@link to.us.resume_builder.data.resume_components.Bullet}s to
      */
     private static void setupBulletHolder(IBulletContainer b) {
         b.getBulletByID(b.addBullet()).setText("Bullet 1");
