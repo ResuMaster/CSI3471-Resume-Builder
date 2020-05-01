@@ -96,6 +96,7 @@ public class BulletCategory extends Category implements IBulletContainer {
 
         // add new element to bullets
         bullets.add(new Bullet(id));
+        LOGGER.info("Created bullet with " + id + ".");
         return id;
     }
 
@@ -130,6 +131,7 @@ public class BulletCategory extends Category implements IBulletContainer {
     @Override
     public void removeBullet(String id) {
         bullets.removeIf(b -> b.getID().equals(id));
+        LOGGER.info("Removed bullet with " + id + ".");
     }
 
     /**
