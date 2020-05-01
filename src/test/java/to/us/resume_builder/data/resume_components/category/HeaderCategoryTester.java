@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Brooklynn Stone
  */
 public class HeaderCategoryTester extends CategoryTester {
+    /**
+     * {@link HeaderCategory} object to perform tests on
+     */
     private HeaderCategory hc;
 
     /**
@@ -26,27 +29,18 @@ public class HeaderCategoryTester extends CategoryTester {
         hc.setName("Header Category");
     }
 
-    /**
-     * Verify getType returns a Header CategoryType
-     */
     @Test
     @Override
     void testGetType() {
         assertEquals(CategoryType.HEADER, hc.getType());
     }
 
-    /**
-     * Testing get and set display name
-     */
     @Test
     @Override
     void testDisplayName() {
         assertEquals("Display Name", hc.getDisplayName());
     }
 
-    /**
-     * Testing get and set name
-     */
     @Test
     @Override
     void testName() {

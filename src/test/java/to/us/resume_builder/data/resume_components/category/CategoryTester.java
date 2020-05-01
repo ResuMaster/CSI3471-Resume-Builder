@@ -7,7 +7,7 @@ import to.us.resume_builder.data.resume_components.Resume;
 /**
  * Test class for the {@link Category}
  *
- * @author none
+ * @author Ashley Lu Couch
  */
 public abstract class CategoryTester {
     private static Resume r;

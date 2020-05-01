@@ -31,10 +31,6 @@ public class ExperienceCategoryTester extends CategoryTester {
         experience.add(new Experience(ec.addExperience()));
     }
 
-    /**
-     * Abstract getType checks to make sure the type of the category is expected
-     * value
-     */
     @Override
     @Test
     void testGetType() {
@@ -42,9 +38,6 @@ public class ExperienceCategoryTester extends CategoryTester {
         assertEquals(ec.getType(), r.getCategoryList().get(0).getType());
     }
 
-    /**
-     * Verifies that set and get DisplayName work
-     */
     @Override
     @Test
     void testDisplayName() {
@@ -52,9 +45,6 @@ public class ExperienceCategoryTester extends CategoryTester {
         assertEquals("this is the display name", ec.getDisplayName());
     }
 
-    /**
-     * Verifies that set and get Name work
-     */
     @Override
     @Test
     void testName() {

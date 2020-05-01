@@ -9,11 +9,17 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests the ResumeExporter class
+ * Tests the {@link ResumeExporter} class
  * @author Brooklynn Stone
  */
 public class ResumeExporterTester {
+    /**
+     * Mock of the {@link ResumeExporter} class to use for testing
+     */
     static ResumeExporterMock re;
+    /**
+     * A {@link Resume} to use for testing
+     */
     static Resume r;
 
     /**

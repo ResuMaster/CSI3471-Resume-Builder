@@ -12,7 +12,14 @@ import java.io.StringWriter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests {@link ResumeFileManager} methods
+ * @author Jacob Curtis
+ */
 public class ResumeFileManagerTests {
+    /**
+     * Tests the importFile method with a Resume created from Json
+     */
     @Test
     public void importFileTest() {
         String json = "{\n" +
@@ -121,6 +128,9 @@ public class ResumeFileManagerTests {
         });
     }
 
+    /**
+     * Tests that the exportFile method does not throw exceptions
+     */
     @Test
     public void exportFileTest() {
         StringWriter json = new StringWriter();
@@ -135,6 +145,9 @@ public class ResumeFileManagerTests {
         });
     }
 
+    /**
+     * Tests that the importFile method does not throw exceptions with an empty json string
+     */
     @Test
     public void emptyJsonImportTest() {
         assertDoesNotThrow(() ->
@@ -142,6 +155,9 @@ public class ResumeFileManagerTests {
         );
     }
 
+    /**
+     * Tests that invalid json does not throw exceptions for the importFile method
+     */
     @Test
     public void invalidJsonImportTest() {
         String json = "{\n" +

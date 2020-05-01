@@ -17,8 +17,17 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Brooklynn Stone
  */
 public class BulletCategoryTester extends CategoryTester {
+    /**
+     * Resume object which will hold a {@link BulletCategory}
+     */
     private static Resume r;
+    /**
+     * The {@link BulletCategory} to run tests on
+     */
     private static BulletCategory bc;
+    /**
+     * A list of {@link Bullet}s to be added to the {@link BulletCategory}
+     */
     private static List<Bullet> bullets;
 
     /**
@@ -38,27 +47,18 @@ public class BulletCategoryTester extends CategoryTester {
         bc.setName("name");
     }
 
-    /**
-     * Verifies that getType returns a Bullet CategoryType
-     */
     @Override
     @Test
     void testGetType() {
         assertEquals(CategoryType.BULLETS, bc.getType());
     }
 
-    /**
-     * Testing get and set display name
-     */
     @Override
     @Test
     void testDisplayName() {
         assertEquals("Display name", bc.getDisplayName());
     }
 
-    /**
-     * Testing get and set name
-     */
     @Override
     @Test
     void testName() {
