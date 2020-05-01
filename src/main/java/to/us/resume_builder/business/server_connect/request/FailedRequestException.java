@@ -2,7 +2,7 @@ package to.us.resume_builder.business.server_connect.request;
 
 /**
  * A custom Exception used
- * @author TODO: find author
+ * @author Micah Schiewe
  */
 public class FailedRequestException extends Exception {
 

@@ -12,7 +12,7 @@ import to.us.resume_builder.business.server_connect.request.RequestType;
 
 /**
  *
- * @author TODO: find author
+ * @author Micah Schiewe
  */
 public class PDFRequest extends BasicRequest<InputStream> {
 
