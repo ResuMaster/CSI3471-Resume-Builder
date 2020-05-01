@@ -174,6 +174,7 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      * @return the id created for the new bullet.
      */
     public String addBullet() {
+
         String id;
         Random rand = new Random();
         do {
@@ -183,6 +184,7 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
 
         // add new element to bullets
         bullets.add(new Bullet(id));
+        LOGGER.info("Created bullet with " + id + ".");
         return id;
     }
 
@@ -214,6 +216,7 @@ public class Experience extends ResumeComponent implements ILaTeXConvertable, IB
      * @param id the ID used to find the Bullet to remove.
      */
     public void removeBullet(String id) {
+        LOGGER.info("Removed bullet with " + id + ".");
         bullets.removeIf(b -> b.getID().equals(id));
     }
 
