@@ -7,10 +7,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
+/**
+ * A Singleton responsible for sending responses from FilIO's upload request to Gson
+ * @author TODO: find author
+ */
 public class FileIOResponseParser {
+	/** Logs a parseResponse request */
 	private static final Logger LOG = Logger.getLogger(FileIOResponseParser.class.getName());
 
+	/** Singleton instance of a FileIOParser */
 	private static FileIOResponseParser manager;
+	/** Object which controls the creation of one and only one FileIOResponseParser */
 	private static final Object LOCK = new Object();
 
 	/** The Gson instance used to parse the response. */

@@ -13,7 +13,15 @@ import to.us.resume_builder.business.server_connect.fileio_response.FileIORespon
 import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 import to.us.resume_builder.business.server_connect.request.impl.PDFRequest;
 
+/**
+ * Facade for communicating with the PDF-compiling server.
+ * <p>
+ * Example of Design Pattern: Facade
+ * 
+ * @author Micah
+ */
 public class PDFFacade {
+	/** Logs uploads and error codes */
 	private static final Logger LOG = Logger.getLogger(PDFFacade.class.getName());
 
 	/** The status code indicating the PDF compile request succeeded */

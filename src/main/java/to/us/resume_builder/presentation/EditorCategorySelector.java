@@ -1,6 +1,8 @@
 package to.us.resume_builder.presentation;
 
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.swing.*;
@@ -20,6 +22,11 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
  * @author Micah Schiewe
  */
 public class EditorCategorySelector extends JPanel implements ListSelectionListener {
+    /**
+     * Logs adding and removing {@link Category}'s
+     */
+    private static final Logger LOG = Logger.getLogger(EditorCategorySelector.class.getName());
+
     /**
      * The categories to be selected from.
      */
@@ -78,6 +85,8 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
      * @param id The ID of the category to be removed.
      */
     public void removeCategory(String id) {
+        LOG.logp(Level.INFO, EditorCategorySelector.class.getName(), "removeCategory", "removing category with id: " + id);
+
         // Return if no selection or only one category available
         if (categories.isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "No section selected! Please select a section in the list on the left.", "Couldn't Remove Section", JOptionPane.ERROR_MESSAGE);
@@ -90,6 +99,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
         // Get the Category for the iD
         Category c = idToCategory.get(id);
         if (c == null) {
+            LOG.logp(Level.WARNING, EditorCategorySelector.class.getName(), "removeCategory", "could not find category id: " + id);
             return;
         }
 
@@ -111,6 +121,7 @@ public class EditorCategorySelector extends JPanel implements ListSelectionListe
      * @param newCat The category to add into the EditorCategorySelector
      */
     public void addCategory(Category newCat) {
+        LOG.logp(Level.INFO, EditorCategorySelector.class.getName(), "removeCategory", "adding new category");
         if (newCat == null)
             return;
         String newID = newCat.getID();

@@ -3,6 +3,8 @@ package to.us.resume_builder.presentation.components;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class allows a table cell to have two rows.
@@ -10,6 +12,11 @@ import java.awt.*;
  * @author Matthew McCaskill
  */
 public class MultilineCellRenderer extends JTextArea implements TableCellRenderer {
+    /**
+     * Logs information about the TableCellRenderer
+     */
+    private static final Logger LOG = Logger.getLogger(MultilineCellRenderer.class.getName());
+
     /**
      * Constructs a <code>MultilineCellRenderer</code>
      */
@@ -85,6 +92,7 @@ public class MultilineCellRenderer extends JTextArea implements TableCellRendere
         this.setFont(table.getFont());
         this.setText((value == null) ? "[New Bullet]" : value.toString());
 
+        LOG.logp(Level.FINE, MultilineCellRenderer.class.getName(), "getTableCellRendererComponent", "returning table cell renderer");
         // Return this text area
         return this;
     }

@@ -3,6 +3,8 @@ package to.us.resume_builder.business.export_LaTeX;
 import to.us.resume_builder.business.ApplicationConfiguration;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
+import to.us.resume_builder.data.resume_components.Experience;
+import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.business.util.StringTemplate;
 
 import java.io.BufferedReader;
@@ -29,10 +31,25 @@ public enum ResumeTemplate {
     DEFAULT("default"),
     DEFAULT_NO_HYPHENS("default-no-hyphens");
 
+    /**
+     * The template for all LaTeX types generated for LaTeX exporting and compilation
+     */
     private StringTemplate latexTemplate;
+    /**
+     * Templates for each {@link CategoryType} in LaTeX form
+     */
     private Map<CategoryType, StringTemplate> categoryTemplates;
+    /**
+     * Template for the LaTeX of an {@link Experience}
+     */
     private StringTemplate experienceTemplate;
+    /**
+     * Template for a field of a {@link Bullet}
+     */
     private StringTemplate fieldTemplate;
+    /**
+     * Template for a solid line on the {@link to.us.resume_builder.data.resume_components.Resume}
+     */
     private StringTemplate separatorTemplate;
 
     /**

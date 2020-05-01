@@ -1,6 +1,8 @@
 package to.us.resume_builder.presentation;
 
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -17,6 +19,11 @@ import to.us.resume_builder.data.resume_components.Resume;
  * @author Micah Schiewe
  */
 public class EditorFrame extends JFrame {
+    /**
+     * Logs creating and assembling the Frame
+     */
+    private static final Logger LOG = Logger.getLogger(EditorFrame.class.getName());
+
     /**
      * The stage shows the information stored in each category and allows
      * for modifying the data.
@@ -44,20 +51,25 @@ public class EditorFrame extends JFrame {
     public EditorFrame(ResumeFile r) {
         super("ResuMaster");
 
+        LOG.logp(Level.INFO, EditorFrame.class.getName(), "EditorFrame constructor", "Beginning initialization");
+
         Resume resume = r.getResume();
 
         // Create editor components
+        LOG.logp(Level.INFO, EditorFrame.class.getName(), "EditorFrame constructor", "Creating editor components");
         menuBar = new EditorMenuBar();
         sideList = new EditorCategorySelector(resume);
         addButton = new EditorAddCategoryButton();
         stage = new EditorStage(resume.getCategoryList().get(0));
 
         // Create and connect controllers
+        LOG.logp(Level.INFO, EditorFrame.class.getName(), "EditorFrame constructor", "Creating and registering controllers");
         EditorController editorController = EditorController.create(stage, sideList, resume);
         MenuController menuController = new MenuController(r);
         addButton.setController(editorController);
         menuBar.setController(menuController);
 
+        LOG.logp(Level.INFO, EditorFrame.class.getName(), "EditorFrame constructor", "Creating category move button panel");
         // Create move button panel
         // This block is by Ashley Lu Couch
         JPanel moveButtons = new JPanel();
@@ -80,6 +92,7 @@ public class EditorFrame extends JFrame {
         selectorPanel.add(addButton, BorderLayout.SOUTH);
 
         // Assemble main UI
+        LOG.logp(Level.INFO, EditorFrame.class.getName(), "EditorFrame constructor", "Assembling frame");
         setLayout(new BorderLayout());
         setJMenuBar(menuBar);
         add(selectorPanel, BorderLayout.WEST);

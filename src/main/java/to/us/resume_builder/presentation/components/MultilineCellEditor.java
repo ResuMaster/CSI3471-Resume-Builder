@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class allows a JTable cell to contain a two-row text editor.
@@ -14,6 +16,11 @@ import java.util.EventObject;
  * @author Matthew McCaskill
  */
 public class MultilineCellEditor extends AbstractCellEditor implements TableCellEditor {
+    /**
+     * Logs when the "enter" key is pressed to finish editing
+     */
+    private static final Logger LOG = Logger.getLogger(MultilineCellEditor.class.getName());
+
     /**
      * The {@link JTextArea} used to edit the text values.
      */
@@ -35,6 +42,7 @@ public class MultilineCellEditor extends AbstractCellEditor implements TableCell
             @Override
             public void keyTyped(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    LOG.logp(Level.FINE, MultilineCellEditor.class.getName(), "KeyListener.keyTyped", "detected enter key, stopping editing");
                     MultilineCellEditor.this.stopCellEditing();
                 }
             }
@@ -42,6 +50,7 @@ public class MultilineCellEditor extends AbstractCellEditor implements TableCell
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    LOG.logp(Level.FINE, MultilineCellEditor.class.getName(), "KeyListener.keyPressed", "detected enter key, stopping editing");
                     e.consume();
                     MultilineCellEditor.this.stopCellEditing();
                 }
@@ -50,6 +59,7 @@ public class MultilineCellEditor extends AbstractCellEditor implements TableCell
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    LOG.logp(Level.FINE, MultilineCellEditor.class.getName(), "KeyListener.keyPressed", "detected enter key, stopping editing");
                     e.consume();
                     MultilineCellEditor.this.stopCellEditing();
                 }
