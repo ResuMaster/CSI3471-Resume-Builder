@@ -1,4 +1,4 @@
-package to.us.resume_builder.business.controllers;
+package to.us.resume_builder.presentation.controllers;
 
 import to.us.resume_builder.presentation.EditorCategorySelector;
 import to.us.resume_builder.presentation.EditorStage;

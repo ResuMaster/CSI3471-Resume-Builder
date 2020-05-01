@@ -6,6 +6,8 @@ import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 import to.us.resume_builder.presentation.EditorCategorySelector;
 import to.us.resume_builder.presentation.EditorStage;
+import to.us.resume_builder.presentation.controllers.EditorController;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

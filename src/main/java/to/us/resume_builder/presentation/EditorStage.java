@@ -11,10 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 
-import to.us.resume_builder.business.controllers.EditorController;
 import to.us.resume_builder.data.resume_components.category.Category;
 import to.us.resume_builder.presentation.category_edit_panes.CategoryEditPane;
 import to.us.resume_builder.presentation.category_edit_panes.CategoryEditVisitor;
+import to.us.resume_builder.presentation.controllers.EditorController;
 
 /**
  * Class to tie together the various Category editors into a standard interface.
