@@ -14,9 +14,11 @@ import to.us.resume_builder.business.server_connect.request.FailedRequestExcepti
 import to.us.resume_builder.business.server_connect.request.impl.PDFRequest;
 
 /**
- * Singleton class which compiles LaTeX to PDF, uploads the PDF to fil.io, and checks for
- * successful or unsuccessful responses from the upload.
- * @author TODO: find author
+ * Facade for communicating with the PDF-compiling server.
+ * <p>
+ * Example of Design Pattern: Facade
+ * 
+ * @author Micah
  */
 public class PDFFacade {
 	/** Logs uploads and error codes */

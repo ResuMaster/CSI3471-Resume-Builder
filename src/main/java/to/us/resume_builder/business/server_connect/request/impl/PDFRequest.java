@@ -29,7 +29,7 @@ public class PDFRequest extends BasicRequest<InputStream> {
 	 * @return
 	 */
 	@Override
-	protected URI getURI(String... arguments) {
+	protected URI doMakeURI(String... arguments) {
 		return URI.create(SITE.concat(path));
 	}
 
@@ -38,7 +38,7 @@ public class PDFRequest extends BasicRequest<InputStream> {
 	 * @return
 	 */
 	@Override
-	protected BodyHandler<InputStream> getResponseBuilder() {
+	protected BodyHandler<InputStream> doMakeResponseBuilder() {
 		return HttpResponse.BodyHandlers.ofInputStream();
 	}
 
@@ -48,7 +48,7 @@ public class PDFRequest extends BasicRequest<InputStream> {
 	 * @return
 	 */
 	@Override
-	protected BodyPublisher getBody(String... arguments) {
+	protected BodyPublisher doMakeBody(String... arguments) {
 		return HttpRequest.BodyPublishers.ofString(getArguments(arguments));
 	}
 }
