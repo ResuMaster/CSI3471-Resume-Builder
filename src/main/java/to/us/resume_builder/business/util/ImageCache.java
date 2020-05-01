@@ -49,6 +49,9 @@ public class ImageCache {
         return singleton;
     }
 
+    /**
+     * Initializes a HashMap to hold the locations of the various images to be cached
+     */
     private ImageCache() {
         images = new HashMap<>();
     }
