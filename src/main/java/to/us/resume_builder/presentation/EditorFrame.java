@@ -7,9 +7,9 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 import to.us.resume_builder.business.resume_file_management.ResumeFile;
-import to.us.resume_builder.business.controllers.EditorController;
-import to.us.resume_builder.business.controllers.MenuController;
 import to.us.resume_builder.data.resume_components.Resume;
+import to.us.resume_builder.presentation.controllers.EditorController;
+import to.us.resume_builder.presentation.controllers.MenuController;
 
 /**
  * The main editor frame which houses the more granular aspects of the

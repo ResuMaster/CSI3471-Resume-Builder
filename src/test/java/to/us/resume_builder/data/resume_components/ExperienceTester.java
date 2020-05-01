@@ -14,10 +14,22 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Ashley Lu Couch
  */
 public class ExperienceTester {
-
+    /**
+     * {@link Resume} object which will hold an {@link ExperienceCategory} with the {@link Experience}
+     * to perform tests on
+     */
     private static Resume r = null;
+    /**
+     * The {@link ExperienceCategory} holding the {@link Experience} to perform tests on
+     */
     private static ExperienceCategory ec = null;
+    /**
+     * The {@link Experience} to perform tests on
+     */
     private static Experience experience = null;
+    /**
+     * A list of {@link Bullet}s held within the {@link Experience}
+     */
     private static List<Bullet> bullets = null;
 
 

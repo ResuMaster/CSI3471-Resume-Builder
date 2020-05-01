@@ -12,8 +12,18 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
  * @author Brooklynn Stone
  */
 public class BulletTester {
+    /**
+     * {@link Resume} object which will hold a {@link BulletCategory} with the {@link Bullet}
+     * to perform tests on
+     */
     private static Resume r = null;
+    /**
+     * The {@link BulletCategory} holding the {@link Bullet} to perform tests on
+     */
     private static BulletCategory bc = null;
+    /**
+     * The {@link Bullet} to perform tests on
+     */
     private static Bullet b = null;
 
     /**

@@ -9,11 +9,11 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import to.us.resume_builder.business.controllers.EditorController;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 import to.us.resume_builder.data.resume_components.category.Category;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
+import to.us.resume_builder.presentation.controllers.EditorController;
 
 /**
  * Selector for the Editor Category List. Controlled by an EditorController.

@@ -43,10 +43,7 @@ public class ResumeExporterMock {
      * Export the resume to the specified file.
      *
      * @param exportLocation The name of the file to export to.
-     *
      * @return Whether or not the export was successful.
-     * @throws IOException Thrown if any errors occur during the export
-     *                     process.
      */
     public boolean export(Path exportLocation) {
         return export(exportLocation, ResumeTemplate.DEFAULT);
@@ -100,6 +97,7 @@ public class ResumeExporterMock {
      * to be exported to PDF and uploaded to file.io, with the response returned
      * here. Uses the specified ResumeTemplate to generate the LaTeX string.
      *
+     * @param template the {@link ResumeTemplate} to use when uploading the {@link Resume} to a PDF
      * @return The response from https://file.io
      * @throws InterruptedException The upload request was interrupted
      * @throws FailedRequestException The response returned with an error

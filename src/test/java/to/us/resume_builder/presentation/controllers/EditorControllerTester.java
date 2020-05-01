@@ -1,4 +1,4 @@
-package to.us.resume_builder.business.controllers;
+package to.us.resume_builder.presentation.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +7,7 @@ import to.us.resume_builder.data.resume_components.category.CategoryType;
 import to.us.resume_builder.presentation.EditorCategorySelector;
 import to.us.resume_builder.presentation.EditorStage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests methods in the {@link EditorController} class
@@ -43,9 +43,8 @@ public class EditorControllerTester extends EditorController {
         ec = new EditorController();
         r = new Resume();
         ec.loadResume(r);
-        r.createCategory(CategoryType.BULLETS);
-        es = new EditorStage(ec.resume.getCategoryList().get(0));
-        ecs = new EditorCategorySelector(ec.resume);
+        es = new EditorStage(r.getCategoryByID(r.createCategory(CategoryType.BULLETS)));
+        ecs = new EditorCategorySelector(r);
         ec = ec.create(es, ecs, r);
         System.out.println("Init called");
     }
@@ -56,24 +55,7 @@ public class EditorControllerTester extends EditorController {
      */
     @Test
     public void testCreate2() {
-        try {
-            ec.create(null, null, null);
-            assert(false);
-        }
-        catch (IllegalArgumentException e) {
-            assert(true);
-        }
-    }
-
-    /**
-     * Add a Category to the Resume and then load it. Validate
-     * that the stage has loaded the designated Category
-     */
-    @Test
-    public void testLoadCategory() {
-        String id = ec.resume.createCategory(CategoryType.BULLETS);
-        ec.loadCategory(id);
-        assertTrue(ec.stage.getEditID().equals(id));
+        assertThrows(IllegalArgumentException.class, () -> { ec.create(null, null, null);});
     }
 
     /**
@@ -82,17 +64,6 @@ public class EditorControllerTester extends EditorController {
     @Test
     public void testAddCategory() {
         ec.addCategory(CategoryType.BULLETS);
-        assertEquals(2, ec.resume.getCategoryList().size());
-    }
-
-    /**
-     * Add then remove a Category and make sure the size decreases by 1
-     */
-    @Test
-    public void testRemoveCategory() {
-        ec.addCategory(CategoryType.BULLETS);
-        String id = ec.resume.getCategoryList().get(0).getID();
-        ec.removeCategory(id);
-        assertEquals(1, ec.sideList.getModel().getSize());
+        assertEquals(2, r.getCategoryList().size());
     }
 }

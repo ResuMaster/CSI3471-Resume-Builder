@@ -14,8 +14,19 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ResumeTester {
 
+    /**
+     * The {@link Resume} to perform tests on
+     */
     private static Resume r = null;
+    /**
+     * A {@link Category} list which will be used to compare to the internal structure of the
+     * {@link Resume}
+     */
     private static List<Category> categoryList = null;
+    /**
+     * A list of each {@link Category} id which will be used to compare to the internal structure of the
+     * {@link Resume}
+     */
     private static List<String> categoryIDs = null;
 
     /**

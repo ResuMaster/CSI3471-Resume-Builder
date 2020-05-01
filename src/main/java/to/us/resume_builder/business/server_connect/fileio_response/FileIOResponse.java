@@ -3,7 +3,7 @@ package to.us.resume_builder.business.server_connect.fileio_response;
 /**
  * Representation of file.io's response to the user.
  * 
- * @author Micah
+ * @author Micah Schiewe
  */
 public class FileIOResponse {
 	/** Success of the call */

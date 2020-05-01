@@ -33,27 +33,18 @@ public class TextCategoryTester extends CategoryTester {
         tc.setName("name");
     }
 
-    /**
-     * Verify getType returns a Text CategoryType
-     */
     @Test
     @Override
     void testGetType() {
         assertEquals(CategoryType.TEXT, tc.getType());
     }
 
-    /**
-     * Testing get and set display name
-     */
     @Test
     @Override
     void testDisplayName() {
         assertEquals("Display name", tc.getDisplayName());
     }
 
-    /**
-     * Testing get and set name
-     */
     @Test
     @Override
     void testName() {

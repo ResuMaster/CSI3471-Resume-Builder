@@ -9,7 +9,7 @@ import com.google.gson.JsonSyntaxException;
 
 /**
  * A Singleton responsible for sending responses from FilIO's upload request to Gson
- * @author TODO: find author
+ * @author Micah Schiewe
  */
 public class FileIOResponseParser {
 	/** Logs a parseResponse request */

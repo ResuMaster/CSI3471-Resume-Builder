@@ -7,48 +7,39 @@ import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandler;
 
+import to.us.resume_builder.business.ApplicationConfiguration;
 import to.us.resume_builder.business.server_connect.request.BasicRequest;
 import to.us.resume_builder.business.server_connect.request.RequestType;
 
 /**
+ * Request for PDF compilation to the Spring server; must be loaded with the
+ * LaTeX string to compile (as argument "latex"), and a boolean indicating
+ * whether the resultant PDF should be sent back or uploaded.
  *
- * @author TODO: find author
+ * @author Micah Schiewe
  */
 public class PDFRequest extends BasicRequest<InputStream> {
 
-	/**
-	 * TODO: fill in
-	 */
-	public PDFRequest() {
-		super(RequestType.POST, "/pdf");
-	}
+    /**
+     * Constructs a PDFRequest, set as a POST request to the url in
+     * ApplicationConfiguration/pdf
+     */
+    public PDFRequest() {
+        super(RequestType.POST, ApplicationConfiguration.getInstance().getString("request.url").concat("/pdf"));
+    }
 
-	/**
-	 * TODO: fill in
-	 * @param arguments in a Name1, Val1, ..., NameN, ValN format.
-	 * @return
-	 */
-	@Override
-	protected URI doMakeURI(String... arguments) {
-		return URI.create(SITE.concat(path));
-	}
+    @Override
+    protected URI doMakeURI(String... arguments) {
+        return URI.create(path);
+    }
 
-	/**
-	 * TODO: fill in
-	 * @return
-	 */
-	@Override
-	protected BodyHandler<InputStream> doMakeResponseBuilder() {
-		return HttpResponse.BodyHandlers.ofInputStream();
-	}
+    @Override
+    protected BodyHandler<InputStream> doMakeResponseBuilder() {
+        return HttpResponse.BodyHandlers.ofInputStream();
+    }
 
-	/**
-	 * TODO: fill in
-	 * @param arguments The arguments potentially needed for this request.
-	 * @return
-	 */
-	@Override
-	protected BodyPublisher doMakeBody(String... arguments) {
-		return HttpRequest.BodyPublishers.ofString(getArguments(arguments));
-	}
+    @Override
+    protected BodyPublisher doMakeBody(String... arguments) {
+        return HttpRequest.BodyPublishers.ofString(getArguments(arguments));
+    }
 }
