@@ -6,7 +6,7 @@ import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
 import to.us.resume_builder.business.export_LaTeX.ResumeTemplate;
 import to.us.resume_builder.business.util.MiscUtils;
 
-public class Bullet extends ResumeComponent implements ILaTeXConvertable {
+public class Bullet extends ResumeComponent implements ILaTeXConvertable, Cloneable {
     private static Logger LOGGER = Logger.getLogger(Bullet.class.getName());
 
     /**

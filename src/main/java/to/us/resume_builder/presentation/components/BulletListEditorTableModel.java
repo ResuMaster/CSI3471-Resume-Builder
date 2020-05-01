@@ -86,7 +86,6 @@ public class BulletListEditorTableModel extends AbstractTableModel {
      * @param bulletC     The IBulletContainer being edited
      */
     public BulletListEditorTableModel(List<Bullet> data, final String[] columnNames, IBulletContainer bulletC) {
-        this.columnNames = columnNames;
         this.bulletC = bulletC;
         
         // Copy column names
