@@ -32,7 +32,8 @@ public enum ResumeTemplate {
     DEFAULT_NO_HYPHENS("default-no-hyphens");
 
     /**
-     * The template for all LaTeX types generated for LaTeX exporting and compilation
+     * The template for all LaTeX types generated for LaTeX exporting and
+     * compilation
      */
     private StringTemplate latexTemplate;
     /**
@@ -58,7 +59,8 @@ public enum ResumeTemplate {
      * @param templateName The name of the template to load.
      */
     ResumeTemplate(String templateName) {
-        Logger LOGGER = Logger.getLogger(ResumeTemplate.class.getName());
+        final Logger LOGGER = Logger.getLogger(ResumeTemplate.class.getName());
+
         // Attempt to load the template files
         try {
             latexTemplate = new StringTemplate(readTemplate(templateName, "latex.tem"));
@@ -70,7 +72,7 @@ public enum ResumeTemplate {
                 categoryTemplates.put(c, new StringTemplate(readTemplate(templateName, c.getTemplateFileName() + ".tem")));
             }
 
-            System.out.println("Read template files for template " + templateName);
+            LOGGER.info("Read template files for template " + templateName);
         } catch (IOException e) {
             latexTemplate = new StringTemplate("");
             experienceTemplate = new StringTemplate("");
@@ -81,7 +83,7 @@ public enum ResumeTemplate {
                 categoryTemplates.put(c, new StringTemplate(""));
             }
 
-            System.err.println("Could not read template files for template " + templateName);
+            LOGGER.severe("Could not read template files for template " + templateName);
 
             e.printStackTrace(); // TODO: display error message
         }
@@ -92,8 +94,8 @@ public enum ResumeTemplate {
         URL path = Thread.currentThread().getContextClassLoader().getResource("templates/" + templateName + "/" + fileName);
         try (InputStream in = path.openStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-            String line="";
-            while((line = reader.readLine()) != null) {
+            String line = "";
+            while ((line = reader.readLine()) != null) {
                 template.append(line).append("\n");
             }
         }
@@ -107,6 +109,7 @@ public enum ResumeTemplate {
      * Get the template for the specified category.
      *
      * @param type The category to get the template for.
+     *
      * @return The {@link StringTemplate} of the specified category.
      * @see StringTemplate
      */
