@@ -23,10 +23,10 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import to.us.resume_builder.data.resume_components.category.Category;
-import to.us.resume_builder.business.controllers.EditorController;
 import to.us.resume_builder.business.util.ImageCache;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
+import to.us.resume_builder.presentation.controllers.EditorController;
 
 /**
  * The button which handles requesting a new {@link to.us.resume_builder.data.resume_components.category.Category}

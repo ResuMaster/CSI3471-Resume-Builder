@@ -1,17 +1,13 @@
 package to.us.resume_builder.presentation.controllers;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import to.us.resume_builder.business.controllers.EditorController;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 import to.us.resume_builder.presentation.EditorCategorySelector;
 import to.us.resume_builder.presentation.EditorStage;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests methods in the {@link EditorController} class
