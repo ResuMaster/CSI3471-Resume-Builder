@@ -1,16 +1,22 @@
 package to.us.resume_builder.business.export_LaTeX;
 
 import to.us.resume_builder.business.ApplicationConfiguration;
+import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
 import to.us.resume_builder.data.resume_components.Experience;
 import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.business.util.StringTemplate;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  * This class provides several LaTeX resume templates to export with. Current
@@ -26,7 +32,8 @@ public enum ResumeTemplate {
     DEFAULT_NO_HYPHENS("default-no-hyphens");
 
     /**
-     * The template for all LaTeX types generated for LaTeX exporting and compilation
+     * The template for all LaTeX types generated for LaTeX exporting and
+     * compilation
      */
     private StringTemplate latexTemplate;
     /**
@@ -52,18 +59,20 @@ public enum ResumeTemplate {
      * @param templateName The name of the template to load.
      */
     ResumeTemplate(String templateName) {
-        String templateDirectory = ApplicationConfiguration.getInstance().getString("templates.directory");
+        final Logger LOGGER = Logger.getLogger(ResumeTemplate.class.getName());
 
         // Attempt to load the template files
         try {
-            latexTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "latex.tem")));
-            experienceTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "experience.tem")));
-            fieldTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "field.tem")));
-            separatorTemplate = new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, "separator.tem")));
+            latexTemplate = new StringTemplate(readTemplate(templateName, "latex.tem"));
+            experienceTemplate = new StringTemplate(readTemplate(templateName, "experience.tem"));
+            fieldTemplate = new StringTemplate(readTemplate(templateName, "field.tem"));
+            separatorTemplate = new StringTemplate(readTemplate(templateName, "separator.tem"));
             categoryTemplates = new HashMap<>();
             for (CategoryType c : CategoryType.values()) {
-                categoryTemplates.put(c, new StringTemplate(Files.readString(Path.of(templateDirectory, templateName, c.getTemplateFileName() + ".tem"))));
+                categoryTemplates.put(c, new StringTemplate(readTemplate(templateName, c.getTemplateFileName() + ".tem")));
             }
+
+            LOGGER.info("Read template files for template " + templateName);
         } catch (IOException e) {
             latexTemplate = new StringTemplate("");
             experienceTemplate = new StringTemplate("");
@@ -74,8 +83,24 @@ public enum ResumeTemplate {
                 categoryTemplates.put(c, new StringTemplate(""));
             }
 
-            e.printStackTrace(); // TODO: display error message
+            LOGGER.severe("Could not read template files for template " + templateName);
+
+            e.printStackTrace();
         }
+    }
+
+    private String readTemplate(String templateName, String fileName) throws IOException {
+        StringBuilder template = new StringBuilder();
+        URL path = Thread.currentThread().getContextClassLoader().getResource("templates/" + templateName + "/" + fileName);
+        try (InputStream in = path.openStream();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                template.append(line).append("\n");
+            }
+        }
+
+        return template.toString();
     }
 
     /**
