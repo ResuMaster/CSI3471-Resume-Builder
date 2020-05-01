@@ -1,5 +1,9 @@
 package to.us.resume_builder.business.server_connect.request;
 
+/**
+ * A custom Exception used
+ * @author TODO: find author
+ */
 public class FailedRequestException extends Exception {
 
 	/** Make my IDE shut up */
@@ -31,6 +35,10 @@ public class FailedRequestException extends Exception {
 		this.responseCode = errorCode;
 	}
 
+	/**
+	 * Constructs a message based on the response code provided in the constructor with errorCode/responseCode
+	 * @return a message in the form "(Response gotten: \<response code\>)"
+	 */
 	@Override
 	public String getMessage() {
 		StringBuilder bldr = new StringBuilder(super.getMessage());
