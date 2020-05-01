@@ -1,7 +1,5 @@
 package to.us.resume_builder.business.resume_file_management;
 
-import to.us.resume_builder.unused.user.User;
-
 import java.util.Date;
 
 /**
@@ -46,5 +44,23 @@ public class Metadata {
         this.email = null;
         this.created = new Date();
         this.lastModified = this.created;
+    }
+
+    /**
+     * Provide access to the date the Resume was last modified.
+     * 
+     * @return The date the Resume was last modified
+     */
+    public Date getLastModified() {
+        return lastModified;
+    }
+    
+    /**
+     * Provide access to the email for the owner of the Resume.
+     * 
+     * @return The email for the owner of the Resume.
+     */
+    public String getEmail() {
+        return email;
     }
 }

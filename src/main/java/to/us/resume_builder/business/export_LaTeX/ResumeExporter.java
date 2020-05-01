@@ -1,21 +1,16 @@
 package to.us.resume_builder.business.export_LaTeX;
 
-import to.us.resume_builder.business.ApplicationConfiguration;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.StringJoiner;
+import java.util.logging.Logger;
+
 import to.us.resume_builder.business.server_connect.PDFFacade;
 import to.us.resume_builder.business.server_connect.fileio_response.FileIOResponse;
 import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.*;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.StringJoiner;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 /**
  * This class handles the exporting of a resume file to a PDF.
@@ -144,54 +139,5 @@ public class ResumeExporter {
         return template.getLatexTemplate()
             .replaceVariable("content", contents.toString())
             .toString(() -> LOG.info("Generated LaTeX document."));
-    }
-
-    /**
-     * Compile the resume PDF from an existing <code>.tex</code> source.
-     *
-     * @param filePath The path to the <code>.tex</code> file to compile.
-     *
-     * @return Whether or not the compilation was successful.
-     * @throws IOException Thrown if an I/O error occurs.
-     */
-    private boolean compileResumePDF(Path filePath) throws IOException {
-        LOG.info("Beginning resume compilation...");
-
-        // Temporary artifacts
-        final String[] ARTIFACTS_TO_DELETE = { "aux", "log", "tex" };
-        boolean status = true;
-
-        // Attempt to generate the resume
-        try {
-            ProcessBuilder builder = new ProcessBuilder("pdflatex", "\"" + filePath.toAbsolutePath().toString() + "\"");
-            builder.directory(filePath.getParent().toFile());
-            // TODO: add dedicated log file
-            builder.redirectOutput(new File("./export.log"));
-            builder.redirectError(new File("./export.log"));
-            LOG.info("PDF compilation log can be found at " + Path.of("./export.log").toAbsolutePath().toString());
-
-            // Run the process
-            LOG.info("Attempting to run process \"" + builder.command() + "\"...");
-            Process p = builder.start();
-            if (!p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
-                p.destroy();
-                LOG.warning("PDF compilation timed out.");
-                JOptionPane.showMessageDialog(null, "Resume exporter took too long. Contact IT for additional assistance.");
-                status = false;
-            }
-
-            // Clean up artifacts
-            for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
-                if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
-                    LOG.info("Attempting to delete artifact \"" + f.getAbsolutePath() + "\", if it exists.");
-                    Files.deleteIfExists(f.toPath());
-                }
-            }
-        } catch (InterruptedException e) {
-            LOG.warning("Compilation process was interrupted. Exiting compilation.");
-            status = false;
-        }
-
-        return status;
     }
 }

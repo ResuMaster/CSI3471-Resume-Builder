@@ -3,7 +3,6 @@ package to.us.resume_builder.presentation.components;
 import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.data.resume_components.IBulletContainer;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,7 +13,10 @@ import java.util.logging.Logger;
  *
  * @author Ashley Lu Couch
  */
-public class BulletListEditorTableModel extends AbstractTableModel implements TableModel {
+public class BulletListEditorTableModel extends AbstractTableModel {
+    /** SerialUID, valid as of Iteration 3 of development (4/30/2020) */
+    private static final long serialVersionUID = 8917865735485157487L;
+
     /**
      * Logs moving, adding, and removing Bullets
      */
@@ -192,6 +194,9 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
                 break;
             case 1:
                 data.get(rowIndex).setText((String) aValue);
+                break;
+            default:
+                LOG.warning(String.format("Attempted to write %s to undefined column %d at row %d", aValue, columnIndex, rowIndex));
                 break;
         }
     }
