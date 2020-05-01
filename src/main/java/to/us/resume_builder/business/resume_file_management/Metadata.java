@@ -40,7 +40,7 @@ public class Metadata {
     }
 
     /**
-     * Creates a new Metadata object with the given parameters.
+     * Creates a new Metadata object with the default parameters.
      */
     public Metadata() {
         this.email = null;
