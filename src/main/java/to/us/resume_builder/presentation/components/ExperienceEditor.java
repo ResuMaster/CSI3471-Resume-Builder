@@ -48,7 +48,7 @@ public class ExperienceEditor extends JPanel implements IEncapsulatedEditor {
     /**
      * The {@link Experience} being edited.
      */
-    private Experience experience;
+    private transient Experience experience;
 
     /**
      * Boolean flag to determine whether the category has been edited.
