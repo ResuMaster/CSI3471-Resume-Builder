@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  * This class contains miscellaneous utility functions used throughout the
  * program.
+ * @author Matthew McCaskill
  */
 public final class MiscUtils {
     /**

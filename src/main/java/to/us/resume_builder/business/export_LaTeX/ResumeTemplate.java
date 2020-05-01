@@ -3,6 +3,8 @@ package to.us.resume_builder.business.export_LaTeX;
 import to.us.resume_builder.business.ApplicationConfiguration;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.category.CategoryType;
+import to.us.resume_builder.data.resume_components.Experience;
+import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.business.util.StringTemplate;
 
 import java.io.BufferedReader;
@@ -29,10 +31,26 @@ public enum ResumeTemplate {
     DEFAULT("default"),
     DEFAULT_NO_HYPHENS("default-no-hyphens");
 
+    /**
+     * The template for all LaTeX types generated for LaTeX exporting and
+     * compilation
+     */
     private StringTemplate latexTemplate;
+    /**
+     * Templates for each {@link CategoryType} in LaTeX form
+     */
     private Map<CategoryType, StringTemplate> categoryTemplates;
+    /**
+     * Template for the LaTeX of an {@link Experience}
+     */
     private StringTemplate experienceTemplate;
+    /**
+     * Template for a field of a {@link Bullet}
+     */
     private StringTemplate fieldTemplate;
+    /**
+     * Template for a solid line on the {@link to.us.resume_builder.data.resume_components.Resume}
+     */
     private StringTemplate separatorTemplate;
 
     /**
@@ -41,7 +59,8 @@ public enum ResumeTemplate {
      * @param templateName The name of the template to load.
      */
     ResumeTemplate(String templateName) {
-        Logger LOGGER = Logger.getLogger(ResumeTemplate.class.getName());
+        final Logger LOGGER = Logger.getLogger(ResumeTemplate.class.getName());
+
         // Attempt to load the template files
         try {
             latexTemplate = new StringTemplate(readTemplate(templateName, "latex.tem"));
@@ -53,7 +72,7 @@ public enum ResumeTemplate {
                 categoryTemplates.put(c, new StringTemplate(readTemplate(templateName, c.getTemplateFileName() + ".tem")));
             }
 
-            System.out.println("Read template files for template " + templateName);
+            LOGGER.info("Read template files for template " + templateName);
         } catch (IOException e) {
             latexTemplate = new StringTemplate("");
             experienceTemplate = new StringTemplate("");
@@ -64,9 +83,9 @@ public enum ResumeTemplate {
                 categoryTemplates.put(c, new StringTemplate(""));
             }
 
-            System.err.println("Could not read template files for template " + templateName);
+            LOGGER.severe("Could not read template files for template " + templateName);
 
-            e.printStackTrace(); // TODO: display error message
+            e.printStackTrace();
         }
     }
 
@@ -75,13 +94,11 @@ public enum ResumeTemplate {
         URL path = Thread.currentThread().getContextClassLoader().getResource("templates/" + templateName + "/" + fileName);
         try (InputStream in = path.openStream();
              BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-            String line="";
-            while((line = reader.readLine()) != null) {
+            String line = "";
+            while ((line = reader.readLine()) != null) {
                 template.append(line).append("\n");
             }
         }
-
-//        System.out.println(template.toString());
 
         return template.toString();
     }
@@ -90,6 +107,7 @@ public enum ResumeTemplate {
      * Get the template for the specified category.
      *
      * @param type The category to get the template for.
+     *
      * @return The {@link StringTemplate} of the specified category.
      * @see StringTemplate
      */

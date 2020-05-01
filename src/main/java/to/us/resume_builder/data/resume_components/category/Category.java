@@ -1,9 +1,16 @@
 package to.us.resume_builder.data.resume_components.category;
 
 import to.us.resume_builder.business.export_LaTeX.ILaTeXConvertable;
+import to.us.resume_builder.data.resume_components.Bullet;
 import to.us.resume_builder.data.resume_components.CategoryVisitor;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
 
+import java.util.Objects;
+
+/**
+ * A class which holds all default methods for any {@link CategoryType}
+ * @author Ashley Lu Couch
+ */
 public abstract class Category extends ResumeComponent implements ILaTeXConvertable {
 
     /**
@@ -94,4 +101,9 @@ public abstract class Category extends ResumeComponent implements ILaTeXConverta
      * @param v The visitor to this Category.
      */
     public abstract void accept(CategoryVisitor v);
+
 }
+
+
+
+

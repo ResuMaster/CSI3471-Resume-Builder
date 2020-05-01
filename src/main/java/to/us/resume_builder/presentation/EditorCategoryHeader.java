@@ -1,6 +1,8 @@
 package to.us.resume_builder.presentation;
 
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -15,6 +17,10 @@ import to.us.resume_builder.data.resume_components.category.Category;
  * @author Jacob Curtis
  */
 public class EditorCategoryHeader extends JPanel {
+    /**
+     * Logs saving, updating, and creating panels
+     */
+    private static final Logger LOG = Logger.getLogger(EditorCategoryHeader.class.getName());
 
     private static final int NUM_COLS = 20;
 
@@ -81,6 +87,7 @@ public class EditorCategoryHeader extends JPanel {
      * @param newCategory The new category to display and edit.
      */
     public void updateHeader(Category newCategory) {
+        LOG.logp(Level.INFO, EditorCategoryHeader.class.getName(), "updateHeader", "updating header with new category " + newCategory);
         category = newCategory;
 
         // Update labels
@@ -99,6 +106,8 @@ public class EditorCategoryHeader extends JPanel {
      * Saves the currently-edited data to the resume in RAM.
      */
     public void save() {
+        LOG.logp(Level.INFO, EditorCategoryHeader.class.getName(), "save", "saving category " + category + " to memory");
+
         // Save display name
         if (!displayName.getText().contentEquals(""))
             category.setDisplayName(displayName.getText());
@@ -128,6 +137,7 @@ public class EditorCategoryHeader extends JPanel {
      * @return The newly-constructed GUI part
      */
     private JPanel createLabelPanel() {
+        LOG.logp(Level.INFO, EditorCategoryHeader.class.getName(), "createLabelPanel", "creating label panel");
         // Set up return panel
         JPanel left = new JPanel(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
@@ -169,6 +179,7 @@ public class EditorCategoryHeader extends JPanel {
      * @return The newly-constructed GUI part
      */
     private JPanel createActionPanel() {
+        LOG.logp(Level.INFO, EditorCategoryHeader.class.getName(), "createActionPanel", "creating action panel");
         JPanel right = new JPanel();
 
         // Create toggle box

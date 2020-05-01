@@ -29,12 +29,12 @@ public class Metadata {
     /**
      * Creates a Metadata object with the given parameters.
      *
-     * @param user         The user attached to the Resume
+     * @param email        The user's email
      * @param created      When the Resume was created
      * @param lastModified When the Resume was last modified.
      */
-    public Metadata(User user, Date created, Date lastModified) {
-        this.email = user.getEmail();
+    public Metadata(String email, Date created, Date lastModified) {
+        this.email = email;
         this.created = created;
         this.lastModified = lastModified;
     }

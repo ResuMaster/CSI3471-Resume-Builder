@@ -3,6 +3,7 @@ package to.us.resume_builder.business.export_LaTeX;
 /**
  * Implementing this interface indicates that the class is LaTeX-serializable
  * through the use of a {@link ResumeTemplate}.
+ * @author Matthew McCaskill
  */
 public interface ILaTeXConvertable {
     /**

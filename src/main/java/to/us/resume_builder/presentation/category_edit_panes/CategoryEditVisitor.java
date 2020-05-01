@@ -35,21 +35,37 @@ public class CategoryEditVisitor implements CategoryVisitor {
         editor = null;
     }
 
+    /**
+     * Creates a {@link BulletCategoryEditPane} when given a {@link BulletCategory}
+     * @param c The {@link BulletCategory} to add to the {@link BulletCategoryEditPane}.
+     */
     @Override
     public void visit(BulletCategory c) {
         editor = new BulletCategoryEditPane(c);
     }
 
+    /**
+     * Creates a {@link TextCategoryEditPane} when given a {@link TextCategory}
+     * @param c The {@link TextCategory} to add to the {@link TextCategoryEditPane}.
+     */
     @Override
     public void visit(TextCategory c) {
         editor = new TextCategoryEditPane(c);
     }
 
+    /**
+     * Creates a {@link ExperienceCategoryEditPane} when given a {@link ExperienceCategory}
+     * @param c The {@link ExperienceCategory} to add to the {@link ExperienceCategoryEditPane}.
+     */
     @Override
     public void visit(ExperienceCategory c) {
         editor = new ExperienceCategoryEditPane(c);
     }
 
+    /**
+     * Creates a {@link HeaderCategoryEditPane} when given a {@link HeaderCategory}
+     * @param c The {@link HeaderCategory} to add to the {@link HeaderCategoryEditPane}.
+     */
     @Override
     public void visit(HeaderCategory c) {
         editor = new HeaderCategoryEditPane(c);

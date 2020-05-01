@@ -1,4 +1,4 @@
-package to.us.resume_builder.business.controllers;
+package to.us.resume_builder.presentation.controllers;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -21,6 +21,9 @@ import to.us.resume_builder.presentation.EditorMenuBar;
  * @author Micah Schiewe
  */
 public class MenuController {
+    /**
+     * Logs exports, uploads, and saves.
+     */
     private static final Logger LOG = Logger.getLogger(MenuController.class.getName());
 
     /** The resume currently loaded into the editor. */
@@ -55,7 +58,7 @@ public class MenuController {
 
     /**
      * Overwrites the JSON data from which
-     * {@link to.us.resume_builder.business.controllers.MenuController#resume resume} was
+     * {@link to.us.resume_builder.presentation.controllers.MenuController#resume resume} was
      * loaded with the current, modified version.
      */
     public void saveData() {
@@ -63,7 +66,7 @@ public class MenuController {
     }
 
     /**
-     * Exports the {@link to.us.resume_builder.business.controllers.MenuController#resume
+     * Exports the {@link to.us.resume_builder.presentation.controllers.MenuController#resume
      * resume} as a formatted pdf, ready to upload to a job.
      * 
      * @param path The location to save the pdf to.
@@ -77,7 +80,7 @@ public class MenuController {
     }
 
     /**
-     * Sends the {@link to.us.resume_builder.business.controllers.MenuController#resume}
+     * Sends the {@link to.us.resume_builder.presentation.controllers.MenuController#resume}
      * to be exported to PDF and uploaded to file.io, with the response returned
      * here.
      *

@@ -6,33 +6,24 @@ import to.us.resume_builder.business.server_connect.fileio_response.FileIORespon
 import to.us.resume_builder.business.server_connect.request.FailedRequestException;
 import to.us.resume_builder.data.resume_components.Resume;
 import to.us.resume_builder.data.resume_components.ResumeComponent;
-
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 /**
  * This class handles the exporting of a resume file to a PDF.
  *
  * @author Matthew McCaskill
+ * @author Brooklynn Stone
  * @see Resume
  * @see ResumeTemplate
  */
-public class ResumeExporter {
-    /**
-     * Logs exports and uploads of a file to JSON and PDF
-     */
-    private static final Logger LOG = Logger.getLogger(ResumeExporter.class.getName());
-
-    /**
-     *  The Resume to be exported
-     */
+public class ResumeExporterMock {
     private Resume resume;
 
     /**
@@ -40,7 +31,7 @@ public class ResumeExporter {
      *
      * @param resume The resume to export.
      */
-    public ResumeExporter(Resume resume) {
+    public ResumeExporterMock(Resume resume) {
         if (resume == null) {
             throw new NullPointerException();
         }
@@ -52,7 +43,6 @@ public class ResumeExporter {
      * Export the resume to the specified file.
      *
      * @param exportLocation The name of the file to export to.
-     *
      * @return Whether or not the export was successful.
      */
     public boolean export(Path exportLocation) {
@@ -75,28 +65,21 @@ public class ResumeExporter {
         try {
             bytes = PDFFacade.getPDFHandle().getPDF(getLaTeXString(template));
         } catch (InterruptedException | FailedRequestException | IOException e) {
-            LOG.warning("Request to get PDF failed: " + e);
             status = false;
         }
 
         try {
-            if (bytes != null) {
+            if (bytes != null)
                 Files.write(exportLocation, bytes);
-                LOG.info("PDF export successful");
-            }
         } catch (IOException e) {
-            LOG.warning("Could not write returned PDF to " + exportLocation + ": " + e);
             status = false;
         }
 
-        if (status) {
-            LOG.info("Export process complete.");
-        }
         return status;
     }
 
     /**
-     * Sends the {@link to.us.resume_builder.business.export_LaTeX.ResumeExporter#resume}
+     * Sends the {@link to.us.resume_builder.business.export_LaTeX.ResumeExporter}
      * to be exported to PDF and uploaded to file.io, with the response returned
      * here.
      *
@@ -110,11 +93,11 @@ public class ResumeExporter {
     }
 
     /**
-     * Sends the {@link to.us.resume_builder.business.export_LaTeX.ResumeExporter#resume}
+     * Sends the {@link to.us.resume_builder.business.export_LaTeX.ResumeExporter}
      * to be exported to PDF and uploaded to file.io, with the response returned
      * here. Uses the specified ResumeTemplate to generate the LaTeX string.
      *
-     * @param template the template to use when uploading the {@link Resume} to a PDF
+     * @param template the {@link ResumeTemplate} to use when uploading the {@link Resume} to a PDF
      * @return The response from https://file.io
      * @throws InterruptedException The upload request was interrupted
      * @throws FailedRequestException The response returned with an error
@@ -143,7 +126,7 @@ public class ResumeExporter {
         // Replace the <content> tag in the resume template with the actual contents
         return template.getLatexTemplate()
             .replaceVariable("content", contents.toString())
-            .toString(() -> LOG.info("Generated LaTeX document."));
+            .toString();
     }
 
     /**
@@ -155,7 +138,6 @@ public class ResumeExporter {
      * @throws IOException Thrown if an I/O error occurs.
      */
     private boolean compileResumePDF(Path filePath) throws IOException {
-        LOG.info("Beginning resume compilation...");
 
         // Temporary artifacts
         final String[] ARTIFACTS_TO_DELETE = { "aux", "log", "tex" };
@@ -167,27 +149,21 @@ public class ResumeExporter {
             builder.directory(filePath.getParent().toFile());
             builder.redirectOutput(new File("./export.log"));
             builder.redirectError(new File("./export.log"));
-            LOG.info("PDF compilation log can be found at " + Path.of("./export.log").toAbsolutePath().toString());
 
             // Run the process
-            LOG.info("Attempting to run process \"" + builder.command() + "\"...");
             Process p = builder.start();
             if (!p.waitFor(ApplicationConfiguration.getInstance().getLong("export.timeout"), TimeUnit.SECONDS)) {
                 p.destroy();
-                LOG.warning("PDF compilation timed out.");
-                JOptionPane.showMessageDialog(null, "Resume exporter took too long. Contact IT for additional assistance.");
                 status = false;
             }
 
             // Clean up artifacts
             for (File f : Objects.requireNonNull(filePath.getParent().toFile().listFiles())) {
                 if (f.isFile() && Arrays.stream(ARTIFACTS_TO_DELETE).anyMatch(e -> f.getName().endsWith(e))) {
-                    LOG.info("Attempting to delete artifact \"" + f.getAbsolutePath() + "\", if it exists.");
                     Files.deleteIfExists(f.toPath());
                 }
             }
         } catch (InterruptedException e) {
-            LOG.warning("Compilation process was interrupted. Exiting compilation.");
             status = false;
         }
 

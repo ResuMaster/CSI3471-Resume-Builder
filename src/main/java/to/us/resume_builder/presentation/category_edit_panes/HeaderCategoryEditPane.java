@@ -4,17 +4,24 @@ import to.us.resume_builder.data.resume_components.category.HeaderCategory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
  * Facilitates editing of the HeaderCategory resume component.
  *
- * @author Brooklyn Stone
+ * @author Brooklynn Stone
  */
 public class HeaderCategoryEditPane extends CategoryEditPane {
     /**
+     * Logs saving a HeaderCategoryEditPane
+     */
+    private static final Logger LOG = Logger.getLogger(HeaderCategoryEditPane.class.getName());
+
+    /**
      * An array of each of the editable Text Fields for a Header Category. 0:
-     * Link 1: Email 2: Phone Number
+     * Link 1: Email, 2: Phone Number
      */
     private JTextField fields[];
     /**
@@ -115,6 +122,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
      */
     @Override
     public void save() {
+        LOG.logp(Level.INFO, HeaderCategoryEditPane.class.getName(), "save", "saving link, email, phone number, address");
         headerCategory.setLink(fields[0].getText());
         headerCategory.setEmail(fields[1].getText());
         headerCategory.setPhoneNumber(fields[2].getText());
