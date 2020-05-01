@@ -54,8 +54,6 @@ public class ResumeExporter {
      * @param exportLocation The name of the file to export to.
      *
      * @return Whether or not the export was successful.
-     * @throws IOException Thrown if any errors occur during the export
-     *                     process.
      */
     public boolean export(Path exportLocation) {
         return export(exportLocation, ResumeTemplate.DEFAULT);

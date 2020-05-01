@@ -37,7 +37,7 @@ public class FailedRequestException extends Exception {
 
 	/**
 	 * Constructs a message based on the response code provided in the constructor with errorCode/responseCode
-	 * @return a message in the form "(Response gotten: \<response code\>)"
+	 * @return a message in the form "(Response gotten: response code)"
 	 */
 	@Override
 	public String getMessage() {

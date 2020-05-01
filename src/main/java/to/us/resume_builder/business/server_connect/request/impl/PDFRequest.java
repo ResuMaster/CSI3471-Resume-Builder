@@ -21,8 +21,8 @@ import to.us.resume_builder.business.server_connect.request.RequestType;
 public class PDFRequest extends BasicRequest<InputStream> {
 
     /**
-     * Constructs a PDFRequest, set as a POST request to the <code><url in
-     * ApplicationConfiguration>/pdf</code>
+     * Constructs a PDFRequest, set as a POST request to the url in
+     * ApplicationConfiguration/pdf
      */
     public PDFRequest() {
         super(RequestType.POST, ApplicationConfiguration.getInstance().getString("request.url").concat("/pdf"));

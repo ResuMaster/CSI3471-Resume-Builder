@@ -58,6 +58,7 @@ public class Resume {
 
     /**
      * Sets the current List categoryList for this instance.
+     * @param newList the list to replace the current categoryList
      */
     public void setCategoryList(List<Category> newList) {
         this.categoryList = newList;
