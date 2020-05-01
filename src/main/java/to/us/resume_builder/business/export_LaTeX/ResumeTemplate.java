@@ -85,7 +85,7 @@ public enum ResumeTemplate {
 
             LOGGER.severe("Could not read template files for template " + templateName);
 
-            e.printStackTrace(); // TODO: display error message
+            e.printStackTrace();
         }
     }
 

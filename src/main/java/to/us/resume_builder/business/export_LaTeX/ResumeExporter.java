@@ -165,7 +165,6 @@ public class ResumeExporter {
         try {
             ProcessBuilder builder = new ProcessBuilder("pdflatex", "\"" + filePath.toAbsolutePath().toString() + "\"");
             builder.directory(filePath.getParent().toFile());
-            // TODO: add dedicated log file
             builder.redirectOutput(new File("./export.log"));
             builder.redirectError(new File("./export.log"));
             LOG.info("PDF compilation log can be found at " + Path.of("./export.log").toAbsolutePath().toString());

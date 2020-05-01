@@ -147,7 +147,6 @@ public class ResumeExporterMock {
         try {
             ProcessBuilder builder = new ProcessBuilder("pdflatex", "\"" + filePath.toAbsolutePath().toString() + "\"");
             builder.directory(filePath.getParent().toFile());
-            // TODO: add dedicated log file
             builder.redirectOutput(new File("./export.log"));
             builder.redirectError(new File("./export.log"));
 
