@@ -52,7 +52,7 @@ public class Metadata {
      * @return The date the Resume was last modified
      */
     public Date getLastModified() {
-        return lastModified;
+        return new Date(lastModified.getTime());
     }
     
     /**

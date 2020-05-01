@@ -24,6 +24,16 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
     }
 
     /**
+     * Copy constructor to enable cloning
+     * 
+     * @param b The Bullet to clone
+     */
+    protected Bullet(Bullet b) {
+        super(b);
+        this.text = b.text;
+    }
+
+    /**
      * Get the current String text for this instance.
      *
      * @return The current string text.
@@ -54,5 +64,10 @@ public class Bullet extends ResumeComponent implements ILaTeXConvertable {
         return text != null && text.length() > 0 ? template.getFieldTemplate()
             .replaceVariable("content", MiscUtils.escapeLaTeX(this.text))
             .toString(() -> LOGGER.info("Generated LaTeX for bullet \"" + this.text + "\".")) : "";
+    }
+
+    @Override
+    public Bullet clone() {
+        return new Bullet(this);
     }
 }

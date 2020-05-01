@@ -1,12 +1,16 @@
 package to.us.resume_builder.presentation.components;
 
-import to.us.resume_builder.data.resume_components.Bullet;
-import to.us.resume_builder.data.resume_components.IBulletContainer;
-import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.table.AbstractTableModel;
+
+import to.us.resume_builder.data.resume_components.Bullet;
+import to.us.resume_builder.data.resume_components.IBulletContainer;
 
 /**
  * Custom table model for a list of Bullets
@@ -83,8 +87,15 @@ public class BulletListEditorTableModel extends AbstractTableModel {
      */
     public BulletListEditorTableModel(List<Bullet> data, final String[] columnNames, IBulletContainer bulletC) {
         this.columnNames = columnNames;
-        this.data = data;
         this.bulletC = bulletC;
+        
+        // Copy column names
+        this.columnNames = Arrays.copyOf(columnNames, columnNames.length);
+
+        // Copy data
+        this.data = new ArrayList<>();
+        for (Bullet b : data)
+            this.data.add(b.clone());
     }
 
     /**
