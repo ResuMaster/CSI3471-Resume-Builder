@@ -100,8 +100,6 @@ public enum ResumeTemplate {
             }
         }
 
-//        System.out.println(template.toString());
-
         return template.toString();
     }
 
