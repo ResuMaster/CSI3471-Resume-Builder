@@ -34,7 +34,7 @@ public class ExperienceCategoryEditPane extends CategoryEditPane {
     /**
      * A reference to the {@link ExperienceCategory} being edited.
      */
-    private ExperienceCategory ref;
+    private transient ExperienceCategory ref;
 
     /**
      * The panel containing the list of {@link ExperienceEditor

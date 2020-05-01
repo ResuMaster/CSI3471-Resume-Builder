@@ -50,7 +50,7 @@ public class EditorStage extends JPanel {
     private EditorCategoryHeader header;
 
     /** Synchronizes actions across different components. */
-    private EditorController controller = null;
+    private transient EditorController controller = null;
 
     /** The category currently loaded to edit. */
     private Category category;

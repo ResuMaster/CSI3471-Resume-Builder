@@ -33,7 +33,7 @@ public class EditorMenuBar extends JMenuBar {
     /**
      * The controller which allows saving and exporting data.
      */
-    private MenuController controller = null;
+    private transient MenuController controller = null;
 
     /**
      * Constructs the EditorMenuBar with the File menu, with items for exporting

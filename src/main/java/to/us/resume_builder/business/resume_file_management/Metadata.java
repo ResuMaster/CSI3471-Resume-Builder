@@ -1,7 +1,5 @@
 package to.us.resume_builder.business.resume_file_management;
 
-import to.us.resume_builder.unused.user.User;
-
 import java.util.Date;
 
 /**
@@ -35,8 +33,8 @@ public class Metadata {
      */
     public Metadata(String email, Date created, Date lastModified) {
         this.email = email;
-        this.created = created;
-        this.lastModified = lastModified;
+        this.created = new Date(created.getTime());
+        this.lastModified = new Date(lastModified.getTime());
     }
 
     /**

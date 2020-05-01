@@ -31,7 +31,7 @@ public class HeaderCategoryEditPane extends CategoryEditPane {
     /**
      * The Header Category to display
      */
-    private HeaderCategory headerCategory;
+    private transient HeaderCategory headerCategory;
 
     /**
      * Constructor for Header Category edit pane which displays each of the
