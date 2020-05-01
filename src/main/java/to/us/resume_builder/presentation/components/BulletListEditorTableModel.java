@@ -1,20 +1,26 @@
 package to.us.resume_builder.presentation.components;
 
-import to.us.resume_builder.data.resume_components.Bullet;
-import to.us.resume_builder.data.resume_components.IBulletContainer;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.table.AbstractTableModel;
+
+import to.us.resume_builder.data.resume_components.Bullet;
+import to.us.resume_builder.data.resume_components.IBulletContainer;
 
 /**
  * Custom table model for a list of Bullets
  *
  * @author Ashley Lu Couch
  */
-public class BulletListEditorTableModel extends AbstractTableModel implements TableModel {
+public class BulletListEditorTableModel extends AbstractTableModel {
+    /** SerialUID, valid as of Iteration 3 of development (4/30/2020) */
+    private static final long serialVersionUID = 8917865735485157487L;
+
     /**
      * Logs moving, adding, and removing Bullets
      */
@@ -23,7 +29,7 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
     /**
      * A list of each bullet to be displayed in the TableModel
      */
-    List<Bullet> data;
+    transient List<Bullet> data;
     /**
      * An array of Strings indicating each column names
      */
@@ -32,7 +38,7 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
      * An object which holds the Bullets of a Bullet Category or Experience
      * Component
      */
-    IBulletContainer bulletC;
+    transient IBulletContainer bulletC;
 
     /**
      * Adds a new Bullet ID to data initialized blank
@@ -79,10 +85,16 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
      * @param columnNames The names for the columns.
      * @param bulletC     The IBulletContainer being edited
      */
-    public BulletListEditorTableModel(List<Bullet> data, String[] columnNames, IBulletContainer bulletC) {
-        this.columnNames = columnNames;
-        this.data = data;
+    public BulletListEditorTableModel(List<Bullet> data, final String[] columnNames, IBulletContainer bulletC) {
         this.bulletC = bulletC;
+        
+        // Copy column names
+        this.columnNames = Arrays.copyOf(columnNames, columnNames.length);
+
+        // Copy data
+        this.data = new ArrayList<>();
+        for (Bullet b : data)
+            this.data.add(b.clone());
     }
 
     /**
@@ -192,6 +204,9 @@ public class BulletListEditorTableModel extends AbstractTableModel implements Ta
                 break;
             case 1:
                 data.get(rowIndex).setText((String) aValue);
+                break;
+            default:
+                LOG.warning(String.format("Attempted to write %s to undefined column %d at row %d", aValue, columnIndex, rowIndex));
                 break;
         }
     }

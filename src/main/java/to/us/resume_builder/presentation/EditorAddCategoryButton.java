@@ -53,7 +53,7 @@ public class EditorAddCategoryButton extends JButton {
     /**
      * Controller which can add the category to the resume.
      */
-    private EditorController controller;
+    private transient EditorController controller;
     /**
      * Holds the type of Category the user chose
      */

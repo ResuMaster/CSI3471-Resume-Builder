@@ -19,6 +19,16 @@ public class ResumeComponent {
     public ResumeComponent(String id) {
         this.id = id;
     }
+    
+    /**
+     * Copy a ResumeComponent to enable subclasses to implement clone(), if needed.
+     * 
+     * @param that The ResumeComponent to copy.
+     */
+    protected ResumeComponent(ResumeComponent that) {
+        this.id = that.id;
+        this.visible = that.visible;
+    }
 
     /**
      * returns the ID for this instance.
