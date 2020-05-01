@@ -1,7 +1,5 @@
 package to.us.resume_builder.business.server_connect.request;
 
-import to.us.resume_builder.business.ApplicationConfiguration;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -13,11 +11,10 @@ import java.net.http.HttpResponse.BodyHandler;
 import java.time.Duration;
 import java.util.Arrays;
 
+import to.us.resume_builder.business.ApplicationConfiguration;
+
 /**
  * Basic framework for connecting to our database. Handles a single request.
- * 
- * TODO Someone who knows more about the terminology than me: FIX WHERE I
- * BUNGLED IT!
  * 
  * @author Micah
  */
@@ -65,6 +62,8 @@ public abstract class BasicRequest<T> {
 
 	/**
 	 * Creates and sends the specific request this class handles.
+	 * <p>
+	 * Example of Design Pattern: Template Method
 	 * 
 	 * @param arguments
 	 * @return The http response from the request this class handles
@@ -73,9 +72,9 @@ public abstract class BasicRequest<T> {
 	 *                              receiving.
 	 */
 	public final HttpResponse<T> sendRequest(String... arguments) throws IOException, InterruptedException {
-		var request = HttpRequest.newBuilder(getURI(arguments)).setHeader("Content-Type", getType())
-				.method(type.name(), getBody(arguments)).timeout(Duration.ofSeconds(TIMEOUT)).build();
-		return CLIENT.send(request, getResponseBuilder());
+        var request = HttpRequest.newBuilder(doMakeURI(arguments)).setHeader("Content-Type", doGetType())
+				.method(type.name(), doMakeBody(arguments)).timeout(Duration.ofSeconds(TIMEOUT)).build();
+		return CLIENT.send(request, doMakeResponseBuilder());
 	}
 
 	/**
@@ -119,7 +118,7 @@ public abstract class BasicRequest<T> {
 	 * 
 	 * @return The type of the message
 	 */
-	protected String getType() {
+    protected String doGetType() {
 		return "application/x-www-form-urlencoded";
 	}
 
@@ -129,7 +128,7 @@ public abstract class BasicRequest<T> {
 	 * @param arguments in a Name1, Val1, ..., NameN, ValN format.
 	 * @return The URI for this request.
 	 */
-	protected abstract URI getURI(String... arguments);
+    protected abstract URI doMakeURI(String... arguments);
 
 	/**
 	 * Gets the http body for this request.
@@ -137,12 +136,12 @@ public abstract class BasicRequest<T> {
 	 * @param arguments The arguments potentially needed for this request.
 	 * @return The body for this request.
 	 */
-	protected abstract HttpRequest.BodyPublisher getBody(String... arguments);
+	protected abstract HttpRequest.BodyPublisher doMakeBody(String... arguments);
 
 	/**
 	 * Creates the response builder for the response.
 	 * 
 	 * @return The handler to adapt the http response to a Java object.
 	 */
-	protected abstract BodyHandler<T> getResponseBuilder();
+	protected abstract BodyHandler<T> doMakeResponseBuilder();
 }
